@@ -172,7 +172,6 @@ handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.i
 
       if (ratio >= 1.0) {
         cli_progress_done(id = pb$id, .envir = pb$envir)
-        erase_progress_bar(pb)
       } else {
         set <- ratio * pb$total
         stopifnot(length(set) == 1L, is.numeric(set), is.finite(set),
@@ -245,7 +244,9 @@ handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.i
         reporter$update(config = config, state = state, progression = progression, ...)
         if (config$clear) {
           pb_update(pb, ratio = 1.0)
+          erase_progress_bar(pb)
         } else {
+          pb_update(pb, ratio = 1.0)
           cat(file = stderr(), "\n")
         }
         
