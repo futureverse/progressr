@@ -62,6 +62,7 @@ jobs:
           needs: check
 
       - name: Install itself (to build vignettes)
+        run: |
           install.packages(".", repos=NULL, type="source")
         shell: Rscript {0}
 
