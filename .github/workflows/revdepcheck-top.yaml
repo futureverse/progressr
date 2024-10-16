@@ -20,15 +20,15 @@ jobs:
           - { r: "release", pkg: "dipsaus"         }
           - { r: "release", pkg: "EFAtools"        }
           - { r: "release", pkg: "EGAnet"          }
-          - { r: "release", pkg: "elevatr"         }
+#          - { r: "release", pkg: "elevatr"         }  ## libproj.so missing
           - { r: "release", pkg: "fabletools"      }
           - { r: "release", pkg: "fxTWAPLS"        }
-          - { r: "release", pkg: "lava"            }
-          - { r: "release", pkg: "nflfastR"        }
-          - { r: "release", pkg: "poppr"           }
+#          - { r: "release", pkg: "lava"            }  ## req's Bioc pkgs
+#          - { r: "release", pkg: "nflfastR"        }
+#          - { r: "release", pkg: "poppr"           }  ## fails to install
 #          - { r: "release", pkg: "Seurat"          }
           - { r: "release", pkg: "SimDesign"       }
-          - { r: "release", pkg: "tidySEM"         }
+#          - { r: "release", pkg: "tidySEM"         }  ## fails to install
           - { r: "release", pkg: "tsdistributions" }
           - { r: "release", pkg: "tsgarch"         }
           
