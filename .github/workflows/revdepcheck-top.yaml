@@ -19,7 +19,7 @@ jobs:
           - { r: "release", pkg: "cSEM"            }
           - { r: "release", pkg: "dipsaus"         }
           - { r: "release", pkg: "EFAtools"        }
-          - { r: "release", pkg: "EGAnet"          }
+#          - { r: "release", pkg: "EGAnet"          }  ## libglpk.so missing
 #          - { r: "release", pkg: "elevatr"         }  ## libproj.so missing
           - { r: "release", pkg: "fabletools"      }
           - { r: "release", pkg: "fxTWAPLS"        }
@@ -84,6 +84,7 @@ jobs:
         run: |
           url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos='https://cloud.r-project.org', type='source'))")
           wget "$url"
+          R_PROGRESSR_ENABLE=true
           R CMD check --no-manual --as-cran "$(basename "$url")"
 
       - name: Upload check results
