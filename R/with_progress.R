@@ -125,7 +125,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     progressr_in_globalenv("allow")
     on.exit(progressr_in_globalenv("disallow"), add = TRUE)
   
-    handlers <- as_progression_handler(handlers)
+    handlers <- as_progression_handler(handlers, debug = debug)
   
     ## Nothing to do?
     if (length(handlers) == 0L) {
