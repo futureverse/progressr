@@ -5,6 +5,9 @@
  * `handlers(new_handlers)` would return `NULL`, instead of `list()`,
    if there were no prior handlers set.
 
+ * `handler_cli(..., format_done = "...", clear = TRUE)` would not
+   render the `format_done` message, if set.
+
 
 # Version 0.14.0 [2023-08-10]
 
