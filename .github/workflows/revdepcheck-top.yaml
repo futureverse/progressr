@@ -16,11 +16,22 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { r: "release", pkg: "cSEM"     }
-          - { r: "release", pkg: "dipsaus"  }
-          - { r: "release", pkg: "EFAtools" }
-          - { r: "release", pkg: "fxTWAPLS" }
-#          - { r: "release", pkg: "gtfs2gps" }
+          - { r: "release", pkg: "cSEM"            }
+          - { r: "release", pkg: "dipsaus"         }
+          - { r: "release", pkg: "EFAtools"        }
+          - { r: "release", pkg: "EGAnet"          }
+          - { r: "release", pkg: "elevatr"         }
+          - { r: "release", pkg: "fabletools"      }
+          - { r: "release", pkg: "fxTWAPLS"        }
+          - { r: "release", pkg: "lava"            }
+          - { r: "release", pkg: "nflfastR"        }
+          - { r: "release", pkg: "poppr"           }
+#          - { r: "release", pkg: "Seurat"          }
+          - { r: "release", pkg: "SimDesign"       }
+          - { r: "release", pkg: "tidySEM"         }
+          - { r: "release", pkg: "tsdistributions" }
+          - { r: "release", pkg: "tsgarch"         }
+          
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
