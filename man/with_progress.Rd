@@ -60,6 +60,9 @@ Returns the value of the expression.
 Report on Progress while Evaluating an R Expression
 }
 \details{
+If you are writing a Shiny app, use the \code{\link[=withProgressShiny]{withProgressShiny()}} function
+instead of this one.
+
 If the global progression handler is enabled, it is temporarily disabled
 while evaluating the \code{expr} expression.
 
@@ -152,5 +155,6 @@ with_progress({
 })
 }
 \seealso{
-\code{\link[base:conditions]{base::withCallingHandlers()}}
+For Shiny apps, use \code{\link[=withProgressShiny]{withProgressShiny()}} instead of this function.
+Internally, this function is built around \code{\link[base:conditions]{base::withCallingHandlers()}}.
 }
