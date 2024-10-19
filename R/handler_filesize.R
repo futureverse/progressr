@@ -27,6 +27,15 @@
 handler_filesize <- function(file = "default.progress", intrusiveness = getOption("progressr.intrusiveness.file", 5), target = "file", enable = getOption("progressr.enable", TRUE), ...) {
   reporter <- local({
     set_file_size <- function(config, state, progression, message = state$message) {
+      ## Troubleshoot https://github.com/HenrikBengtsson/progressr/issues/168
+      stop_if_not(
+        length(config$max_steps) == 1L, is.numeric(config$max_steps),
+        !is.na(config$max_steps), is.finite(config$max_steps),
+        config$max_steps >= 0,
+        length(state$step) == 1L, is.numeric(state$step),
+        !is.na(state$step), is.finite(state$step), state$step >= 0
+      )
+      
       ratio <- if (config$max_steps == 0) 1 else state$step / config$max_steps
       size <- round(100 * ratio)
       current_size <- file.size(file)
