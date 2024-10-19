@@ -89,5 +89,18 @@ with_progress({
   })
 })
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://progressr.futureverse.org}
+  \item \url{https://github.com/HenrikBengtsson/progressr}
+  \item Report bugs at \url{https://github.com/HenrikBengtsson/progressr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Henrik Bengtsson \email{henrikb@braju.com} (\href{https://orcid.org/0000-0002-7579-5165}{ORCID}) [copyright holder]
+
+}
 \keyword{iteration}
 \keyword{programming}
