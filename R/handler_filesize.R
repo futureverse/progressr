@@ -31,9 +31,7 @@ handler_filesize <- function(file = "default.progress", intrusiveness = getOptio
       stop_if_not(
         length(config$max_steps) == 1L, is.numeric(config$max_steps),
         !is.na(config$max_steps), is.finite(config$max_steps),
-        config$max_steps >= 0,
-        length(state$step) == 1L, is.numeric(state$step),
-        !is.na(state$step), is.finite(state$step), state$step >= 0
+        config$max_steps >= 0
       )
       
       ratio <- if (config$max_steps == 0) 1 else state$step / config$max_steps
@@ -63,19 +61,23 @@ handler_filesize <- function(file = "default.progress", intrusiveness = getOptio
     
     list(
       initiate = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         set_file_size(config = config, state = state, progression = progression)
       },
       
       interrupt = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         msg <- conditionMessage(progression)
         set_file_size(config = config, state = state, progression = progression, message = msg)
       },
       
       update = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         set_file_size(config = config, state = state, progression = progression)
       },
       
       finish = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         if (config$clear) {
 	  if (file_test("-f", file)) file.remove(file)
 	} else {
