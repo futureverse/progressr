@@ -2,6 +2,9 @@
 
 ## Bug Fixes
 
+ * `withProgressShiny()` could produce an `if (config$max_steps ==
+   0) : ... argument is of length zero` error.
+
  * `handlers(new_handlers)` would return `NULL`, instead of `list()`,
    if there were no prior handlers set.
 
