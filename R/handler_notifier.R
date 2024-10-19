@@ -28,7 +28,7 @@ handler_notifier <- function(intrusiveness = getOption("progressr.intrusiveness.
       notifier_(msg = message, title = title)
     }
   } else {
-    notifier <- function(...) NULL
+    notifier <- function(title = "R 'progressr' notification", message, ...) NULL
   }
 
   reporter <- local({
