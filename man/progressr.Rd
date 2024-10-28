@@ -73,6 +73,13 @@ In Shiny:
 \itemize{
 \item \link{withProgressShiny}
 }
+
+Via notification systems:
+\itemize{
+\item \link{handler_ntfy}
+\item \link{handler_notifier}
+\item \link{handler_rpushbullet}
+}
 }
 
 \examples{

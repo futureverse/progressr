@@ -1,5 +1,11 @@
 # Version (development version)
 
+## New Features
+
+ * Add `handler_ntfy()` for reporting on progress via the Ntfy.sh
+   Messaging Service using the **ntfy** package.
+
+
 ## Bug Fixes
 
  * `withProgressShiny()` could produce an `if (config$max_steps ==
@@ -623,7 +629,7 @@
  * TESTS: Increased package test coverage of progression handlers by
    running all code except the last step that calls the backend, which
    may not be installed or supported on the current platform,
-   e.g. **tcltk**, **beepr**, notifier.
+   e.g. **tcltk**, **beepr**, and **notifier**.
 
 ## Bug Fixes
 
