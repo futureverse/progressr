@@ -27,7 +27,7 @@
 handler_filesize <- function(file = "default.progress", intrusiveness = getOption("progressr.intrusiveness.file", 5), target = "file", enable = getOption("progressr.enable", TRUE), ...) {
   reporter <- local({
     set_file_size <- function(config, state, progression, message = state$message) {
-      ## Troubleshoot https://github.com/HenrikBengtsson/progressr/issues/168
+      ## Troubleshoot https://github.com/futureverse/progressr/issues/168
       stop_if_not(
         length(config$max_steps) == 1L, is.numeric(config$max_steps),
         !is.na(config$max_steps), is.finite(config$max_steps),

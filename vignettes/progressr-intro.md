@@ -877,7 +877,7 @@ depends on it.  The roadmap for developing the API is roughly:
       additional progression handlers
 
 For a more up-to-date view on what features might be added, see
-<https://github.com/HenrikBengtsson/progressr/issues>.
+<https://github.com/futureverse/progressr/issues>.
 
 
 ## Appendix

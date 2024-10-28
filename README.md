@@ -1,7 +1,7 @@
 
 
 <div id="badges"><!-- pkgdown markup -->
-<a href="https://CRAN.R-project.org/web/checks/check_results_progressr.html"><img border="0" src="https://www.r-pkg.org/badges/version/progressr" alt="CRAN check status"/></a> <a href="https://github.com/HenrikBengtsson/progressr/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/progressr/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"/></a> <a href="https://github.com/HenrikBengtsson/progressr/actions?query=workflow%3Arevdepcheck-top"><img border="0" src="https://github.com/HenrikBengtsson/progressr/actions/workflows/revdepcheck-top.yaml/badge.svg?branch=develop" alt="Top reverse-dependency checks status"/></a>    <a href="https://app.codecov.io/gh/HenrikBengtsson/progressr"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/progressr/branch/develop/graph/badge.svg" alt="Coverage Status"/></a> <a href="https://lifecycle.r-lib.org/articles/stages.html"><img border="0" src="man/figures/lifecycle-maturing-blue.svg" alt="Life cycle: maturing"/></a>
+<a href="https://CRAN.R-project.org/web/checks/check_results_progressr.html"><img border="0" src="https://www.r-pkg.org/badges/version/progressr" alt="CRAN check status"/></a> <a href="https://github.com/futureverse/progressr/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/futureverse/progressr/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"/></a> <a href="https://github.com/futureverse/progressr/actions?query=workflow%3Arevdepcheck-top"><img border="0" src="https://github.com/futureverse/progressr/actions/workflows/revdepcheck-top.yaml/badge.svg?branch=develop" alt="Top reverse-dependency checks status"/></a>    <a href="https://app.codecov.io/gh/futureverse/progressr"><img border="0" src="https://codecov.io/gh/futureverse/progressr/branch/develop/graph/badge.svg" alt="Coverage Status"/></a> <a href="https://lifecycle.r-lib.org/articles/stages.html"><img border="0" src="man/figures/lifecycle-maturing-blue.svg" alt="Life cycle: maturing"/></a>
 </div>
 
 # progressr: An Inclusive, Unifying API for Progress Updates 
@@ -874,7 +874,7 @@ depends on it.  The roadmap for developing the API is roughly:
       additional progression handlers
 
 For a more up-to-date view on what features might be added, see
-<https://github.com/HenrikBengtsson/progressr/issues>.
+<https://github.com/futureverse/progressr/issues>.
 
 
 ## Appendix
@@ -1054,7 +1054,7 @@ install.packages("progressr")
 
 To install the pre-release version that is available in Git branch `develop` on GitHub, use:
 ```r
-remotes::install_github("HenrikBengtsson/progressr", ref="develop")
+remotes::install_github("futureverse/progressr", ref="develop")
 ```
 This will install the package from source.  
 
