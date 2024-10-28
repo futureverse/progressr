@@ -93,8 +93,8 @@ with_progress({
 Useful links:
 \itemize{
   \item \url{https://progressr.futureverse.org}
-  \item \url{https://github.com/HenrikBengtsson/progressr}
-  \item Report bugs at \url{https://github.com/HenrikBengtsson/progressr/issues}
+  \item \url{https://github.com/futureverse/progressr}
+  \item Report bugs at \url{https://github.com/futureverse/progressr/issues}
 }
 
 }
