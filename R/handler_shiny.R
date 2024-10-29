@@ -54,6 +54,12 @@ handler_shiny <- function(intrusiveness = getOption("progressr.intrusiveness.gui
   reporter <- local({
     list(
       interrupt = function(config, state, progression, ...) {
+        if (!state$enabled) return()
+        stop_if_not(
+          length(config$max_steps) == 1L, is.numeric(config$max_steps),
+          !is.na(config$max_steps), is.finite(config$max_steps),
+          config$max_steps >= 0
+        )
         msg <- conditionMessage(progression)
         amount <- if (config$max_steps == 0) 1 else progression$amount / config$max_steps
         args <- c(
@@ -64,6 +70,12 @@ handler_shiny <- function(intrusiveness = getOption("progressr.intrusiveness.gui
       },
       
       update = function(config, state, progression, ...) {
+        if (!state$enabled) return()
+        stop_if_not(
+          length(config$max_steps) == 1L, is.numeric(config$max_steps),
+          !is.na(config$max_steps), is.finite(config$max_steps),
+          config$max_steps >= 0
+        )
         amount <- if (config$max_steps == 0) 1 else progression$amount / config$max_steps
         args <- c(
           list(amount = amount),

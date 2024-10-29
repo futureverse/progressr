@@ -109,6 +109,7 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
   }
 
   handlers <- list()
+  
   names <- names(args)
   for (kk in seq_along(args)) {
     handler <- args[[kk]]
@@ -164,5 +165,8 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
     if (length(current) > 0L) handlers <- c(current, handlers)
   }
 
-  invisible(options(progressr.handlers = handlers)[[1]])
+  old_handlers <- options(progressr.handlers = handlers)[[1]]
+  if (is.null(old_handlers)) old_handlers <- list()
+  
+  invisible(old_handlers)
 }

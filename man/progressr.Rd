@@ -73,6 +73,13 @@ In Shiny:
 \itemize{
 \item \link{withProgressShiny}
 }
+
+Via notification systems:
+\itemize{
+\item \link{handler_ntfy}
+\item \link{handler_notifier}
+\item \link{handler_rpushbullet}
+}
 }
 
 \examples{
@@ -88,6 +95,19 @@ with_progress({
     sqrt(x)
   })
 })
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://progressr.futureverse.org}
+  \item \url{https://github.com/futureverse/progressr}
+  \item Report bugs at \url{https://github.com/futureverse/progressr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Henrik Bengtsson \email{henrikb@braju.com} (\href{https://orcid.org/0000-0002-7579-5165}{ORCID}) [copyright holder]
+
 }
 \keyword{iteration}
 \keyword{programming}

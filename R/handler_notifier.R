@@ -23,17 +23,12 @@ handler_notifier <- function(intrusiveness = getOption("progressr.intrusiveness.
     if (!requireNamespace(pkg, quietly = TRUE)) {
       stop("Package 'notifier' is not available. See ?progressr::handler_notifier() for installation instructions")
     }
-    notifier_notify <- get("notify", mode = "function", envir = getNamespace(pkg))
+    notifier_ <- get("notify", mode = "function", envir = getNamespace(pkg))
+    notifier <- function(title = "R 'progressr' notification", message, ...) {
+      notifier_(msg = message, title = title)
+    }
   } else {
-    notifier_notify <- function(...) NULL
-  }
-
-  notify <- function(step, max_steps, message) {
-    ratio <- if (max_steps == 0) 1 else step / max_steps
-    ratio <- sprintf("%.0f%%", 100*ratio)
-    msg <- paste(c("", message), collapse = "")
-    msg <- sprintf("[%s] %s", ratio, msg)
-    notifier_notify(msg)
+    notifier <- function(title = "R 'progressr' notification", message, ...) NULL
   }
 
   reporter <- local({
@@ -46,23 +41,25 @@ handler_notifier <- function(intrusiveness = getOption("progressr.intrusiveness.
       
       interrupt = function(config, state, progression, ...) {
         msg <- conditionMessage(progression)
-        notify(step = state$step, max_steps = config$max_steps, message = msg)
+        progress_notify(step = state$step, max_steps = config$max_steps, message = msg, notifier = notifier)
       },
 
       initiate = function(config, state, progression, ...) {
         if (!state$enabled || config$times == 1L) return()
-        notify(step = state$step, max_steps = config$max_steps, message = state$message)
+        progress_notify(step = state$step, max_steps = config$max_steps, message = state$message, notifier = notifier)
       },
         
       update = function(config, state, progression, ...) {
         if (!state$enabled || progression$amount == 0 || config$times <= 2L) return()
-        notify(step = state$step, max_steps = config$max_steps, message = state$message)
+        progress_notify(step = state$step, max_steps = config$max_steps, message = state$message, notifier = notifier)
       },
         
       finish = function(config, state, progression, ...) {
         if (finished) return()
         if (!state$enabled) return()
-        if (state$delta > 0) notify(step = state$step, max_steps = config$max_steps, message = state$message)
+        if (state$delta > 0) {
+          progress_notify(step = state$step, max_steps = config$max_steps, message = state$message, notifier = notifier)
+        }
 	finished <<- TRUE
       }
     )

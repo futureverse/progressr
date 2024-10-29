@@ -38,6 +38,9 @@
 #' @example incl/with_progress.R
 #'
 #' @details
+#' If you are writing a Shiny app, use the [withProgressShiny()] function
+#' instead of this one.
+#'
 #' If the global progression handler is enabled, it is temporarily disabled
 #' while evaluating the `expr` expression.
 #'
@@ -69,7 +72,8 @@
 #' will.
 #'
 #' @seealso
-#' [base::withCallingHandlers()]
+#' For Shiny apps, use [withProgressShiny()] instead of this function.
+#' Internally, this function is built around [base::withCallingHandlers()].
 #'
 #' @export
 with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE, delay_terminal = NULL, delay_stdout = NULL, delay_conditions = NULL, interrupts = getOption("progressr.interrupts", TRUE), interval = NULL, enable = NULL) {
@@ -125,7 +129,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     progressr_in_globalenv("allow")
     on.exit(progressr_in_globalenv("disallow"), add = TRUE)
   
-    handlers <- as_progression_handler(handlers)
+    handlers <- as_progression_handler(handlers, debug = debug)
   
     ## Nothing to do?
     if (length(handlers) == 0L) {

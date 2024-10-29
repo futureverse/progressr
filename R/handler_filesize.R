@@ -27,6 +27,13 @@
 handler_filesize <- function(file = "default.progress", intrusiveness = getOption("progressr.intrusiveness.file", 5), target = "file", enable = getOption("progressr.enable", TRUE), ...) {
   reporter <- local({
     set_file_size <- function(config, state, progression, message = state$message) {
+      ## Troubleshoot https://github.com/futureverse/progressr/issues/168
+      stop_if_not(
+        length(config$max_steps) == 1L, is.numeric(config$max_steps),
+        !is.na(config$max_steps), is.finite(config$max_steps),
+        config$max_steps >= 0
+      )
+      
       ratio <- if (config$max_steps == 0) 1 else state$step / config$max_steps
       size <- round(100 * ratio)
       current_size <- file.size(file)
@@ -54,19 +61,23 @@ handler_filesize <- function(file = "default.progress", intrusiveness = getOptio
     
     list(
       initiate = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         set_file_size(config = config, state = state, progression = progression)
       },
       
       interrupt = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         msg <- conditionMessage(progression)
         set_file_size(config = config, state = state, progression = progression, message = msg)
       },
       
       update = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         set_file_size(config = config, state = state, progression = progression)
       },
       
       finish = function(config, state, progression, ...) {
+        if (!state$enabled) return()
         if (config$clear) {
 	  if (file_test("-f", file)) file.remove(file)
 	} else {

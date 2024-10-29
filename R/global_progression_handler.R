@@ -335,14 +335,24 @@ if (getRversion() < "4.0.0") {
 }
 
 
-as_progression_handler <- function(handlers, drop = TRUE) {
+as_progression_handler <- function(handlers, drop = TRUE, debug = FALSE) {
   ## FIXME(?)
   if (!is.list(handlers)) handlers <- list(handlers)
-  
+
+  if (debug) {
+    message("as_progression_handler() ...")
+    message(sprintf("- Number of progression handlers: %d", length(handlers)))
+    on.exit({
+      message(sprintf("- Number of progression handlers: %d", length(handlers)))
+      message("as_progression_handler() ... done")
+    })
+  }
+
   for (kk in seq_along(handlers)) {
     handler <- handlers[[kk]]
     stop_if_not(is.function(handler))
     if (!inherits(handler, "progression_handler")) {
+      if (debug) message(sprintf("- Handler %d is a function; calling it", kk))
       handler <- handler()
       stop_if_not(is.function(handler),
                   inherits(handler, "progression_handler"))
@@ -352,11 +362,17 @@ as_progression_handler <- function(handlers, drop = TRUE) {
 
   ## Keep only enabled handlers?
   if (drop) {
+    if (debug) message(sprintf("- drop = TRUE => dropping non-enabled handlers"))
     enabled <- vapply(handlers, FUN = function(h) {
       env <- environment(h)
       value <- env$enable
       isTRUE(value) || is.null(value)
     }, FUN.VALUE = TRUE)
+    
+    if (debug && !all(enabled)) {
+      message(sprintf("- Detected %d non-enabled handlers: %s", sum(!enabled), vapply(handlers[!enabled], FUN = function(h) class(h)[1], FUN.VALUE = NA_character_)))
+    }
+    
     handlers <- handlers[enabled]
   }
 

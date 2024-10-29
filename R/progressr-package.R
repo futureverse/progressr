@@ -56,11 +56,15 @@
 #' In Shiny:
 #' * [withProgressShiny]
 #'
+#' Via notification systems:
+#' * [handler_ntfy]
+#' * [handler_notifier]
+#' * [handler_rpushbullet]
+#'
 #' @example incl/progressr-package.R
 #'
 #' @keywords programming iteration
 #'
-#' @docType package
 #' @aliases progressr-package
 #' @name progressr
-NULL
+"_PACKAGE"
