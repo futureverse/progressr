@@ -24,7 +24,7 @@ which sends notifications via the https://ntfy.sh framework."><!-- mathjax --><s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">progressr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9000</span>
       </span>
     </div>
 
@@ -188,7 +188,7 @@ available from <a href="https://github.com/jonocarroll/ntfy" class="external-lin
 <span class="r-in"><span>  <span class="co">## We need to specify a ntfy.sh topic that progress messages</span></span></span>
 <span class="r-in"><span>  <span class="co">## should be sent to. See help("ntfy_topic", package = "ntfy")</span></span></span>
 <span class="r-in"><span>  <span class="co">## for details</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span><span class="st">"NTFY_TOPIC"</span>, <span class="st">"R-my-secret-topic"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html" class="external-link">Sys.setenv</a></span><span class="op">(</span>NTFY_TOPIC <span class="op">=</span> <span class="st">"R-my-secret-topic"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="handlers.html">handlers</a></span><span class="op">(</span><span class="st">"ntfy"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="with_progress.html">with_progress</a></span><span class="op">(</span><span class="op">{</span> <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="slow_sum.html">slow_sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span> <span class="op">}</span><span class="op">)</span></span></span>
@@ -197,7 +197,17 @@ available from <a href="https://github.com/jonocarroll/ntfy" class="external-lin
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Topic not yet set - using a demo topic 'mytopic'</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Set one with usethis::edit_r_environ()</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  and set NTFY_TOPIC='&lt;yourSecretTopic&gt;'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in Sys.setenv("NTFY_TOPIC", "R-my-secret-topic"):</span> all arguments must be named</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 1</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 2</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 3</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 4</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 5</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 7</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 8</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 9</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> M: Added value 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 55</span>
 </code></pre></div>
     </div>
   </div>
