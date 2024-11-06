@@ -1,6 +1,8 @@
 # Version (development version)
 
- * ...
+## Bug Fixes
+
+ * Renamed `handler_rpushbullet()` argument `device` to `devices`.
 
 
 # Version 0.15.0 [2023-10-28]
