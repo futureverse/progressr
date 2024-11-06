@@ -1,6 +1,7 @@
 #' Progression Handler: Progress Reported via the Pushbullet Messaging Service
 #'
-#' A progression handler for `pbPost()` of the \pkg{RPushbullet} package.
+#' A progression handler for [RPushbullet::pbPost()] of the \pkg{RPushbullet}
+#' package.
 #'
 #' @inheritParams make_progression_handler
 #' @inheritParams RPushbullet::pbPost
@@ -15,7 +16,6 @@
 #' of the \pkg{RPushbullet} package.  It also requires internet access
 #' from the computer where this progress handler is registered.
 #'
-#' @keywords internal
 #' @export
 handler_rpushbullet <- function(intrusiveness = getOption("progressr.intrusiveness.rpushbullet", 5), target = "gui", ..., title = "Progress update from R", recipients = NULL, email = NULL, channel = NULL, apikey = NULL, device = NULL) {
   ## Used for package testing purposes only when we want to perform

@@ -47,7 +47,8 @@ the global option).}
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
-A progression handler for \code{pbPost()} of the \pkg{RPushbullet} package.
+A progression handler for \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}} of the \pkg{RPushbullet}
+package.
 }
 \section{Requirements}{
 
@@ -67,4 +68,3 @@ if (requireNamespace(pkg, quietly = TRUE)) {
   
 }
 }
-\keyword{internal}

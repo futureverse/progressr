@@ -13,7 +13,6 @@
 #' available from <https://github.com/gaborcsardi/notifier>.  This can be
 #' installed as `remotes::install_github("gaborcsardi/notifier@62d484")`.
 #'
-#' @keywords internal
 #' @export
 handler_notifier <- function(intrusiveness = getOption("progressr.intrusiveness.notifier", 10), target = "gui", ...) {
   ## Used for package testing purposes only when we want to perform

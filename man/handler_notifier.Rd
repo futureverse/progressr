@@ -39,4 +39,3 @@ if (requireNamespace(pkg, quietly = TRUE)) {
   
 }
 }
-\keyword{internal}
