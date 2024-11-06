@@ -24,7 +24,7 @@ package."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">progressr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9001</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.15.0-9002</span>
       </span>
     </div>
 
@@ -152,7 +152,7 @@ package.</p>
 <span>  email <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  channel <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  apikey <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  device <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  devices <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -199,6 +199,13 @@ supplied as an argument here, via the global option
 <code>rpushbullet.key</code>, or via the file <code>~/.rpushbullet.json</code>
 which is read at package initialization (and, if found, also sets
 the global option).</p></dd>
+
+
+<dt id="arg-devices">devices<a class="anchor" aria-label="anchor" href="#arg-devices"></a></dt>
+<dd><p>The device to which this post is pushed. It can be
+supplied as an argument here, or via the file
+<code>~/.rpushbullet.json</code> which is read at package
+initialization.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
