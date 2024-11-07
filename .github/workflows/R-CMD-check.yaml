@@ -22,7 +22,7 @@ jobs:
 #          - {os: macOS-latest,   r: 'release'  }
 #          - {os: macOS-latest,   r: 'oldrel'   }
           - {os: ubuntu-latest,  r: 'devel'    }
-          - {os: ubuntu-latest,  r: 'devel'    , req_suggests: false, label: '!req-suggests' }
+          - {os: ubuntu-latest,  r: 'devel'    , req_suggests: false, label: '!req_suggests' }
           - {os: ubuntu-latest,  r: 'release'  }
           - {os: ubuntu-latest,  r: 'oldrel'   }
           - {os: ubuntu-latest,  r: 'oldrel-1' }
@@ -49,6 +49,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: R env vars
+        run: |
+          env | grep -E "^(_R_|R_)"
+        
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-tinytex@v2
