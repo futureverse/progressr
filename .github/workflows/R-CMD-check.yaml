@@ -39,8 +39,7 @@ jobs:
       ## Test in other locale (optional)
       LANGUAGE: ${{ matrix.config.language }}
       ## R CMD check
-      _R_CHECK_SUGGESTS_ONLY_: ${{ matrix.config.req_suggests || true }}
-      _R_FOO_: ${{ !contains(matrix.config.req_suggests, false) }}
+      _R_CHECK_SUGGESTS_ONLY_: ${{ !!contains(matrix.config.req_suggests, false) }}
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_MATRIX_DATA_: true
       _R_CHECK_THINGS_IN_TEMP_DIR_: true
@@ -50,10 +49,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: R env vars
-        run: |
-          env | grep -E "^(_R_|R_)"
-        
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-tinytex@v2
