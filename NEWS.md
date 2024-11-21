@@ -4,8 +4,10 @@
 
  * Renamed `handler_rpushbullet()` argument `device` to `devices`.
 
+ * Fixed thinko bug in `example("handler_ntfy")`.
 
-# Version 0.15.0 [2023-10-28]
+
+# Version 0.15.0 [2024-10-28]
 
 ## New Features
 
