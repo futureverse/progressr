@@ -89,6 +89,10 @@ jobs:
         with:
           job-config: ${{ matrix.config.job-config }}
           token: ${{ secrets.RHUB_TOKEN }}
+      - name: Install itself (to build vignettes)
+        run: |
+          install.packages(".", repos=NULL, type="source")
+        shell: Rscript {0}
       - uses: r-hub/actions/run-check@v1
         with:
           job-config: ${{ matrix.config.job-config }}
