@@ -13,7 +13,7 @@ handler_rpushbullet(
   email = NULL,
   channel = NULL,
   apikey = NULL,
-  device = NULL
+  devices = NULL
 )
 }
 \arguments{
@@ -44,10 +44,16 @@ supplied as an argument here, via the global option
 which is read at package initialization (and, if found, also sets
 the global option).}
 
+\item{devices}{The device to which this post is pushed. It can be
+supplied as an argument here, or via the file
+\code{~/.rpushbullet.json} which is read at package
+initialization.}
+
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
-A progression handler for \code{pbPost()} of the \pkg{RPushbullet} package.
+A progression handler for \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}} of the \pkg{RPushbullet}
+package.
 }
 \section{Requirements}{
 
@@ -67,4 +73,3 @@ if (requireNamespace(pkg, quietly = TRUE)) {
   
 }
 }
-\keyword{internal}

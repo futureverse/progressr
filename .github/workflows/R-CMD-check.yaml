@@ -22,11 +22,13 @@ jobs:
 #          - {os: macOS-latest,   r: 'release'  }
 #          - {os: macOS-latest,   r: 'oldrel'   }
           - {os: ubuntu-latest,  r: 'devel'    }
+          - {os: ubuntu-latest,  r: 'devel'    , suggests_only: 'false', label: '!suggests_only' }
           - {os: ubuntu-latest,  r: 'release'  }
           - {os: ubuntu-latest,  r: 'oldrel'   }
           - {os: ubuntu-latest,  r: 'oldrel-1' }
           - {os: ubuntu-latest,  r: 'oldrel-2' }
-          - {os: ubuntu-latest,  r: '3.6'      }
+          - {os: ubuntu-latest,  r: '4.1'      }
+#          - {os: ubuntu-latest,  r: '3.6'      } ## optional 'ntfy' requires R (>= 4.1), but triggers an error
           - {os: ubuntu-latest,  r: 'release'  , language: ko,    label: ko    }
           - {os: ubuntu-latest,  r: 'release'  , language: zh_CN, label: zh_CN }
           - {os: ubuntu-latest,  r: 'release'  , language: zh_TW, label: zh_TW }
@@ -37,9 +39,9 @@ jobs:
       ## Test in other locale (optional)
       LANGUAGE: ${{ matrix.config.language }}
       ## R CMD check
+      _R_CHECK_SUGGESTS_ONLY_: ${{ matrix.config.suggests_only || 'true' }}
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_MATRIX_DATA_: true
-      _R_CHECK_SUGGESTS_ONLY_: true
       _R_CHECK_THINGS_IN_TEMP_DIR_: true
       ## R (>= 4.4.0) Note, no trailing underscore (sic!)
       _R_COMPARE_LANG_OBJECTS: eqonly
@@ -81,6 +83,10 @@ jobs:
           cat(sprintf("LANGUAGE=%s\n", sQuote(Sys.getenv("LANGUAGE"))))
           cat(sprintf("locales: %s\n", sQuote(Sys.getlocale())))
           tryCatch(log("a"), error = conditionMessage)
+          cat("R-specific environment variables:\n")
+          envs <- Sys.getenv()
+          envs <- envs[grep("^(_R_|R_)", names(envs))]
+          print(envs)
         shell: Rscript {0}
 
       - name: Check (!Windows)

@@ -1,6 +1,6 @@
 #' Progression Handler: Progress Reported via the Ntfy.sh Messaging Service
 #'
-#' A progression handler for `ntfy_send()` of the \pkg{ntfy} package,
+#' A progression handler for [ntfy::ntfy_send()] of the \pkg{ntfy} package,
 #' which sends notifications via the <https://ntfy.sh> framework.
 #'
 #' @inheritParams make_progression_handler
@@ -11,10 +11,8 @@
 #' @example incl/handler_ntfy.R
 #'
 #' @section Requirements:
-#' This progression handler requires the \pkg{ntfy} package, which is only
-#' available from <https://github.com/jonocarroll/ntfy>.
+#' This progression handler requires the \pkg{ntfy} package.
 #'
-#' @keywords internal
 #' @export
 handler_ntfy <- function(intrusiveness = getOption("progressr.intrusiveness.ntfy", 5), target = "gui", ..., title = "Progress update from R") {
   ## Used for package testing purposes only when we want to perform

@@ -23,13 +23,12 @@ rendered.}
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
-A progression handler for \code{ntfy_send()} of the \pkg{ntfy} package,
+A progression handler for \code{\link[ntfy:ntfy_send]{ntfy::ntfy_send()}} of the \pkg{ntfy} package,
 which sends notifications via the \url{https://ntfy.sh} framework.
 }
 \section{Requirements}{
 
-This progression handler requires the \pkg{ntfy} package, which is only
-available from \url{https://github.com/jonocarroll/ntfy}.
+This progression handler requires the \pkg{ntfy} package.
 }
 
 \examples{
@@ -38,11 +37,10 @@ if (requireNamespace(pkg, quietly = TRUE)) {
   ## We need to specify a ntfy.sh topic that progress messages
   ## should be sent to. See help("ntfy_topic", package = "ntfy")
   ## for details
-  Sys.setenv("NTFY_TOPIC", "R-my-secret-topic")
+  Sys.setenv(NTFY_TOPIC = "R-my-secret-topic")
 
   handlers("ntfy")
   with_progress({ y <- slow_sum(1:10) })
   print(y)
 }
 }
-\keyword{internal}
