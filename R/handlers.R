@@ -1,6 +1,6 @@
 #' Control How Progress is Reported
 #'
-#' @param \dots One or more progression handlers.  Alternatively, this
+#' @param \ldots One or more progression handlers.  Alternatively, this
 #' functions accepts also a single vector of progression handlers as input.
 #' If this vector is empty, then an empty set of progression handlers will
 #' be set.

@@ -13,11 +13,6 @@ handlers(
 )
 }
 \arguments{
-\item{\dots}{One or more progression handlers.  Alternatively, this
-functions accepts also a single vector of progression handlers as input.
-If this vector is empty, then an empty set of progression handlers will
-be set.}
-
 \item{append}{(logical) If FALSE, the specified progression handlers
 replace the current ones, otherwise appended to them.}
 
@@ -32,6 +27,11 @@ are set.}
 \item{global}{If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
 otherwise FALSE.  Argument \code{global} must not used with other arguments.}
+
+\item{\ldots}{One or more progression handlers.  Alternatively, this
+functions accepts also a single vector of progression handlers as input.
+If this vector is empty, then an empty set of progression handlers will
+be set.}
 }
 \value{
 (invisibly) the previous list of progression handlers set.
