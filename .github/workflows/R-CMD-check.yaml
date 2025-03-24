@@ -21,7 +21,7 @@ jobs:
 #          - {os: macOS-latest,   r: 'devel'    }
 #          - {os: macOS-latest,   r: 'release'  }
 #          - {os: macOS-latest,   r: 'oldrel'   }
-          - {os: ubuntu-latest,  r: 'devel'    }
+          - {os: ubuntu-latest,  r: 'devel'    , future: 'develop' }
           - {os: ubuntu-latest,  r: 'devel'    , suggests_only: 'false', label: '!suggests_only' }
           - {os: ubuntu-latest,  r: 'release'  }
           - {os: ubuntu-latest,  r: 'oldrel'   }
@@ -45,6 +45,7 @@ jobs:
       _R_CHECK_THINGS_IN_TEMP_DIR_: true
       ## R (>= 4.4.0) Note, no trailing underscore (sic!)
       _R_COMPARE_LANG_OBJECTS: eqonly
+      R_FUTURE_BRANCH: ${{ matrix.config.future }}
       
     steps:
       - uses: actions/checkout@v4
@@ -71,6 +72,10 @@ jobs:
       - name: Install itself (to build vignettes)
         run: |
           install.packages(".", repos=NULL, type="source")
+          pver <- Sys.getenv("R_FUTURE_BRANCH")
+          if (nzchar(pver)) {
+            remotes::install_github("futureverse/future", ref = pver)
+          }
         shell: Rscript {0}
 
       - name: Session info
