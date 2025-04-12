@@ -6,7 +6,7 @@ vignettes/progressr-intro.md: incl/OVERVIEW.md vignettes/incl/clean.css
 	cat $< >> $@
 	sed -i 's/vignettes\///g' $@
 
-vigns: vignettes/progressr-intro.md
+vignettes: vignettes/progressr-intro.md
 
 spelling:
 	$(R_SCRIPT) -e "spelling::spell_check_package()"
