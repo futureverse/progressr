@@ -33,7 +33,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +52,9 @@
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
 <ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://www.futureverse.org/"><span class="fa fas fa-home"></span></a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-packages" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Packages</button>
@@ -730,7 +733,7 @@ updates;</p>
 package to parallelize on the local machine while at the same time
 signaling progression updates:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/futureverse/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/DavisVaughan/furrr" class="external-link">furrr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://future.futureverse.org/reference/plan.html" class="external-link">plan</a></span><span class="op">(</span><span class="va">multisession</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
@@ -821,7 +824,7 @@ one can use <code>.progress = "progressr"</code> together with
 <div class="section level3">
 <h3 id="near-live-versus-buffered-progress-updates-with-futures">Near-live versus buffered progress updates with futures<a class="anchor" aria-label="anchor" href="#near-live-versus-buffered-progress-updates-with-futures"></a>
 </h3>
-<p>As of November 2020, there are four types of <strong>future</strong>
+<p>As of April 2025, there are five types of <strong>future</strong>
 backends that are known(*) to provide near-live progress updates:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -832,6 +835,7 @@ backends that are known(*) to provide near-live progress updates:</p>
 <code>multisession</code>, and</li>
 <li>
 <code>cluster</code> (local and remote)</li>
+<li><code><a href="https://future.callr.futureverse.org/reference/callr.html" class="external-link">future.callr::callr</a></code></li>
 </ol>
 <p>Here “near-live” means that the progress handlers will report on
 progress almost immediately when the progress is signaled on the worker.
