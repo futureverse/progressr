@@ -111,7 +111,7 @@ global_progression_handler <- local({
 
   finish <- function(progression = control_progression("shutdown"), debug = FALSE) {
     finished <- FALSE
-    
+
     ## Is progress handler active?
     if (!is.null(current_progressor_uuid)) {
       if (debug) message(" - shutdown progression handlers")

@@ -1,29 +1,86 @@
-getRStudioVersion <- function() {
+get_rstudio_version <- function() {
   if (!"tools:rstudio" %in% search()) return(package_version("0.0"))
   envir <- as.environment("tools:rstudio")
   RStudio.Version <- get("RStudio.Version", mode = "function", envir = envir, inherits = FALSE)
   RStudio.Version()[["version"]]
 }
 
-#' @importFrom utils packageVersion
-warnAboutRStudioMessageHandler <- function() {
+
+patch_rstudio_console_evidence <- function() {
+  res <- c(
+    console = FALSE, ## In RStudio Console?
+    version = FALSE, ## Affected RStudio version?
+    message = FALSE, ## RStudio use custom message handler?
+    warning = FALSE  ## RStudio use custom warning handler?
+  )
+  
   ## Not RStudio Console?
-  if (Sys.getenv("RSTUDIO") != "1" || nzchar(Sys.getenv("RSTUDIO_TERM"))) {
-    return()
+  if (Sys.getenv("RSTUDIO") == "1" && !nzchar(Sys.getenv("RSTUDIO_TERM"))) {
+    res["console"] <- TRUE
   }
 
   ## Unaffected version of RStudio?
-  if (getRStudioVersion() < "2025.5.0") return()
+  if (get_rstudio_version() >= "2025.5.0") {
+    res["version"] <- TRUE
+  }
 
-  ## No global condition handler for "message":s?
-  handler <- globalCallingHandlers()[["message"]]
-  if (is.null(handler)) return()
+  ## No global message and warning handlers?
+  handlers <- globalCallingHandlers()
+  
+  handler <- handlers[["message"]]
+  if (is.null(handler)) {
+    res["message"] <- TRUE
+  } else {
+    code <- deparse(body(handler))
+    search <- ".rs.globalCallingHandlers.onMessageImpl"
+    if (any(grepl(search, code, fixed = TRUE))) {
+      res["message"] <- TRUE
+    }
+  }
 
-  ## Not one of RStudio's custom handlers?
-  code <- deparse(body(handler))
-  search <- ".rs.globalCallingHandlers.onMessageImpl"
-  if (!any(grepl(search, code, fixed = TRUE))) return()
+  handler <- handlers[["warning"]]
+  if (is.null(handler)) {
+    res["warning"] <- TRUE
+  } else {
+    code <- deparse(body(handler))
+    search <- ".rs.globalCallingHandlers.onWarningImpl"
+    if (any(grepl(search, code, fixed = TRUE))) {
+      res["warning"] <- TRUE
+    }
+  }
 
-  msg <- sprintf("You are running RStudio %s, which has a custom conditional handler for messages that is incompatible with some of the progress handlers in progressr %s, e.g. 'cli'. Until fixed, one workaround is to disable RStudio's custom handlers, by going to 'Tools' -> 'Global Options ...' -> 'Console' and switch 'Use Extended Display' to 'Errors and Warnings only'. See <https://github.com/futureverse/progressr/issues/179> for further details", getRStudioVersion(), packageVersion("progressr"))
+  res
+}
+
+
+patch_rstudio_console <- local({
+  patch <- NA
+  
+  function(reset = FALSE) {
+    if (isTRUE(reset)) patch <<- NA
+    if (!is.na(patch)) return(patch)
+
+    ## Always respect option
+    opt <- getOption("progressr.rstudio.patch")
+    if (is.logical(opt) && length(opt) == 1L && !is.na(opt)) {
+      return(opt)
+    }
+
+    affected <- patch_rstudio_console_evidence()
+    if (!all(affected)) {
+      patch <<- FALSE
+      return(FALSE)
+    }
+
+    TRUE
+  }
+})
+
+
+#' @importFrom utils packageVersion
+warn_about_rstudio_condition_handlers <- function() {
+  affected <- patch_rstudio_console_evidence()
+  if (!all(affected)) return()
+  msg <- sprintf("You are running RStudio %s, which has a custom message and warning handlers that are incompatible with some of the progress handlers in progressr %s, e.g. 'cli'. Until fixed, one workaround is to disable RStudio's custom handlers, by going to 'Tools' -> 'Global Options ...' -> 'Console' and switch 'Use Extended Display' to 'Errors only'. See <https://github.com/futureverse/progressr/issues/179> for further details", get_rstudio_version(), packageVersion("progressr"))
   warning(msg, call. = FALSE, immediate. = FALSE)
 }

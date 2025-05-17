@@ -31,5 +31,5 @@
   ## for the RStudio Console. It causes conflicts with some of the
   ## progressr handlers.
   ## https://github.com/futureverse/progressr/issues/179
-  warnAboutRStudioMessageHandler()
+  warn_about_rstudio_condition_handlers()
 }

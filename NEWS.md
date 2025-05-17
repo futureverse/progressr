@@ -1,6 +1,13 @@
 # Version (development version)
 
- * ...
+## Workarounds
+
+ * RStudio 2025.05.0 introduced new default handlers for messages and
+   warnings for the RStudio Console thate are incompatible with some
+   of the **progressr** handlers. I believe this is due to a bug in
+   these new handlers. Until resolved, **progressr** implements a
+   workaround for the RStudio Console that circumvents these handlers
+   while a progressor is active.
 
 
 # Version 0.15.1 [2024-11-20]

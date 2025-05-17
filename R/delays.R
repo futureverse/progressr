@@ -79,7 +79,25 @@ has_buffered_stdout <- function(stdout_file) {
 }
 
 
-flush_conditions <- function(conditions) {
+flush_conditions <- function(conditions, patch = FALSE) {
+  ## Patch https://github.com/futureverse/progressr/issues/179
+  patch <- patch_rstudio_console()
+  if (patch) {
+    message <- function(m) {
+      cat(conditionMessage(m), file = stderr())
+    }
+    warning <- function(w) {
+      call <- w[["call"]]
+      if (is.null(call)) {
+        cat(gettext("Warning:"), file = stderr())
+      } else {
+        dcall <- deparse(call)
+        cat(gettextf("Warning in %s :", dcall), file = stderr())
+      }
+      cat(conditionMessage(w), "\n", sep = "", file = stderr())
+    }
+  }
+  
   for (c in conditions) {
     if (inherits(c, "message")) {
       message(c)
@@ -89,6 +107,7 @@ flush_conditions <- function(conditions) {
       signalCondition(c)
     }
   }
+  
   list()
 } ## flush_conditions()
  
