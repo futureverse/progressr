@@ -9,6 +9,11 @@
    workaround for the RStudio Console that circumvents these handlers
    while a progressor is active.
 
+## Bug Fixes
+
+ * Package failed to load in the Positrion environment due to an
+   "object 'RStudio.Version' of mode 'function' was not found" error.
+ 
 
 # Version 0.15.1 [2024-11-20]
 

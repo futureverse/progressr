@@ -20,7 +20,7 @@ patch_rstudio_console_evidence <- function() {
   }
 
   ## Unaffected version of RStudio?
-  if (get_rstudio_version() >= "2025.5.0") {
+  if (Sys.getenv("RSTUDIO") == "1" && get_rstudio_version() >= "2025.5.0") {
     res["version"] <- TRUE
   }
 
