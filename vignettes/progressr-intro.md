@@ -434,7 +434,7 @@ my_fcn <- function(xs) {
   })
 }
 
-y <- my_fcn(1:10/2)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -455,7 +455,7 @@ my_fcn <- function(xs) {
   }
 }
 
-y <- my_fcn(1:10/2)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -475,7 +475,7 @@ my_fcn <- function(xs) {
   })
 }
 
-y <- my_fcn(1:10/2)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -496,7 +496,7 @@ my_fcn <- function(xs) {
   })
 }
 
-y <- my_fcn(1:10/2)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -606,14 +606,14 @@ handlers("cli")
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   future_lapply(xs, function(x, ...) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-y <- my_fcn(1:10/2)
-# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40% x=2
 ```
 
 
@@ -635,14 +635,14 @@ handlers("cli")
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   foreach(x = xs) %dofuture% {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }
 }
 
-y <- my_fcn(1:10/2)
-# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40% x=2
 ```
 
 
@@ -662,14 +662,14 @@ handlers("cli")
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   foreach(x = xs) %dopar% {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }
 }
 
-y <- my_fcn(1:10/2)
-# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40% x=2
 ```
 
 
@@ -690,14 +690,14 @@ handlers("cli")
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   future_map(xs, function(x) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-y <- my_fcn(1:10/2)
-# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40% x=2
 ```
 
 _Note:_ This solution does not involved the `.progress = TRUE`
@@ -728,14 +728,14 @@ handlers("cli")
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   bplapply(xs, function(x) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-y <- my_fcn(1:10/2)
-# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40% x=2
 ```
 
 
@@ -758,14 +758,14 @@ handlers("cli")
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   llply(xs, function(x, ...) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }, .parallel = TRUE)
 }
 
-y <- my_fcn(1:10/2)
-# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40% x=2
 ```
 
 _Note:_ As an alternative to the above, recommended approach, one can

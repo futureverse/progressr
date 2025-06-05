@@ -431,7 +431,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -452,7 +452,7 @@ my_fcn <- function(xs) {
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -472,7 +472,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -493,7 +493,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -594,22 +594,22 @@ Here is an example that uses `future_lapply()` of the **[future.apply]** package
 
 ```r
 library(future.apply)
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   future_lapply(xs, function(x, ...) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -623,22 +623,22 @@ the local machine, it works alsof for remote machines:
 
 ```r
 library(doFuture)    ## %dofuture%
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   foreach(x = xs) %dofuture% {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -650,22 +650,22 @@ use the same **progressr** as above to progress updates;
 ```r
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   foreach(x = xs) %dopar% {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -678,22 +678,22 @@ progression updates:
 
 ```r
 library(furrr)
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   future_map(xs, function(x) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -716,22 +716,22 @@ library(BiocParallel)
 library(doFuture)
 register(DoparParam())  ## BiocParallel parallelizes via %dopar%
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   bplapply(xs, function(x) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -746,22 +746,22 @@ progression updates:
 library(plyr)
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   llply(xs, function(x, ...) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }, .parallel = TRUE)
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
