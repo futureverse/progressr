@@ -434,7 +434,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10/2)
 #  |====================                               |  40%
 ```
 
@@ -455,7 +455,7 @@ my_fcn <- function(xs) {
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10/2)
 #  |====================                               |  40%
 ```
 
@@ -475,7 +475,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10/2)
 #  |====================                               |  40%
 ```
 
@@ -496,7 +496,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10/2)
 #  |====================                               |  40%
 ```
 
@@ -597,11 +597,11 @@ Here is an example that uses `future_lapply()` of the **[future.apply]** package
 
 ```r
 library(future.apply)
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -612,8 +612,8 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
-# / [================>-----------------------------]  40% x=2
+y <- my_fcn(1:10/2)
+# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
 ```
 
 
@@ -626,11 +626,11 @@ the local machine, it works alsof for remote machines:
 
 ```r
 library(doFuture)    ## %dofuture%
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -641,8 +641,8 @@ my_fcn <- function(xs) {
   }
 }
 
-my_fcn(1:5)
-# / [================>-----------------------------]  40% x=2
+y <- my_fcn(1:10/2)
+# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
 ```
 
 
@@ -653,11 +653,11 @@ use the same **progressr** as above to progress updates;
 ```r
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -668,8 +668,8 @@ my_fcn <- function(xs) {
   }
 }
 
-my_fcn(1:5)
-# / [================>-----------------------------]  40% x=2
+y <- my_fcn(1:10/2)
+# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
 ```
 
 
@@ -681,11 +681,11 @@ progression updates:
 
 ```r
 library(furrr)
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -696,8 +696,8 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
-# / [================>-----------------------------]  40% x=2
+y <- my_fcn(1:10/2)
+# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
 ```
 
 _Note:_ This solution does not involved the `.progress = TRUE`
@@ -719,11 +719,11 @@ library(BiocParallel)
 library(doFuture)
 register(DoparParam())  ## BiocParallel parallelizes via %dopar%
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -734,8 +734,8 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
-# / [================>-----------------------------]  40% x=2
+y <- my_fcn(1:10/2)
+# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
 ```
 
 
@@ -749,11 +749,11 @@ progression updates:
 library(plyr)
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -764,8 +764,8 @@ my_fcn <- function(xs) {
   }, .parallel = TRUE)
 }
 
-my_fcn(1:5)
-# / [================>-----------------------------]  40% x=2
+y <- my_fcn(1:10/2)
+# ■■■■■■■■■■■■■                     40% | x=4 ETA: 15s
 ```
 
 _Note:_ As an alternative to the above, recommended approach, one can
