@@ -2,16 +2,15 @@
 
 ## Workarounds
 
- * RStudio 2025.05.0 introduced new default handlers for messages and
-   warnings for the RStudio Console thate are incompatible with some
-   of the **progressr** handlers. I believe this is due to a bug in
-   these new handlers. Until resolved, **progressr** implements a
-   workaround for the RStudio Console that circumvents these handlers
-   while a progressor is active.
+ * RStudio v2025.05.0 introduced new default handlers for messages and
+   warnings for the RStudio Console, which came with a bug causing
+   console output to stop working in some cases. This bug was fixed in
+   RStudio v2025.05.1. If you run v2025.05.0, **progressr** implements
+   a workaround.
 
 ## Bug Fixes
 
- * Package failed to load in the Positrion environment due to an
+ * Package failed to load in the Positron environment due to an
    "object 'RStudio.Version' of mode 'function' was not found" error.
  
 

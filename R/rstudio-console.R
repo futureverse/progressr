@@ -1,9 +1,18 @@
-get_rstudio_version <- function() {
-  if (!"tools:rstudio" %in% search()) return(package_version("0.0"))
-  envir <- as.environment("tools:rstudio")
-  RStudio.Version <- get("RStudio.Version", mode = "function", envir = envir, inherits = FALSE)
-  RStudio.Version()[["version"]]
-}
+get_rstudio_version <- local({
+  .version <- NULL
+  function() {
+    if (is.null(.version)) {
+      if (!"tools:rstudio" %in% search()) {
+        .version <<- package_version("0.0")
+      } else {
+        envir <- as.environment("tools:rstudio")
+        RStudio.Version <- get("RStudio.Version", mode = "function", envir = envir, inherits = FALSE)
+        .version <<- RStudio.Version()[["version"]]
+      }
+    }
+    .version
+  }
+})
 
 
 patch_rstudio_console_evidence <- function() {
@@ -13,15 +22,19 @@ patch_rstudio_console_evidence <- function() {
     message = FALSE, ## RStudio use custom message handler?
     warning = FALSE  ## RStudio use custom warning handler?
   )
-  
-  ## Not RStudio Console?
-  if (Sys.getenv("RSTUDIO") == "1" && !nzchar(Sys.getenv("RSTUDIO_TERM"))) {
-    res["console"] <- TRUE
-  }
 
-  ## Unaffected version of RStudio?
-  if (Sys.getenv("RSTUDIO") == "1" && get_rstudio_version() >= "2025.5.0") {
-    res["version"] <- TRUE
+  ## RStudio?
+  if (Sys.getenv("RSTUDIO") == "1") {
+    ## Not RStudio Terminal, i.e. RStudio Console?
+    if (!nzchar(Sys.getenv("RSTUDIO_TERM"))) {
+      res["console"] <- TRUE
+    }
+
+    ## RStudio v2025.5.0?
+    if (get_rstudio_version() >= "2025.5.0" &&
+        get_rstudio_version() <  "2025.5.1") {
+      res["version"] <- TRUE
+    }
   }
 
   ## No global message and warning handlers?
