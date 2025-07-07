@@ -622,7 +622,7 @@ y <- my_fcn(1:10)
 Here is an example that uses `foreach()` of the **[foreach]** package
 together with `%dofuture%` of the **[doFuture]** package to
 parallelize while reporting on progress.  This example parallelizes on
-the local machine, it works alsof for remote machines:
+the local machine, it works also for remote machines:
 
 ```r
 library(doFuture)    ## %dofuture%
@@ -647,7 +647,7 @@ y <- my_fcn(1:10)
 
 
 For existing code using the traditional `%dopar%` operators of the
-**[foreach]** package, we can register the **[doFuture]** adaptor and
+**[foreach]** package, we can register the **[doFuture]** adapter and
 use the same **progressr** as above to progress updates;
 
 ```r
