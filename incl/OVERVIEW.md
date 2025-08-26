@@ -764,14 +764,15 @@ requires **plyr** (>= 1.8.7).
 
 ### Near-live versus buffered progress updates with futures
 
-As of April 2025, there are five types of **future** backends that are
+As of August 2025, there are six types of **future** backends that are
 known(*) to provide near-live progress updates:
 
  1. `sequential`,
  2. `multicore`,
  3. `multisession`, and
  4. `cluster` (local and remote)
- 4. `future.callr::callr`
+ 5. `future.callr::callr`
+ 6. `future.mirai::mirai_multisession`
 
 Here "near-live" means that the progress handlers will report on
 progress almost immediately when the progress is signaled on the
