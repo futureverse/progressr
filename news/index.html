@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9010</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,10 +22,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/progressr-intro.html">progressr: An Introduction</a></li>
-  </ul></li>
 <li class="active nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -73,11 +69,11 @@
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
 <div class="section level3">
 <h3 id="workarounds-development-version">Workarounds<a class="anchor" aria-label="anchor" href="#workarounds-development-version"></a></h3>
-<ul><li>RStudio 2025.05.0 introduced new default handlers for messages and warnings for the RStudio Console thate are incompatible with some of the <strong>progressr</strong> handlers. I believe this is due to a bug in these new handlers. Until resolved, <strong>progressr</strong> implements a workaround for the RStudio Console that circumvents these handlers while a progressor is active.</li>
+<ul><li>RStudio v2025.05.0 introduced new default handlers for messages and warnings for the RStudio Console, which came with a bug causing console output to stop working in some cases. This bug was fixed in RStudio v2025.05.1. If you run v2025.05.0, <strong>progressr</strong> implements a workaround.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Package failed to load in the Positrion environment due to an “object ‘RStudio.Version’ of mode ‘function’ was not found” error.</li>
+<ul><li>Package failed to load in the Positron environment due to an “object ‘RStudio.Version’ of mode ‘function’ was not found” error.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -130,13 +126,13 @@
 <h3 id="new-features-0-13-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-13-0"></a></h3>
 <ul><li><p>Add <code><a href="../reference/handler_rpushbullet.html">handler_rpushbullet()</a></code> for reporting on progress via the Pushbullet Messaging Service using the <strong>RPushbullet</strong> package.</p></li>
 <li><p>Now also ‘beepr’, ‘debug’, ‘filesize’, ‘notifier’, ‘rpushbullet’, ‘shiny’, ‘tkprogressbar’, and ‘winprogressbar’ handlers report on interrupts.</p></li>
-<li><p>Now progress updates of type “finish” supports also updating the progress state, e.g. you can do <code>p(amount = 1.0, type = "finish")</code> whereas previously you had to do <code>p(amount = 1.0)</code> and then <code>p(type    = "finish")</code> resulting in two progress conditions being signaled.</p></li>
+<li><p>Now progress updates of type “finish” supports also updating the progress state, e.g. you can do <code>p(amount = 1.0, type = "finish")</code> whereas previously you had to do <code>p(amount = 1.0)</code> and then <code>p(type = "finish")</code> resulting in two progress conditions being signaled.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-13-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-13-0"></a></h3>
 <ul><li><p>When using multiple progression handlers, it would only be first one that was updated as the progressor completed, whereas any following ones would not receive that last update.</p></li>
 <li><p>The ‘cli’ handler would output a newline when completed.</p></li>
-<li><p>The ‘cli’ handler did not handle zero-length progressors resulting in <code>Error in rep(chr_complete, complete_len) : invalid 'times'    argument</code> when the progressor completed.</p></li>
+<li><p>The ‘cli’ handler did not handle zero-length progressors resulting in <code>Error in rep(chr_complete, complete_len) : invalid 'times' argument</code> when the progressor completed.</p></li>
 <li><p>The ‘cli’ handler did not work when the <strong>cli</strong> package was configured to report on progress via <strong>progressr</strong>, i.e. when setting <code>options(cli.progress_handlers = "progressr")</code>.</p></li>
 </ul></div>
 </div>
@@ -149,7 +145,7 @@
 <div class="section level3">
 <h3 id="new-features-0-12-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-0"></a></h3>
 <ul><li><p>Add <code><a href="../reference/handler_cli.html">handler_cli()</a></code> for rendering progress updates via the <strong>cli</strong> package and its <code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code>.</p></li>
-<li><p>Now <code><a href="../reference/handler_progress.html">handler_progress()</a></code> creates a <strong>progress</strong> progress bar that is always rendered by forcing <code>progress::progress_bar$new(...,    force = TRUE)</code>.</p></li>
+<li><p>Now <code><a href="../reference/handler_progress.html">handler_progress()</a></code> creates a <strong>progress</strong> progress bar that is always rendered by forcing <code>progress::progress_bar$new(..., force = TRUE)</code>.</p></li>
 <li><p><code><a href="../reference/handler_txtprogressbar.html">handler_txtprogressbar()</a></code> gained support for ANSI-colored <code>char</code> ASCII and Unicode symbols.</p></li>
 </ul></div>
 <div class="section level3">
@@ -168,7 +164,7 @@
 <h2 class="pkg-version" data-toc-text="0.11.0" id="version-0110">Version 0.11.0<a class="anchor" aria-label="anchor" href="#version-0110"></a></h2><p class="text-muted">CRAN release: 2022-09-02</p>
 <div class="section level3">
 <h3 id="new-features-0-11-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-11-0"></a></h3>
-<ul><li><p>When the using a ‘winprogressbar’ or a ‘tkprogressbar’ handler, progression messages updates the <code>label</code> component of the progress panel. Now, it is also possible to update the <code>title</code> component based on progression messages. How the <code>title</code> and <code>label</code> components are updated and from what type of progression message is configured via the new <code>inputs</code> argument. For example, <code>inputs =    list(title = "sticky_message", label = "message")</code> causes progression messages to update the <code>label</code> component and sticky ones to update both. For backward compatible reasons, the default is <code>inputs = list(title = NULL, label = "message")</code>.</p></li>
+<ul><li><p>When the using a ‘winprogressbar’ or a ‘tkprogressbar’ handler, progression messages updates the <code>label</code> component of the progress panel. Now, it is also possible to update the <code>title</code> component based on progression messages. How the <code>title</code> and <code>label</code> components are updated and from what type of progression message is configured via the new <code>inputs</code> argument. For example, <code>inputs = list(title = "sticky_message", label = "message")</code> causes progression messages to update the <code>label</code> component and sticky ones to update both. For backward compatible reasons, the default is <code>inputs = list(title = NULL, label = "message")</code>.</p></li>
 <li><p>Now the demo function <code><a href="../reference/slow_sum.html">slow_sum()</a></code> outputs also “sticky” messages.</p></li>
 </ul></div>
 <div class="section level3">
@@ -180,7 +176,7 @@
 <h2 class="pkg-version" data-toc-text="0.10.1" id="version-0101">Version 0.10.1<a class="anchor" aria-label="anchor" href="#version-0101"></a></h2><p class="text-muted">CRAN release: 2022-06-03</p>
 <div class="section level3">
 <h3 id="new-features-0-10-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-10-1"></a></h3>
-<ul><li>Now <strong>plyr</strong> (&gt;= 1.8.7) supports <strong>progressr</strong> for also parallel processing, e.g. <code>y &lt;- plyr::llply(X, slow_sum, .parallel = TRUE,    .progress = "progressr")</code>.</li>
+<ul><li>Now <strong>plyr</strong> (&gt;= 1.8.7) supports <strong>progressr</strong> for also parallel processing, e.g. <code>y &lt;- plyr::llply(X, slow_sum, .parallel = TRUE, .progress = "progressr")</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-10-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-1"></a></h3>
@@ -202,7 +198,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-0-10-0">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-10-0"></a></h3>
-<ul><li>Function <code><a href="../reference/progress.html">progress()</a></code> is defunct in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p)    NULL)</code> to signal it.</li>
+<ul><li>Function <code><a href="../reference/progress.html">progress()</a></code> is defunct in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p) NULL)</code> to signal it.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -233,7 +229,7 @@
 <div class="section level3">
 <h3 id="new-features-0-8-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-8-0"></a></h3>
 <ul><li><p><code><a href="../reference/withProgressShiny.html">withProgressShiny()</a></code> gained argument <code>inputs</code>, which can be used to control whether or not Shiny progress components <code>message</code> and <code>detail</code> should be updated based on the progression message, e.g. <code>inputs = list(message = "sticky_message", detail = "message")</code> will cause progression messages to update the <code>detail</code> component and sticky ones to update both.</p></li>
-<li><p>Now supporting zero-length progressors, e.g. <code>p &lt;- progressor(along    = x)</code> where <code>length(x) == 0</code>.</p></li>
+<li><p>Now supporting zero-length progressors, e.g. <code>p &lt;- progressor(along = x)</code> where <code>length(x) == 0</code>.</p></li>
 <li><p>Add <code>handlers("rstudio")</code> to report on progress in the RStudio Console via the RStudio Job interface.</p></li>
 </ul></div>
 <div class="section level3">
@@ -246,7 +242,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-0-8-0">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-8-0"></a></h3>
-<ul><li>Function <code><a href="../reference/progress.html">progress()</a></code> is deprecated in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p)    NULL)</code> to signal it.</li>
+<ul><li>Function <code><a href="../reference/progress.html">progress()</a></code> is deprecated in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p) NULL)</code> to signal it.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -254,13 +250,13 @@
 <div class="section level3">
 <h3 id="significant-changes-0-7-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-7-0"></a></h3>
 <ul><li><p>The user can now use <code>handlers(global = TRUE)</code> to enable progress reports everywhere without having to use <code><a href="../reference/with_progress.html">with_progress()</a></code>. This only works in R (&gt;= 4.0.0) because it requires global calling handlers.</p></li>
-<li><p><code><a href="../reference/with_progress.html">with_progress()</a></code> now reports on progress from multiple consecutive progressors, e.g. <code>with_progress({ a &lt;- slow_sum(1:3); b &lt;-    slow_sum(1:3) })</code>.</p></li>
+<li><p><code><a href="../reference/with_progress.html">with_progress()</a></code> now reports on progress from multiple consecutive progressors, e.g. <code>with_progress({ a &lt;- slow_sum(1:3); b &lt;- slow_sum(1:3) })</code>.</p></li>
 <li><p>A progressor must not be created in the global environment unless wrapped in <code><a href="../reference/with_progress.html">with_progress()</a></code> or <code><a href="../reference/with_progress.html">without_progress()</a></code> call. Ideally, a progressor is created within a function or a <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> environment.</p></li>
 <li><p>Package now requires R (&gt;= 3.5.0) in order to protect against interrupts.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-7-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-7-0"></a></h3>
-<ul><li><p><code><a href="../reference/progressor.html">progressor()</a></code> gained argument <code>enable</code> to control whether or not the progressor signals <code>progression</code> conditions. It defaults to option <code>progressr.enable</code> so that progress updates can be disabled globally. The <code>enable</code> argument makes it easy for package developers who already provide a <code>progress = TRUE/FALSE</code> argument in their functions to migrate to the <strong>progressr</strong> package without having to change their existing API, e.g. the setup becomes <code>p &lt;-    progressor(along = x, enabled = progress)</code>. The <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p()</a></code> function created by <code>p &lt;- progressor(..., enable = FALSE)</code> is an empty function with near-zero overhead.</p></li>
+<ul><li><p><code><a href="../reference/progressor.html">progressor()</a></code> gained argument <code>enable</code> to control whether or not the progressor signals <code>progression</code> conditions. It defaults to option <code>progressr.enable</code> so that progress updates can be disabled globally. The <code>enable</code> argument makes it easy for package developers who already provide a <code>progress = TRUE/FALSE</code> argument in their functions to migrate to the <strong>progressr</strong> package without having to change their existing API, e.g. the setup becomes <code>p &lt;- progressor(along = x, enabled = progress)</code>. The <code><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">p()</a></code> function created by <code>p &lt;- progressor(..., enable = FALSE)</code> is an empty function with near-zero overhead.</p></li>
 <li><p>Now <code><a href="../reference/with_progress.html">with_progress()</a></code> and <code><a href="../reference/with_progress.html">without_progress()</a></code> returns the value of the evaluated expression.</p></li>
 <li><p>The progression message can now be created dynamically based on the information in the <code>progression</code> condition. Specifically, if <code>message</code> is a function, then that function will called with the <code>progression</code> condition as the first argument. This function should return a character string. Importantly, it is only when the progression handler receives the progression update and calls <code>conditionMessage(p)</code> on it that this function is called.</p></li>
 <li><p><code><a href="../reference/progressor.html">progressor()</a></code> gained argument <code>message</code> to set the default message of all progression updates, unless otherwise specified.</p></li>
@@ -432,7 +428,7 @@
 <div class="section level3">
 <h3 id="new-features-0-0-4">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-4"></a></h3>
 <ul><li><p>Add <code><a href="https://rdrr.io/r/utils/winProgressBar.html" class="external-link">utils::winProgressBar()</a></code> progression handler for MS Windows.</p></li>
-<li><p>Add support for silent sounds for <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code>.</p></li>
+<li><p>Add support for silent sounds for <code>beepr::beep()</code>.</p></li>
 <li><p>Add option <code>progressr.enable</code>, which defaults to <code><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive()</a></code>.</p></li>
 </ul></div>
 <div class="section level3">
@@ -498,7 +494,7 @@
 <ul><li><p>Add argument <code>auto_done</code> to automatically have progress updates also signal “done” as soon as the last step has been reached.</p></li>
 <li><p>Made <code>amount</code> the first argument of progressors to avoid having to specify it by name if progressing with an amount than the default <code>amount = 1.0</code>.</p></li>
 <li><p>Add argument <code>clear</code> to control whether progress reporter should clear its output upon completion. The default is to do this, where supported.</p></li>
-<li><p>Add progress update handler based on <code><a href="https://rdrr.io/pkg/pbmcapply/man/progressBar.html" class="external-link">pbmcapply::progressBar()</a></code>.</p></li>
+<li><p>Add progress update handler based on <code>pbmcapply::progressBar()</code>.</p></li>
 <li><p>Each achieved step is now timestamped.</p></li>
 <li><p>Add option <code>progressr.debug</code>.</p></li>
 </ul></div>
@@ -523,7 +519,7 @@
 <h2 class="pkg-version" data-toc-text="0.0.0-9001" id="version-000-9001">Version 0.0.0-9001<a class="anchor" aria-label="anchor" href="#version-000-9001"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-0-0-9001">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-0-9001"></a></h3>
-<ul><li><p>Add progress update handlers based on <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">utils::txtProgressBar()</a></code>, <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code>, <code>cat("\a")</code>, <code><a href="http://r-lib.github.io/progress/reference/progress_bar.html" class="external-link">progress::progress_bar()</a></code>, <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code>, and <code>notifier::notify()</code>.</p></li>
+<ul><li><p>Add progress update handlers based on <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">utils::txtProgressBar()</a></code>, <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code>, <code>cat("\a")</code>, <code><a href="http://r-lib.github.io/progress/reference/progress_bar.html" class="external-link">progress::progress_bar()</a></code>, <code>beepr::beep()</code>, and <code>notifier::notify()</code>.</p></li>
 <li><p>Add <code><a href="../reference/with_progress.html">with_progress()</a></code>.</p></li>
 <li><p>Add options <code>progressr.handlers</code> for settings default progress handlers.</p></li>
 <li><p>Add <code>progressr.times</code> for controlling the number of times progress updates are rendered.</p></li>

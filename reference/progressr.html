@@ -17,7 +17,7 @@ using parallel processing."><!-- Global site tag (gtag.js) - Google Analytics --
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9008</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9010</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,10 +26,6 @@ using parallel processing."><!-- Global site tag (gtag.js) - Google Analytics --
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/progressr-intro.html">progressr: An Introduction</a></li>
-  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -92,7 +88,7 @@ in the terminal using <code><a href="https://rdrr.io/r/utils/txtProgressBar.html
 <code><a href="http://r-lib.github.io/progress/reference/progress_bar.html" class="external-link">progress::progress_bar()</a></code> or via the graphical user interface (GUI)
 using <code><a href="https://rdrr.io/r/utils/winProgressBar.html" class="external-link">utils::winProgressBar()</a></code> or <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code>.
 An alternative to above visual rendering of progress, is to report it
-using <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code> sounds.
+using <code>beepr::beep()</code> sounds.
 It is possible to use a combination of above progression handlers, e.g.
 a progress bar in the terminal together with audio updates.
 Besides the existing handlers, it is possible to develop custom
