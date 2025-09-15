@@ -13,6 +13,11 @@
    RStudio v2025.05.1. If you run v2025.05.0, **progressr** implements
    a workaround.
 
+## Documentation
+
+ * Replace the long, single introductory vignette with eight separate
+   vignettes.
+
 ## Bug Fixes
 
  * Package failed to load in the Positron environment due to an
