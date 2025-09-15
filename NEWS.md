@@ -1,5 +1,10 @@
 # Version (development version)
 
+## New Features
+
+ * Add `handler_slowdown()` for slowing down a full progress run a
+   certain amount of time (in seconds).
+
 ## Workarounds
 
  * RStudio v2025.05.0 introduced new default handlers for messages and
