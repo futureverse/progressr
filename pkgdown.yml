@@ -2,8 +2,15 @@ pandoc: '3.8'
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  progressr-intro: progressr-intro.html
-last_built: 2025-09-15T06:16Z
+  progressr-01-intro: progressr-01-intro.html
+  progressr-11-handlers: progressr-11-handlers.html
+  progressr-21-map-reduce: progressr-21-map-reduce.html
+  progressr-22-parallel-processing: progressr-22-parallel-processing.html
+  progressr-25-replace-cli-with-progressr: progressr-25-replace-cli-with-progressr.html
+  progressr-29-debugging: progressr-29-debugging.html
+  progressr-31-knitr: progressr-31-knitr.html
+  progressr-91-appendix: progressr-91-appendix.html
+last_built: 2025-09-15T21:05Z
 urls:
   reference: https://progressr.futureverse.org/reference
   article: https://progressr.futureverse.org/articles

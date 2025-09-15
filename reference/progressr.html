@@ -17,7 +17,7 @@ using parallel processing."><!-- Global site tag (gtag.js) - Google Analytics --
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9015</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,14 @@ using parallel processing."><!-- Global site tag (gtag.js) - Google Analytics --
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/progressr-intro.html">progressr: An Introduction</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/progressr-01-intro.html">progressr: An Introduction</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-11-handlers.html">progressr: Customizing How Progress is Reported</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-21-map-reduce.html">progressr: Map-Reduce Calls, e.g. lapply() and map()</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-22-parallel-processing.html">progressr: Parallel and Distributed Processing</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-25-replace-cli-with-progressr.html">progressr: Replace 'cli' Progress Bars with 'progressr'</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-29-debugging.html">progressr: Debugging</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-31-knitr.html">progressr: Rendering 'knitr' Documents</a></li>
+    <li><a class="dropdown-item" href="../articles/progressr-91-appendix.html">progressr: Appendix</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -88,15 +95,18 @@ progress should be reported on without having to worry about <em>how</em> to
 present it.</p>
 <p>The <em>end user</em> has full control of <em>how</em>, <em>where</em>, and <em>when</em> to render
 these progress updates.  For instance, they can chose to report progress
-in the terminal using <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">utils::txtProgressBar()</a></code> or
-<code><a href="http://r-lib.github.io/progress/reference/progress_bar.html" class="external-link">progress::progress_bar()</a></code> or via the graphical user interface (GUI)
-using <code><a href="https://rdrr.io/r/utils/winProgressBar.html" class="external-link">utils::winProgressBar()</a></code> or <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code>.
-An alternative to above visual rendering of progress, is to report it
-using <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code> sounds.
-It is possible to use a combination of above progression handlers, e.g.
-a progress bar in the terminal together with audio updates.
+in the terminal using <code><a href="https://rdrr.io/r/utils/txtProgressBar.html" class="external-link">utils::txtProgressBar()</a></code> (default) or
+<code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code>, via the R graphical user interface (GUI)
+using <code><a href="https://rdrr.io/r/utils/winProgressBar.html" class="external-link">utils::winProgressBar()</a></code> or <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code>, or
+via the RStudio GUI using <code><a href="https://rstudio.github.io/rstudioapi/reference/jobSetProgress.html" class="external-link">rstudioapi::jobSetProgress()</a></code>.
+An alternative to above visual rendering, is to report progress as audio
+using <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code>.
+It is also possible to use a combination of above progression handlers,
+e.g. a progress bar in the terminal together with audio updates.
 Besides the existing handlers, it is possible to develop custom
 progression handlers.</p>
+<p>The <span class="pkg">progressr</span> package is compatible with <span class="pkg">shiny</span> applications
+and <span class="pkg">knitr</span> rendering.</p>
 <p>The <span class="pkg">progressr</span> package uses R's condition framework for signaling
 progress updated. Because of this, progress can be reported from almost
 anywhere in R, e.g. from classical for and while loops, from map-reduce
@@ -105,29 +115,31 @@ APIs like the <code><a href="https://rdrr.io/r/base/lapply.html" class="external
 The <span class="pkg">progressr</span> package will also work with parallel processing via
 the <span class="pkg">future</span> framework, e.g. <code><a href="https://future.apply.futureverse.org/reference/future_lapply.html" class="external-link">future.apply::future_lapply()</a></code>,
 <code><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">furrr::future_map()</a></code>, and <code><a href="https://rdrr.io/pkg/foreach/man/foreach.html" class="external-link">foreach::foreach()</a></code> with <span class="pkg">doFuture</span>.</p>
-<p>The <span class="pkg">progressr</span> package is compatible with Shiny applications.</p>
     </div>
     <div class="section level2">
     <h2 id="progression-handlers">Progression Handlers<a class="anchor" aria-label="anchor" href="#progression-handlers"></a></h2>
 
 
 
-<p>In the terminal:</p><ul><li><p><a href="handler_txtprogressbar.html">handler_txtprogressbar</a> (default)</p></li>
-<li><p><a href="handler_pbcol.html">handler_pbcol</a></p></li>
-<li><p><a href="handler_pbmcapply.html">handler_pbmcapply</a></p></li>
-<li><p><a href="handler_progress.html">handler_progress</a></p></li>
-<li><p><a href="handler_ascii_alert.html">handler_ascii_alert</a></p></li>
-<li><p><a href="handler_debug.html">handler_debug</a></p></li>
-</ul><p>In a graphical user interface (GUI):</p><ul><li><p><a href="handler_rstudio.html">handler_rstudio</a></p></li>
-<li><p><a href="handler_tkprogressbar.html">handler_tkprogressbar</a></p></li>
-<li><p><a href="handler_winprogressbar.html">handler_winprogressbar</a></p></li>
-</ul><p>As sound:</p><ul><li><p><a href="handler_beepr.html">handler_beepr</a></p></li>
-<li><p><a href="handler_ascii_alert.html">handler_ascii_alert</a></p></li>
-</ul><p>Via the file system:</p><ul><li><p><a href="handler_filesize.html">handler_filesize</a></p></li>
-</ul><p>In Shiny:</p><ul><li><p><a href="withProgressShiny.html">withProgressShiny</a></p></li>
-</ul><p>Via notification systems:</p><ul><li><p><a href="handler_ntfy.html">handler_ntfy</a></p></li>
-<li><p><a href="handler_notifier.html">handler_notifier</a></p></li>
-<li><p><a href="handler_rpushbullet.html">handler_rpushbullet</a></p></li>
+<p>In the terminal:</p><ul><li><p><a href="handler_txtprogressbar.html">handler_txtprogressbar</a> (built-in; default)</p></li>
+<li><p><a href="handler_pbcol.html">handler_pbcol</a> (built-in)</p></li>
+<li><p><a href="handler_ascii_alert.html">handler_ascii_alert</a> (built-in)</p></li>
+<li><p><a href="handler_pbmcapply.html">handler_pbmcapply</a> (requires the <span class="pkg">pbmcapply</span> package)</p></li>
+<li><p><a href="handler_progress.html">handler_progress</a> (requires the <span class="pkg">progress</span> package)</p></li>
+</ul><p>In a graphical user interface (GUI):</p><ul><li><p><a href="handler_rstudio.html">handler_rstudio</a> (only in the RStudio Console)</p></li>
+<li><p><a href="handler_tkprogressbar.html">handler_tkprogressbar</a> (built-in)</p></li>
+<li><p><a href="handler_winprogressbar.html">handler_winprogressbar</a> (built-in)</p></li>
+</ul><p>As sound:</p><ul><li><p><a href="handler_ascii_alert.html">handler_ascii_alert</a> (built-in)</p></li>
+<li><p><a href="handler_beepr.html">handler_beepr</a> (requires the <span class="pkg">beepr</span> package)</p></li>
+</ul><p>Via the file system:</p><ul><li><p><a href="handler_filesize.html">handler_filesize</a> (built-in)</p></li>
+</ul><p>In Shiny:</p><ul><li><p><a href="withProgressShiny.html">withProgressShiny</a> (requires the <span class="pkg">shiny</span> package)</p></li>
+</ul><p>Via notification systems:</p><ul><li><p><a href="handler_ntfy.html">handler_ntfy</a> (requires the <span class="pkg">ntfy</span> package)</p></li>
+<li><p><a href="handler_notifier.html">handler_notifier</a> (requires the non-CRAN <span class="pkg">notifier</span> package)</p></li>
+<li><p><a href="handler_rpushbullet.html">handler_rpushbullet</a> (requires the <span class="pkg">RPushBullet</span> package)</p></li>
+</ul><p>Misceallanous:</p><ul><li><p><a href="handler_debug.html">handler_debug</a> (built-in)</p></li>
+<li><p><a href="handler_newline.html">handler_newline</a> (built-in)</p></li>
+<li><p><a href="handler_slowdown.html">handler_slowdown</a> (built-in)</p></li>
+<li><p><a href="handler_void.html">handler_void</a> (built-in)</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
