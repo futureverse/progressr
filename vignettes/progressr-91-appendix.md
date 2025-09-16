@@ -155,6 +155,80 @@ If we created it in the global environment, there is a significant
 risk it would never finish and block all of the following progressors.
 
 
+## Known Issues
+
+### Jupyter Notebook and Jupyter Lab
+
+The default for most terminal progress renderers, including the ones
+for **progressr**, display the progress on standard error
+(stderr). Due to limitation in Jupyter, this default does not work
+there. The reason is that [Jupyter silently
+drops](https://github.com/futureverse/progressr/issues/170) any output
+send to stderr, e.g.
+
+```r
+> cat("hello stderr\n", file = stderr())
+> cat("hello stdout\n", file = stdout())
+hello stdout
+>
+```
+
+If we try the following
+
+```r
+library(progressr)
+handlers(globals = TRUE)
+handlers("txtprogressbar")
+y <- slow_sum(1:20)
+```
+
+there will be no progress being reported. This is not specific to
+**progressr**, we have the same problem with for instance **cli**. Try
+for instance,
+
+```r
+void <- cli::cli_progress_demo(delay = 1.0)
+```
+
+The workaround is to direct all progress output to the standard output
+(stdout) when working in Jupyter. For this to work, we also need to
+disable the buffering ("delaying") of any other output to stdout.
+
+```r
+library(progressr)
+handlers(globals = TRUE)
+
+## Workaround for Jupyter
+options(progressr.enable = TRUE), progressr.delay_stdout = FALSE)
+
+## Jupyter requires that progress is rendered to standard output;
+## it does not work with the default standard error
+handlers(handler_txtprogressbar(file = stdout()))
+
+y <- slow_sum(1:20)
+```
+
+
+Jupyter has other outputting issues. Specifically, Jupyter [injects an
+_extra_ newline at the end of every
+message](https://github.com/IRkernel/IRkernel/issues/732), e.g.
+
+```r
+> message("abc", appendLF = FALSE); message("def", appendLF = FALSE)
+abc
+def
+> message("abc"); message("def")
+abc
+
+def
+
+> 
+```
+
+This causes any progress framework (e.g. the **progress** package)
+that reports via messages to render progress output very poorly or not
+at all.
+
 
 ## Design and Implementation
 
