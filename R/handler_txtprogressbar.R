@@ -13,7 +13,8 @@
 #'
 #' @param file (connection) A [base::connection] to where output should be sent.
 #'
-#' @param \ldots Additional arguments passed to [make_progression_handler()].
+#' @param \ldots Additional arguments passed to [utils::txtProgressBar()]
+#' and [make_progression_handler()].
 #'
 #' @section Appearance:
 #' Below are a few examples on how to use and customize this progress handler.

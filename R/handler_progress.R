@@ -9,7 +9,8 @@
 #' @param show_after (numeric) Number of seconds to wait before displaying
 #' the progress bar.
 #'
-#' @param \ldots Additional arguments passed to [make_progression_handler()].
+#' @param \ldots Additional arguments passed to [progress::progress_bar()]
+#' and [make_progression_handler()].
 #'
 #' @section Requirements:
 #' This progression handler requires the \pkg{progress} package.

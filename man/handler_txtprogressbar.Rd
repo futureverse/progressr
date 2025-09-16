@@ -29,7 +29,8 @@ supports also ANSI-colored symbols.}
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
 
-\item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
+\item{\ldots}{Additional arguments passed to \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}}
+and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
 A progression handler for \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}}.

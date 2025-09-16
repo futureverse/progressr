@@ -47,8 +47,7 @@ by a reporter will be cleared/removed upon completion, if possible.}
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
 
-\item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}
-or not used.}
+\item{\ldots}{Not used.}
 }
 \value{
 A function of class \code{progression_handler} that takes a

@@ -15,7 +15,8 @@
 #' @param substyle (integer) The progress-bar substyle according to
 #' [pbmcapply::progressBar()].
 #'
-#' @param \ldots Additional arguments passed to [make_progression_handler()].
+#' @param \ldots Additional arguments passed to [pbmcapply::progressBar()]
+#' and [make_progression_handler()].
 #'
 #' @section Requirements:
 #' This progression handler requires the \pkg{pbmcapply} package.
