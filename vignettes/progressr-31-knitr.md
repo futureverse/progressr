@@ -1,5 +1,5 @@
 <!--
-%\VignetteIndexEntry{progressr: Rendering 'knitr' Documents}
+%\VignetteIndexEntry{progressr: Render 'knitr' Documents}
 %\VignetteAuthor{Henrik Bengtsson}
 %\VignetteKeyword{R}
 %\VignetteKeyword{package}

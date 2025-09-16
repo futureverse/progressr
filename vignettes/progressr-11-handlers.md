@@ -1,5 +1,5 @@
 <!--
-%\VignetteIndexEntry{progressr: Customizing How Progress is Reported}
+%\VignetteIndexEntry{progressr: Customize How Progress is Reported}
 %\VignetteAuthor{Henrik Bengtsson}
 %\VignetteKeyword{R}
 %\VignetteKeyword{package}

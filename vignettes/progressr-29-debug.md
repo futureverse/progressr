@@ -1,5 +1,5 @@
 <!--
-%\VignetteIndexEntry{progressr: Debugging}
+%\VignetteIndexEntry{progressr: Debug}
 %\VignetteAuthor{Henrik Bengtsson}
 %\VignetteKeyword{R}
 %\VignetteKeyword{package}
