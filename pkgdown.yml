@@ -7,10 +7,10 @@ articles:
   progressr-21-map-reduce: progressr-21-map-reduce.html
   progressr-22-parallel-processing: progressr-22-parallel-processing.html
   progressr-25-replace-cli-with-progressr: progressr-25-replace-cli-with-progressr.html
-  progressr-29-debugging: progressr-29-debugging.html
+  progressr-29-debug: progressr-29-debug.html
   progressr-31-knitr: progressr-31-knitr.html
   progressr-91-appendix: progressr-91-appendix.html
-last_built: 2025-09-15T21:05Z
+last_built: 2025-09-16T00:02Z
 urls:
   reference: https://progressr.futureverse.org/reference
   article: https://progressr.futureverse.org/articles
