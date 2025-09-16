@@ -295,7 +295,7 @@ to disable the buffering (“delaying”) of any other output to stdout.</p>
 <span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
 <span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">slow_sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span></code></pre></div>
 <p>Jupyter has other outputting issues. Specifically, Jupyter <a href="https://github.com/IRkernel/IRkernel/issues/732" class="external-link">injects an
-<em>extra</em> newline at the end of every messages</a>, e.g.</p>
+<em>extra</em> newline at the end of every message</a>, e.g.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>); <span class="fu">message</span>(<span class="st">"def"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>abc</span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>def</span>
