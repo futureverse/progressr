@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9019</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9020</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -267,11 +267,10 @@ progressors.</p>
 <code>progressr::handlers(global = TRUE)</code> during R’s startup
 process appears to have no effect, despite it registered the global
 calling handler as expected. The reason for why this does not work is
-unknown. The workaround is to manually disable and re-enable it at the R
-prompt;</p>
+unknown. The workaround is to manually re-registering all calling
+handlers at the R prompt, which can be done as:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">globalCallingHandlers</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">globalCallingHandlers</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="messages-and-warnings-adds-extra-newlines-during-progress-reporting">Messages and warnings adds extra newlines during progress
