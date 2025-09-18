@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9018</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9019</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -258,19 +258,63 @@ progressors.</p>
 <h2 id="known-issues">Known Issues<a class="anchor" aria-label="anchor" href="#known-issues"></a>
 </h2>
 <div class="section level3">
+<h3 id="positron">Positron<a class="anchor" aria-label="anchor" href="#positron"></a>
+</h3>
+<div class="section level4">
+<h4 id="setting-global-progressr-handlers-during-startup-does-not-work">Setting global progressr handlers during startup does not work<a class="anchor" aria-label="anchor" href="#setting-global-progressr-handlers-during-startup-does-not-work"></a>
+</h4>
+<p>When using Positron, setting
+<code>progressr::handlers(global = TRUE)</code> during R’s startup
+process appears to have no effect, despite it registered the global
+calling handler as expected. The reason for why this does not work is
+unknown. The workaround is to manually disable and re-enable it at the R
+prompt;</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="messages-and-warnings-adds-extra-newlines-during-progress-reporting">Messages and warnings adds extra newlines during progress
+reporting<a class="anchor" aria-label="anchor" href="#messages-and-warnings-adds-extra-newlines-during-progress-reporting"></a>
+</h4>
+<p>One of the features of <strong>progressr</strong> is that messages
+are buffered during progress reporting and relayed as soon as possible,
+which typically happens just before handlers re-render the progress
+output. This way you can use <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> as usual, regardless
+whether progress is reported or not.</p>
+<p>Currently, when using Positron (e.g. Positron 2025.09.0), any
+<code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code>:s result in extra newlines being injected before
+each message, if progress reporting is active, e.g.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="st">"cli"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">1</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">2</span></span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>■■■■■■■                           <span class="dv">20</span>% <span class="sc">|</span> P<span class="sc">:</span> Adding <span class="dv">2</span> ETA<span class="sc">:</span>  <span class="dv">9</span>s</span></code></pre></div>
+<p>I do not fully understand the reason for this, but I hope we can get
+to the bottom of it and fix it, either in <strong>progressr</strong> or
+in Positron.</p>
+</div>
+</div>
+<div class="section level3">
 <h3 id="jupyter-notebook-and-jupyter-lab">Jupyter Notebook and Jupyter Lab<a class="anchor" aria-label="anchor" href="#jupyter-notebook-and-jupyter-lab"></a>
 </h3>
-<p>The default for most terminal progress renderers, including the ones
+<div class="section level4">
+<h4 id="reporting-progress-to-stderr-does-not-work">Reporting progress to stderr does not work<a class="anchor" aria-label="anchor" href="#reporting-progress-to-stderr-does-not-work"></a>
+</h4>
+<p>The default for most terminal progress renders, including the ones
 for <strong>progressr</strong>, display the progress on standard error
 (stderr). Due to limitation in Jupyter, this default does not work
 there. The reason is that <a href="https://github.com/futureverse/progressr/issues/170" class="external-link">Jupyter
 silently drops</a> any output send to stderr, e.g.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cat</span>(<span class="st">"hello stderr</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="fu">stderr</span>())</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cat</span>(<span class="st">"hello stdout</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="fu">stdout</span>())</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>hello stdout</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="sc">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cat</span>(<span class="st">"hello stderr</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="fu">stderr</span>())</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cat</span>(<span class="st">"hello stdout</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="fu">stdout</span>())</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>hello stdout</span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a><span class="sc">&gt;</span></span></code></pre></div>
 <p>If we try the following</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>globals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"txtprogressbar"</span><span class="op">)</span></span>
@@ -278,12 +322,12 @@ silently drops</a> any output send to stderr, e.g.</p>
 <p>there will be no progress being reported. This is not specific to
 <strong>progressr</strong>, we have the same problem with for instance
 <strong>cli</strong>. Try for instance,</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">void</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_progress_demo.html" class="external-link">cli_progress_demo</a></span><span class="op">(</span>delay <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span></code></pre></div>
 <p>The workaround is to direct all progress output to the standard
 output (stdout) when working in Jupyter. For this to work, we also need
 to disable the buffering (“delaying”) of any other output to stdout.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>globals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -295,20 +339,25 @@ to disable the buffering (“delaying”) of any other output to stdout.</p>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_txtprogressbar.html">handler_txtprogressbar</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stdout</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum.html">slow_sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level4">
+<h4 id="handlersprogress-output-is-messy">handlers(“progress”) output is messy<a class="anchor" aria-label="anchor" href="#handlersprogress-output-is-messy"></a>
+</h4>
 <p>Jupyter has other outputting issues. Specifically, Jupyter <a href="https://github.com/IRkernel/IRkernel/issues/732" class="external-link">injects an
 <em>extra</em> newline at the end of every message</a>, e.g.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>); <span class="fu">message</span>(<span class="st">"def"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>abc</span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>def</span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>); <span class="fu">message</span>(<span class="st">"def"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>abc</span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>def</span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="sc">&gt;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>); <span class="fu">message</span>(<span class="st">"def"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>abc</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>def</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>); <span class="fu">message</span>(<span class="st">"def"</span>)</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>abc</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>def</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="sc">&gt;</span> </span></code></pre></div>
 <p>This causes any progress framework (e.g. the
 <strong>progress</strong> package) that reports via messages to render
 progress output very poorly or not at all.</p>
+</div>
 </div>
 </div>
 <div class="section level2">
