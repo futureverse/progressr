@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9022</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Package failed to load in the Positron environment due to an “object ‘RStudio.Version’ of mode ‘function’ was not found” error.</li>
+<ul><li><p>Package failed to load in the Positron environment due to an “object ‘RStudio.Version’ of mode ‘function’ was not found” error.</p></li>
+<li><p>In Positron, messages produced while progress is reported were prepended by a newline to standard output, even when there is no stdout buffered. This is due to a bug in Positron, which this version of the package works around.</p></li>
 </ul></div>
 </div>
     <div class="section level2">

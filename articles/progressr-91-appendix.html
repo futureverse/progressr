@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9021</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9022</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -284,8 +284,7 @@ be done as:</p>
 <span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level4">
-<h4 id="messages-and-warnings-adds-extra-newlines-during-progress-reporting">Messages and warnings adds extra newlines during progress
-reporting<a class="anchor" aria-label="anchor" href="#messages-and-warnings-adds-extra-newlines-during-progress-reporting"></a>
+<h4 id="messages-add-a-extra-newline-before-the-final-progress-step">Messages add a extra newline before the final progress step<a class="anchor" aria-label="anchor" href="#messages-add-a-extra-newline-before-the-final-progress-step"></a>
 </h4>
 <p>One of the features of <strong>progressr</strong> is that messages
 are buffered during progress reporting and relayed as soon as possible,
@@ -293,16 +292,18 @@ which typically happens just before handlers re-render the progress
 output. This way you can use <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> as usual, regardless
 whether progress is reported or not.</p>
 <p>Currently, when using Positron (e.g. Positron 2025.09.0), any
-<code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code>:s result in extra newlines being injected before
-each message, if progress reporting is active, e.g.</p>
+<code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> output adds an extra newline before the
+<em>final</em> progress step is reported, e.g.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="st">"cli"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">1</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">2</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a>■■■■■■■                           <span class="dv">20</span>% <span class="sc">|</span> P<span class="sc">:</span> Adding <span class="dv">2</span> ETA<span class="sc">:</span>  <span class="dv">9</span>s</span></code></pre></div>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">2</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">3</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">4</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">5</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="sc">&gt;</span> </span></code></pre></div>
 <p>I do not fully understand the reason for this, but I hope we can get
 to the bottom of it and fix it, either in <strong>progressr</strong> or
 in Positron.</p>
