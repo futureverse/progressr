@@ -157,12 +157,58 @@ risk it would never finish and block all of the following progressors.
 
 ## Known Issues
 
+### Positron
+
+#### Setting global progressr handlers during startup does not work
+
+When using Positron, setting `progressr::handlers(global = TRUE)`
+during R's startup process appears to have no effect, despite it
+registered the global calling handler as expected. The reason for why
+this does not work is unknown. The workaround is to manually disable
+and re-enable it at the R prompt;
+
+```r
+progressr::handlers(global = FALSE)
+progressr::handlers(global = TRUE)
+```
+
+
+#### Messages and warnings adds extra newlines during progress reporting
+
+One of the features of **progressr** is that messages are buffered
+during progress reporting and relayed as soon as possible, which
+typically happens just before handlers re-render the progress
+output. This way you can use `message()` as usual, regardless whether
+progress is reported or not.
+
+Currently, when using Positron (e.g. Positron 2025.09.0), any
+`message()`:s result in extra newlines being injected before each
+message, if progress reporting is active, e.g.
+
+```r
+> progressr::handlers(global = TRUE)
+> progressr::handlers("cli")
+> y <- progressr::slow_sum(1:10, message = TRUE)
+M: Added value 1
+
+
+M: Added value 2
+■■■■■■■                           20% | P: Adding 2 ETA:  9s
+```
+
+I do not fully understand the reason for this, but I hope we can get
+to the bottom of it and fix it, either in **progressr** or in
+Positron.
+
+
 ### Jupyter Notebook and Jupyter Lab
 
-The default for most terminal progress renderers, including the ones
-for **progressr**, display the progress on standard error
-(stderr). Due to limitation in Jupyter, this default does not work
-there. The reason is that [Jupyter silently
+#### Reporting progress to stderr does not work
+
+The default for most terminal progress renders, including the ones for
+**progressr**, display the progress on standard error (stderr). Due to
+limitation in Jupyter, this default does not work there. The reason is
+that [Jupyter silently
 drops](https://github.com/futureverse/progressr/issues/170) any output
 send to stderr, e.g.
 
@@ -199,7 +245,7 @@ library(progressr)
 handlers(globals = TRUE)
 
 ## Workaround for Jupyter
-options(progressr.enable = TRUE), progressr.delay_stdout = FALSE)
+options(progressr.enable = TRUE, progressr.delay_stdout = FALSE)
 
 ## Jupyter requires that progress is rendered to standard output;
 ## it does not work with the default standard error
@@ -208,6 +254,8 @@ handlers(handler_txtprogressbar(file = stdout()))
 y <- slow_sum(1:20)
 ```
 
+
+#### handlers("progress") output is messy
 
 Jupyter has other outputting issues. Specifically, Jupyter [injects an
 _extra_ newline at the end of every
@@ -228,6 +276,7 @@ def
 This causes any progress framework (e.g. the **progress** package)
 that reports via messages to render progress output very poorly or not
 at all.
+
 
 
 ## Design and Implementation
