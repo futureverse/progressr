@@ -283,17 +283,18 @@ silently drops</a> any output send to stderr, e.g.</p>
 <p>The workaround is to direct all progress output to the standard
 output (stdout) when working in Jupyter. For this to work, we also need
 to disable the buffering (“delaying”) of any other output to stdout.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="fu">library</span>(progressr)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="fu">handlers</span>(<span class="at">globals =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="do">## Workaround for Jupyter</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="fu">options</span>(<span class="at">progressr.enable =</span> <span class="cn">TRUE</span>), progressr.delay_stdout <span class="ot">=</span> <span class="cn">FALSE</span><span class="er">)</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="do">## Jupyter requires that progress is rendered to standard output;</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">## it does not work with the default standard error</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="fu">handlers</span>(<span class="fu">handler_txtprogressbar</span>(<span class="at">file =</span> <span class="fu">stdout</span>()))</span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">slow_sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>globals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Workaround for Jupyter</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>progressr.enable <span class="op">=</span> <span class="cn">TRUE</span>, progressr.delay_stdout <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">## Jupyter requires that progress is rendered to standard output;</span></span>
+<span><span class="co">## it does not work with the default standard error</span></span>
+<span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_txtprogressbar.html">handler_txtprogressbar</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stdout</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum.html">slow_sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p>Jupyter has other outputting issues. Specifically, Jupyter <a href="https://github.com/IRkernel/IRkernel/issues/732" class="external-link">injects an
 <em>extra</em> newline at the end of every message</a>, e.g.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>); <span class="fu">message</span>(<span class="st">"def"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>)</span>
