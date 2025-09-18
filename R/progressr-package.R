@@ -62,7 +62,7 @@
 #' * [handler_notifier] (requires the non-CRAN \pkg{notifier} package)
 #' * [handler_rpushbullet] (requires the \pkg{RPushBullet} package)
 #'
-#' Misceallanous:
+#' Miscellaneous:
 #' * [handler_debug] (built-in)
 #' * [handler_newline] (built-in)
 #' * [handler_slowdown] (built-in)

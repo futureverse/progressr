@@ -82,7 +82,7 @@ Via notification systems:
 \item \link{handler_rpushbullet} (requires the \pkg{RPushBullet} package)
 }
 
-Misceallanous:
+Miscellaneous:
 \itemize{
 \item \link{handler_debug} (built-in)
 \item \link{handler_newline} (built-in)

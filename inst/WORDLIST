@@ -6,6 +6,7 @@ CMD
 Ctrl
 HTTPS
 HenrikBengtsson
+Jupyter
 NL
 ORCID
 POSIXct
@@ -40,6 +41,7 @@ fcn
 filesize
 foreach
 furrr
+futureverse
 github
 happend
 https
@@ -77,6 +79,7 @@ rstudio
 selfonly
 signalCondition
 specfied
+stderr
 stdout
 substyle
 tcltk
@@ -85,6 +88,7 @@ thinko
 tidyverse
 tkProgressBar
 tkprogressbar
+tos
 txtProgressBar
 txtprogressbar
 unhide

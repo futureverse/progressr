@@ -15,7 +15,7 @@ handler_slowdown(
 \arguments{
 \item{duration}{(numeric) Added slowdown (in seconds) across all progress
 steps, e.g. if \code{duration = 10.0} and \code{steps = 100L}, then each step unit is
-delayed 0.1 seconds, totalling a ten-second slowdown.}
+delayed 0.1 seconds, totaling a ten-second slowdown.}
 
 \item{intrusiveness}{(numeric) A non-negative scalar on how intrusive
 (disruptive) the reporter to the user.}
