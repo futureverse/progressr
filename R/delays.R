@@ -67,7 +67,12 @@ flush_stdout <- function(stdout_file, close = TRUE, must_work = FALSE) {
   
   sink(split = FALSE, type = "output")
   stdout <- rawToChar(rawConnectionValue(stdout_file))
-  if (length(stdout) > 0) cat(stdout, file = stdout())
+  ## WORKAROUND: Positron 2025.09.0 appends a newline for cat("") [1], while
+  ## it should output nothing. We use nzchar(stdout) here to avoid this
+  ## from happening.
+  ## [1] https://github.com/posit-dev/positron/issues/9486
+  ## cat("") nzchar(stdout) is used to handle the cat("") case
+  if (length(stdout) > 0 && nzchar(stdout)) cat(stdout, file = stdout())
   close(stdout_file)
   stdout_file <- NULL
   if (!close) stdout_file <- buffer_stdout()

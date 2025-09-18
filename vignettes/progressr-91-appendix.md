@@ -191,7 +191,7 @@ progressr::handlers(global = TRUE)
 
 
 
-#### Messages and warnings adds extra newlines during progress reporting
+#### Messages add a extra newline before the final progress step
 
 One of the features of **progressr** is that messages are buffered
 during progress reporting and relayed as soon as possible, which
@@ -200,18 +200,20 @@ output. This way you can use `message()` as usual, regardless whether
 progress is reported or not.
 
 Currently, when using Positron (e.g. Positron 2025.09.0), any
-`message()`:s result in extra newlines being injected before each
-message, if progress reporting is active, e.g.
+`message()` output adds an extra newline before the _final_ progress
+step is reported, e.g.
 
 ```r
 > progressr::handlers(global = TRUE)
 > progressr::handlers("cli")
-> y <- progressr::slow_sum(1:10, message = TRUE)
+> y <- progressr::slow_sum(1:5, message = TRUE)
 M: Added value 1
-
-
 M: Added value 2
-■■■■■■■                           20% | P: Adding 2 ETA:  9s
+M: Added value 3
+M: Added value 4
+
+M: Added value 5
+> 
 ```
 
 I do not fully understand the reason for this, but I hope we can get

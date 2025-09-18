@@ -22,7 +22,12 @@
 
  * Package failed to load in the Positron environment due to an
    "object 'RStudio.Version' of mode 'function' was not found" error.
- 
+
+ * In Positron, messages produced while progress is reported were
+   prepended by a newline to standard output, even when there is no
+   stdout buffered. This is due to a bug in Positron, which this version
+   of the package works around.
+
 
 # Version 0.15.1 [2024-11-20]
 
