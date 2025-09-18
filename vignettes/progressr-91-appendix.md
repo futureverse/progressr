@@ -161,16 +161,33 @@ risk it would never finish and block all of the following progressors.
 
 #### Setting global progressr handlers during startup does not work
 
-When using Positron, setting `progressr::handlers(global = TRUE)`
-during R's startup process appears to have no effect, despite it
-registered the global calling handler as expected. The reason for why
-this does not work is unknown. The workaround is to manually disable
-and re-enable it at the R prompt;
+Positron does not support setting global calling handlers during R's
+startup process, e.g. in `~/.Rprofile`. Even if such handlers are
+registered, they have no effect. This is likely a bug in Positron,
+which was last confirmed with Position 2025.09.0 on Linux. Because of
+this, having something like in your `~/.Rprofile`:
 
 ```r
-progressr::handlers(global = FALSE)
+if (requireNamespace("progressr", quietly = TRUE)) {
+  progressr::handlers(global = TRUE)
+}
+```
+
+will have no effect. If used, the workaround is to manually
+re-registering all calling handlers _at the R prompt_, which can be
+done as:
+
+```r
+globalCallingHandlers(globalCallingHandlers(NULL))
+```
+
+Alternatively, call:
+
+```r
+progressr::handlers(global = FALSE)  ## important
 progressr::handlers(global = TRUE)
 ```
+
 
 
 #### Messages and warnings adds extra newlines during progress reporting
