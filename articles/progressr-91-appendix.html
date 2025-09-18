@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9020</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9021</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -265,9 +265,10 @@ progressors.</p>
 </h4>
 <p>Positron does not support setting global calling handlers during R’s
 startup process, e.g. in <code>~/.Rprofile</code>. Even if such handlers
-are registered, they have no effect. This is likely a bug in Positron,
-which was last confirmed with Position 2025.09.0 on Linux. Because of
-this, having something like in your <code>~/.Rprofile</code>:</p>
+are registered, they have no effect. This is <a href="https://github.com/posit-dev/positron/issues/9480" class="external-link">bug in
+Positron</a>, which was last confirmed with Position 2025.09.0 on Linux.
+Because of this, having something like in your
+<code>~/.Rprofile</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"progressr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
