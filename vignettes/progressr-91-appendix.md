@@ -164,9 +164,10 @@ risk it would never finish and block all of the following progressors.
 Positron does not support setting global calling handlers during R's
 startup process, e.g. in `~/.Rprofile`. Even if such handlers are
 registered, they have no effect. This is a [bug in
-Positron](https://github.com/posit-dev/positron/issues/9480), which
-was last confirmed with Position 2025.09.0 on Linux. Because of this,
-having something like in your `~/.Rprofile`:
+Positron](https://github.com/posit-dev/positron/issues/6892)
+(2025-03-20), which was most recently confirmed with Position
+2025.09.0 on Linux. Because of this, having something like in your
+`~/.Rprofile`:
 
 ```r
 if (requireNamespace("progressr", quietly = TRUE)) {
