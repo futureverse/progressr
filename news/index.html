@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.15.1-9022</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,21 +77,21 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.16.0" id="version-0160">Version 0.16.0<a class="anchor" aria-label="anchor" href="#version-0160"></a></h2><p class="text-muted">CRAN release: 2025-09-19</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-16-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-16-0"></a></h3>
 <ul><li>Add <code><a href="../reference/handler_slowdown.html">handler_slowdown()</a></code> for slowing down a full progress run a certain amount of time (in seconds).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="workarounds-development-version">Workarounds<a class="anchor" aria-label="anchor" href="#workarounds-development-version"></a></h3>
+<h3 id="workarounds-0-16-0">Workarounds<a class="anchor" aria-label="anchor" href="#workarounds-0-16-0"></a></h3>
 <ul><li>RStudio v2025.05.0 introduced new default handlers for messages and warnings for the RStudio Console, which came with a bug causing console output to stop working in some cases. This bug was fixed in RStudio v2025.05.1. If you run v2025.05.0, <strong>progressr</strong> implements a workaround.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-development-version">Documentation<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h3>
+<h3 id="documentation-0-16-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-0-16-0"></a></h3>
 <ul><li>Replace the long, single introductory vignette with eight separate vignettes.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-16-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-16-0"></a></h3>
 <ul><li><p>Package failed to load in the Positron environment due to an “object ‘RStudio.Version’ of mode ‘function’ was not found” error.</p></li>
 <li><p>In Positron, messages produced while progress is reported were prepended by a newline to standard output, even when there is no stdout buffered. This is due to a bug in Positron, which this version of the package works around.</p></li>
 </ul></div>
