@@ -12,7 +12,8 @@
 #' will update the 'title' component from sticky messages only,
 #' whereas the 'label' component is updated using any message.
 #'
-#' @param \ldots Additional arguments passed to [make_progression_handler()].
+#' @param \ldots Additional arguments passed to `tcltk::winProgressBar()`
+#' and [make_progression_handler()].
 #'
 #' @examples
 #' \donttest{\dontrun{
@@ -25,6 +26,9 @@
 #'
 #' @export
 handler_winprogressbar <- function(intrusiveness = getOption("progressr.intrusiveness.gui", 1), target = "gui", inputs = list(title = NULL, label = "message"), ...) {
+  ## Additional arguments passed to the progress-handler backend
+  backend_args <- handler_backend_args(...)
+
   ## Additional arguments passed to the progress-handler backend
   ## Used for package testing purposes only when we want to perform
   ## everything except the last part where the backend is called
@@ -61,8 +65,6 @@ handler_winprogressbar <- function(intrusiveness = getOption("progressr.intrusiv
     }
     inputs[[name]] <- unique(input)
   }
-
-  backend_args <- handler_backend_args(...)
 
   reporter <- local({
     pb_config <- NULL

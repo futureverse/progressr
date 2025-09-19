@@ -21,7 +21,8 @@ the progress bar.}
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
 
-\item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
+\item{\ldots}{Additional arguments passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}
+and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
 A progression handler for \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}.

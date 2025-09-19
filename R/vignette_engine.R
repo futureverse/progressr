@@ -52,6 +52,7 @@ register_vignette_engine_during_build_only <- function(pkgname) {
       html <- c("<!DOCTYPE html>",
                 "<html lang=\"en\">",
                 "<head>",
+                "<meta charset=\"UTF-8\">",
                 sprintf("<title>%s</title>", title),
                 "<style>",
                 readLines("incl/clean.css", warn = FALSE),

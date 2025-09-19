@@ -26,7 +26,8 @@ example, \code{inputs = list(title = "sticky_message", label = "message")}
 will update the 'title' component from sticky messages only,
 whereas the 'label' component is updated using any message.}
 
-\item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
+\item{\ldots}{Additional arguments passed to \code{tcltk::winProgressBar()}
+and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
 A progression handler for \code{winProgressBar()} in the \pkg{utils} package.

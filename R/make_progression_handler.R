@@ -33,8 +33,7 @@
 #' @param target (character vector) Specifies where progression updates are
 #'   rendered.
 #'
-#' @param \ldots Additional arguments passed to [make_progression_handler()]
-#' or not used.
+#' @param \ldots Not used.
 #'
 #' @return A function of class `progression_handler` that takes a
 #' [progression] condition as its first and only argument.
@@ -124,7 +123,7 @@ make_progression_handler <- function(name, reporter = list(), handler = NULL, en
     handler <- function(p) NULL
   }
 
-  ## Reporter
+  ## Set default reporter functions
   for (key in setdiff(c("reset", "initiate", "update", "finish", "hide", "unhide", "interrupt"), names(reporter))) {
     reporter[[key]] <- structure(function(...) NULL, class = "null_function")
   }

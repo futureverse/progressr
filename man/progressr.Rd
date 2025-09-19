@@ -17,15 +17,19 @@ present it.
 
 The \emph{end user} has full control of \emph{how}, \emph{where}, and \emph{when} to render
 these progress updates.  For instance, they can chose to report progress
-in the terminal using \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} or
-\code{\link[progress:progress_bar]{progress::progress_bar()}} or via the graphical user interface (GUI)
-using \code{utils::winProgressBar()} or \code{\link[tcltk:tkProgressBar]{tcltk::tkProgressBar()}}.
-An alternative to above visual rendering of progress, is to report it
-using \code{\link[beepr:beep]{beepr::beep()}} sounds.
-It is possible to use a combination of above progression handlers, e.g.
-a progress bar in the terminal together with audio updates.
+in the terminal using \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}} (default) or
+\code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}, via the R graphical user interface (GUI)
+using \code{utils::winProgressBar()} or \code{\link[tcltk:tkProgressBar]{tcltk::tkProgressBar()}}, or
+via the RStudio GUI using \code{rstudioapi::jobSetProgress()}.
+An alternative to above visual rendering, is to report progress as audio
+using \code{\link[beepr:beep]{beepr::beep()}}.
+It is also possible to use a combination of above progression handlers,
+e.g. a progress bar in the terminal together with audio updates.
 Besides the existing handlers, it is possible to develop custom
 progression handlers.
+
+The \pkg{progressr} package is compatible with \pkg{shiny} applications
+and \pkg{knitr} rendering.
 
 The \pkg{progressr} package uses R's condition framework for signaling
 progress updated. Because of this, progress can be reported from almost
@@ -35,50 +39,55 @@ APIs like the \code{\link[=lapply]{lapply()}} family of functions, \pkg{purrr}, 
 The \pkg{progressr} package will also work with parallel processing via
 the \pkg{future} framework, e.g. \code{\link[future.apply:future_lapply]{future.apply::future_lapply()}},
 \code{\link[furrr:future_map]{furrr::future_map()}}, and \code{\link[foreach:foreach]{foreach::foreach()}} with \pkg{doFuture}.
-
-The \pkg{progressr} package is compatible with Shiny applications.
 }
 \section{Progression Handlers}{
 
 
 In the terminal:
 \itemize{
-\item \link{handler_txtprogressbar} (default)
-\item \link{handler_pbcol}
-\item \link{handler_pbmcapply}
-\item \link{handler_progress}
-\item \link{handler_ascii_alert}
-\item \link{handler_debug}
+\item \link{handler_txtprogressbar} (built-in; default)
+\item \link{handler_pbcol} (built-in)
+\item \link{handler_ascii_alert} (built-in)
+\item \link{handler_pbmcapply} (requires the \pkg{pbmcapply} package)
+\item \link{handler_progress} (requires the \pkg{progress} package)
 }
 
 In a graphical user interface (GUI):
 \itemize{
-\item \link{handler_rstudio}
-\item \link{handler_tkprogressbar}
-\item \link{handler_winprogressbar}
+\item \link{handler_rstudio} (only in the RStudio Console)
+\item \link{handler_tkprogressbar} (built-in)
+\item \link{handler_winprogressbar} (built-in)
 }
 
 As sound:
 \itemize{
-\item \link{handler_beepr}
-\item \link{handler_ascii_alert}
+\item \link{handler_ascii_alert} (built-in)
+\item \link{handler_beepr} (requires the \pkg{beepr} package)
 }
 
 Via the file system:
 \itemize{
-\item \link{handler_filesize}
+\item \link{handler_filesize} (built-in)
 }
 
 In Shiny:
 \itemize{
-\item \link{withProgressShiny}
+\item \link{withProgressShiny} (requires the \pkg{shiny} package)
 }
 
 Via notification systems:
 \itemize{
-\item \link{handler_ntfy}
-\item \link{handler_notifier}
-\item \link{handler_rpushbullet}
+\item \link{handler_ntfy} (requires the \pkg{ntfy} package)
+\item \link{handler_notifier} (requires the non-CRAN \pkg{notifier} package)
+\item \link{handler_rpushbullet} (requires the \pkg{RPushBullet} package)
+}
+
+Miscellaneous:
+\itemize{
+\item \link{handler_debug} (built-in)
+\item \link{handler_newline} (built-in)
+\item \link{handler_slowdown} (built-in)
+\item \link{handler_void} (built-in)
 }
 }
 

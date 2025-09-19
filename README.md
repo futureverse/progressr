@@ -431,7 +431,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -452,7 +452,7 @@ my_fcn <- function(xs) {
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -472,7 +472,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -493,7 +493,7 @@ my_fcn <- function(xs) {
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 #  |====================                               |  40%
 ```
 
@@ -594,22 +594,22 @@ Here is an example that uses `future_lapply()` of the **[future.apply]** package
 
 ```r
 library(future.apply)
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   future_lapply(xs, function(x, ...) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -619,53 +619,53 @@ my_fcn(1:5)
 Here is an example that uses `foreach()` of the **[foreach]** package
 together with `%dofuture%` of the **[doFuture]** package to
 parallelize while reporting on progress.  This example parallelizes on
-the local machine, it works alsof for remote machines:
+the local machine, it works also for remote machines:
 
 ```r
 library(doFuture)    ## %dofuture%
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   foreach(x = xs) %dofuture% {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
 
 For existing code using the traditional `%dopar%` operators of the
-**[foreach]** package, we can register the **[doFuture]** adaptor and
+**[foreach]** package, we can register the **[doFuture]** adapter and
 use the same **progressr** as above to progress updates;
 
 ```r
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   foreach(x = xs) %dopar% {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -678,22 +678,22 @@ progression updates:
 
 ```r
 library(furrr)
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   future_map(xs, function(x) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -716,22 +716,22 @@ library(BiocParallel)
 library(doFuture)
 register(DoparParam())  ## BiocParallel parallelizes via %dopar%
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   bplapply(xs, function(x) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   })
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -746,22 +746,22 @@ progression updates:
 library(plyr)
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession)
+plan(multisession, workers = 2)
 
 library(progressr)
 handlers(global = TRUE)
-handlers("progress", "beepr")
+handlers("cli")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
   llply(xs, function(x, ...) {
-    Sys.sleep(6.0-x)
+    Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
   }, .parallel = TRUE)
 }
 
-my_fcn(1:5)
+y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
@@ -772,12 +772,15 @@ requires **plyr** (>= 1.8.7).
 
 ### Near-live versus buffered progress updates with futures
 
-As of November 2020, there are four types of **future** backends that are known(*) to provide near-live progress updates:
+As of August 2025, there are six types of **future** backends that are
+known(*) to provide near-live progress updates:
 
  1. `sequential`,
  2. `multicore`,
  3. `multisession`, and
  4. `cluster` (local and remote)
+ 5. `future.callr::callr`
+ 6. `future.mirai::mirai_multisession`
 
 Here "near-live" means that the progress handlers will report on
 progress almost immediately when the progress is signaled on the

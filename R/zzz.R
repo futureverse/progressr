@@ -26,4 +26,10 @@
     ## /HB 2020-11-19
 #    register_global_progression_handler()
   }
+
+  ## RStudio (>= 2025.05.0) introduced a custom global message handler
+  ## for the RStudio Console. It causes conflicts with some of the
+  ## progressr handlers.
+  ## https://github.com/futureverse/progressr/issues/179
+  warn_about_rstudio_condition_handlers()
 }

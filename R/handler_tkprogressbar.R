@@ -5,7 +5,8 @@
 #' @inheritParams make_progression_handler
 #' @inheritParams handler_winprogressbar
 #'
-#' @param \ldots Additional arguments passed to [make_progression_handler()].
+#' @param \ldots Additional arguments passed to [tcltk::tkProgressBar()]
+#' and [make_progression_handler()].
 #'
 #' @example incl/handler_tkprogressbar.R
 #'
@@ -52,8 +53,6 @@ handler_tkprogressbar <- function(intrusiveness = getOption("progressr.intrusive
     }
     inputs[[name]] <- unique(input)
   }
-
-  backend_args <- handler_backend_args(...)
 
   reporter <- local({
     pb_config <- NULL
