@@ -2,12 +2,17 @@ get_rstudio_version <- local({
   .version <- NULL
   function() {
     if (is.null(.version)) {
-      if (!"tools:rstudio" %in% search()) {
-        .version <<- package_version("0.0")
-      } else {
+      .version <<- package_version("0.0")
+      if ("tools:rstudio" %in% search()) {
         envir <- as.environment("tools:rstudio")
-        RStudio.Version <- get("RStudio.Version", mode = "function", envir = envir, inherits = FALSE)
-        .version <<- RStudio.Version()[["version"]]
+        ## There are cases where 'tools:rstudio' exist, but there is no
+        ## RStudio.Version() function. See
+        ## https://github.com/futureverse/progressr/issues/183 for
+        ## an example. Not sure how that happens. /HB 2025-09-23
+        if (exists("RStudio.Version", mode = "function", envir = envir, inherits = FALSE)) {
+          RStudio.Version <- get("RStudio.Version", mode = "function", envir = envir, inherits = FALSE)
+          .version <<- RStudio.Version()[["version"]]
+        }
       }
     }
     .version

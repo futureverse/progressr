@@ -1,7 +1,11 @@
 # Version (development version)
 
- * ...
+## Bug Fixes
 
+ * Shiny apps running as background jobs in RStudio could fail with an
+   error "object 'RStudio.Version' of mode 'function' was not found".
+   This error occurred sporadically.
+   
 
 # Version 0.16.0 [2025-05-18]
 

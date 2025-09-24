@@ -263,4 +263,8 @@ update_package_options <- function(debug = FALSE) {
 
   ## However, not used
   update_package_option("global.handler", mode = "logical", debug = debug)
+
+  ## For RStudio users
+  update_package_option("rstudio.patch", mode = "logical", debug = debug)
 }
+
