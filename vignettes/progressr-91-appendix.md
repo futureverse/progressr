@@ -219,7 +219,8 @@ M: Added value 5
 
 I do not fully understand the reason for this, but I hope we can get
 to the bottom of it and fix it, either in **progressr** or in
-Positron.
+Positron, e.g. [Bug #9486](https://github.com/posit-dev/positron/issues/9486)
+(2025-09-18).
 
 
 ### Jupyter Notebook and Jupyter Lab
