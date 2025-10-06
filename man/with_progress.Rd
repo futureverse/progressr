@@ -66,6 +66,11 @@ instead of this one.
 If the global progression handler is enabled, it is temporarily disabled
 while evaluating the \code{expr} expression.
 
+If a \code{progression} condition causes the progressor to be completed
+("reaches 100\%"), then \code{with_progress()} will muffle the \code{progression}
+condition preventing it from reaching, say, any global condition
+handlers.
+
 \strong{IMPORTANT: This function is meant for end users only.  It should not
 be used by R packages, which only task is to \emph{signal} progress updates,
 not to decide if, when, and how progress should be reported.}

@@ -44,6 +44,11 @@
 #' If the global progression handler is enabled, it is temporarily disabled
 #' while evaluating the `expr` expression.
 #'
+#' If a `progression` condition causes the progressor to be completed
+#' ("reaches 100%"), then `with_progress()` will muffle the `progression`
+#' condition preventing it from reaching, say, any global condition
+#' handlers.
+#'
 #' **IMPORTANT: This function is meant for end users only.  It should not
 #' be used by R packages, which only task is to _signal_ progress updates,
 #' not to decide if, when, and how progress should be reported.**
@@ -240,9 +245,16 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
       }
 
       ## Let the registered 'progressr' calling handlers process
-      ## the 'progression' condition. If the progressor completed,
-      ## then 'finished' is TRUE (which we currently don't use)
+      ## the 'progression' condition. If this resulted in the
+      ## progressor being completed, then 'finished' is TRUE
       finished <- calling_handler(p)
+
+      ## If the progressor is completed, muffle the 'progression'
+      ## condition already here, to prevent it from reaching other
+      ## handlers such as global 'progression' handlers.
+      if (finished) {
+        invokeRestart("muffleProgression")
+      }
     },
   
     interrupt = handle_interrupt_or_error,
