@@ -157,7 +157,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     ## Flag indicating whether nor not with_progress() exited due to an error
     status <- "incomplete"
   
-    ## Tell all progression handlers to shutdown at the end and
+    ## Tell all progression handlers to shut down at the end and
     ## the status of the evaluation.
     if (cleanup) {
       on.exit({
@@ -238,8 +238,11 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
           calling_handler(control_progression("unhide"))
         }
       }
-      
-      calling_handler(p)
+
+      ## Let the registered 'progressr' calling handlers process
+      ## the 'progression' condition. If the progressor completed,
+      ## then 'finished' is TRUE (which we currently don't use)
+      finished <- calling_handler(p)
     },
   
     interrupt = handle_interrupt_or_error,

@@ -6,7 +6,7 @@ make_calling_handler <- function(handlers) {
         handler <- handlers[[kk]]
         if (handler(p)) finished <- TRUE
       }
-      finished
+      invisible(finished)
     }
   } else {
     calling_handler <- handlers[[1]]
