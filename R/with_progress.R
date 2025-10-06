@@ -274,9 +274,9 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
         conditions[[length(conditions) + 1L]] <<- c
         ## Muffle
         if (inherits(c, "message")) {
-          invokeRestart("muffleMessage")
+          tryInvokeRestart("muffleMessage")
         } else if (inherits(c, "warning")) {
-          invokeRestart("muffleWarning")
+          tryInvokeRestart("muffleWarning")
         } else if (inherits(c, "condition")) {
           ## If there is a "muffle" restart for this condition,
           ## then invoke that restart, i.e. "muffle" the condition
@@ -285,7 +285,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
             name <- restart$name
             if (is.null(name)) next
             if (!grepl("^muffle", name)) next
-            invokeRestart(restart)
+            tryInvokeRestart(restart)
             break
           }
         }

@@ -66,7 +66,7 @@ handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.i
           output <- gsub("[\n\r]+$", "", output)
         }
         cat(output, file = stderr())
-        invokeRestart("muffleMessage")
+        tryInvokeRestart("muffleMessage")
       })
 
       invisible(res)

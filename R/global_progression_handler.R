@@ -308,9 +308,9 @@ global_progression_handler <- local({
     
     ## Muffle it for now
     if (inherits(condition, "message")) {
-      invokeRestart("muffleMessage")
+      tryInvokeRestart("muffleMessage")
     } else if (inherits(condition, "warning")) {
-      invokeRestart("muffleWarning")
+      tryInvokeRestart("muffleWarning")
     } else if (inherits(condition, "condition")) {
       ## If there is a "muffle" restart for this condition,
       ## then invoke that restart, i.e. "muffle" the condition
@@ -319,7 +319,7 @@ global_progression_handler <- local({
         name <- restart$name
         if (is.null(name)) next
         if (!grepl("^muffle", name)) next
-        invokeRestart(restart)
+        tryInvokeRestart(restart)
         break
       }
     }
