@@ -253,7 +253,10 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
       ## condition already here, to prevent it from reaching other
       ## handlers such as global 'progression' handlers.
       if (finished) {
-        invokeRestart("muffleProgression")
+        ## Restart 'muffleProgression' is not guaranteed to exist, e.g. the
+        ## 'progression' condition might be resignaled by a handler that
+        ## does not define it.
+        tryInvokeRestart("muffleProgression")
       }
     },
   

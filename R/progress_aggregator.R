@@ -41,8 +41,11 @@ progress_aggregator <- function(progress) {
       }
     }
     
-    ## Prevent upstream calling handlers to receive progression 'p'
-    invokeRestart("muffleProgression")
+    ## Prevent upstream calling handlers to receive progression 'p'.
+    ## Restart 'muffleProgression' is not guaranteed to exist, e.g. the
+    ## 'progression' condition might be resignaled by a handler that
+    ## does not define it.
+    tryInvokeRestart("muffleProgression")
   }
 
   handler <- make_progression_handler("progress_aggregator", handler = handler)
