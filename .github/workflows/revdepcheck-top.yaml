@@ -30,7 +30,7 @@ jobs:
           - { r: "release", pkg: "SimDesign"       }
 #          - { r: "release", pkg: "tidySEM"         }  ## fails to install
           - { r: "release", pkg: "tsdistributions" }
-          - { r: "release", pkg: "tsgarch"         }
+          - { r: "release", pkg: "tsgarch", sysdeps: "libcairo2-dev" }
           
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -50,7 +50,7 @@ jobs:
 
       - name: Install system dependencies (Linux)
         if: runner.os == 'Linux'
-        run: sudo apt-get install -y tidy
+        run: sudo apt-get install -y tidy ${{ matrix.config.sysdeps }}
 
       - uses: r-lib/actions/setup-r@v2
         with:
