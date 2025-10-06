@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.16.0-9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,8 +79,13 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
 <div class="section level3">
+<h3 id="significant-changes-development-version">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-development-version"></a></h3>
+<ul><li>Now <code><a href="../reference/with_progress.html">with_progress()</a></code> muffles a <code>progression</code> condition, if the progressor becomes complete (“reaches 100%”). This prevents it from reaching, say, any global condition handlers and further attempts to complete the already completed progressor.</li>
+</ul></div>
+<div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Shiny apps running as background jobs in RStudio could fail with an error “object ‘RStudio.Version’ of mode ‘function’ was not found”. This error occurred sporadically.</li>
+<ul><li><p>Using <code><a href="../reference/with_progress.html">with_progress()</a></code> together with <code>handlers(global = TRUE)</code> would produce a warning on “Received a progression ‘update’ request (…) but is not listening to this progressor”. Above update to <code><a href="../reference/with_progress.html">with_progress()</a></code> avoids this warning.</p></li>
+<li><p>Shiny apps running as background jobs in RStudio could fail with an error “object ‘RStudio.Version’ of mode ‘function’ was not found”. This error occurred sporadically.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
