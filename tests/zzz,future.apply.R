@@ -1,6 +1,6 @@
 source("incl/start.R")
 
-if (requireNamespace("future.apply", quietly = TRUE)) {
+if (requireNamespace("future.apply", quietly = TRUE) && !covr) {
   for (strategy in future_strategies) {
     future::plan(strategy)
     print(future::plan())
