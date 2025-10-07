@@ -1,5 +1,11 @@
 # Version (development version)
 
+## New Features
+
+ * Now also `with_progress()` warns about receiving progress updates
+   after the progressor has finished. Previously, only the global
+   'progression' handler would do this.
+ 
 ## Bug Fixes
 
  * Using `with_progress()` together with `handlers(global = TRUE)`
