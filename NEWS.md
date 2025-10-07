@@ -1,18 +1,10 @@
 # Version (development version)
 
-## Significant Changes
-
- * Now `with_progress()` muffles a `progression` condition, if the
-   progressor becomes complete ("reaches 100%"). This prevents it from
-   reaching, say, any global condition handlers and further attempts
-   to complete the already completed progressor.
-
 ## Bug Fixes
 
  * Using `with_progress()` together with `handlers(global = TRUE)`
    would produce a warning on "Received a progression 'update' request
-   (...) but is not listening to this progressor". Above update to
-   `with_progress()` avoids this warning.
+   (...) but is not listening to this progressor".
 
  * Shiny apps running as background jobs in RStudio could fail with an
    error "object 'RStudio.Version' of mode 'function' was not found".
