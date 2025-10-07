@@ -42,9 +42,14 @@ for (kk in seq_along(handlers)) {
           }
         })
       }, classes = type)
+      output <- relay$stdout
+      message <- gsub("\n$", "", relay$msgs)
+      if (delta > 0) {
+        message <- grep("no longer listening to this progressor", message, invert = TRUE, value = TRUE)
+      }
       stopifnot(
-        identical(relay$stdout, truth),
-        identical(gsub("\n$", "", relay$msgs), truth)
+        identical(output, truth),
+        identical(message, truth)
       )
     } ## for (delta ...)
   } ## for (signal ...)

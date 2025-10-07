@@ -217,25 +217,7 @@ global_progression_handler <- local({
       }
     } else if (type == "update") {
       if (is.null(current_progressor_uuid)) {
-        ## We might receive zero-amount progress updates after the fact that the
-        ## progress has been completed
-        amount <- progression$amount
-        if (!is.numeric(amount) || amount > 0) {
-          ## But otherwise, it might be a coding mistake ...
-          
-          ## unless the 'progression' signaled within with_progress(), which
-          ## in case it might be re-signaled such that it reaches the global
-          ## 'progression' handler here
-          is_with_progress <- function(call) {
-            identical(call, quote(with_progress)) || identical(call, quote(progressr::with_progress))
-          }
-          calls <- lapply(sys.calls(), FUN = .subset2, 1L)
-          if (!any(vapply(calls, FUN = is_with_progress, FUN.VALUE = FALSE))) {
-            msg <- conditionMessage(progression)
-            if (length(msg) == 0) msg <- "character(0)"
-            warning(sprintf("Received a progression %s request (amount=%g; msg=%s) but is not listening to this progressor. This can happen when code signals more progress updates than it configured the progressor to do. When the progressor completes all steps, it shuts down resulting in the global progression handler to no longer listen to it. To troubleshoot this, try with progressr::handlers(\"debug\")", sQuote(type), amount, sQuote(msg)))
-          }
-        }
+        warn_about_too_many_progressions(progression, global = TRUE)
         return()
       }
 
