@@ -246,18 +246,9 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
 
       ## Let the registered 'progressr' calling handlers process
       ## the 'progression' condition. If this resulted in the
-      ## progressor being completed, then 'finished' is TRUE
+      ## progressor being completed, then 'finished' is TRUE,
+      ## which we do not make use of.
       finished <- calling_handler(p)
-
-      ## If the progressor is completed, muffle the 'progression'
-      ## condition already here, to prevent it from reaching other
-      ## handlers such as global 'progression' handlers.
-      if (finished) {
-        ## Restart 'muffleProgression' is not guaranteed to exist, e.g. the
-        ## 'progression' condition might be resignaled by a handler that
-        ## does not define it.
-        tryInvokeRestart("muffleProgression")
-      }
     },
   
     interrupt = handle_interrupt_or_error,
