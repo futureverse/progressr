@@ -38,6 +38,7 @@ for (delay in c(FALSE, TRUE)) {
     }, delay_stdout = delay,
       delay_conditions = if (delay) "condition" else character(0L))
   })
+
   stopifnot(identical(output$stdout, output_truth$stdout))
   stopifnot(identical(output$conditions, output_truth$conditions))
   stopifnot(identical(y, y_truth))

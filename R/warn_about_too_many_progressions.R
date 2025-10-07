@@ -2,10 +2,14 @@ warn_about_too_many_progressions <- function(progression, global = FALSE) {
   ## We might receive progress updates after the fact that the progressor
   ## has been completed
 
-  ## This is okay if it's a zero-amount progression
+  ## It is okay if it's a zero-amount progression
   amount <- progression$amount
   if (is.numeric(amount) && amount == 0) return()
-  
+
+  ## It is okay if it's a 'finish' progression
+  type <- progression$type
+  if (is.character(type) && type == "finish") return()
+
   ## This is okay if it's signaled from within with_progress() and then
   ## caught by the global 'progression' handler
   if (global) {
@@ -26,6 +30,6 @@ warn_about_too_many_progressions <- function(progression, global = FALSE) {
   m <- if (length(m) == 0) "character(0)" else sQuote(m)
   info <- sprintf("amount=%g; msg=%s", amount, m)
   msg <- if (global) "The global progression handlers" else "with_progress()"
-  msg <- sprintf("%s received a progression %s request (%s), but is no longer listening to this progressor. This can happen when code signals more progress updates than steps in the progressor. To troubleshoot this, retry with progressr::handlers(\"debug\")", msg, sQuote(progression$type), info)
-  warning(msg, call. = FALSE)
+  msg <- sprintf("%s received a progression %s request (%s), but is no longer listening to this progressor. This can happen when code signals more progress updates than steps in the progressor. To troubleshoot this, retry with progressr::handlers(\"debug\")", msg, sQuote(type), info)
+  warning(msg, call. = FALSE, immediate. = TRUE)
 } ## warn_about_too_many_progressions()
