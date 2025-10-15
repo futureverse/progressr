@@ -1,3 +1,22 @@
+# Version 0.17.0 [2025-10-15]
+
+## New Features
+
+ * Now also `with_progress()` warns about receiving progress updates
+   after the progressor has finished. Previously, only the global
+   'progression' handler would do this.
+ 
+## Bug Fixes
+
+ * Using `with_progress()` together with `handlers(global = TRUE)`
+   would produce a warning on "Received a progression 'update' request
+   (...) but is not listening to this progressor".
+
+ * Shiny apps running as background jobs in RStudio could fail with an
+   error "object 'RStudio.Version' of mode 'function' was not found".
+   This error occurred sporadically.
+   
+
 # Version 0.16.0 [2025-05-18]
 
 ## New Features

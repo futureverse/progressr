@@ -15,7 +15,10 @@ without_progress <- function(expr) {
   withCallingHandlers({
     res <- withVisible(expr)
   }, progression = function(p) {
-    invokeRestart("muffleProgression")
+    ## Restart 'muffleProgression' is not guaranteed to exist, e.g. the
+    ## 'progression' condition might be resignaled by a handler that
+    ## does not define it.
+    tryInvokeRestart("muffleProgression")
   })
   
   if (isTRUE(res$visible)) {

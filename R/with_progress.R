@@ -44,6 +44,11 @@
 #' If the global progression handler is enabled, it is temporarily disabled
 #' while evaluating the `expr` expression.
 #'
+#' If a `progression` condition causes the progressor to be completed
+#' ("reaches 100%"), then `with_progress()` will muffle the `progression`
+#' condition preventing it from reaching, say, any global condition
+#' handlers.
+#'
 #' **IMPORTANT: This function is meant for end users only.  It should not
 #' be used by R packages, which only task is to _signal_ progress updates,
 #' not to decide if, when, and how progress should be reported.**
@@ -157,7 +162,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     ## Flag indicating whether nor not with_progress() exited due to an error
     status <- "incomplete"
   
-    ## Tell all progression handlers to shutdown at the end and
+    ## Tell all progression handlers to shut down at the end and
     ## the status of the evaluation.
     if (cleanup) {
       on.exit({
@@ -217,6 +222,8 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     
     ## Evaluate expression
     capture_conditions <- TRUE
+    finished <- FALSE
+    
     withCallingHandlers({
       res <- withVisible(expr)
     },
@@ -224,6 +231,11 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     progression = function(p) {
       progression_counter <<- progression_counter + 1
       if (debug) message(sprintf("- received a %s (n=%g)", sQuote(class(p)[1]), progression_counter))
+
+      if (finished) {
+        warn_about_too_many_progressions(p)
+        return()
+      }
       
       ## Don't capture conditions that are produced by progression handlers
       capture_conditions <<- FALSE
@@ -238,8 +250,11 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
           calling_handler(control_progression("unhide"))
         }
       }
-      
-      calling_handler(p)
+
+      ## Let the registered 'progressr' calling handlers process
+      ## the 'progression' condition. If this resulted in the
+      ## progressor being completed, then 'finished' is TRUE
+      finished <<- calling_handler(p)
     },
   
     interrupt = handle_interrupt_or_error,
@@ -247,7 +262,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     error = handle_interrupt_or_error,
   
     condition = function(c) {
-      if (!capture_conditions) return()
+      if (!capture_conditions || finished) return()
       
       if (debug) message("- received a ", sQuote(class(c)[1]))
   
@@ -256,9 +271,9 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
         conditions[[length(conditions) + 1L]] <<- c
         ## Muffle
         if (inherits(c, "message")) {
-          invokeRestart("muffleMessage")
+          tryInvokeRestart("muffleMessage")
         } else if (inherits(c, "warning")) {
-          invokeRestart("muffleWarning")
+          tryInvokeRestart("muffleWarning")
         } else if (inherits(c, "condition")) {
           ## If there is a "muffle" restart for this condition,
           ## then invoke that restart, i.e. "muffle" the condition
@@ -267,7 +282,7 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
             name <- restart$name
             if (is.null(name)) next
             if (!grepl("^muffle", name)) next
-            invokeRestart(restart)
+            tryInvokeRestart(restart)
             break
           }
         }

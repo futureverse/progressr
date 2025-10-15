@@ -125,10 +125,10 @@ is_rpushbullet_working <- local({
       })
     }, message = function(cond) {
        conds <<- c(conds, list(cond))
-       if (quiet) invokeRestart("muffleMessage")
+       if (quiet) tryInvokeRestart("muffleMessage")
     }, warning = function(cond) {
        conds <<- c(conds, list(cond))
-       if (quiet) invokeRestart("muffleWarning")
+       if (quiet) tryInvokeRestart("muffleWarning")
     })
 
     if (is.na(res)) res <- FALSE

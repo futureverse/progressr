@@ -30,10 +30,10 @@ Run `revdepcheck::revdep_details(, "adestr")` for more info
 
 <details>
 
-* Version: 4.10.0
+* Version: 4.10.1
 * GitHub: https://github.com/sipss/AlpsNMR
 * Source code: https://github.com/cran/AlpsNMR
-* Date/Publication: 2025-04-15
+* Date/Publication: 2025-09-28
 * Number of recursive dependencies: 180
 
 Run `revdepcheck::revdep_details(, "AlpsNMR")` for more info
@@ -41,31 +41,6 @@ Run `revdepcheck::revdep_details(, "AlpsNMR")` for more info
 </details>
 
 ## In both
-
-*   checking tests ...
-    ```
-      Running ‘testthat.R’
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(AlpsNMR)
-      
-      Attaching package: 'AlpsNMR'
-      
-      The following object is masked from 'package:stats':
-    ...
-      `expected`: TRUE 
-      ── Failure ('test-outliers.R:30:5'): nmr_pca_outliers_robust works ─────────────
-      is.list(plot) is not TRUE
-      
-      `actual`:   FALSE
-      `expected`: TRUE 
-      
-      [ FAIL 5 | WARN 0 | SKIP 1 | PASS 88 ]
-      Error: Test failures
-      Execution halted
-    ```
 
 *   checking re-building of vignette outputs ... ERROR
     ```
@@ -80,7 +55,7 @@ Run `revdepcheck::revdep_details(, "AlpsNMR")` for more info
     ---
     Backtrace:
     ...
-    LaTeX failed to compile /c4/home/henrik/futureverse/progressr/revdep/checks/AlpsNMR/new/AlpsNMR.Rcheck/vign_test/AlpsNMR/vignettes/Vig02-handling-metadata-and-annotations.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips.
+    LaTeX failed to compile /scratch/henrik/revdep/progressr/checks/AlpsNMR/new/AlpsNMR.Rcheck/vign_test/AlpsNMR/vignettes/Vig02-handling-metadata-and-annotations.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips.
     --- failed re-building ‘Vig02-handling-metadata-and-annotations.Rmd’
     
     SUMMARY: processing the following files failed:
@@ -159,30 +134,6 @@ Run `revdepcheck::revdep_details(, "bayesmove")` for more info
     checkRd: (-1) insert_NAs.Rd:22: Lost braces; missing escapes or markup?
         22 | A data frame where new rows have been inserted to regularize the \code{date} column. This results in values provided for \code{id}, \code{date}, and {dt} while inserting NAs for all other columns. Additionally, observations with duplicate date-times are removed.
            |                                                                                                                                                      ^
-    ```
-
-# bolasso
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/dmolitor/bolasso
-* Source code: https://github.com/cran/bolasso
-* Date/Publication: 2024-12-08 22:20:12 UTC
-* Number of recursive dependencies: 67
-
-Run `revdepcheck::revdep_details(, "bolasso")` for more info
-
-</details>
-
-## In both
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        ‘plot.R’ ‘utils.R’
     ```
 
 # caretSDM
@@ -456,6 +407,20 @@ Run `revdepcheck::revdep_details(, "fdacluster")` for more info
 
 ## In both
 
+*   checking whether package ‘fdacluster’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      baseDissimilarityClass.cpp:39:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
+      baseDissimilarityClass.cpp:39:57: warning: ‘bool arma::is_finite(const Base<typename T1::elem_type, T1>&) [with T1 = subview<double>; typename T1::elem_type = double]’ is deprecated: change arma::is_finite(X) to X.is_finite() [-Wdeprecated-declarations]
+      baseDissimilarityClass.cpp:53:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
+      baseDissimilarityClass.cpp:53:57: warning: ‘bool arma::is_finite(const Base<typename T1::elem_type, T1>&) [with T1 = subview<double>; typename T1::elem_type = double]’ is deprecated: change arma::is_finite(X) to X.is_finite() [-Wdeprecated-declarations]
+      lowessCenterClass.cpp:41:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
+      lowessCenterClass.cpp:41:64: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
+      polyCenterClass.cpp:39:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
+      polyCenterClass.cpp:39:64: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
+    See ‘/scratch/henrik/revdep/progressr/checks/fdacluster/new/fdacluster.Rcheck/00install.out’ for details.
+    ```
+
 *   checking DESCRIPTION meta-information ... NOTE
     ```
       Missing dependency on R >= 4.2.0 because package code uses the pipe
@@ -509,10 +474,10 @@ Run `revdepcheck::revdep_details(, "geocmeans")` for more info
 
 <details>
 
-* Version: 2.1-2
+* Version: 2.1-3
 * GitHub: https://github.com/ipeaGIT/gtfs2gps
 * Source code: https://github.com/cran/gtfs2gps
-* Date/Publication: 2024-10-08 07:00:06 UTC
+* Date/Publication: 2025-10-08 15:00:02 UTC
 * Number of recursive dependencies: 86
 
 Run `revdepcheck::revdep_details(, "gtfs2gps")` for more info
@@ -529,10 +494,10 @@ Run `revdepcheck::revdep_details(, "gtfs2gps")` for more info
     Complete output:
       > library(testthat)
       > library(gtfs2gps)
-      gtfs2gps version 2.1-2 is now loaded
-      NOTE: All filter functions from gtfs2gps were removed
-      Please replace them by similar functions from gtfstools
+      gtfs2gps version 2.1-3 is now loaded
+      
       > 
+      > test_check("gtfs2gps")
     ...
        4.     └─terra (local) .local(x, ...)
        5.       ├─terra::makeValid(x)
@@ -544,15 +509,6 @@ Run `revdepcheck::revdep_details(, "gtfs2gps")` for more info
       [ FAIL 1 | WARN 0 | SKIP 0 | PASS 119 ]
       Error: Test failures
       Execution halted
-    ```
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        ‘adjust_speed.R’ ‘adjust_speed.Rd’ ‘gps_as_sflinestring.Rd’
-        ‘gps_as_sfpoints.Rd’ ‘gtfs2gps.Rd’ ‘write_gtfs.Rd’
     ```
 
 # ISAnalytics
@@ -606,10 +562,10 @@ Run `revdepcheck::revdep_details(, "lava")` for more info
 
 <details>
 
-* Version: 0.9.4
+* Version: 0.9.5
 * GitHub: https://github.com/mapme-initiative/mapme.biodiversity
 * Source code: https://github.com/cran/mapme.biodiversity
-* Date/Publication: 2025-04-28 13:00:08 UTC
+* Date/Publication: 2025-10-06 07:00:02 UTC
 * Number of recursive dependencies: 101
 
 Run `revdepcheck::revdep_details(, "mapme.biodiversity")` for more info
@@ -624,12 +580,12 @@ Run `revdepcheck::revdep_details(, "mapme.biodiversity")` for more info
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
     Last 50 lines of output:
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test-calc_deforestation_drivers.R:16:3'): deforestation drivers works ──
-      `.check_single_asset(result)` produced warnings.
-      ── Failure ('test-calc_deforestation_drivers.R:17:3'): deforestation drivers works ──
-      unique(result$variable) (`actual`) not equal to c(...) (`expected`).
-      
+        'test-calc_treecover_area_and_emissions.R:30:3',
+        'test-calc_treecoverloss_emissions.R:27:3', 'test-calc_tri.R:33:3',
+        'test-get_carbon.R:2:3', 'test-get_carbon.R:29:3', 'test-get_chelsa.R:2:3',
+        'test-get_esalandcover.R:2:3', 'test-get_fritz_et_al.R:2:3',
+        'test-get_gfw_emissions.R:2:3', 'test-get_gfw_lossyear.R:2:3',
+        'test-get_gfw_treecover.R:7:3', 'test-get_gmw.R:2:3', 'test-get_gsw.R:2:3',
     ...
        12. │               └─jsonlite:::parseJSON(txt, bigint_as_char)
        13. │                 └─jsonlite:::parse_string(txt, bigint_as_char)
@@ -638,9 +594,27 @@ Run `revdepcheck::revdep_details(, "mapme.biodiversity")` for more info
        16.     └─cli::cli_abort(...)
        17.       └─rlang::abort(...)
       
-      [ FAIL 5 | WARN 1 | SKIP 38 | PASS 563 ]
+      [ FAIL 2 | WARN 0 | SKIP 44 | PASS 515 ]
       Error: Test failures
       Execution halted
+    ```
+
+*   checking whether package ‘mapme.biodiversity’ can be installed ... WARNING
+    ```
+    Found the following significant warnings:
+      Warning: GDAL system library version (3.0.4) < 3.7.0
+    See ‘/scratch/henrik/revdep/progressr/checks/mapme.biodiversity/new/mapme.biodiversity.Rcheck/00install.out’ for details.
+    ```
+
+*   checking whether the namespace can be loaded with stated dependencies ... NOTE
+    ```
+    Warning: GDAL system library version (3.0.4) < 3.7.0
+    
+    A namespace must be able to be loaded with just the base namespace
+    loaded: otherwise if the namespace gets loaded by a saved object, the
+    session will be unable to start.
+    
+    Probably some imports need to be declared in the NAMESPACE file.
     ```
 
 # mpathsenser
@@ -689,7 +663,7 @@ Run `revdepcheck::revdep_details(, "pavo")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/c4/home/henrik/futureverse/progressr/revdep/checks/pavo/new/pavo.Rcheck/00install.out’ for details.
+    See ‘/scratch/henrik/revdep/progressr/checks/pavo/new/pavo.Rcheck/00install.out’ for details.
     ```
 
 # powRICLPM
@@ -824,7 +798,7 @@ Run `revdepcheck::revdep_details(, "stppSim")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/c4/home/henrik/futureverse/progressr/revdep/checks/stppSim/new/stppSim.Rcheck/00install.out’ for details.
+    See ‘/scratch/henrik/revdep/progressr/checks/stppSim/new/stppSim.Rcheck/00install.out’ for details.
     ```
 
 # targeted
@@ -936,7 +910,7 @@ Run `revdepcheck::revdep_details(, "vmeasur")` for more info
     ```
     Found the following significant warnings:
       Warning: no DISPLAY variable so Tk is not available
-    See ‘/c4/home/henrik/futureverse/progressr/revdep/checks/vmeasur/new/vmeasur.Rcheck/00install.out’ for details.
+    See ‘/scratch/henrik/revdep/progressr/checks/vmeasur/new/vmeasur.Rcheck/00install.out’ for details.
     ```
 
 # WeightedCluster

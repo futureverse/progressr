@@ -217,14 +217,7 @@ global_progression_handler <- local({
       }
     } else if (type == "update") {
       if (is.null(current_progressor_uuid)) {
-        ## We might receive zero-amount progress updates after the fact that the
-        ## progress has been completed
-        amount <- progression$amount
-        if (!is.numeric(amount) || amount > 0) {
-          msg <- conditionMessage(progression)
-          if (length(msg) == 0) msg <- "character(0)"
-          warning(sprintf("Received a progression %s request (amount=%g; msg=%s) but is not listening to this progressor. This can happen when code signals more progress updates than it configured the progressor to do. When the progressor completes all steps, it shuts down resulting in the global progression handler to no longer listen to it. To troubleshoot this, try with progressr::handlers(\"debug\")", sQuote(type), amount, sQuote(msg)))
-        }
+        warn_about_too_many_progressions(progression, global = TRUE)
         return()
       }
 
@@ -308,9 +301,9 @@ global_progression_handler <- local({
     
     ## Muffle it for now
     if (inherits(condition, "message")) {
-      invokeRestart("muffleMessage")
+      tryInvokeRestart("muffleMessage")
     } else if (inherits(condition, "warning")) {
-      invokeRestart("muffleWarning")
+      tryInvokeRestart("muffleWarning")
     } else if (inherits(condition, "condition")) {
       ## If there is a "muffle" restart for this condition,
       ## then invoke that restart, i.e. "muffle" the condition
@@ -319,7 +312,7 @@ global_progression_handler <- local({
         name <- restart$name
         if (is.null(name)) next
         if (!grepl("^muffle", name)) next
-        invokeRestart(restart)
+        tryInvokeRestart(restart)
         break
       }
     }
