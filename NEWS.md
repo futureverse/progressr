@@ -1,11 +1,17 @@
 # Version (development version)
 
+## New Features
+
+ * Add `length()` for `progressor` objects, which enables using
+   `seq_along()` and `seq()` on progressors.
+
 ## Bug Fixes
 
  * It was not possible to create more than one progressor in a
    `with_progress()` call, resulting in additional progressors being
-   ignored and warnings on "with_progress() received a progression
-   'initiate' request" being produced.
+   ignored. Also, warnings on "with_progress() received a progression
+   'initiate' request" were produced with **progressr** 0.17.0
+   (2025-10-15).
    
 
 # Version 0.17.0 [2025-10-15]

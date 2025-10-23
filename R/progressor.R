@@ -211,6 +211,12 @@ print.progressor <- function(x, ...) {
 }
 
 
+#' @export
+length.progressor <- function(x) {
+  environment(x)[["steps"]]
+}
+
+
 progressr_in_globalenv <- local({
   state <- FALSE
   
