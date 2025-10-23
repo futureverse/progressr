@@ -80,11 +80,11 @@
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>Added <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length()</a></code> for <code>progressor</code> object, which enables using <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code> and <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq()</a></code> on progressors.</li>
+<ul><li>Added <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length()</a></code> for <code>progressor</code> objects, which enables using <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code> and <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq()</a></code> on progressors.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>It was not possible to create more than one progressor in a <code><a href="../reference/with_progress.html">with_progress()</a></code> call, resulting in additional progressors being ignored and warnings on “with_progress() received a progression ‘initiate’ request” being produced.</li>
+<ul><li>It was not possible to create more than one progressor in a <code><a href="../reference/with_progress.html">with_progress()</a></code> call, resulting in additional progressors being ignored. Also, warnings on “with_progress() received a progression ‘initiate’ request” were produced when using <strong>progressr</strong> 0.17.0 (2025-10-15).</li>
 </ul></div>
 </div>
     <div class="section level2">
