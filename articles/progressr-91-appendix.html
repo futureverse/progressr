@@ -258,12 +258,9 @@ progressors.</p>
 <h2 id="known-issues">Known Issues<a class="anchor" aria-label="anchor" href="#known-issues"></a>
 </h2>
 <div class="section level3">
-<h3 id="rstudio">RStudio<a class="anchor" aria-label="anchor" href="#rstudio"></a>
-</h3>
-<div class="section level4">
-<h4 id="rstudio-bug-16331-setting-global-progressr-handlers-during-startup-does-not-work">RStudio bug #16331: Setting global progressr handlers during startup
+<h3 id="rstudio-bug-16331-setting-global-progressr-handlers-during-startup-does-not-work">RStudio bug #16331: Setting global progressr handlers during startup
 does not work<a class="anchor" aria-label="anchor" href="#rstudio-bug-16331-setting-global-progressr-handlers-during-startup-does-not-work"></a>
-</h4>
+</h3>
 <p>Setting the global progressr handler in <code>~/.Rprofile</code> does
 <em>not</em> work in RStudio 2025.09:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -293,14 +290,10 @@ use:</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 </div>
-</div>
 <div class="section level3">
-<h3 id="positron">Positron<a class="anchor" aria-label="anchor" href="#positron"></a>
-</h3>
-<div class="section level4">
-<h4 id="positron-bug-6892-setting-global-progressr-handlers-during-startup-does-not-work">Positron bug #6892: Setting global progressr handlers during startup
+<h3 id="positron-bug-6892-setting-global-progressr-handlers-during-startup-does-not-work">Positron bug #6892: Setting global progressr handlers during startup
 does not work<a class="anchor" aria-label="anchor" href="#positron-bug-6892-setting-global-progressr-handlers-during-startup-does-not-work"></a>
-</h4>
+</h3>
 <p>Positron does not support setting global calling handlers during R’s
 startup process, e.g. in <code>~/.Rprofile</code>. Even if such handlers
 are registered, they have no effect. This is a <a href="https://github.com/posit-dev/positron/issues/6892" class="external-link">bug in
@@ -321,9 +314,10 @@ be done as:</p>
 <code class="sourceCode R"><span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>  <span class="co">## important</span></span>
 <span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="messages-add-a-extra-newline-before-the-final-progress-step">Messages add a extra newline before the final progress step<a class="anchor" aria-label="anchor" href="#messages-add-a-extra-newline-before-the-final-progress-step"></a>
-</h4>
+<div class="section level3">
+<h3 id="positron-messages-add-a-extra-newline-before-the-final-progress-step">Positron: Messages add a extra newline before the final progress
+step<a class="anchor" aria-label="anchor" href="#positron-messages-add-a-extra-newline-before-the-final-progress-step"></a>
+</h3>
 <p>One of the features of <strong>progressr</strong> is that messages
 are buffered during progress reporting and relayed as soon as possible,
 which typically happens just before handlers re-render the progress
@@ -347,13 +341,9 @@ to the bottom of it and fix it, either in <strong>progressr</strong> or
 in Positron, e.g. <a href="https://github.com/posit-dev/positron/issues/9486" class="external-link">Bug #9486</a>
 (2025-09-18).</p>
 </div>
-</div>
 <div class="section level3">
-<h3 id="jupyter-notebook-and-jupyter-lab">Jupyter Notebook and Jupyter Lab<a class="anchor" aria-label="anchor" href="#jupyter-notebook-and-jupyter-lab"></a>
+<h3 id="jupyter-reporting-progress-to-stderr-does-not-work">Jupyter: Reporting progress to stderr does not work<a class="anchor" aria-label="anchor" href="#jupyter-reporting-progress-to-stderr-does-not-work"></a>
 </h3>
-<div class="section level4">
-<h4 id="reporting-progress-to-stderr-does-not-work">Reporting progress to stderr does not work<a class="anchor" aria-label="anchor" href="#reporting-progress-to-stderr-does-not-work"></a>
-</h4>
 <p>The default for most terminal progress renders, including the ones
 for <strong>progressr</strong>, display the progress on standard error
 (stderr). Due to limitation in Jupyter, this default does not work
@@ -390,9 +380,9 @@ to disable the buffering (“delaying”) of any other output to stdout.</p>
 <span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum.html">slow_sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div class="section level4">
-<h4 id="jupyter-bug-732---handlersprogress-output-is-messy">Jupyter bug #732 - handlers(“progress”) output is messy<a class="anchor" aria-label="anchor" href="#jupyter-bug-732---handlersprogress-output-is-messy"></a>
-</h4>
+<div class="section level3">
+<h3 id="jupyter-bug-732---handlersprogress-output-is-messy">Jupyter bug #732 - handlers(“progress”) output is messy<a class="anchor" aria-label="anchor" href="#jupyter-bug-732---handlersprogress-output-is-messy"></a>
+</h3>
 <p>Jupyter has other outputting issues. Specifically, Jupyter <a href="https://github.com/IRkernel/IRkernel/issues/732" class="external-link">injects an
 <em>extra</em> newline at the end of every message</a>, e.g.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">message</span>(<span class="st">"abc"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>); <span class="fu">message</span>(<span class="st">"def"</span>, <span class="at">appendLF =</span> <span class="cn">FALSE</span>)</span>
@@ -407,7 +397,6 @@ to disable the buffering (“delaying”) of any other output to stdout.</p>
 <p>This causes any progress framework (e.g. the
 <strong>progress</strong> package) that reports via messages to render
 progress output very poorly or not at all.</p>
-</div>
 </div>
 </div>
 <div class="section level2">
@@ -451,7 +440,7 @@ progress handlers removing the need for the user having to specify
 <code><a href="../reference/with_progress.html">with_progress()</a></code>, i.e. <code>handlers(global = TRUE)</code>
 and <code>handlers(global = FALSE)</code></label></p></li>
 <li><p><label><input type="checkbox">Make it possible to create a
-progressor also in the global environment (see ‘Known issues’
+progressor also in the global environment (see ‘Known Issues’
 above)</label></p></li>
 <li><p><label><input type="checkbox">Add support for nested progress
 updates</label></p></li>
