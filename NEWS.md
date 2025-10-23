@@ -5,6 +5,15 @@
  * Add `length()` for `progressor` objects, which enables using
    `seq_along()` and `seq()` on progressors.
 
+## Beta Features
+
+ * Add experimental support for `progressor(..., finalize = TRUE)`,
+   which will cause the progressor to signal a progression 'shutdown'
+   condition when the progressor is garbage collected. This can serve
+   as a backstop in yet-to-be-observed cases where a progressor did
+   not shutdown properly leaving for instance active sinks behind.
+   For now, `finalize = FALSE` is the default.
+
 ## Bug Fixes
 
  * It was not possible to create more than one progressor in a
