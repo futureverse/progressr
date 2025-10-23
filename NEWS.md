@@ -1,7 +1,12 @@
 # Version (development version)
 
- * ...
+## Bug Fixes
 
+ * It was not possible to create more than one progressor in a
+   `with_progress()` call, resulting in additional progressors being
+   ignored and warnings on "with_progress() received a progression
+   'initiate' request" being produced.
+   
 
 # Version 0.17.0 [2025-10-15]
 

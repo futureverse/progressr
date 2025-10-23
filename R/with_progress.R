@@ -229,12 +229,18 @@ with_progress <- function(expr, handlers = progressr::handlers(), cleanup = TRUE
     },
     
     progression = function(p) {
-      progression_counter <<- progression_counter + 1
-      if (debug) message(sprintf("- received a %s (n=%g)", sQuote(class(p)[1]), progression_counter))
-
-      if (finished) {
-        warn_about_too_many_progressions(p)
-        return()
+      ## Reset, because a new progression was created?
+      if (p$type == "initiate") {
+        if (!finished) calling_handler(control_progression("shutdown"))
+        progression_counter <<- 0
+        finished <<- FALSE
+      } else {
+        progression_counter <<- progression_counter + 1
+        if (debug) message(sprintf("- received a %s (n=%g)", sQuote(class(p)[1]), progression_counter))
+        if (finished) {
+          warn_about_too_many_progressions(p)
+          return()
+        }
       }
       
       ## Don't capture conditions that are produced by progression handlers
