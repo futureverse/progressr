@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,6 +81,10 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>Add <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length()</a></code> for <code>progressor</code> objects, which enables using <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code> and <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq()</a></code> on progressors.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="beta-features-development-version">Beta Features<a class="anchor" aria-label="anchor" href="#beta-features-development-version"></a></h3>
+<ul><li>Add experimental support for <code>progressor(..., finalize = TRUE)</code>, which will cause the progressor to signal a progression ‘shutdown’ condition when the progressor is garbage collected. This can serve as a backstop in yet-to-be-observed cases where a progressor did not shutdown properly leaving for instance active sinks behind. For now, <code>finalize = FALSE</code> is the default.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>

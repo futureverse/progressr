@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,6 +93,7 @@
 <span>  label <span class="op">=</span> <span class="cn">NA_character_</span>,</span>
 <span>  trace <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  initiate <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  finalize <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  auto_finish <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  on_exit <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">envir</span>, <span class="fu"><a href="https://rdrr.io/r/base/environment.html" class="external-link">globalenv</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  enable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"progressr.enable"</span>, <span class="cn">TRUE</span><span class="op">)</span>,</span>
@@ -144,6 +145,11 @@ not.</p></dd>
 <dt id="arg-initiate">initiate<a class="anchor" aria-label="anchor" href="#arg-initiate"></a></dt>
 <dd><p>(logical) If TRUE, the progressor will signal a
 <a href="progression.html">progression</a> 'initiate' condition when created.</p></dd>
+
+
+<dt id="arg-finalize">finalize<a class="anchor" aria-label="anchor" href="#arg-finalize"></a></dt>
+<dd><p>(logical) If TRUE, the progressor signals a <a href="progression.html">progression</a>
+'shutdown' condition when finalized by the garbage collector.</p></dd>
 
 
 <dt id="arg-auto-finish">auto_finish<a class="anchor" aria-label="anchor" href="#arg-auto-finish"></a></dt>
