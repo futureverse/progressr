@@ -155,6 +155,29 @@ If we created it in the global environment, there is a significant
 risk it would never finish and block all of the following progressors.
 
 
+### No coloring by the 'cli' and 'crayon' packages
+
+The **[cli]** package can be used to output colored text and messages
+in the terminal, e.g. `message(cli::col_blue("hey"))`. However,
+**cli** disables such coloring by default when there is an active
+progressor. The workaround is to set **cli** option `cli.num_colors` to:
+
+```r
+options(cli.num_colors = cli::num_ansi_colors())
+```
+
+This will force **cli** to use the same number of colors with and
+without an active progressor.
+
+The same happens when using the superseeded **[crayon]** package for
+colorization. To re-enable coloring for **crayon** set the same (sic!)
+above R options.
+
+The technical reason for **cli** and **crayon** disabling coloring, is
+that the **progressr** package buffers standard output using a sink,
+which these packages consider to be mono-color only.
+
+
 ## Known Issues
 
 ### RStudio bug #16331: Setting global progressr handlers during startup does not work
@@ -408,4 +431,6 @@ For a more up-to-date view on what features might be added, see
 
 [progressr]: https://progressr.futureverse.org
 [future]: https://future.futureverse.org
+[cli]: https://cran.r-project.org/package=cli
+[crayon]: https://cran.r-project.org/package=crayon
 
