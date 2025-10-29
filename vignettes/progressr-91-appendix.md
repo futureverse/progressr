@@ -170,8 +170,8 @@ This will force **cli** to use the same number of colors with and
 without an active progressor.
 
 The same happens when using the superseeded **[crayon]** package for
-colorization. To re-enable coloring for **crayon** set the same (sic!)
-above R options.
+colorization. To re-enable coloring for **crayon**, set the same
+(sic!)  above R options.
 
 The technical reason for **cli** and **crayon** disabling coloring, is
 that the **progressr** package buffers standard output using a sink,
