@@ -21,7 +21,12 @@
    ignored. Also, warnings on "with_progress() received a progression
    'initiate' request" were produced with **progressr** 0.17.0
    (2025-10-15).
-   
+
+## Deprecated and Defunct
+
+ * Removed `progress()`, which has been defunct since version 0.10.0
+   (2021-12-18).
+
 
 # Version 0.17.0 [2025-10-15]
 
