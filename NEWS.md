@@ -11,7 +11,7 @@
    which will cause the progressor to signal a progression 'shutdown'
    condition when the progressor is garbage collected. This can serve
    as a backstop in yet-to-be-observed cases where a progressor did
-   not shutdown properly leaving for instance active sinks behind.
+   not shut down properly leaving for instance active sinks behind.
    For now, `finalize = FALSE` is the default.
 
 ## Bug Fixes
