@@ -1,51 +1,51 @@
 # Platform
 
-|field    |value                                                       |
-|:--------|:-----------------------------------------------------------|
-|version  |R version 4.5.0 (2025-04-11)                                |
-|os       |Rocky Linux 8.10 (Green Obsidian)                           |
-|system   |x86_64, linux-gnu                                           |
-|ui       |X11                                                         |
-|language |en                                                          |
-|collate  |en_US.UTF-8                                                 |
-|ctype    |en_US.UTF-8                                                 |
-|tz       |America/Los_Angeles                                         |
-|date     |2025-10-14                                                  |
-|pandoc   |3.6.3 @ /software/c4/cbi/software/pandoc-3.6.3/bin/pandoc   |
-|quarto   |1.6.42 @ /software/c4/cbi/software/quarto-1.6.42/bin/quarto |
+|field    |value                                                         |
+|:--------|:-------------------------------------------------------------|
+|version  |R version 4.5.2 (2025-10-31)                                  |
+|os       |Rocky Linux 8.10 (Green Obsidian)                             |
+|system   |x86_64, linux-gnu                                             |
+|ui       |X11                                                           |
+|language |en                                                            |
+|collate  |en_US.UTF-8                                                   |
+|ctype    |en_US.UTF-8                                                   |
+|tz       |America/Los_Angeles                                           |
+|date     |2025-11-05                                                    |
+|pandoc   |3.8.2.1 @ /software/c4/cbi/software/pandoc-3.8.2.1/bin/pandoc |
+|quarto   |1.8.25 @ /software/c4/cbi/software/quarto-1.8.25/bin/quarto   |
 
 # Dependencies
 
 |package   |old    |new         |Δ  |
 |:---------|:------|:-----------|:--|
-|progressr |0.16.0 |0.16.0-9015 |*  |
+|progressr |0.17.0 |0.17.0-9005 |*  |
 |digest    |0.6.37 |0.6.37      |   |
 
 # Revdeps
 
-## All (139)
+## All (142)
 
 |package                |version    |error |warning |note |
 |:----------------------|:----------|:-----|:-------|:----|
 |[adestr](problems.md#adestr)|1.0.0      |      |        |1    |
 |AIPW                   |0.6.9.2    |      |        |     |
 |ale                    |0.5.3      |      |        |     |
-|[AlpsNMR](problems.md#alpsnmr)|4.10.1     |1     |        |     |
+|[AlpsNMR](problems.md#alpsnmr)|4.12.0     |1     |        |     |
 |antaresEditObject      |0.9.2      |      |        |     |
 |ao                     |1.2.1      |      |        |     |
 |[baseballr](problems.md#baseballr)|1.6.0      |      |        |1    |
 |[baskexact](problems.md#baskexact)|1.0.1      |      |        |1    |
 |basksim                |1.0.0      |      |        |     |
-|[bayesmove](problems.md#bayesmove)|0.2.1      |      |        |1    |
-|BayesRegDTR            |1.0.1      |      |        |     |
-|bbotk                  |1.7.0      |      |        |     |
-|beer                   |1.12.0     |      |        |     |
-|binaryRL               |0.9.7      |      |        |     |
+|bayesmove              |0.2.3      |      |        |     |
+|BayesRegDTR            |1.1.1      |      |        |     |
+|bbotk                  |1.7.1      |      |        |     |
+|beer                   |1.14.0     |      |        |     |
+|binaryRL               |0.9.8      |      |        |     |
 |bolasso                |0.4.0      |      |        |     |
 |calmr                  |0.8.1      |      |        |     |
 |campsis                |1.7.0      |      |        |     |
 |canaper                |1.0.1      |      |        |     |
-|[caretSDM](problems.md#caretsdm)|1.1.4      |2     |        |     |
+|caretSDM               |1.1.4      |      |        |     |
 |cccrm                  |3.0.5      |      |        |     |
 |cfbfastR               |2.0.0      |      |        |     |
 |[collinear](problems.md#collinear)|2.0.0      |      |        |1    |
@@ -74,36 +74,38 @@
 |[fastRhockey](problems.md#fastrhockey)|0.4.0      |      |        |1    |
 |[fdacluster](problems.md#fdacluster)|0.4.1      |      |1       |1    |
 |FDOTT                  |0.1.0      |      |        |     |
-|flexFitR               |1.2.0      |      |        |     |
+|flexFitR               |1.2.1      |      |        |     |
 |funGp                  |1.0.0      |      |        |     |
 |futureverse            |0.1.0      |      |        |     |
 |fxTWAPLS               |0.1.3      |      |        |     |
 |geocausal              |0.3.4      |      |        |     |
-|[geocmeans](problems.md#geocmeans)|0.3.4      |1     |        |     |
+|geocmeans              |0.3.4      |      |        |     |
+|geomeTriD              |1.4.0      |      |        |     |
 |GeoModels              |2.2.0      |      |        |     |
 |gtfs2emis              |0.1.1      |      |        |     |
-|[gtfs2gps](problems.md#gtfs2gps)|2.1-3      |1     |        |     |
+|gtfs2gps               |2.1-3      |      |        |     |
 |hbamr                  |2.4.4      |      |        |     |
 |hgwrr                  |0.6-2      |      |        |     |
 |hmer                   |1.6.0      |      |        |     |
 |hoopR                  |2.1.0      |      |        |     |
 |iccTraj                |1.1.0      |      |        |     |
-|ino                    |1.1.0      |      |        |     |
-|[ISAnalytics](problems.md#isanalytics)|1.18.0     |      |        |1    |
-|JANE                   |2.0.0      |      |        |     |
+|ino                    |1.2.0      |      |        |     |
+|[ISAnalytics](problems.md#isanalytics)|1.20.0     |      |        |1    |
+|JANE                   |2.1.0      |      |        |     |
 |kmeRtone               |1.0        |      |        |     |
-|[lava](problems.md#lava)|1.8.1      |      |        |1    |
+|lava                   |1.8.2      |      |        |     |
 |lightr                 |1.9.0      |      |        |     |
 |LLMR                   |0.6.3      |      |        |     |
 |lmtp                   |1.5.3      |      |        |     |
 |LWFBrook90R            |0.6.2      |      |        |     |
-|[mapme.biodiversity](problems.md#mapmebiodiversity)|0.9.5      |1     |1       |1    |
+|[mapme.biodiversity](problems.md#mapmebiodiversity)|0.9.5      |1     |        |     |
 |mcmcensemble           |3.2.0      |      |        |     |
 |metasnf                |2.1.2      |      |        |     |
 |MIC                    |1.2.0      |      |        |     |
-|mikropml               |1.6.2      |      |        |     |
+|[mikropml](problems.md#mikropml)|1.7.0      |      |        |1    |
 |mlr3                   |1.2.0      |      |        |     |
 |modeltime.resample     |0.3.0      |      |        |     |
+|modeltuning            |0.1.2      |      |        |     |
 |MOODE                  |1.1.0      |      |        |     |
 |[mpathsenser](problems.md#mpathsenser)|1.2.3      |      |        |1    |
 |nflfastR               |5.1.0      |      |        |     |
@@ -117,32 +119,33 @@
 |[pavo](problems.md#pavo)|2.9.0      |      |1       |     |
 |pcpr                   |1.0.0      |      |        |     |
 |plnr                   |2022.11.23 |      |        |     |
-|polle                  |1.5        |      |        |     |
+|polle                  |1.6.0      |      |        |     |
 |polykde                |1.1.7      |      |        |     |
 |poppr                  |2.9.8      |      |        |     |
 |[powRICLPM](problems.md#powriclpm)|0.2.1      |      |        |1    |
-|projpred               |2.9.0      |      |        |     |
+|projpred               |2.9.1      |      |        |     |
 |[PWIR](problems.md#pwir)|0.0.3.1    |      |        |1    |
 |R4GoodPersonalFinances |1.1.0      |      |        |     |
 |RAINBOWR               |0.1.38     |      |        |     |
 |rainette               |0.3.1.1    |      |        |     |
 |rangeMapper            |2.0.3      |      |        |     |
 |readsdr                |0.3.0      |      |        |     |
-|readyomics             |0.1.2      |      |        |     |
+|readyomics             |0.2.0      |      |        |     |
 |[receptiviti](problems.md#receptiviti)|0.2.0      |1     |        |     |
 |rechaRge               |1.0.0      |      |        |     |
 |remiod                 |1.0.2      |      |        |     |
 |restriktor             |0.6-10     |      |        |     |
+|Rfuzzycoco             |0.1.0      |      |        |     |
 |[rsi](problems.md#rsi) |0.3.2      |      |        |1    |
 |saeczi                 |0.2.0      |      |        |     |
 |SCGLR                  |3.1.0      |      |        |     |
 |semPower               |2.1.3      |      |        |     |
-|sentopics              |0.7.5      |      |        |     |
+|sentopics              |0.7.6      |      |        |     |
 |seqHMM                 |2.1.0      |      |        |     |
-|Seurat                 |5.3.0      |      |        |     |
+|Seurat                 |5.3.1      |      |        |     |
 |SeuratObject           |5.2.0      |      |        |     |
 |shapr                  |1.0.5      |      |        |     |
-|simaerep               |0.7.0      |      |        |     |
+|simaerep               |1.0.0      |      |        |     |
 |SimDesign              |2.21       |      |        |     |
 |sims                   |0.0.4      |      |        |     |
 |skpr                   |1.9.2      |      |        |     |
@@ -152,7 +155,7 @@
 |squat                  |0.4.0      |      |        |     |
 |[stppSim](problems.md#stppsim)|1.3.4      |      |1       |     |
 |survex                 |1.2.0      |      |        |     |
-|[targeted](problems.md#targeted)|0.5        |      |        |1    |
+|targeted               |0.6        |      |        |     |
 |terrainr               |0.7.6      |      |        |     |
 |tidyfit                |0.7.4      |      |        |     |
 |tidySEM                |0.2.9      |      |        |     |
