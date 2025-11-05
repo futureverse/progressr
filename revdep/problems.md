@@ -30,11 +30,11 @@ Run `revdepcheck::revdep_details(, "adestr")` for more info
 
 <details>
 
-* Version: 4.10.1
+* Version: 4.12.0
 * GitHub: https://github.com/sipss/AlpsNMR
 * Source code: https://github.com/cran/AlpsNMR
-* Date/Publication: 2025-09-28
-* Number of recursive dependencies: 180
+* Date/Publication: 2025-10-29
+* Number of recursive dependencies: 182
 
 Run `revdepcheck::revdep_details(, "AlpsNMR")` for more info
 
@@ -46,14 +46,14 @@ Run `revdepcheck::revdep_details(, "AlpsNMR")` for more info
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘Vig01-introduction-to-alpsnmr.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
+    Error: processing vignette 'Vig01-introduction-to-alpsnmr.Rmd' failed with diagnostics:
+    LaTeX failed to compile /scratch/henrik/revdep/progressr/checks/AlpsNMR/new/AlpsNMR.Rcheck/vign_test/AlpsNMR/vignettes/Vig01-introduction-to-alpsnmr.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips.
+    --- failed re-building ‘Vig01-introduction-to-alpsnmr.Rmd’
     
-    Quitting from Vig01-introduction-to-alpsnmr.Rmd:94-99 [load-samples]
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <error/rlang_error>
-    Error in `socketConnection()`:
-    ! cannot open the connection
-    ---
-    Backtrace:
+    --- re-building ‘Vig01b-introduction-to-alpsnmr-old-api.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
+    Error: processing vignette 'Vig01b-introduction-to-alpsnmr-old-api.Rmd' failed with diagnostics:
     ...
     LaTeX failed to compile /scratch/henrik/revdep/progressr/checks/AlpsNMR/new/AlpsNMR.Rcheck/vign_test/AlpsNMR/vignettes/Vig02-handling-metadata-and-annotations.tex. See https://yihui.org/tinytex/r/#debugging for debugging tips.
     --- failed re-building ‘Vig02-handling-metadata-and-annotations.Rmd’
@@ -113,29 +113,69 @@ Run `revdepcheck::revdep_details(, "baskexact")` for more info
       All declared Imports should be used.
     ```
 
-# bayesmove
+# beer
 
 <details>
 
-* Version: 0.2.1
-* GitHub: https://github.com/joshcullen/bayesmove
-* Source code: https://github.com/cran/bayesmove
-* Date/Publication: 2021-10-22 08:50:09 UTC
-* Number of recursive dependencies: 160
+* Version: 1.14.0
+* GitHub: https://github.com/athchen/beer
+* Source code: https://github.com/cran/beer
+* Date/Publication: 2025-10-29
+* Number of recursive dependencies: 121
 
-Run `revdepcheck::revdep_details(, "bayesmove")` for more info
+Run `revdepcheck::revdep_details(, "beer")` for more info
 
 </details>
 
-## In both
+## Newly broken
 
-*   checking Rd files ... NOTE
+*   checking whether package ‘beer’ can be installed ... ERROR
     ```
-    checkRd: (-1) insert_NAs.Rd:22: Lost braces; missing escapes or markup?
-        22 | A data frame where new rows have been inserted to regularize the \code{date} column. This results in values provided for \code{id}, \code{date}, and {dt} while inserting NAs for all other columns. Additionally, observations with duplicate date-times are removed.
-           |                                                                                                                                                      ^
+    Installation failed.
+    See ‘/scratch/henrik/revdep/progressr/checks/beer/new/beer.Rcheck/00install.out’ for details.
     ```
 
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘beer’ ...
+** this is package ‘beer’ version ‘1.14.0’
+** package ‘beer’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error: object ‘progress’ is not exported by 'namespace:progressr'
+Execution halted
+ERROR: lazy loading failed for package ‘beer’
+* removing ‘/scratch/henrik/revdep/progressr/checks/beer/new/beer.Rcheck/beer’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘beer’ ...
+** this is package ‘beer’ version ‘1.14.0’
+** package ‘beer’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (beer)
+
+
+```
 # caretSDM
 
 <details>
@@ -144,7 +184,7 @@ Run `revdepcheck::revdep_details(, "bayesmove")` for more info
 * GitHub: https://github.com/luizesser/caretSDM
 * Source code: https://github.com/cran/caretSDM
 * Date/Publication: 2025-08-29 13:50:02 UTC
-* Number of recursive dependencies: 183
+* Number of recursive dependencies: 184
 
 Run `revdepcheck::revdep_details(, "caretSDM")` for more info
 
@@ -262,7 +302,7 @@ Run `revdepcheck::revdep_details(, "crumble")` for more info
 * GitHub: https://github.com/FloSchuberth/cSEM
 * Source code: https://github.com/cran/cSEM
 * Date/Publication: 2025-05-16 09:40:14 UTC
-* Number of recursive dependencies: 143
+* Number of recursive dependencies: 144
 
 Run `revdepcheck::revdep_details(, "cSEM")` for more info
 
@@ -284,7 +324,7 @@ Run `revdepcheck::revdep_details(, "cSEM")` for more info
 * GitHub: https://github.com/dipterix/dipsaus
 * Source code: https://github.com/cran/dipsaus
 * Date/Publication: 2025-04-03 16:50:02 UTC
-* Number of recursive dependencies: 62
+* Number of recursive dependencies: 63
 
 Run `revdepcheck::revdep_details(, "dipsaus")` for more info
 
@@ -399,7 +439,7 @@ Run `revdepcheck::revdep_details(, "fastRhockey")` for more info
 * GitHub: https://github.com/astamm/fdacluster
 * Source code: https://github.com/cran/fdacluster
 * Date/Publication: 2025-01-14 16:50:09 UTC
-* Number of recursive dependencies: 125
+* Number of recursive dependencies: 126
 
 Run `revdepcheck::revdep_details(, "fdacluster")` for more info
 
@@ -429,97 +469,36 @@ Run `revdepcheck::revdep_details(, "fdacluster")` for more info
         ‘caps-plot.R’ ‘utils.R’
     ```
 
-# geocmeans
+# futureverse
 
 <details>
 
-* Version: 0.3.4
-* GitHub: https://github.com/JeremyGelb/geocmeans
-* Source code: https://github.com/cran/geocmeans
-* Date/Publication: 2023-09-12 03:10:02 UTC
-* Number of recursive dependencies: 208
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/futureverse
+* Date/Publication: 2024-06-07 14:10:22 UTC
+* Number of recursive dependencies: 43
 
-Run `revdepcheck::revdep_details(, "geocmeans")` for more info
-
-</details>
-
-## In both
-
-*   checking re-building of vignette outputs ... ERROR
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘introduction.Rmd’ using rmarkdown
-    
-    Quitting from introduction.Rmd:487-489 [unnamed-chunk-38]
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    <error/rlang_error>
-    Error in `st_transform.bbox()`:
-    ! method not available for GDAL: 3.0.4
-    ---
-    Backtrace:
-    ...
-    
-    Error: processing vignette 'introduction.Rmd' failed with diagnostics:
-    method not available for GDAL: 3.0.4
-    --- failed re-building ‘introduction.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘introduction.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# gtfs2gps
-
-<details>
-
-* Version: 2.1-3
-* GitHub: https://github.com/ipeaGIT/gtfs2gps
-* Source code: https://github.com/cran/gtfs2gps
-* Date/Publication: 2025-10-08 15:00:02 UTC
-* Number of recursive dependencies: 86
-
-Run `revdepcheck::revdep_details(, "gtfs2gps")` for more info
+Run `revdepcheck::revdep_details(, "futureverse")` for more info
 
 </details>
 
-## In both
+## Newly broken
 
-*   checking tests ...
+*   checking dependencies in R code ... WARNING
     ```
-      Running ‘testthat.R’
-     ERROR
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(gtfs2gps)
-      gtfs2gps version 2.1-3 is now loaded
-      
-      > 
-      > test_check("gtfs2gps")
-    ...
-       4.     └─terra (local) .local(x, ...)
-       5.       ├─terra::makeValid(x)
-       6.       └─terra::makeValid(x)
-       7.         └─terra (local) .local(x, ...)
-       8.           └─terra:::messages(x)
-       9.             └─terra:::error(f, x@pntr$getError())
-      
-      [ FAIL 1 | WARN 0 | SKIP 0 | PASS 119 ]
-      Error: Test failures
-      Execution halted
+    Missing or unexported object: ‘progressr::progress’
     ```
 
 # ISAnalytics
 
 <details>
 
-* Version: 1.18.0
+* Version: 1.20.0
 * GitHub: https://github.com/calabrialab/ISAnalytics
 * Source code: https://github.com/cran/ISAnalytics
-* Date/Publication: 2025-04-15
-* Number of recursive dependencies: 176
+* Date/Publication: 2025-10-29
+* Number of recursive dependencies: 177
 
 Run `revdepcheck::revdep_details(, "ISAnalytics")` for more info
 
@@ -532,30 +511,6 @@ Run `revdepcheck::revdep_details(, "ISAnalytics")` for more info
     checkRd: (-1) refGenes_hg19.Rd:21: Lost braces; missing escapes or markup?
         21 | \item Download from {http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/}
            |                     ^
-    ```
-
-# lava
-
-<details>
-
-* Version: 1.8.1
-* GitHub: https://github.com/kkholst/lava
-* Source code: https://github.com/cran/lava
-* Date/Publication: 2025-01-12 11:40:02 UTC
-* Number of recursive dependencies: 130
-
-Run `revdepcheck::revdep_details(, "lava")` for more info
-
-</details>
-
-## In both
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        ‘contr.Rd’
     ```
 
 # mapme.biodiversity
@@ -579,42 +534,46 @@ Run `revdepcheck::revdep_details(, "mapme.biodiversity")` for more info
       Running ‘testthat.R’
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Last 50 lines of output:
-        'test-calc_treecover_area_and_emissions.R:30:3',
-        'test-calc_treecoverloss_emissions.R:27:3', 'test-calc_tri.R:33:3',
-        'test-get_carbon.R:2:3', 'test-get_carbon.R:29:3', 'test-get_chelsa.R:2:3',
-        'test-get_esalandcover.R:2:3', 'test-get_fritz_et_al.R:2:3',
-        'test-get_gfw_emissions.R:2:3', 'test-get_gfw_lossyear.R:2:3',
-        'test-get_gfw_treecover.R:7:3', 'test-get_gmw.R:2:3', 'test-get_gsw.R:2:3',
+    Complete output:
+      > library(testthat)
+      > library(mapme.biodiversity)
+      > 
+      > options(pillar.advice = FALSE)
+      > mapme_options(verbose = FALSE)
+      > test_check("mapme.biodiversity")
     ...
-       12. │               └─jsonlite:::parseJSON(txt, bigint_as_char)
-       13. │                 └─jsonlite:::parse_string(txt, bigint_as_char)
-       14. └─base::.handleSimpleError(...)
-       15.   └─purrr (local) h(simpleError(msg, call))
-       16.     └─cli::cli_abort(...)
-       17.       └─rlang::abort(...)
+      `x2 <- .split_dateline(x)` produced warnings.
+      ── Failure ('test-chunking.R:8:3'): .crosses_dateline and .split_dateline works ──
+      nrow(x2) (`actual`) not equal to 2 (`expected`).
       
-      [ FAIL 2 | WARN 0 | SKIP 44 | PASS 515 ]
+        `actual`: 1.0
+      `expected`: 2.0
+      
+      [ FAIL 2 | WARN 0 | SKIP 43 | PASS 532 ]
       Error: Test failures
       Execution halted
     ```
 
-*   checking whether package ‘mapme.biodiversity’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      Warning: GDAL system library version (3.0.4) < 3.7.0
-    See ‘/scratch/henrik/revdep/progressr/checks/mapme.biodiversity/new/mapme.biodiversity.Rcheck/00install.out’ for details.
-    ```
+# mikropml
 
-*   checking whether the namespace can be loaded with stated dependencies ... NOTE
+<details>
+
+* Version: 1.7.0
+* GitHub: https://github.com/SchlossLab/mikropml
+* Source code: https://github.com/cran/mikropml
+* Date/Publication: 2025-10-29 03:30:02 UTC
+* Number of recursive dependencies: 180
+
+Run `revdepcheck::revdep_details(, "mikropml")` for more info
+
+</details>
+
+## In both
+
+*   checking dependencies in R code ... NOTE
     ```
-    Warning: GDAL system library version (3.0.4) < 3.7.0
-    
-    A namespace must be able to be loaded with just the base namespace
-    loaded: otherwise if the namespace gets loaded by a saved object, the
-    session will be unable to start.
-    
-    Probably some imports need to be declared in the NAMESPACE file.
+    Namespace in Imports field not imported from: ‘methods’
+      All declared Imports should be used.
     ```
 
 # mpathsenser
@@ -630,6 +589,25 @@ Run `revdepcheck::revdep_details(, "mapme.biodiversity")` for more info
 Run `revdepcheck::revdep_details(, "mpathsenser")` for more info
 
 </details>
+
+## Newly broken
+
+*   checking Rd cross-references ... WARNING
+    ```
+    Missing link(s) in Rd file 'fix_jsons.Rd':
+      ‘[progressr:progress]{progressr::progress()}’
+    
+    Missing link(s) in Rd file 'import.Rd':
+      ‘[progressr:progress]{progressr::progress()}’
+    
+    Missing link(s) in Rd file 'test_jsons.Rd':
+      ‘[progressr:progress]{progressr::progress()}’
+    
+    Missing link(s) in Rd file 'unzip_data.Rd':
+      ‘[progressr:progress]{progressr::progress()}’
+    
+    See section 'Cross-references' in the 'Writing R Extensions' manual.
+    ```
 
 ## In both
 
@@ -698,7 +676,7 @@ Run `revdepcheck::revdep_details(, "powRICLPM")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/PWIR
 * Date/Publication: 2025-07-24 11:10:17 UTC
-* Number of recursive dependencies: 107
+* Number of recursive dependencies: 108
 
 Run `revdepcheck::revdep_details(, "PWIR")` for more info
 
@@ -801,30 +779,6 @@ Run `revdepcheck::revdep_details(, "stppSim")` for more info
     See ‘/scratch/henrik/revdep/progressr/checks/stppSim/new/stppSim.Rcheck/00install.out’ for details.
     ```
 
-# targeted
-
-<details>
-
-* Version: 0.5
-* GitHub: https://github.com/kkholst/targeted
-* Source code: https://github.com/cran/targeted
-* Date/Publication: 2024-02-22 10:00:21 UTC
-* Number of recursive dependencies: 90
-
-Run `revdepcheck::revdep_details(, "targeted")` for more info
-
-</details>
-
-## In both
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        ‘alean.Rd’ ‘nondom.Rd’
-    ```
-
 # tsdistributions
 
 <details>
@@ -844,19 +798,19 @@ Run `revdepcheck::revdep_details(, "tsdistributions")` for more info
 *   checking re-building of vignette outputs ... ERROR
     ```
     Error(s) in re-building vignettes:
-      ...
     --- re-building ‘estimation_demo.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
     --- finished re-building ‘estimation_demo.Rmd’
     
     --- re-building ‘location_scale_distributions.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
     ! Undefined control sequence.
     l.56 \NewDocumentCommand
                             \citeproctext{}{} 
-    
     ...
-    --- finished re-building ‘profile_demo.Rmd’
     
     --- re-building ‘spd_demo.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
     --- finished re-building ‘spd_demo.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -933,14 +887,14 @@ Run `revdepcheck::revdep_details(, "WeightedCluster")` for more info
     ```
     Error(s) in re-building vignettes:
     --- re-building ‘BigDataSA.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
     --- finished re-building ‘BigDataSA.Rmd’
     
     --- re-building ‘ClusterExternalValidSA.Rmd’ using rmarkdown
+    [WARNING] Deprecated: --highlight-style. Use --syntax-highlighting instead.
     --- finished re-building ‘ClusterExternalValidSA.Rmd’
     
     --- re-building ‘ClusterValidSA.Rmd’ using rmarkdown
-    --- finished re-building ‘ClusterValidSA.Rmd’
-    
     ...
     l.85 \usepackage
                     {tikz}^^M
