@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.17.0-9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,22 +77,18 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.18.0" id="version-0180">Version 0.18.0<a class="anchor" aria-label="anchor" href="#version-0180"></a></h2>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-0-18-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-18-0"></a></h3>
 <ul><li>Add <code><a href="https://rdrr.io/r/base/length.html" class="external-link">length()</a></code> for <code>progressor</code> objects, which enables using <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along()</a></code> and <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq()</a></code> on progressors.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="beta-features-development-version">Beta Features<a class="anchor" aria-label="anchor" href="#beta-features-development-version"></a></h3>
-<ul><li>Add experimental support for <code>progressor(..., finalize = TRUE)</code>, which will cause the progressor to signal a progression ‘shutdown’ condition when the progressor is garbage collected. This can serve as a backstop in yet-to-be-observed cases where a progressor did not shutdown properly leaving for instance active sinks behind. For now, <code>finalize = FALSE</code> is the default.</li>
+<h3 id="beta-features-0-18-0">Beta Features<a class="anchor" aria-label="anchor" href="#beta-features-0-18-0"></a></h3>
+<ul><li>Add experimental support for <code>progressor(..., finalize = TRUE)</code>, which will cause the progressor to signal a progression ‘shutdown’ condition when the progressor is garbage collected. This can serve as a backstop in yet-to-be-observed cases where a progressor did not shut down properly leaving for instance active sinks behind. For now, <code>finalize = FALSE</code> is the default.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-18-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-18-0"></a></h3>
 <ul><li>It was not possible to create more than one progressor in a <code><a href="../reference/with_progress.html">with_progress()</a></code> call, resulting in additional progressors being ignored. Also, warnings on “with_progress() received a progression ‘initiate’ request” were produced with <strong>progressr</strong> 0.17.0 (2025-10-15).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="deprecated-and-defunct-development-version">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
-<ul><li>Removed <code>progress()</code>, which has been defunct since version 0.10.0 (2021-12-18).</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -249,7 +245,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-0-10-0">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-10-0"></a></h3>
-<ul><li>Function <code>progress()</code> is defunct in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p) NULL)</code> to signal it.</li>
+<ul><li>Function <code><a href="../reference/progress.html">progress()</a></code> is defunct in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p) NULL)</code> to signal it.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -293,7 +289,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="deprecated-and-defunct-0-8-0">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-8-0"></a></h3>
-<ul><li>Function <code>progress()</code> is deprecated in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p) NULL)</code> to signal it.</li>
+<ul><li>Function <code><a href="../reference/progress.html">progress()</a></code> is deprecated in order to re-use it for other purpose. It is unlikely that anyone really used this function, but if you did, then use <code>cond &lt;- progression()</code> to create a <code>progression</code> condition and then use <code>withRestart(signalCondition(cond), muffleProgression = function(p) NULL)</code> to signal it.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -581,7 +577,7 @@
 <h2 class="pkg-version" data-toc-text="0.0.0-9000" id="version-000-9000">Version 0.0.0-9000<a class="anchor" aria-label="anchor" href="#version-000-9000"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-0-0-9000">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-0-9000"></a></h3>
-<ul><li><p>Add <code>progress()</code> to create and signal <code>progression</code> condition.</p></li>
+<ul><li><p>Add <code><a href="../reference/progress.html">progress()</a></code> to create and signal <code>progression</code> condition.</p></li>
 <li><p>Add <code><a href="../reference/progression.html">progression()</a></code> to create <code>progression</code> condition.</p></li>
 </ul></div>
 </div>
