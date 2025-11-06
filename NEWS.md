@@ -1,3 +1,28 @@
+# Version 0.18.0 [2025-11-05]
+
+## New Features
+
+ * Add `length()` for `progressor` objects, which enables using
+   `seq_along()` and `seq()` on progressors.
+
+## Beta Features
+
+ * Add experimental support for `progressor(..., finalize = TRUE)`,
+   which will cause the progressor to signal a progression 'shutdown'
+   condition when the progressor is garbage collected. This can serve
+   as a backstop in yet-to-be-observed cases where a progressor did
+   not shut down properly leaving for instance active sinks behind.
+   For now, `finalize = FALSE` is the default.
+
+## Bug Fixes
+
+ * It was not possible to create more than one progressor in a
+   `with_progress()` call, resulting in additional progressors being
+   ignored. Also, warnings on "with_progress() received a progression
+   'initiate' request" were produced with **progressr** 0.17.0
+   (2025-10-15).
+   
+
 # Version 0.17.0 [2025-10-15]
 
 ## New Features

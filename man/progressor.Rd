@@ -14,6 +14,7 @@ progressor(
   label = NA_character_,
   trace = FALSE,
   initiate = TRUE,
+  finalize = FALSE,
   auto_finish = TRUE,
   on_exit = !identical(envir, globalenv()),
   enable = getOption("progressr.enable", TRUE),
@@ -46,6 +47,9 @@ not.}
 
 \item{initiate}{(logical) If TRUE, the progressor will signal a
 \link{progression} 'initiate' condition when created.}
+
+\item{finalize}{(logical) If TRUE, the progressor signals a \link{progression}
+'shutdown' condition when finalized by the garbage collector.}
 
 \item{auto_finish}{(logical) If TRUE, then the progressor will signal a
 \link{progression} 'finish' condition as soon as the last step has been reached.}

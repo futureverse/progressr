@@ -22,6 +22,9 @@
 #' @param initiate (logical) If TRUE, the progressor will signal a
 #' [progression] 'initiate' condition when created.
 #'
+#' @param finalize (logical) If TRUE, the progressor signals a [progression]
+#' 'shutdown' condition when finalized by the garbage collector.
+#'
 #' @param auto_finish (logical) If TRUE, then the progressor will signal a
 #' [progression] 'finish' condition as soon as the last step has been reached.
 #'
@@ -60,7 +63,7 @@ progressor <- local({
   environment(void_progressor)$enable <- FALSE
   class(void_progressor) <- c("progressor", class(void_progressor))
 
-  function(steps = length(along), along = NULL, offset = 0L, scale = 1L, transform = function(steps) scale * steps + offset, message = character(0L), label = NA_character_, trace = FALSE, initiate = TRUE, auto_finish = TRUE, on_exit = !identical(envir, globalenv()), enable = getOption("progressr.enable", TRUE), envir = parent.frame()) {
+  function(steps = length(along), along = NULL, offset = 0L, scale = 1L, transform = function(steps) scale * steps + offset, message = character(0L), label = NA_character_, trace = FALSE, initiate = TRUE, finalize = FALSE, auto_finish = TRUE, on_exit = !identical(envir, globalenv()), enable = getOption("progressr.enable", TRUE), envir = parent.frame()) {
     stop_if_not(is.logical(enable), length(enable) == 1L, !is.na(enable))
 
     ## Quickly return a moot progressor function?
@@ -113,7 +116,7 @@ progressor <- local({
         muffleProgression = function(p) NULL
       )
       invisible(cond)
-    }
+    } ## fcn()
     formals(fcn)$message <- message
     class(fcn) <- c("progressor", class(fcn))
 
@@ -163,6 +166,18 @@ progressor <- local({
       do.call(base::on.exit, args = list(call, add = TRUE), envir = envir)
     }
 
+    if (finalize) {
+      ## Self-reference progressor function needed by the finalizer function
+      progressor_envir$self <- fcn
+      reg.finalizer(progressor_envir, function(e) {
+        print(utils::ls.str(e))
+        if (is.function(e$self)) {
+          e$self(type = "shutdown")
+          e$self <- NULL
+        }
+      })
+    }
+
     fcn
   }
 })
@@ -208,6 +223,12 @@ print.progressor <- function(x, ...) {
   cat(s, "\n", sep = "")
   
   invisible(x)
+}
+
+
+#' @export
+length.progressor <- function(x) {
+  environment(x)[["steps"]]
 }
 
 

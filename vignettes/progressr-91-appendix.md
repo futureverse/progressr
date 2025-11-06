@@ -155,11 +155,69 @@ If we created it in the global environment, there is a significant
 risk it would never finish and block all of the following progressors.
 
 
+### No coloring by the 'cli' and 'crayon' packages
+
+The **[cli]** package can be used to output colored text and messages
+in the terminal, e.g. `message(cli::col_blue("hey"))`. However,
+**cli** disables such coloring by default when there is an active
+progressor. The workaround is to set **cli** option `cli.num_colors` to:
+
+```r
+options(cli.num_colors = cli::num_ansi_colors())
+```
+
+This will force **cli** to use the same number of colors with and
+without an active progressor.
+
+The same happens when using the superseeded **[crayon]** package for
+colorization. To re-enable coloring for **crayon**, set the same
+(sic!)  above R options.
+
+The technical reason for **cli** and **crayon** disabling coloring, is
+that the **progressr** package buffers standard output using a sink,
+which these packages consider to be mono-color only.
+
+
 ## Known Issues
 
-### Positron
+### RStudio bug #16331: Setting global progressr handlers during startup does not work
 
-#### Setting global progressr handlers during startup does not work
+Setting the global progressr handler in `~/.Rprofile` does _not_ work
+in RStudio 2025.09:
+
+```r
+if (requireNamespace("progressr", quietly = TRUE)) {
+  progressr::handlers(global = TRUE)
+}
+```
+
+This is due to a [bug introduced in RStudio
+2025.09](https://github.com/rstudio/rstudio/issues/16331), which has
+been fixed for the next release RStudio 2025.11. If you are using
+RStudio 2025.09, the workaround is to instead use:
+
+```r
+if (requireNamespace("progressr", quietly = TRUE)) {
+  progressr::handlers(global = TRUE)
+
+  ## Workaround for RStudio 2025.09 console bug #16331
+  if (nzchar(Sys.getenv("RSTUDIO")) && !nzchar(Sys.getenv("RSTUDIO_TERM"))) {
+    invisible(addTaskCallback(function(...) {
+      ver <- RStudio.Version()$version
+      if (ver >= "2025.09" && ver < "2025.11") {
+        message("Workaround for RStudio 2025.09 bug #16331: Added progressr global handler")
+        progressr::handlers(global = TRUE)
+      } else {
+        warning("Workaround for RStudio 2025.09 bug #16331: Not needed in RStudio v", ver, ". Please remove task callback 'rstudio::progressr::once' in your Rprofile startup file", call. = FALSE, immediate. = TRUE)
+      }
+      removeTaskCallback("rstudio::progressr::once")
+    }, name = "rstudio::progressr::once"))
+  }
+}
+```
+
+
+### Positron bug #6892: Setting global progressr handlers during startup does not work
 
 Positron does not support setting global calling handlers during R's
 startup process, e.g. in `~/.Rprofile`. Even if such handlers are
@@ -176,23 +234,44 @@ if (requireNamespace("progressr", quietly = TRUE)) {
 ```
 
 will have no effect. If used, the workaround is to manually
-re-registering all calling handlers _at the R prompt_, which can be
-done as:
+re-registering all calling handlers, which can be done as:
+
+```r
+if (requireNamespace("progressr", quietly = TRUE)) {
+  progressr::handlers(global = TRUE)
+
+  ## Workaround for Positron (>= 2025.09) bug #16331
+  if (nzchar(Sys.getenv("POSITRON"))) local({
+    ver <- numeric_version(Sys.getenv("POSITRON_VERSION"))
+    if (ver >= "2025.09") {
+      message("Workaround for Positron (>= 2025.09) bug #6892: progressr global handler will be installed *after* the next call has been completed")
+      invisible(addTaskCallback(function(...) {
+        message("Workaround for Positron (>= 2025.09) bug #6892: re-installed progressr global handler")
+        globalCallingHandlers(globalCallingHandlers(NULL))
+        removeTaskCallback("positron::progressr::once")
+      }, name = "positron::progressr::once"))
+    }
+  })
+}
+```
+
+Alternatively, call:
 
 ```r
 globalCallingHandlers(globalCallingHandlers(NULL))
 ```
 
-Alternatively, call:
+or
 
 ```r
 progressr::handlers(global = FALSE)  ## important
 progressr::handlers(global = TRUE)
 ```
 
+at the prompt.
 
 
-#### Messages add a extra newline before the final progress step
+### Positron: Messages add extra newline before the final progress step
 
 One of the features of **progressr** is that messages are buffered
 during progress reporting and relayed as soon as possible, which
@@ -223,9 +302,7 @@ Positron, e.g. [Bug #9486](https://github.com/posit-dev/positron/issues/9486)
 (2025-09-18).
 
 
-### Jupyter Notebook and Jupyter Lab
-
-#### Reporting progress to stderr does not work
+### Jupyter: Reporting progress to stderr (default) does not work
 
 The default for most terminal progress renders, including the ones for
 **progressr**, display the progress on standard error (stderr). Due to
@@ -277,7 +354,7 @@ y <- slow_sum(1:20)
 ```
 
 
-#### handlers("progress") output is messy
+### Jupyter bug #732 - handlers("progress") output is messy
 
 Jupyter has other outputting issues. Specifically, Jupyter [injects an
 _extra_ newline at the end of every
@@ -341,7 +418,7 @@ depends on it.  The roadmap for developing the API is roughly:
       i.e. `handlers(global = TRUE)` and `handlers(global = FALSE)`
 
 * [ ] Make it possible to create a progressor also in the global
-      environment (see 'Known issues' above)
+      environment (see 'Known Issues' above)
 
 * [ ] Add support for nested progress updates
 
@@ -354,4 +431,6 @@ For a more up-to-date view on what features might be added, see
 
 [progressr]: https://progressr.futureverse.org
 [future]: https://future.futureverse.org
+[cli]: https://cran.r-project.org/package=cli
+[crayon]: https://cran.r-project.org/package=crayon
 
