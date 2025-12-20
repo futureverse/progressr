@@ -10,13 +10,12 @@ with_progress({
 
 
 with_progress({
-  progress <- progressor(steps = 1 + 2 + 1)
-  relay_progress <- progress_aggregator(progress)
-  p <- progress()
-  progressr::progress(p) ## duplicated - will be ignored
+  p <- progressor(steps = 1 + 2 + 1)
+  relay_progress <- progress_aggregator(p)
+  cond <- p()
   relay_progress(slow_sum(1:2))
-  progress(type = "finish")
-  progress() ## one too many - will be ignored
+  p(type = "finish")
+  p() ## one too many - will be ignored
 })
 
 

@@ -1,6 +1,9 @@
 # Version (development version)
 
- * ...
+## Deprecated and Defunct
+
+ * Remove `progress()`, which has been defunct since **progressr**
+   0.10.0 (2021-12-18).
 
 
 # Version 0.18.0 [2025-11-05]
