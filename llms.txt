@@ -1,0 +1,378 @@
+# progressr: An Inclusive, Unifying API for Progress Updates
+
+The **[progressr](https://progressr.futureverse.org)** package provides
+a minimal API for reporting progress updates in
+[R](https://www.r-project.org/). The design is to separate the
+representation of progress updates from how they are presented. What
+type of progress to signal is controlled by the developer. How these
+progress updates are rendered is controlled by the end user. For
+instance, some users may prefer visual feedback such as a horizontal
+progress bar in the terminal, whereas others may prefer auditory
+feedback. The **[progressr](https://progressr.futureverse.org)**
+framework is designed to work out-of-the-box also with parallel and
+distributed processing, especially with the
+**[futureverse](https://www.futureverse.org)** ecosystem.
+
+![Three strokes writing three in
+Chinese](articles/imgs/three_in_chinese.gif)
+
+Design motto:
+
+> The developer is responsible for providing progress updates but it’s
+> only the end user who decides if, when, and how progress should be
+> presented. No exceptions will be allowed.
+
+## Two Minimal APIs - One For Developers and One For End-Users
+
+[TABLE]
+
+    
+
+[TABLE]
+
+## A simple example
+
+Assume that we have a function
+[`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
+for adding up the values in a vector. It is so slow, that we like to
+provide progress updates to whoever might be interested in it. With the
+**progressr** package, this can be done as:
+
+``` r
+slow_sum <- function(x) {
+  p <- progressr::progressor(along = x)
+  sum <- 0
+  for (kk in seq_along(x)) {
+    Sys.sleep(0.1)
+    sum <- sum + x[kk]
+    p(message = sprintf("Adding %g", x[kk]))
+  }
+  sum
+}
+```
+
+Note how there are *no* arguments (e.g. `.progress = TRUE`) in the code
+that specify how progress is presented. This is by design and because
+the only task for the developer is to decide on where in the code it
+makes sense to signal that progress has been made. As we will see next,
+it should be up to the end user, and end user only, of this code to
+decide whether they want to receive progress updates or not, and, if so,
+in what format. Asking them to specify a special “progress” argument
+adds a lot of friction, it clutters up the code, and, importantly, might
+not even be possible for end users to do (e.g. they call a package
+function that in turn calls the progress reporting function of
+interest).
+
+Now, if we call this function, without further settings:
+
+``` r
+> y <- slow_sum(1:10)
+> y
+[1] 55
+>
+```
+
+the default is that there will be *no* progress updates. To get progress
+updates, we need to request them to be “handled”, which we do by:
+
+``` r
+> progressr::handlers(global = TRUE)
+```
+
+After this, progress will be reported;
+
+``` r
+> y <- slow_sum(1:10)
+  |====================                               |  40%
+> y <- slow_sum(10:1)
+  |========================================           |  80%
+```
+
+To disable reporting again, do:
+
+``` r
+> handlers(global = FALSE)
+```
+
+## Customizing how progress is reported
+
+By default, **[progressr](https://progressr.futureverse.org)** presents
+progress via the built-in
+[`utils::txtProgressBar()`](https://rdrr.io/r/utils/txtProgressBar.html).
+It presents itself as a rudimentary ASCII-based horizontal progress bar
+in the R terminal. See
+[`help("handler_txtprogressbar")`](https://progressr.futureverse.org/reference/handler_txtprogressbar.md)
+for how to customize the look of “txtprogressbar”, e.g. colorization and
+Unicode. There are many other ways to report on progress, including
+visually, auditory, and via notification systems. You can also use a mix
+of these, e.g.
+
+``` r
+handlers(c("cli", "beepr", "ntfy"))
+```
+
+See the ‘Customizing How Progress is Reported’ vignette for for
+examples.
+
+## Additional Features
+
+### Support for progressr elsewhere
+
+Note that progression updates by **progressr** is designed to work out
+of the box for any iterator framework in R. See the different package
+vignettes for details. Prominent examples are:
+
+- [`lapply()`](https://rdrr.io/r/base/lapply.html) etc. of base R
+- `map()` etc. by the
+  **[purrr](https://cran.r-project.org/package=purrr)** package
+- `llply()` etc. by the
+  **[plyr](https://cran.r-project.org/package=plyr)** package
+- `foreach()` iterations by the
+  **[foreach](https://cran.r-project.org/package=foreach)** package
+
+and near-live progress reporting in parallel and distributed processing
+via the **[future](https://future.futureverse.org)** framework:
+
+- `future_lapply()` etc. by the
+  **[future.apply](https://future.apply.futureverse.org)** package
+- `future_map()` etc. by the **[furrr](https://furrr.futureverse.org)**
+  package
+- `llply()` etc. by the
+  **[plyr](https://cran.r-project.org/package=plyr)** and
+  **[doFuture](https://doFuture.futureverse.org)** packages
+- `foreach()` iterations via the **foreach** and
+  **[doFuture](https://doFuture.futureverse.org)** packages
+- `bplapply()` etc. by the
+  **[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
+  and **[doFuture](https://doFuture.futureverse.org)** packages
+
+Other uses of **progressr** are:
+
+- make packages that report progress via the
+  **[cli](https://cran.r-project.org/package=cli)** package
+  (e.g. **purrr**) report progress via **progressr**
+- make `knit()` of the
+  **[knitr](https://cran.r-project.org/package=knitr)** package report
+  via **progressr**
+
+### Use regular output as usual alongside progress updates
+
+In contrast to other progress-bar frameworks, output from
+[`message()`](https://rdrr.io/r/base/message.html),
+[`cat()`](https://rdrr.io/r/base/cat.html),
+[`print()`](https://rdrr.io/r/base/print.html) and so on, will *not*
+interfere with progress reported via **progressr**. For example, say we
+have:
+
+``` r
+slow_sqrt <- function(xs) {
+  p <- progressor(along = xs)
+  lapply(xs, function(x) {
+    message("Calculating the square root of ", x)
+    Sys.sleep(2)
+    p(sprintf("x=%g", x))
+    sqrt(x)
+  })
+}
+```
+
+we will get:
+
+``` r
+> library(progressr)
+> handlers(global = TRUE)
+> handlers("progress")
+> y <- slow_sqrt(1:8)
+Calculating the square root of 1
+Calculating the square root of 2
+- [===========>-----------------------------------]  25% x=2
+```
+
+This works because **progressr** will briefly buffer any output
+internally and only release it when the next progress update is received
+just before the progress is re-rendered in the terminal. This is why you
+see a two second delay when running the above example. Note that, if we
+use progress handlers that do not output to the terminal, such as
+`handlers("beepr")`, then output does not have to be buffered and will
+appear immediately.
+
+*Comment*: When signaling a warning using
+`warning(msg, immediate. = TRUE)` the message is immediately outputted
+to the standard-error stream. However, this is not possible to emulate
+when warnings are intercepted using calling handlers. This is a
+limitation of R that cannot be worked around. Because of this, the above
+call will behave the same as `warning(msg)` - that is, all warnings will
+be buffered by R internally and released only when all computations are
+done.
+
+### Sticky messages
+
+As seen above, some progress handlers present the progress message as
+part of its output, e.g. the “progress” handler will display the message
+as part of the progress bar. It is also possible to “push” the message
+up together with other terminal output. This can be done by adding class
+attribute `"sticky"` to the progression signaled. This works for several
+progress handlers that output to the terminal. For example, with:
+
+``` r
+slow_sum <- function(x) {
+  p <- progressr::progressor(along = x)
+  sum <- 0
+  for (kk in seq_along(x)) {
+    Sys.sleep(0.1)
+    sum <- sum + x[kk]
+    p(sprintf("Step %d", kk), class = if (kk %% 5 == 0) "sticky", amount = 0)
+    p(message = sprintf("Adding %g", x[kk]))
+  }
+  sum
+}
+```
+
+we get
+
+``` r
+> handlers("txtprogressbar")
+> y <- slow_sum(1:30)
+Step 5
+Step 10
+  |====================                               |  43%
+```
+
+and
+
+``` r
+> handlers("progress")
+> y <- slow_sum(1:30)
+Step 5
+Step 10
+/ [===============>-------------------------]  43% Adding 13
+```
+
+## Installation
+
+R package progressr is available on
+[CRAN](https://cran.r-project.org/package=progressr) and can be
+installed in R as:
+
+``` r
+install.packages("progressr")
+```
+
+### Pre-release version
+
+To install the pre-release version that is available in Git branch
+`develop` on GitHub, use:
+
+``` r
+remotes::install_github("futureverse/progressr", ref="develop")
+```
+
+This will install the package from source.
+
+# Package index
+
+## All functions
+
+- [`handler_ascii_alert()`](https://progressr.futureverse.org/reference/handler_ascii_alert.md)
+  : Progression Handler: Progress Reported as ASCII BEL Symbols (Audio
+  or Blink) in the Terminal
+- [`handler_beepr()`](https://progressr.futureverse.org/reference/handler_beepr.md)
+  : Progression Handler: Progress Reported as 'beepr' Sounds (Audio)
+- [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
+  : Progression Handler: Progress Reported via 'cli' Progress Bars
+  (Text) in the Terminal
+- [`handler_debug()`](https://progressr.futureverse.org/reference/handler_debug.md)
+  : Progression Handler: Progress Reported as Debug Information (Text)
+  in the Terminal
+- [`handler_filesize()`](https://progressr.futureverse.org/reference/handler_filesize.md)
+  : Progression Handler: Progress Reported as the Size of a File on the
+  File System
+- [`handler_notifier()`](https://progressr.futureverse.org/reference/handler_notifier.md)
+  : Progression Handler: Progress Reported via the Operating-System
+  Notification Framework (GUI, Text)
+- [`handler_ntfy()`](https://progressr.futureverse.org/reference/handler_ntfy.md)
+  : Progression Handler: Progress Reported via the Ntfy.sh Messaging
+  Service
+- [`handler_pbcol()`](https://progressr.futureverse.org/reference/handler_pbcol.md)
+  : Progression Handler: Progress Reported as an ANSI Background Color
+  in the Terminal
+- [`handler_pbmcapply()`](https://progressr.futureverse.org/reference/handler_pbmcapply.md)
+  : Progression Handler: Progress Reported via 'pbmcapply' Progress Bars
+  (Text) in the Terminal
+- [`handler_progress()`](https://progressr.futureverse.org/reference/handler_progress.md)
+  : Progression Handler: Progress Reported via 'progress' Progress Bars
+  (Text) in the Terminal
+- [`handler_rpushbullet()`](https://progressr.futureverse.org/reference/handler_rpushbullet.md)
+  : Progression Handler: Progress Reported via the Pushbullet Messaging
+  Service
+- [`handler_rstudio()`](https://progressr.futureverse.org/reference/handler_rstudio.md)
+  : Progression Handler: Progress Reported in the RStudio Console
+- [`handler_slowdown()`](https://progressr.futureverse.org/reference/handler_slowdown.md)
+  : Progression Handler: Slow Down Progress Reporting
+- [`handler_tkprogressbar()`](https://progressr.futureverse.org/reference/handler_tkprogressbar.md)
+  : Progression Handler: Progress Reported as a Tcl/Tk Progress Bars in
+  the GUI
+- [`handler_txtprogressbar()`](https://progressr.futureverse.org/reference/handler_txtprogressbar.md)
+  : Progression Handler: Progress Reported as Plain Progress Bars (Text)
+  in the Terminal
+- [`handler_void()`](https://progressr.futureverse.org/reference/handler_void.md)
+  : Progression Handler: No Progress Report
+- [`handler_winprogressbar()`](https://progressr.futureverse.org/reference/handler_winprogressbar.md)
+  : Progression Handler: Progress Reported as a MS Windows Progress Bars
+  in the GUI
+- [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+  : Control How Progress is Reported
+- [`progress_progressr()`](https://progressr.futureverse.org/reference/progress_progressr.md)
+  : Use Progressr with Plyr Map-Reduce Functions
+- [`progressor()`](https://progressr.futureverse.org/reference/progressor.md)
+  : Create a Progressor Function that Signals Progress Updates
+- [`progressr`](https://progressr.futureverse.org/reference/progressr.md)
+  [`progressr-package`](https://progressr.futureverse.org/reference/progressr.md)
+  : progressr: A Unifying API for Progress Updates
+- [`progressr.options`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.clear`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.debug`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.demo.delay`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.delay_stdout`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.delay_conditions`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.enable`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.enable_after`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.interrupts`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.interval`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness.audio`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness.debug`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness.file`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness.gui`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness.notifier`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.intrusiveness.terminal`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.handlers`](https://progressr.futureverse.org/reference/progressr.options.md)
+  [`progressr.times`](https://progressr.futureverse.org/reference/progressr.options.md)
+  : Options and environment variables used by the 'progressr' packages
+- [`withProgressShiny()`](https://progressr.futureverse.org/reference/withProgressShiny.md)
+  : Use Progressr in Shiny Apps: Plug-in Backward-Compatible Replacement
+  for shiny::withProgress()
+- [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md)
+  [`without_progress()`](https://progressr.futureverse.org/reference/with_progress.md)
+  : Report on Progress while Evaluating an R Expression
+
+# Articles
+
+### All vignettes
+
+- [progressr: An
+  Introduction](https://progressr.futureverse.org/articles/progressr-01-intro.md):
+- [progressr: Customize How Progress is
+  Reported](https://progressr.futureverse.org/articles/progressr-11-handlers.md):
+- [progressr: Map-Reduce Calls, e.g. lapply() and
+  map()](https://progressr.futureverse.org/articles/progressr-21-map-reduce.md):
+- [progressr: Parallel and Distributed
+  Processing](https://progressr.futureverse.org/articles/progressr-22-parallel-processing.md):
+- [progressr: Replace 'cli' Progress Bars with
+  'progressr'](https://progressr.futureverse.org/articles/progressr-25-replace-cli-with-progressr.md):
+- [progressr:
+  Debug](https://progressr.futureverse.org/articles/progressr-29-debug.md):
+- [progressr: Render 'knitr'
+  Documents](https://progressr.futureverse.org/articles/progressr-31-knitr.md):
+- [progressr:
+  Appendix](https://progressr.futureverse.org/articles/progressr-91-appendix.md):
