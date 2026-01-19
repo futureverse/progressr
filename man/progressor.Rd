@@ -27,7 +27,7 @@ progressor(
 \item{along}{(vector; alternative) Alternative that sets
 \code{steps = length(along)}.}
 
-\item{offset, scale}{(integer; optional) scale and offset applying transform
+\item{offset, scale}{(integer; optional) scale and offset applying the transform
 \code{steps <- scale * steps + offset}.}
 
 \item{transform}{(function; optional) A function that takes the effective
@@ -72,7 +72,7 @@ Create a Progressor Function that Signals Progress Updates
 \details{
 A \code{progressor} function can only be created inside a local environment,
 e.g. inside a function, within a \code{local()} call, or within a
-\code{with_progress()} call.  Notably, it \emph{cannot} be create at the top level,
+\code{with_progress()} call.  Notably, it \emph{cannot} be created at the top level,
 e.g. immediately at the R prompt or outside a local environment in an
 R script.  If attempted, an informative error message is produced, e.g.
 

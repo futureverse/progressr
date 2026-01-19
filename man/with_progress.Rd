@@ -26,10 +26,10 @@ without_progress(expr)
 If NULL or an empty list, progress updates are ignored.}
 
 \item{cleanup}{If TRUE, all progression handlers will be shutdown
-at the end regardless of the progression is complete or not.}
+at the end regardless of whether the progression is complete or not.}
 
 \item{delay_terminal}{If TRUE, output and conditions that may end up in
-the terminal will delayed.}
+the terminal will be delayed.}
 
 \item{delay_stdout}{If TRUE, standard output is captured and relayed
 at the end just before any captured conditions are relayed.}
@@ -39,8 +39,8 @@ classes to be captured and relayed at the end after any captured
 standard output is relayed.}
 
 \item{interrupts}{Controls whether interrupts should be detected or not.
-If TRUE and a interrupt is signaled, progress handlers are asked to
-report on the current amount progress when the evaluation was terminated
+If TRUE and an interrupt is signaled, progress handlers are asked to
+report on the current amount of progress when the evaluation was terminated
 by the interrupt, e.g. when a user pressed Ctrl-C in an interactive session,
 or a batch process was interrupted because it ran out of time.
 Note that it's optional for a progress handler to support this and only
@@ -72,7 +72,7 @@ condition preventing it from reaching, say, any global condition
 handlers.
 
 \strong{IMPORTANT: This function is meant for end users only.  It should not
-be used by R packages, which only task is to \emph{signal} progress updates,
+be used by R packages, whose only task is to \emph{signal} progress updates,
 not to decide if, when, and how progress should be reported.}
 
 \code{without_progress()} evaluates an expression while ignoring all
@@ -82,7 +82,7 @@ progress updates.
 
 Formally, progression handlers are calling handlers that are called
 when a \link{progression} condition is signaled.  These handlers are functions
-that takes one argument which is the \link{progression} condition.
+that take one argument which is the \link{progression} condition.
 }
 
 \section{Progress updates in batch mode}{
@@ -90,7 +90,7 @@ that takes one argument which is the \link{progression} condition.
 When running R from the command line, R runs in a non-interactive mode
 (\code{interactive()} returns \code{FALSE}).  The default behavior of
 \code{with_progress()} is to \emph{not} report on progress in non-interactive mode.
-To have progress being reported on also then, set R options
+To have progress being reported also then, set R options
 \option{progressr.enable} or environment variable \env{R_PROGRESSR_ENABLE}
 to \code{TRUE}.  Alternatively, one can set argument \code{enable=TRUE} when calling
 \code{with_progress()}.  For example,

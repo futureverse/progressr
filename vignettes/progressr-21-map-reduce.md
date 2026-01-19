@@ -11,9 +11,9 @@
 %\VignetteEngine{progressr::selfonly}
 -->
 
-Progress updates by **[progressr]** is designed to work out of the box
+Progress updates by **[progressr]** are designed to work out of the box
 for any iterator framework in R, e.g. `lapply()`, **[foreach]**,
-**[purrr]**, and **[plyr]**. Below you will a set of examples that
+**[purrr]**, and **[plyr]**. Below you will find a set of examples that
 illustrate how to use **progressr** in common use cases.
 
 
@@ -101,7 +101,7 @@ y <- my_fcn(1:10)
 
 Note how this solution does not make use of **plyr**'s `.progress`
 argument, because the above solution is more powerful and more
-flexible, e.g. we have more control on progress updates and their
+flexible, e.g. we have more control over progress updates and their
 messages.  However, if you prefer the traditional **plyr** approach,
 you can use `.progress = "progressr"`, e.g. `y <- llply(..., .progress
 = "progressr")`.

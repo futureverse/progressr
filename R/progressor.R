@@ -7,7 +7,7 @@
 #' @param along (vector; alternative) Alternative that sets
 #' `steps = length(along)`.
 #'
-#' @param offset,scale (integer; optional) scale and offset applying transform
+#' @param offset,scale (integer; optional) scale and offset applying the transform
 #' `steps <- scale * steps + offset`.
 #'
 #' @param transform (function; optional) A function that takes the effective
@@ -42,7 +42,7 @@
 #' @details
 #' A `progressor` function can only be created inside a local environment,
 #' e.g. inside a function, within a `local()` call, or within a
-#' `with_progress()` call.  Notably, it _cannot_ be create at the top level,
+#' `with_progress()` call.  Notably, it _cannot_ be created at the top level,
 #' e.g. immediately at the R prompt or outside a local environment in an
 #' R script.  If attempted, an informative error message is produced, e.g.
 #'
@@ -120,7 +120,7 @@ progressor <- local({
     formals(fcn)$message <- message
     class(fcn) <- c("progressor", class(fcn))
 
-    ## WORKAROUND: Use teeny, custom enviroment for the progressor function.
+    ## WORKAROUND: Use teeny, custom environment for the progressor function.
     ## The default would otherwise be to inherit the parent frame, which
     ## might contain very large objects.
     progressor_envir <- new.env(parent = getNamespace(.packageName))
@@ -132,7 +132,7 @@ progressor <- local({
     }
     environment(fcn) <- progressor_envir
     
-    ## Is there already be an active '...progressr'?
+    ## Is there already an active '...progressr'?
     ## If so, make sure it is finished and then remove it
     if (exists("...progressor", mode = "function", envir = envir)) {
       ...progressor <- get("...progressor", mode = "function", envir = envir)

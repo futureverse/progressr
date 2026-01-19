@@ -8,7 +8,7 @@
 %\VignetteEngine{progressr::selfonly}
 -->
 
-When compiling ("knitting") an knitr-based vignette, for instance, via
+When compiling ("knitting") a knitr-based vignette, for instance, via
 `knitr::knit()`, **[knitr]** shows the progress of code chunks
 processed thus far using a progress bar.  We can use **[progressr]**
 also for this type of progress reporting.  To have **knitr** report on
@@ -51,7 +51,7 @@ down the knitting process, e.g.
 progressr::handlers(c("pbcol", "slowdown"))
 ```
 
-This will add the overall process to take at least ten seconds
+This will cause the overall process to take at least ten seconds
 (default).
 
 

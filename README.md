@@ -14,7 +14,7 @@ developer.  How these progress updates are rendered is controlled by
 the end user.  For instance, some users may prefer visual feedback
 such as a horizontal progress bar in the terminal, whereas others may
 prefer auditory feedback.  The **[progressr]** framework is designed
-to work out-of-the-box also with parallel and distributed processing,
+to work out-of-the-box also for parallel and distributed processing,
 especially with the **[futureverse]** ecosystem.
 
 <img src="vignettes/imgs/three_in_chinese.gif" alt="Three strokes writing three in Chinese" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
@@ -147,7 +147,7 @@ by:
 > progressr::handlers(global = TRUE)
 ```
 
-After this, progress will be reported;
+After this, progress will be reported:
 
 ```r
 > y <- slow_sum(1:10)
@@ -177,18 +177,18 @@ notification systems. You can also use a mix of these, e.g.
 handlers(c("cli", "beepr", "ntfy"))
 ```
 
-See the 'Customizing How Progress is Reported' vignette for for examples.
+See the 'Customizing How Progress is Reported' vignette for examples.
 
 
 ## Additional Features
 
 ### Support for progressr elsewhere
 
-Note that progression updates by **progressr** is designed to work out
+Note that progression updates by **progressr** are designed to work out
 of the box for any iterator framework in R. See the different package
 vignettes for details. Prominent examples are:
 
- * `lapply()` etc. of base R
+ * `lapply()` etc. in base R
  * `map()` etc. by the **[purrr]** package
  * `llply()` etc. by the **[plyr]** package
  * `foreach()` iterations by the **[foreach]** package
@@ -212,7 +212,7 @@ Other uses of **progressr** are:
 ### Use regular output as usual alongside progress updates
 
 In contrast to other progress-bar frameworks, output from `message()`,
-`cat()`, `print()` and so on, will _not_ interfere with progress
+`cat()`, `print()` and so on will _not_ interfere with progress
 reported via **progressr**.  For example, say we have:
 
 ```r
@@ -320,7 +320,6 @@ Step 10
 [pbmcapply]: https://cran.r-project.org/package=pbmcapply
 [plyr]: https://cran.r-project.org/package=plyr
 [BiocParallel]: https://www.bioconductor.org/packages/BiocParallel/
-
 ## Installation
 R package progressr is available on [CRAN](https://cran.r-project.org/package=progressr) and can be installed in R as:
 ```r

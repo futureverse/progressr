@@ -14,22 +14,22 @@ handlers(
 }
 \arguments{
 \item{append}{(logical) If FALSE, the specified progression handlers
-replace the current ones, otherwise appended to them.}
+replace the current ones, otherwise they are appended to them.}
 
 \item{on_missing}{(character) If \code{"error"}, an error is thrown if one of
-the progression handlers does not exists.  If \code{"warning"}, a warning
-is produces and the missing handlers is ignored.  If \code{"ignore"}, the
-missing handlers is ignored.}
+the progression handlers does not exist.  If \code{"warning"}, a warning
+is produced and the missing handler is ignored.  If \code{"ignore"}, the
+missing handler is ignored.}
 
 \item{default}{The default progression calling handler to use if none
 are set.}
 
 \item{global}{If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-otherwise FALSE.  Argument \code{global} must not used with other arguments.}
+otherwise FALSE.  Argument \code{global} must not be used with other arguments.}
 
 \item{\ldots}{One or more progression handlers.  Alternatively, this
-functions accepts also a single vector of progression handlers as input.
+function also accepts a single vector of progression handlers as input.
 If this vector is empty, then an empty set of progression handlers will
 be set.}
 }
@@ -38,7 +38,7 @@ be set.}
 If no arguments are specified, then the current set of progression
 handlers is returned.
 If \code{global} is specified, then TRUE is returned if the global progression
-handlers is enabled, otherwise false.
+handler is enabled, otherwise FALSE.
 }
 \description{
 Control How Progress is Reported
@@ -50,14 +50,14 @@ option \option{progressr.handlers}.
 \section{For package developers}{
 
 \strong{IMPORTANT: Setting progression handlers is a privilege that should be
-left to the end user. It should not be used by R packages, which only task
+left to the end user. It should not be used by R packages, whose only task
 is to \emph{signal} progress updates, not to decide if, when, and how progress
 should be reported.}
 
 If you have to set or modify the progression handlers inside a function,
 please make sure to undo the settings afterward.  If not, you will break
 whatever progression settings the user already has for other purposes
-used elsewhere.  To undo you settings, you can do:
+used elsewhere.  To undo your settings, you can do:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{old_handlers <- handlers(c("beepr", "progress"))
 on.exit(handlers(old_handlers), add = TRUE)
@@ -72,8 +72,7 @@ startup file.  For example, the following will (i) cause your interactive
 R session to use global progression handler by default, and (ii) report
 progress via the \pkg{progress} package when in the terminal and via the
 RStudio Jobs progress bar when in the RStudio Console.
-\link{handler_txtprogressbar},
-other whenever using the RStudio Console, add
+To configure this, add
 the following to your \file{~/.Rprofile} startup file:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{if (interactive() && requireNamespace("progressr", quietly = TRUE)) \{

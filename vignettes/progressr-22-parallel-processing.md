@@ -43,10 +43,10 @@ y <- my_fcn(1:10)
 The **[futureverse]** framework, which provides a unified API for parallel
 and distributed processing in R, has built-in support for the kind of
 progression updates produced by the **progressr** package.  This means
-that you can use it with for instance **[future.apply]**, **[furrr]**,
+that you can use it with, for instance, **[future.apply]**, **[furrr]**,
 and **[foreach]** with **[doFuture]**, and **[plyr]** or
 **[BiocParallel]** with **doFuture**.  In contrast, _non-future_
-parallelization methods such as **parallel**'s `mclapply()` and,
+parallelization methods such as **parallel**'s `mclapply()` and
 `parallel::parLapply()`, and **foreach** adapters like **doParallel**
 do _not_ support progress reports via **progressr**.
 
@@ -81,7 +81,7 @@ y <- my_fcn(1:10)
 Here is an example that uses `foreach()` of the **[foreach]** package
 together with `%dofuture%` of the **[doFuture]** package to
 parallelize while reporting on progress.  This example parallelizes on
-the local machine, it works also for remote machines:
+the local machine; it works also for remote machines:
 
 ```r
 library(doFuture)    ## %dofuture%
@@ -107,7 +107,7 @@ y <- my_fcn(1:10)
 
 For existing code using the traditional `%dopar%` operators of the
 **[foreach]** package, we can register the **[doFuture]** adapter and
-use the same **progressr** as above to progress updates;
+use the same **progressr** as above to report progress updates;
 
 ```r
 library(doFuture)
@@ -159,10 +159,10 @@ y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-_Note:_ This solution does not involved the `.progress = TRUE`
+_Note:_ This solution does not involve the `.progress = TRUE`
 argument that **furrr** implements.  Because **progressr** is more
 generic and because `.progress = TRUE` only supports certain future
-backends and produces errors on non-supported backends, I recommended
+backends and produces errors on non-supported backends, I recommend
 to stop using `.progress = TRUE` and use the **progressr** package
 instead.
 
@@ -255,7 +255,7 @@ results of the futures.  For instance, if `future_lapply(X, FUN)`
 chunks up the processing of, say, 100 elements in `X` into eight
 futures, we will see progress from each of the 100 elements as they
 are done when using a future backend supporting "near-live" updates,
-whereas we will only see those updated to be flushed eight times when
+whereas we will only see those updates flushed eight times when
 using any other types of future backends.
 
 (*) Other future backends may gain support for "near-live" progress

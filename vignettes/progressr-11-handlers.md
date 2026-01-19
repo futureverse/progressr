@@ -107,7 +107,7 @@ handlers("void")
 
 ## Further configuration of progress handlers
 
-Above we have seen examples where the `handlers()` takes one or more
+Above we have seen examples where `handlers()` takes one or more
 strings as input, e.g. `handlers(c("progress", "beepr"))`.  This is
 short for a more flexible specification where we can pass a list of
 handler functions, e.g.

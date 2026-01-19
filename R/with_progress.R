@@ -6,10 +6,10 @@
 #' If NULL or an empty list, progress updates are ignored.
 #'
 #' @param cleanup If TRUE, all progression handlers will be shutdown
-#' at the end regardless of the progression is complete or not.
+#' at the end regardless of whether the progression is complete or not.
 #'
 #' @param delay_terminal If TRUE, output and conditions that may end up in
-#' the terminal will delayed.
+#' the terminal will be delayed.
 #'
 #' @param delay_stdout If TRUE, standard output is captured and relayed
 #' at the end just before any captured conditions are relayed.
@@ -19,8 +19,8 @@
 #' standard output is relayed.
 #'
 #' @param interrupts Controls whether interrupts should be detected or not.
-#' If TRUE and a interrupt is signaled, progress handlers are asked to
-#' report on the current amount progress when the evaluation was terminated
+#' If TRUE and an interrupt is signaled, progress handlers are asked to
+#' report on the current amount of progress when the evaluation was terminated
 #' by the interrupt, e.g. when a user pressed Ctrl-C in an interactive session,
 #' or a batch process was interrupted because it ran out of time.
 #' Note that it's optional for a progress handler to support this and only
@@ -50,19 +50,19 @@
 #' handlers.
 #'
 #' **IMPORTANT: This function is meant for end users only.  It should not
-#' be used by R packages, which only task is to _signal_ progress updates,
+#' be used by R packages, whose only task is to _signal_ progress updates,
 #' not to decide if, when, and how progress should be reported.**
 #'
 #' @section Progression handler functions:
 #' Formally, progression handlers are calling handlers that are called
 #' when a [progression] condition is signaled.  These handlers are functions
-#' that takes one argument which is the [progression] condition.
+#' that take one argument which is the [progression] condition.
 #'
 #' @section Progress updates in batch mode:
 #' When running R from the command line, R runs in a non-interactive mode
 #' (`interactive()` returns `FALSE`).  The default behavior of
 #' `with_progress()` is to _not_ report on progress in non-interactive mode.
-#' To have progress being reported on also then, set R options
+#' To have progress being reported also then, set R options
 #' \option{progressr.enable} or environment variable \env{R_PROGRESSR_ENABLE}
 #' to `TRUE`.  Alternatively, one can set argument `enable=TRUE` when calling
 #' `with_progress()`.  For example,
