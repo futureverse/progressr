@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@ Bengtsson</h4>
 <p>When running R from the command line, R runs in a non-interactive
 mode (<code><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive()</a></code> returns <code>FALSE</code>). The
 default behavior of <strong>progressr</strong> is to <em>not</em> report
-on progress in non-interactive mode. To reported on progress also then,
+on progress in non-interactive mode. To report on progress also then,
 set R options <code>progressr.enable</code> or environment variable
 <code>R_PROGRESSR_ENABLE</code> to <code>TRUE</code>. For example,</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"library(progressr)"</span> <span class="at">-e</span> <span class="st">"with_progress(y &lt;- slow_sum(1:10))"</span></span></code></pre></div>
@@ -151,14 +151,14 @@ set R options <code>progressr.enable</code> or environment variable
 <div class="section level3">
 <h3 id="avoid-sending-progress-updates-too-frequently">Avoid sending progress updates too frequently<a class="anchor" aria-label="anchor" href="#avoid-sending-progress-updates-too-frequently"></a>
 </h3>
-<p>Signaling progress updates comes with some overhead. In situation
+<p>Signaling progress updates comes with some overhead. In situations
 where we use progress updates, this overhead is typically much smaller
 than the task we are processing in each step. However, if the task we
 iterate over is quick, then the extra time induced by the progress
 updates might end up dominating the overall processing time. If that is
-the case, a simple solution is to only signal progress updates every
-n:th step. Here is a version of <code><a href="../reference/slow_sum.html">slow_sum()</a></code> that signals
-progress every 10:th iteration:</p>
+the case, a simple solution is to only signal progress updates every nth
+step. Here is a version of <code><a href="../reference/slow_sum.html">slow_sum()</a></code> that signals progress
+every 10th iteration:</p>
 <pre><code><span><span class="va">slow_sum</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/progressor.html">progressor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="va">sum</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
@@ -187,15 +187,15 @@ become clogged up if progress updates are too frequent.</p>
 it cannot be called within <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch()</a></code> and
 <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">withCallingHandlers()</a></code>;</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">tryCatch</span>(<span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>), <span class="at">error =</span> identity)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">globalCallingHandlers</span>(<span class="cn">NULL</span>) <span class="sc">:</span> </span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>Error <span class="cf">in</span> <span class="fu">globalCallingHandlers</span>(<span class="cn">NULL</span>) <span class="sc">:</span></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  should not be called with handlers on the stack</span></code></pre></div>
 <p>This is not a bug - neither in <strong>progressr</strong> nor in R
 itself. It’s due to a conservative design on how <em>global</em> calling
-handlers should work in R. If it allowed, there’s a risk we might end up
-getting weird and unpredictable behaviors when messages, warnings,
-errors, and other types of conditions are signaled.</p>
+handlers should work in R. If it were allowed, there’s a risk we might
+end up getting weird and unpredictable behaviors when messages,
+warnings, errors, and other types of conditions are signaled.</p>
 <p>Because <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch()</a></code> and
-<code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">withCallingHandlers()</a></code> is used in many places throughout
+<code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">withCallingHandlers()</a></code> are used in many places throughout
 base R, this means that we also cannot call
 <code>handlers(global = TRUE)</code> as part of a package’s startup
 process, e.g. <code>.onLoad()</code> or <code>.onAttach()</code>.</p>
@@ -211,7 +211,7 @@ document, e.g.</p>
 <h3 id="a-progressor-cannot-be-created-in-the-global-environment">A progressor cannot be created in the global environment<a class="anchor" aria-label="anchor" href="#a-progressor-cannot-be-created-in-the-global-environment"></a>
 </h3>
 <p>It is not possible to create a progressor in the global environment,
-e.g. in the the top-level of a script. It can only be created inside a
+e.g. in the top-level of a script. It can only be created inside a
 function, within <code>with_progress({ ... })</code>,
 <code>local({ ... })</code>, or a similar construct. For example, the
 following:</p>
@@ -227,10 +227,10 @@ following:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>results in an error if tried:</p>
-<pre><code>Error in progressor(along = xs) : 
+<pre><code>Error in progressor(along = xs) :
   A progressor must not be created in the global environment unless wrapped in a
   with_progress() or without_progress() call. Alternatively, create it inside a
-  function or in a local() environment to make sure there is a finite life span
+  function or in a local() environment to make sure there is a finite lifespan
   of the progressor</code></pre>
 <p>The solution is to wrap it in a <code>local({ ... })</code> call, or
 more explicitly, in a <code>with_progress({ ... })</code> call:</p>
@@ -248,10 +248,9 @@ more explicitly, in a <code>with_progress({ ... })</code> call:</p>
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#  |====================                               |  40%</span></span></code></pre></div>
-<p>The main reason for this is to limit the life span of each
-progressor. If we created it in the global environment, there is a
-significant risk it would never finish and block all of the following
-progressors.</p>
+<p>The main reason for this is to limit the lifespan of each progressor.
+If we created it in the global environment, there is a significant risk
+it would never finish and block all of the following progressors.</p>
 </div>
 <div class="section level3">
 <h3 id="no-coloring-by-the-cli-and-crayon-packages">No coloring by the ‘cli’ and ‘crayon’ packages<a class="anchor" aria-label="anchor" href="#no-coloring-by-the-cli-and-crayon-packages"></a>
@@ -385,9 +384,9 @@ in Positron, e.g. <a href="https://github.com/posit-dev/positron/issues/9486" c
 </h3>
 <p>The default for most terminal progress renders, including the ones
 for <strong>progressr</strong>, display the progress on standard error
-(stderr). Due to limitation in Jupyter, this default does not work
+(stderr). Due to a limitation in Jupyter, this default does not work
 there. The reason is that <a href="https://github.com/futureverse/progressr/issues/170" class="external-link">Jupyter
-silently drops</a> any output send to stderr, e.g.</p>
+silently drops</a> any output sent to stderr, e.g.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cat</span>(<span class="st">"hello stderr</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="fu">stderr</span>())</span>
 <span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">cat</span>(<span class="st">"hello stdout</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">file =</span> <span class="fu">stdout</span>())</span>
 <span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>hello stdout</span>
@@ -432,7 +431,7 @@ to disable the buffering (“delaying”) of any other output to stdout.</p>
 <span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a></span>
 <span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>def</span>
 <span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="sc">&gt;</span> </span></code></pre></div>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="sc">&gt;</span></span></code></pre></div>
 <p>This causes any progress framework (e.g. the
 <strong>progress</strong> package) that reports via messages to render
 progress output very poorly or not at all.</p>

@@ -1,6 +1,6 @@
 # progressr: Render 'knitr' Documents
 
-When compiling (“knitting”) an knitr-based vignette, for instance, via
+When compiling (“knitting”) a knitr-based vignette, for instance, via
 [`knitr::knit()`](https://rdrr.io/pkg/knitr/man/knit.html),
 **[knitr](https://cran.r-project.org/package=knitr)** shows the progress
 of code chunks processed thus far using a progress bar. We can use
@@ -45,7 +45,7 @@ down the knitting process, e.g.
 progressr::handlers(c("pbcol", "slowdown"))
 ```
 
-This will add the overall process to take at least ten seconds
+This will cause the overall process to take at least ten seconds
 (default).
 
 To make **knitr** report via **progressr** in all your R session, set

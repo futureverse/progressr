@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,7 +115,7 @@
 
 
 <dt id="arg-offset-scale">offset, scale<a class="anchor" aria-label="anchor" href="#arg-offset-scale"></a></dt>
-<dd><p>(integer; optional) scale and offset applying transform
+<dd><p>(integer; optional) scale and offset applying the transform
 <code>steps &lt;- scale * steps + offset</code>.</p></dd>
 
 
@@ -178,7 +178,7 @@ function is an empty function that does nothing.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>A <code>progressor</code> function can only be created inside a local environment,
 e.g. inside a function, within a <code><a href="https://rdrr.io/r/base/eval.html" class="external-link">local()</a></code> call, or within a
-<code><a href="with_progress.html">with_progress()</a></code> call.  Notably, it <em>cannot</em> be create at the top level,
+<code><a href="with_progress.html">with_progress()</a></code> call.  Notably, it <em>cannot</em> be created at the top level,
 e.g. immediately at the R prompt or outside a local environment in an
 R script.  If attempted, an informative error message is produced, e.g.</p>
 <p></p><div class="sourceCode r"><pre><code>&gt; p &lt;- progressr::progressor(100)

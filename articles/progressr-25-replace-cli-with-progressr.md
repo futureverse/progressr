@@ -39,9 +39,9 @@ if (requireNamespace("progressr", quietly = TRUE)) {
 }
 ```
 
-*Note:* A **cli** progress bar can have a “name”, which can be specfied
+*Note:* A **cli** progress bar can have a “name”, which can be specified
 in **purrr** function via argument `.progress`,
 e.g. `.progress = "processing"`. This name is then displayed in front of
 the progress bar. However, because the **progressr** framework does not
-have a concept of progress “name”, they are silently ignored when using
+have a concept of progress “name”, this is silently ignored when using
 `options(cli.progress_handlers = "progressr")`.

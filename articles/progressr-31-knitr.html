@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,8 +126,8 @@ Bengtsson</h4>
 %\VignetteKeyword{knitr}
 %\VignetteEngine{progressr::selfonly}
 -->
-<p>When compiling (“knitting”) an knitr-based vignette, for instance,
-via <code><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knitr::knit()</a></code>, <strong><a href="https://cran.r-project.org/package=knitr" class="external-link">knitr</a></strong> shows
+<p>When compiling (“knitting”) a knitr-based vignette, for instance, via
+<code><a href="https://rdrr.io/pkg/knitr/man/knit.html" class="external-link">knitr::knit()</a></code>, <strong><a href="https://cran.r-project.org/package=knitr" class="external-link">knitr</a></strong> shows
 the progress of code chunks processed thus far using a progress bar. We
 can use <strong><a href="https://progressr.futureverse.org">progressr</a></strong> also for
 this type of progress reporting. To have <strong>knitr</strong> report
@@ -158,7 +158,7 @@ you to see the progress updates, you can add the “slowdown” handler to
 slow down the knitting process, e.g.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pbcol"</span>, <span class="st">"slowdown"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>This will add the overall process to take at least ten seconds
+<p>This will cause the overall process to take at least ten seconds
 (default).</p>
 <p>To make <strong>knitr</strong> report via <strong>progressr</strong>
 in all your R session, set the above R option in your

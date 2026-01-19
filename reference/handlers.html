@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,14 +98,14 @@
 
 <dl><dt id="arg-append">append<a class="anchor" aria-label="anchor" href="#arg-append"></a></dt>
 <dd><p>(logical) If FALSE, the specified progression handlers
-replace the current ones, otherwise appended to them.</p></dd>
+replace the current ones, otherwise they are appended to them.</p></dd>
 
 
 <dt id="arg-on-missing">on_missing<a class="anchor" aria-label="anchor" href="#arg-on-missing"></a></dt>
 <dd><p>(character) If <code>"error"</code>, an error is thrown if one of
-the progression handlers does not exists.  If <code>"warning"</code>, a warning
-is produces and the missing handlers is ignored.  If <code>"ignore"</code>, the
-missing handlers is ignored.</p></dd>
+the progression handlers does not exist.  If <code>"warning"</code>, a warning
+is produced and the missing handler is ignored.  If <code>"ignore"</code>, the
+missing handler is ignored.</p></dd>
 
 
 <dt id="arg-default">default<a class="anchor" aria-label="anchor" href="#arg-default"></a></dt>
@@ -116,12 +116,12 @@ are set.</p></dd>
 <dt id="arg-global">global<a class="anchor" aria-label="anchor" href="#arg-global"></a></dt>
 <dd><p>If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-otherwise FALSE.  Argument <code>global</code> must not used with other arguments.</p></dd>
+otherwise FALSE.  Argument <code>global</code> must not be used with other arguments.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>One or more progression handlers.  Alternatively, this
-functions accepts also a single vector of progression handlers as input.
+function also accepts a single vector of progression handlers as input.
 If this vector is empty, then an empty set of progression handlers will
 be set.</p></dd>
 
@@ -132,7 +132,7 @@ be set.</p></dd>
 If no arguments are specified, then the current set of progression
 handlers is returned.
 If <code>global</code> is specified, then TRUE is returned if the global progression
-handlers is enabled, otherwise false.</p>
+handler is enabled, otherwise FALSE.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -144,13 +144,13 @@ option <span class="option">progressr.handlers</span>.</p>
 
 
 <p><strong>IMPORTANT: Setting progression handlers is a privilege that should be
-left to the end user. It should not be used by R packages, which only task
+left to the end user. It should not be used by R packages, whose only task
 is to <em>signal</em> progress updates, not to decide if, when, and how progress
 should be reported.</strong></p>
 <p>If you have to set or modify the progression handlers inside a function,
 please make sure to undo the settings afterward.  If not, you will break
 whatever progression settings the user already has for other purposes
-used elsewhere.  To undo you settings, you can do:</p>
+used elsewhere.  To undo your settings, you can do:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">old_handlers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"beepr"</span>, <span class="st">"progress"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="va">old_handlers</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
@@ -164,8 +164,7 @@ startup file.  For example, the following will (i) cause your interactive
 R session to use global progression handler by default, and (ii) report
 progress via the <span class="pkg">progress</span> package when in the terminal and via the
 RStudio Jobs progress bar when in the RStudio Console.
-<a href="handler_txtprogressbar.html">handler_txtprogressbar</a>,
-other whenever using the RStudio Console, add
+To configure this, add
 the following to your <code class="file">~/.Rprofile</code> startup file:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"progressr"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co">## Enable global progression updates</span></span>

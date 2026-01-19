@@ -7,9 +7,9 @@
 When running R from the command line, R runs in a non-interactive mode
 ([`interactive()`](https://rdrr.io/r/base/interactive.html) returns
 `FALSE`). The default behavior of **progressr** is to *not* report on
-progress in non-interactive mode. To reported on progress also then, set
-R options `progressr.enable` or environment variable
-`R_PROGRESSR_ENABLE` to `TRUE`. For example,
+progress in non-interactive mode. To report on progress also then, set R
+options `progressr.enable` or environment variable `R_PROGRESSR_ENABLE`
+to `TRUE`. For example,
 
 ``` sh
 $ Rscript -e "library(progressr)" -e "with_progress(y <- slow_sum(1:10))"
@@ -28,15 +28,15 @@ will.
 
 ### Avoid sending progress updates too frequently
 
-Signaling progress updates comes with some overhead. In situation where
+Signaling progress updates comes with some overhead. In situations where
 we use progress updates, this overhead is typically much smaller than
 the task we are processing in each step. However, if the task we iterate
 over is quick, then the extra time induced by the progress updates might
 end up dominating the overall processing time. If that is the case, a
-simple solution is to only signal progress updates every n:th step. Here
+simple solution is to only signal progress updates every nth step. Here
 is a version of
 [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
-that signals progress every 10:th iteration:
+that signals progress every 10th iteration:
 
     slow_sum <- function(x) {
       p <- progressr::progressor(length(x) / 10)
@@ -66,18 +66,18 @@ circumstances. For example, it cannot be called within
 
 ``` r
 > tryCatch(handlers(global = TRUE), error = identity)
-Error in globalCallingHandlers(NULL) : 
+Error in globalCallingHandlers(NULL) :
   should not be called with handlers on the stack
 ```
 
 This is not a bug - neither in **progressr** nor in R itself. It’s due
 to a conservative design on how *global* calling handlers should work in
-R. If it allowed, there’s a risk we might end up getting weird and
+R. If it were allowed, there’s a risk we might end up getting weird and
 unpredictable behaviors when messages, warnings, errors, and other types
 of conditions are signaled.
 
 Because [`tryCatch()`](https://rdrr.io/r/base/conditions.html) and
-[`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html) is
+[`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html) are
 used in many places throughout base R, this means that we also cannot
 call `handlers(global = TRUE)` as part of a package’s startup process,
 e.g. `.onLoad()` or `.onAttach()`.
@@ -95,7 +95,7 @@ processing the document, e.g.
 ### A progressor cannot be created in the global environment
 
 It is not possible to create a progressor in the global environment,
-e.g. in the the top-level of a script. It can only be created inside a
+e.g. in the top-level of a script. It can only be created inside a
 function, within `with_progress({ ... })`, `local({ ... })`, or a
 similar construct. For example, the following:
 
@@ -114,10 +114,10 @@ y <- lapply(xs, function(x) {
 
 results in an error if tried:
 
-    Error in progressor(along = xs) : 
+    Error in progressor(along = xs) :
       A progressor must not be created in the global environment unless wrapped in a
       with_progress() or without_progress() call. Alternatively, create it inside a
-      function or in a local() environment to make sure there is a finite life span
+      function or in a local() environment to make sure there is a finite lifespan
       of the progressor
 
 The solution is to wrap it in a `local({ ... })` call, or more
@@ -139,9 +139,9 @@ with_progress({
 #  |====================                               |  40%
 ```
 
-The main reason for this is to limit the life span of each progressor.
-If we created it in the global environment, there is a significant risk
-it would never finish and block all of the following progressors.
+The main reason for this is to limit the lifespan of each progressor. If
+we created it in the global environment, there is a significant risk it
+would never finish and block all of the following progressors.
 
 ### No coloring by the ‘cli’ and ‘crayon’ packages
 
@@ -290,11 +290,11 @@ e.g. [Bug \#9486](https://github.com/posit-dev/positron/issues/9486)
 ### Jupyter: Reporting progress to stderr (default) does not work
 
 The default for most terminal progress renders, including the ones for
-**progressr**, display the progress on standard error (stderr). Due to
+**progressr**, display the progress on standard error (stderr). Due to a
 limitation in Jupyter, this default does not work there. The reason is
 that [Jupyter silently
 drops](https://github.com/futureverse/progressr/issues/170) any output
-send to stderr, e.g.
+sent to stderr, e.g.
 
 ``` r
 > cat("hello stderr\n", file = stderr())
@@ -353,7 +353,7 @@ abc
 
 def
 
-> 
+>
 ```
 
 This causes any progress framework (e.g. the **progress** package) that

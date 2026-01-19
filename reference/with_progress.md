@@ -34,11 +34,11 @@ without_progress(expr)
 - cleanup:
 
   If TRUE, all progression handlers will be shutdown at the end
-  regardless of the progression is complete or not.
+  regardless of whether the progression is complete or not.
 
 - delay_terminal:
 
-  If TRUE, output and conditions that may end up in the terminal will
+  If TRUE, output and conditions that may end up in the terminal will be
   delayed.
 
 - delay_stdout:
@@ -55,9 +55,9 @@ without_progress(expr)
 
 - interrupts:
 
-  Controls whether interrupts should be detected or not. If TRUE and a
+  Controls whether interrupts should be detected or not. If TRUE and an
   interrupt is signaled, progress handlers are asked to report on the
-  current amount progress when the evaluation was terminated by the
+  current amount of progress when the evaluation was terminated by the
   interrupt, e.g. when a user pressed Ctrl-C in an interactive session,
   or a batch process was interrupted because it ran out of time. Note
   that it's optional for a progress handler to support this and only
@@ -93,7 +93,7 @@ condition preventing it from reaching, say, any global condition
 handlers.
 
 **IMPORTANT: This function is meant for end users only. It should not be
-used by R packages, which only task is to *signal* progress updates, not
+used by R packages, whose only task is to *signal* progress updates, not
 to decide if, when, and how progress should be reported.**
 
 `without_progress()` evaluates an expression while ignoring all progress
@@ -104,7 +104,7 @@ updates.
 Formally, progression handlers are calling handlers that are called when
 a
 [progression](https://progressr.futureverse.org/reference/progression.md)
-condition is signaled. These handlers are functions that takes one
+condition is signaled. These handlers are functions that take one
 argument which is the
 [progression](https://progressr.futureverse.org/reference/progression.md)
 condition.
@@ -114,7 +114,7 @@ condition.
 When running R from the command line, R runs in a non-interactive mode
 ([`interactive()`](https://rdrr.io/r/base/interactive.html) returns
 `FALSE`). The default behavior of `with_progress()` is to *not* report
-on progress in non-interactive mode. To have progress being reported on
+on progress in non-interactive mode. To have progress being reported
 also then, set R options progressr.enable or environment variable
 `R_PROGRESSR_ENABLE` to `TRUE`. Alternatively, one can set argument
 `enable=TRUE` when calling `with_progress()`. For example,
@@ -175,7 +175,7 @@ print(slow_sum)
 #>     p(amount = 0)
 #>     sum
 #> }
-#> <bytecode: 0x59141adfc978>
+#> <bytecode: 0x5dcbac6f8958>
 #> <environment: namespace:progressr>
 
 x <- 1:10

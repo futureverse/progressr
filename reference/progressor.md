@@ -35,7 +35,7 @@ progressor(
 
 - offset, scale:
 
-  (integer; optional) scale and offset applying transform
+  (integer; optional) scale and offset applying the transform
   `steps <- scale * steps + offset`.
 
 - transform:
@@ -105,7 +105,7 @@ A `progressor` function can only be created inside a local environment,
 e.g. inside a function, within a
 [`local()`](https://rdrr.io/r/base/eval.html) call, or within a
 [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md)
-call. Notably, it *cannot* be create at the top level, e.g. immediately
+call. Notably, it *cannot* be created at the top level, e.g. immediately
 at the R prompt or outside a local environment in an R script. If
 attempted, an informative error message is produced, e.g.
 

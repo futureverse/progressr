@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -153,11 +153,11 @@ all your R session, set the above R option in your
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>cli.progress_handlers <span class="op">=</span> <span class="st">"progressr"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p><em>Note:</em> A <strong>cli</strong> progress bar can have a “name”,
-which can be specfied in <strong>purrr</strong> function via argument
+which can be specified in <strong>purrr</strong> function via argument
 <code>.progress</code>, e.g. <code>.progress = "processing"</code>. This
 name is then displayed in front of the progress bar. However, because
 the <strong>progressr</strong> framework does not have a concept of
-progress “name”, they are silently ignored when using
+progress “name”, this is silently ignored when using
 <code>options(cli.progress_handlers = "progressr")</code>.</p>
   </main>
 </div>

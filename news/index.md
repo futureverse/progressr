@@ -215,10 +215,9 @@ CRAN release: 2022-12-13
   [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md)
   and
   [`without_progress()`](https://progressr.futureverse.org/reference/with_progress.md)
-  disables the global progress handler temporarily while running to
-  avoid progress updates being handled twice. Previously, it was,
-  technically, possible to have two different progress handlers
-  intertwined.
+  disable the global progress handler temporarily while running to avoid
+  progress updates being handled twice. Previously, it was, technically,
+  possible to have two different progress handlers intertwined.
 
 ### New Features
 
@@ -270,7 +269,7 @@ CRAN release: 2022-09-02
 
 ### New Features
 
-- When the using a ‘winprogressbar’ or a ‘tkprogressbar’ handler,
+- When using a ‘winprogressbar’ or a ‘tkprogressbar’ handler,
   progression messages updates the `label` component of the progress
   panel. Now, it is also possible to update the `title` component based
   on progression messages. How the `title` and `label` components are
@@ -283,7 +282,7 @@ CRAN release: 2022-09-02
 
 - Now the demo function
   [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
-  outputs also “sticky” messages.
+  also outputs “sticky” messages.
 
 ### Miscellaneous
 
@@ -295,7 +294,7 @@ CRAN release: 2022-06-03
 
 ### New Features
 
-- Now **plyr** (\>= 1.8.7) supports **progressr** for also parallel
+- Now **plyr** (\>= 1.8.7) supports **progressr** also for parallel
   processing,
   e.g. `y <- plyr::llply(X, slow_sum, .parallel = TRUE, .progress = "progressr")`.
 
@@ -319,7 +318,7 @@ CRAN release: 2021-12-19
 ### Bug Fixes
 
 - A progressor that signaled progress beyond 100% prevented any further
-  progressors in the same environment to report on progress.
+  progressors in the same environment reporting on progress.
 
 - It was not possible to reuse handlers of type ‘progress’ more than
   once, because they did not fully reset themselves when finished.
@@ -343,7 +342,7 @@ CRAN release: 2021-09-24
 
 - The progressor function created by
   [`progressor()`](https://progressr.futureverse.org/reference/progressor.md)
-  no longer “inherit” objects from the calling environment, which would,
+  no longer inherits objects from the calling environment, which would,
   for instance, result in those objects to be exported to parallel
   workers together with the progressor function, which in turn would
   come with large time and memory costs.
@@ -368,14 +367,14 @@ CRAN release: 2021-09-24
   should be recorded in each `progression` condition.
 
 - Now [`print()`](https://rdrr.io/r/base/print.html) for `progressor`
-  functions and `progression` conditions report also on the size of the
+  functions and `progression` conditions reports also on the size of the
   object, i.e. the number of bytes it requires when serialized, for
   instance, to and from a parallel worker.
 
 ### Bug Fixes
 
 - Registered progression handlers would report on progress also when in
-  a *forked* parallel child processes, e.g. when using
+  a *forked* parallel child process, e.g. when using
   [`parallel::mclapply()`](https://rdrr.io/r/parallel/mclapply.html).
   This would give a false impression that **progressr** updates would
   work when using
@@ -400,13 +399,13 @@ CRAN release: 2021-06-10
   `progressr.*` option. Previously, some of these environment variables
   were queried by different functions as a fallback to when an option
   was not set. By only parsing them when the package is loaded, it
-  decrease the overhead in functions, and it clarifies that options can
+  decreases the overhead in functions, and it clarifies that options can
   be changed at runtime whereas environment variables should only be set
   at startup.
 
 - When using
   [`withProgressShiny()`](https://progressr.futureverse.org/reference/withProgressShiny.md),
-  progression messages now updates the `detail` component of the Shiny
+  progression messages now update the `detail` component of the Shiny
   progress panel. Previously, it updated the `message` component. This
   can be configured via new `inputs` argument.
 
@@ -431,7 +430,7 @@ CRAN release: 2021-06-10
 - As an alternative to specifying the relative amount of progress, say,
   `p(amount = 2)`, it is now possible to also specify the absolute
   amount of progress made this far, e.g. `p(step = 42)`. Argument
-  `amount` has not effect when argument `step` is specified. WARNING:
+  `amount` has no effect when argument `step` is specified. WARNING:
   Argument `step` should only be used when in full control of the order
   when this `progression` condition is signaled. For example, it must
   not be signaled as one of many parallel progress updates signaled
@@ -595,7 +594,7 @@ CRAN release: 2020-05-19
 - Argument `interval` was ignored for
   [`handler_debug()`](https://progressr.futureverse.org/reference/handler_debug.md).
 
-- The class of `handler_<nnn>()` functions where all
+- The class of `handler_<nnn>()` functions were all
   `reset_progression_handler` rather than `<nnn>_progression_handler`.
   The same bug caused the reported `name` field to be `"reset"` rather
   than `"<nnn>"`.
@@ -618,7 +617,7 @@ CRAN release: 2020-01-23
 
 ### Significant Changes
 
-- All progression handler function have been renamed from
+- All progression handler functions have been renamed from
   `<name>_handler()` to `handler_<name>()` to make it easier to use
   autocompletion on them.
 
@@ -679,7 +678,7 @@ CRAN release: 2020-01-23
 - Package could set `.Random.seed` to NULL, instead of removing it,
   which in turn would produce a warning on “‘.Random.seed’ is not an
   integer vector but of type ‘NULL’, so ignored” when the next random
-  number generated.
+  number was generated.
 
 ## Version 0.1.4
 
@@ -693,7 +692,7 @@ CRAN release: 2020-01-23
 
 - Now it is possible to send “I’m still here” progression updates by
   setting the progress step to zero, e.g. `progress(amount = 0)`. This
-  type of information can for instance be used to updated a progress bar
+  type of information can for instance be used to update a progress bar
   spinner.
 
 - Add utility function
@@ -701,7 +700,7 @@ CRAN release: 2020-01-23
   for controlling option `progressr.handlers`.
 
 - Progression handlers’ internal state now has a sticky `message` field,
-  which hold the most recent, non-empty progression `message` received.
+  which holds the most recent, non-empty progression `message` received.
 
 ## Version 0.1.2
 
@@ -811,7 +810,8 @@ CRAN release: 2020-01-23
 
 - Now `with_progress(..., cleanup = TRUE)` will signal a generic
   “shutdown” progression at the end that will trigger all progression
-  handlers to finish up regardless of all steps have been take or not.
+  handlers to finish up regardless of whether all steps have been taken
+  or not.
 
 - Now progressions originating from an unknown source are ignored.
 
@@ -894,8 +894,8 @@ CRAN release: 2020-01-23
   signal “done” as soon as the last step has been reached.
 
 - Made `amount` the first argument of progressors to avoid having to
-  specify it by name if progressing with an amount than the default
-  `amount = 1.0`.
+  specify it by name if progressing with an amount other than the
+  default `amount = 1.0`.
 
 - Add argument `clear` to control whether progress reporter should clear
   its output upon completion. The default is to do this, where

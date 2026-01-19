@@ -9,7 +9,7 @@ progress updates are rendered is controlled by the end user. For
 instance, some users may prefer visual feedback such as a horizontal
 progress bar in the terminal, whereas others may prefer auditory
 feedback. The **[progressr](https://progressr.futureverse.org)**
-framework is designed to work out-of-the-box also with parallel and
+framework is designed to work out-of-the-box also for parallel and
 distributed processing, especially with the
 **[futureverse](https://www.futureverse.org)** ecosystem.
 
@@ -78,7 +78,7 @@ updates, we need to request them to be “handled”, which we do by:
 > progressr::handlers(global = TRUE)
 ```
 
-After this, progress will be reported;
+After this, progress will be reported:
 
 ``` r
 > y <- slow_sum(1:10)
@@ -110,18 +110,17 @@ of these, e.g.
 handlers(c("cli", "beepr", "ntfy"))
 ```
 
-See the ‘Customizing How Progress is Reported’ vignette for for
-examples.
+See the ‘Customizing How Progress is Reported’ vignette for examples.
 
 ## Additional Features
 
 ### Support for progressr elsewhere
 
-Note that progression updates by **progressr** is designed to work out
+Note that progression updates by **progressr** are designed to work out
 of the box for any iterator framework in R. See the different package
 vignettes for details. Prominent examples are:
 
-- [`lapply()`](https://rdrr.io/r/base/lapply.html) etc. of base R
+- [`lapply()`](https://rdrr.io/r/base/lapply.html) etc. in base R
 - `map()` etc. by the
   **[purrr](https://cran.r-project.org/package=purrr)** package
 - `llply()` etc. by the
@@ -159,7 +158,7 @@ Other uses of **progressr** are:
 In contrast to other progress-bar frameworks, output from
 [`message()`](https://rdrr.io/r/base/message.html),
 [`cat()`](https://rdrr.io/r/base/cat.html),
-[`print()`](https://rdrr.io/r/base/print.html) and so on, will *not*
+[`print()`](https://rdrr.io/r/base/print.html) and so on will *not*
 interfere with progress reported via **progressr**. For example, say we
 have:
 

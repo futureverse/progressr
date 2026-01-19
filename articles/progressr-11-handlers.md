@@ -117,7 +117,7 @@ handlers("void")
 
 ## Further configuration of progress handlers
 
-Above we have seen examples where the
+Above we have seen examples where
 [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
 takes one or more strings as input,
 e.g. `handlers(c("progress", "beepr"))`. This is short for a more

@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -129,12 +129,12 @@ Bengtsson</h4>
 %\VignetteKeyword{plyr}
 %\VignetteEngine{progressr::selfonly}
 -->
-<p>Progress updates by <strong><a href="https://progressr.futureverse.org">progressr</a></strong> is
+<p>Progress updates by <strong><a href="https://progressr.futureverse.org">progressr</a></strong> are
 designed to work out of the box for any iterator framework in R,
 e.g. <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code>, <strong><a href="https://cran.r-project.org/package=foreach" class="external-link">foreach</a></strong>,
 <strong><a href="https://cran.r-project.org/package=purrr" class="external-link">purrr</a></strong>, and
 <strong><a href="https://cran.r-project.org/package=plyr" class="external-link">plyr</a></strong>. Below
-you will a set of examples that illustrate how to use
+you will find a set of examples that illustrate how to use
 <strong>progressr</strong> in common use cases.</p>
 <div class="section level2">
 <h2 id="base-r-apply-functions">Base R apply functions<a class="anchor" aria-label="anchor" href="#base-r-apply-functions"></a>
@@ -216,7 +216,7 @@ you will a set of examples that illustrate how to use
 <span><span class="co">#  |====================                               |  40%</span></span></code></pre></div>
 <p>Note how this solution does not make use of <strong>plyr</strong>’s
 <code>.progress</code> argument, because the above solution is more
-powerful and more flexible, e.g. we have more control on progress
+powerful and more flexible, e.g. we have more control over progress
 updates and their messages. However, if you prefer the traditional
 <strong>plyr</strong> approach, you can use
 <code>.progress = "progressr"</code>,

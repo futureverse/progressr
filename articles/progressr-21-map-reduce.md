@@ -1,12 +1,12 @@
 # progressr: Map-Reduce Calls, e.g. lapply() and map()
 
 Progress updates by **[progressr](https://progressr.futureverse.org)**
-is designed to work out of the box for any iterator framework in R,
+are designed to work out of the box for any iterator framework in R,
 e.g. [`lapply()`](https://rdrr.io/r/base/lapply.html),
 **[foreach](https://cran.r-project.org/package=foreach)**,
 **[purrr](https://cran.r-project.org/package=purrr)**, and
-**[plyr](https://cran.r-project.org/package=plyr)**. Below you will a
-set of examples that illustrate how to use **progressr** in common use
+**[plyr](https://cran.r-project.org/package=plyr)**. Below you will find
+a set of examples that illustrate how to use **progressr** in common use
 cases.
 
 ## Base R apply functions
@@ -90,7 +90,7 @@ y <- my_fcn(1:10)
 
 Note how this solution does not make use of **plyr**’s `.progress`
 argument, because the above solution is more powerful and more flexible,
-e.g. we have more control on progress updates and their messages.
+e.g. we have more control over progress updates and their messages.
 However, if you prefer the traditional **plyr** approach, you can use
 `.progress = "progressr"`,
 e.g. `y <- llply(..., .progress = "progressr")`.

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -194,7 +194,7 @@
 <h2 class="pkg-version" data-toc-text="0.12.0" id="version-0120">Version 0.12.0<a class="anchor" aria-label="anchor" href="#version-0120"></a></h2><p class="text-muted">CRAN release: 2022-12-13</p>
 <div class="section level3">
 <h3 id="significant-changes-0-12-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-12-0"></a></h3>
-<ul><li>Now <code><a href="../reference/with_progress.html">with_progress()</a></code> and <code><a href="../reference/with_progress.html">without_progress()</a></code> disables the global progress handler temporarily while running to avoid progress updates being handled twice. Previously, it was, technically, possible to have two different progress handlers intertwined.</li>
+<ul><li>Now <code><a href="../reference/with_progress.html">with_progress()</a></code> and <code><a href="../reference/with_progress.html">without_progress()</a></code> disable the global progress handler temporarily while running to avoid progress updates being handled twice. Previously, it was, technically, possible to have two different progress handlers intertwined.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-12-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-12-0"></a></h3>
@@ -218,8 +218,8 @@
 <h2 class="pkg-version" data-toc-text="0.11.0" id="version-0110">Version 0.11.0<a class="anchor" aria-label="anchor" href="#version-0110"></a></h2><p class="text-muted">CRAN release: 2022-09-02</p>
 <div class="section level3">
 <h3 id="new-features-0-11-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-11-0"></a></h3>
-<ul><li><p>When the using a ‘winprogressbar’ or a ‘tkprogressbar’ handler, progression messages updates the <code>label</code> component of the progress panel. Now, it is also possible to update the <code>title</code> component based on progression messages. How the <code>title</code> and <code>label</code> components are updated and from what type of progression message is configured via the new <code>inputs</code> argument. For example, <code>inputs =    list(title = "sticky_message", label = "message")</code> causes progression messages to update the <code>label</code> component and sticky ones to update both. For backward compatible reasons, the default is <code>inputs = list(title = NULL, label = "message")</code>.</p></li>
-<li><p>Now the demo function <code><a href="../reference/slow_sum.html">slow_sum()</a></code> outputs also “sticky” messages.</p></li>
+<ul><li><p>When using a ‘winprogressbar’ or a ‘tkprogressbar’ handler, progression messages updates the <code>label</code> component of the progress panel. Now, it is also possible to update the <code>title</code> component based on progression messages. How the <code>title</code> and <code>label</code> components are updated and from what type of progression message is configured via the new <code>inputs</code> argument. For example, <code>inputs =    list(title = "sticky_message", label = "message")</code> causes progression messages to update the <code>label</code> component and sticky ones to update both. For backward compatible reasons, the default is <code>inputs = list(title = NULL, label = "message")</code>.</p></li>
+<li><p>Now the demo function <code><a href="../reference/slow_sum.html">slow_sum()</a></code> also outputs “sticky” messages.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="miscellaneous-0-11-0">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-11-0"></a></h3>
@@ -230,7 +230,7 @@
 <h2 class="pkg-version" data-toc-text="0.10.1" id="version-0101">Version 0.10.1<a class="anchor" aria-label="anchor" href="#version-0101"></a></h2><p class="text-muted">CRAN release: 2022-06-03</p>
 <div class="section level3">
 <h3 id="new-features-0-10-1">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-10-1"></a></h3>
-<ul><li>Now <strong>plyr</strong> (&gt;= 1.8.7) supports <strong>progressr</strong> for also parallel processing, e.g. <code>y &lt;- plyr::llply(X, slow_sum, .parallel = TRUE,    .progress = "progressr")</code>.</li>
+<ul><li>Now <strong>plyr</strong> (&gt;= 1.8.7) supports <strong>progressr</strong> also for parallel processing, e.g. <code>y &lt;- plyr::llply(X, slow_sum, .parallel = TRUE,    .progress = "progressr")</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-10-1">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-1"></a></h3>
@@ -246,7 +246,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-10-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-10-0"></a></h3>
-<ul><li><p>A progressor that signaled progress beyond 100% prevented any further progressors in the same environment to report on progress.</p></li>
+<ul><li><p>A progressor that signaled progress beyond 100% prevented any further progressors in the same environment reporting on progress.</p></li>
 <li><p>It was not possible to reuse handlers of type ‘progress’ more than once, because they did not fully reset themselves when finished.</p></li>
 <li><p>The ‘pbcol’ progression handler did not respect <code>clean = FALSE</code>.</p></li>
 </ul></div>
@@ -259,17 +259,17 @@
 <h2 class="pkg-version" data-toc-text="0.9.0" id="version-090">Version 0.9.0<a class="anchor" aria-label="anchor" href="#version-090"></a></h2><p class="text-muted">CRAN release: 2021-09-24</p>
 <div class="section level3">
 <h3 id="performance-0-9-0">Performance<a class="anchor" aria-label="anchor" href="#performance-0-9-0"></a></h3>
-<ul><li><p>The progressor function created by <code><a href="../reference/progressor.html">progressor()</a></code> no longer “inherit” objects from the calling environment, which would, for instance, result in those objects to be exported to parallel workers together with the progressor function, which in turn would come with large time and memory costs.</p></li>
+<ul><li><p>The progressor function created by <code><a href="../reference/progressor.html">progressor()</a></code> no longer inherits objects from the calling environment, which would, for instance, result in those objects to be exported to parallel workers together with the progressor function, which in turn would come with large time and memory costs.</p></li>
 <li><p><code><a href="../reference/progressor.html">progressor()</a></code> no longer records the call stack for progressions by default, because that significantly increases the size of these condition objects, e.g. instead of being 5 kB it may be 500 kB. If a large number of progress updates are signaled and collected, as done, for instance, by futures, then the memory consumption on the collecting end could become very large. The large sizes would also have a negative impact on the performance in parallelization with futures because of the extra overhead of transferring these extra large conditions from the parallel workers back to the main R session. These issues has been there since <strong>progressr</strong> 0.7.0 (December 2020). To revert to the previous behavior, use <code>progressor(..., trace = TRUE)</code>.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-9-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-9-0"></a></h3>
 <ul><li><p><code><a href="../reference/progressor.html">progressor()</a></code> gained argument <code>trace</code> to control whether or not the call stack should be recorded in each <code>progression</code> condition.</p></li>
-<li><p>Now <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> for <code>progressor</code> functions and <code>progression</code> conditions report also on the size of the object, i.e. the number of bytes it requires when serialized, for instance, to and from a parallel worker.</p></li>
+<li><p>Now <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> for <code>progressor</code> functions and <code>progression</code> conditions reports also on the size of the object, i.e. the number of bytes it requires when serialized, for instance, to and from a parallel worker.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-9-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-9-0"></a></h3>
-<ul><li>Registered progression handlers would report on progress also when in a <em>forked</em> parallel child processes, e.g. when using <code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code>. This would give a false impression that <strong>progressr</strong> updates would work when using <code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code>, which is not true. Note however, that it does indeed work when using the future ‘multicore’ backend, which uses forks.</li>
+<ul><li>Registered progression handlers would report on progress also when in a <em>forked</em> parallel child process, e.g. when using <code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code>. This would give a false impression that <strong>progressr</strong> updates would work when using <code><a href="https://rdrr.io/r/parallel/mclapply.html" class="external-link">parallel::mclapply()</a></code>, which is not true. Note however, that it does indeed work when using the future ‘multicore’ backend, which uses forks.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -277,8 +277,8 @@
 <div class="section level3">
 <h3 id="significant-changes-0-8-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-8-0"></a></h3>
 <ul><li><p>Creating a new <code><a href="../reference/progressor.html">progressor()</a></code> will now automatically finish an existing progressor, if one was previously created in the same environment. The previous behavior was to give an error (see below bug fix).</p></li>
-<li><p><code>R_PROGRESSR_*</code> environment variables are now only read when the <strong>progressr</strong> package is loaded, where they set the corresponding <code>progressr.*</code> option. Previously, some of these environment variables were queried by different functions as a fallback to when an option was not set. By only parsing them when the package is loaded, it decrease the overhead in functions, and it clarifies that options can be changed at runtime whereas environment variables should only be set at startup.</p></li>
-<li><p>When using <code><a href="../reference/withProgressShiny.html">withProgressShiny()</a></code>, progression messages now updates the <code>detail</code> component of the Shiny progress panel. Previously, it updated the <code>message</code> component. This can be configured via new <code>inputs</code> argument.</p></li>
+<li><p><code>R_PROGRESSR_*</code> environment variables are now only read when the <strong>progressr</strong> package is loaded, where they set the corresponding <code>progressr.*</code> option. Previously, some of these environment variables were queried by different functions as a fallback to when an option was not set. By only parsing them when the package is loaded, it decreases the overhead in functions, and it clarifies that options can be changed at runtime whereas environment variables should only be set at startup.</p></li>
+<li><p>When using <code><a href="../reference/withProgressShiny.html">withProgressShiny()</a></code>, progression messages now update the <code>detail</code> component of the Shiny progress panel. Previously, it updated the <code>message</code> component. This can be configured via new <code>inputs</code> argument.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-8-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-8-0"></a></h3>
@@ -288,7 +288,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="beta-features-0-8-0">Beta Features<a class="anchor" aria-label="anchor" href="#beta-features-0-8-0"></a></h3>
-<ul><li>As an alternative to specifying the relative amount of progress, say, <code>p(amount = 2)</code>, it is now possible to also specify the absolute amount of progress made this far, e.g. <code>p(step = 42)</code>. Argument <code>amount</code> has not effect when argument <code>step</code> is specified. WARNING: Argument <code>step</code> should only be used when in full control of the order when this <code>progression</code> condition is signaled. For example, it must not be signaled as one of many parallel progress updates signaled concurrently, because we cannot guarantee the order these progressions arrive.</li>
+<ul><li>As an alternative to specifying the relative amount of progress, say, <code>p(amount = 2)</code>, it is now possible to also specify the absolute amount of progress made this far, e.g. <code>p(step = 42)</code>. Argument <code>amount</code> has no effect when argument <code>step</code> is specified. WARNING: Argument <code>step</code> should only be used when in full control of the order when this <code>progression</code> condition is signaled. For example, it must not be signaled as one of many parallel progress updates signaled concurrently, because we cannot guarantee the order these progressions arrive.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-8-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-8-0"></a></h3>
@@ -346,7 +346,7 @@
 <li><p><code><a href="../reference/handlers.html">handlers()</a></code> did not return invisible (as documented).</p></li>
 <li><p>Argument <code>target</code> was ignored for all handler functions.</p></li>
 <li><p>Argument <code>interval</code> was ignored for <code><a href="../reference/handler_debug.html">handler_debug()</a></code>.</p></li>
-<li><p>The class of <code>handler_&lt;nnn&gt;()</code> functions where all <code>reset_progression_handler</code> rather than <code>&lt;nnn&gt;_progression_handler</code>. The same bug caused the reported <code>name</code> field to be <code>"reset"</code> rather than <code>"&lt;nnn&gt;"</code>.</p></li>
+<li><p>The class of <code>handler_&lt;nnn&gt;()</code> functions were all <code>reset_progression_handler</code> rather than <code>&lt;nnn&gt;_progression_handler</code>. The same bug caused the reported <code>name</code> field to be <code>"reset"</code> rather than <code>"&lt;nnn&gt;"</code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -364,7 +364,7 @@
 <h2 class="pkg-version" data-toc-text="0.4.0" id="version-040">Version 0.4.0<a class="anchor" aria-label="anchor" href="#version-040"></a></h2><p class="text-muted">CRAN release: 2020-01-23</p>
 <div class="section level3">
 <h3 id="significant-changes-0-4-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-0-4-0"></a></h3>
-<ul><li>All progression handler function have been renamed from <code>&lt;name&gt;_handler()</code> to <code>handler_&lt;name&gt;()</code> to make it easier to use autocompletion on them.</li>
+<ul><li>All progression handler functions have been renamed from <code>&lt;name&gt;_handler()</code> to <code>handler_&lt;name&gt;()</code> to make it easier to use autocompletion on them.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -408,7 +408,7 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-1-5">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-1-5"></a></h3>
-<ul><li>Package could set <code>.Random.seed</code> to NULL, instead of removing it, which in turn would produce a warning on “‘.Random.seed’ is not an integer vector but of type ‘NULL’, so ignored” when the next random number generated.</li>
+<ul><li>Package could set <code>.Random.seed</code> to NULL, instead of removing it, which in turn would produce a warning on “‘.Random.seed’ is not an integer vector but of type ‘NULL’, so ignored” when the next random number was generated.</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -422,9 +422,9 @@
 <h2 class="pkg-version" data-toc-text="0.1.3" id="version-013">Version 0.1.3<a class="anchor" aria-label="anchor" href="#version-013"></a></h2>
 <div class="section level3">
 <h3 id="new-features-0-1-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-1-3"></a></h3>
-<ul><li><p>Now it is possible to send “I’m still here” progression updates by setting the progress step to zero, e.g. <code>progress(amount = 0)</code>. This type of information can for instance be used to updated a progress bar spinner.</p></li>
+<ul><li><p>Now it is possible to send “I’m still here” progression updates by setting the progress step to zero, e.g. <code>progress(amount = 0)</code>. This type of information can for instance be used to update a progress bar spinner.</p></li>
 <li><p>Add utility function <code><a href="../reference/handlers.html">handlers()</a></code> for controlling option <code>progressr.handlers</code>.</p></li>
-<li><p>Progression handlers’ internal state now has a sticky <code>message</code> field, which hold the most recent, non-empty progression <code>message</code> received.</p></li>
+<li><p>Progression handlers’ internal state now has a sticky <code>message</code> field, which holds the most recent, non-empty progression <code>message</code> received.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -500,7 +500,7 @@
 <div class="section level3">
 <h3 id="new-features-0-0-3">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-3"></a></h3>
 <ul><li><p>Add argument <code>enable_after</code> for progression handlers.</p></li>
-<li><p>Now <code>with_progress(..., cleanup = TRUE)</code> will signal a generic “shutdown” progression at the end that will trigger all progression handlers to finish up regardless of all steps have been take or not.</p></li>
+<li><p>Now <code>with_progress(..., cleanup = TRUE)</code> will signal a generic “shutdown” progression at the end that will trigger all progression handlers to finish up regardless of whether all steps have been taken or not.</p></li>
 <li><p>Now progressions originating from an unknown source are ignored.</p></li>
 <li><p>The default output format of the <code><a href="http://r-lib.github.io/progress/reference/progress_bar.html" class="external-link">progress::progress_bar()</a></code> progression handler is now <code>":percent :bar :message"</code>.</p></li>
 <li><p>The <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code> progression handler now displays the progression message.</p></li>
@@ -546,7 +546,7 @@
 <div class="section level3">
 <h3 id="new-features-0-0-0-9004">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-0-0-9004"></a></h3>
 <ul><li><p>Add argument <code>auto_done</code> to automatically have progress updates also signal “done” as soon as the last step has been reached.</p></li>
-<li><p>Made <code>amount</code> the first argument of progressors to avoid having to specify it by name if progressing with an amount than the default <code>amount = 1.0</code>.</p></li>
+<li><p>Made <code>amount</code> the first argument of progressors to avoid having to specify it by name if progressing with an amount other than the default <code>amount = 1.0</code>.</p></li>
 <li><p>Add argument <code>clear</code> to control whether progress reporter should clear its output upon completion. The default is to do this, where supported.</p></li>
 <li><p>Add progress update handler based on <code><a href="https://rdrr.io/pkg/pbmcapply/man/progressBar.html" class="external-link">pbmcapply::progressBar()</a></code>.</p></li>
 <li><p>Each achieved step is now timestamped.</p></li>

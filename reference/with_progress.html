@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,12 +113,12 @@ If NULL or an empty list, progress updates are ignored.</p></dd>
 
 <dt id="arg-cleanup">cleanup<a class="anchor" aria-label="anchor" href="#arg-cleanup"></a></dt>
 <dd><p>If TRUE, all progression handlers will be shutdown
-at the end regardless of the progression is complete or not.</p></dd>
+at the end regardless of whether the progression is complete or not.</p></dd>
 
 
 <dt id="arg-delay-terminal">delay_terminal<a class="anchor" aria-label="anchor" href="#arg-delay-terminal"></a></dt>
 <dd><p>If TRUE, output and conditions that may end up in
-the terminal will delayed.</p></dd>
+the terminal will be delayed.</p></dd>
 
 
 <dt id="arg-delay-stdout">delay_stdout<a class="anchor" aria-label="anchor" href="#arg-delay-stdout"></a></dt>
@@ -134,8 +134,8 @@ standard output is relayed.</p></dd>
 
 <dt id="arg-interrupts">interrupts<a class="anchor" aria-label="anchor" href="#arg-interrupts"></a></dt>
 <dd><p>Controls whether interrupts should be detected or not.
-If TRUE and a interrupt is signaled, progress handlers are asked to
-report on the current amount progress when the evaluation was terminated
+If TRUE and an interrupt is signaled, progress handlers are asked to
+report on the current amount of progress when the evaluation was terminated
 by the interrupt, e.g. when a user pressed Ctrl-C in an interactive session,
 or a batch process was interrupted because it ran out of time.
 Note that it's optional for a progress handler to support this and only
@@ -168,7 +168,7 @@ while evaluating the <code>expr</code> expression.</p>
 condition preventing it from reaching, say, any global condition
 handlers.</p>
 <p><strong>IMPORTANT: This function is meant for end users only.  It should not
-be used by R packages, which only task is to <em>signal</em> progress updates,
+be used by R packages, whose only task is to <em>signal</em> progress updates,
 not to decide if, when, and how progress should be reported.</strong></p>
 <p><code>without_progress()</code> evaluates an expression while ignoring all
 progress updates.</p>
@@ -179,7 +179,7 @@ progress updates.</p>
 
 <p>Formally, progression handlers are calling handlers that are called
 when a <a href="progression.html">progression</a> condition is signaled.  These handlers are functions
-that takes one argument which is the <a href="progression.html">progression</a> condition.</p>
+that take one argument which is the <a href="progression.html">progression</a> condition.</p>
     </div>
     <div class="section level2">
     <h2 id="progress-updates-in-batch-mode">Progress updates in batch mode<a class="anchor" aria-label="anchor" href="#progress-updates-in-batch-mode"></a></h2>
@@ -188,7 +188,7 @@ that takes one argument which is the <a href="progression.html">progression</a> 
 <p>When running R from the command line, R runs in a non-interactive mode
 (<code><a href="https://rdrr.io/r/base/interactive.html" class="external-link">interactive()</a></code> returns <code>FALSE</code>).  The default behavior of
 <code>with_progress()</code> is to <em>not</em> report on progress in non-interactive mode.
-To have progress being reported on also then, set R options
+To have progress being reported also then, set R options
 <span class="option">progressr.enable</span> or environment variable <code class="env">R_PROGRESSR_ENABLE</code>
 to <code>TRUE</code>.  Alternatively, one can set argument <code>enable=TRUE</code> when calling
 <code>with_progress()</code>.  For example,</p>
@@ -243,7 +243,7 @@ Internally, this function is built around <code><a href="https://rdrr.io/r/base/
 <span class="r-out co"><span class="r-pr">#&gt;</span>     p(amount = 0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     sum</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x59141adfc978&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5dcbac6f8958&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:progressr&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>

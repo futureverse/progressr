@@ -32,15 +32,15 @@ y <- my_fcn(1:10)
 The **[futureverse](https://www.futureverse.org)** framework, which
 provides a unified API for parallel and distributed processing in R, has
 built-in support for the kind of progression updates produced by the
-**progressr** package. This means that you can use it with for instance
-**[future.apply](https://future.apply.futureverse.org)**,
+**progressr** package. This means that you can use it with, for
+instance, **[future.apply](https://future.apply.futureverse.org)**,
 **[furrr](https://furrr.futureverse.org)**, and
 **[foreach](https://cran.r-project.org/package=foreach)** with
 **[doFuture](https://doFuture.futureverse.org)**, and
 **[plyr](https://cran.r-project.org/package=plyr)** or
 **[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
 with **doFuture**. In contrast, *non-future* parallelization methods
-such as **parallel**’s `mclapply()` and,
+such as **parallel**’s `mclapply()` and
 [`parallel::parLapply()`](https://rdrr.io/r/parallel/clusterApply.html),
 and **foreach** adapters like **doParallel** do *not* support progress
 reports via **progressr**.
@@ -81,7 +81,7 @@ Here is an example that uses
 together with `%dofuture%` of the
 **[doFuture](https://doFuture.futureverse.org)** package to parallelize
 while reporting on progress. This example parallelizes on the local
-machine, it works also for remote machines:
+machine; it works also for remote machines:
 
 ``` r
 library(doFuture)    ## %dofuture%
@@ -107,7 +107,8 @@ y <- my_fcn(1:10)
 For existing code using the traditional `%dopar%` operators of the
 **[foreach](https://cran.r-project.org/package=foreach)** package, we
 can register the **[doFuture](https://doFuture.futureverse.org)**
-adapter and use the same **progressr** as above to progress updates;
+adapter and use the same **progressr** as above to report progress
+updates;
 
 ``` r
 library(doFuture)
@@ -160,15 +161,17 @@ y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-*Note:* This solution does not involved the `.progress = TRUE` argument
+*Note:* This solution does not involve the `.progress = TRUE` argument
 that **furrr** implements. Because **progressr** is more generic and
 because `.progress = TRUE` only supports certain future backends and
-produces errors on non-supported backends, I recommended to stop using
+produces errors on non-supported backends, I recommend to stop using
 `.progress = TRUE` and use the **progressr** package instead.
 
 ### BiocParallel::bplapply() - parallel lapply()
 
-Here is an example that uses `bplapply()` of the
+Here is an example that uses
+[`bplapply()`](https://rdrr.io/pkg/BiocParallel/man/bplapply.html) of
+the
 **[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
 package to parallelize on the local machine while at the same time
 signaling progression updates:
@@ -254,8 +257,8 @@ the main machine and reported together with the results of the futures.
 For instance, if `future_lapply(X, FUN)` chunks up the processing of,
 say, 100 elements in `X` into eight futures, we will see progress from
 each of the 100 elements as they are done when using a future backend
-supporting “near-live” updates, whereas we will only see those updated
-to be flushed eight times when using any other types of future backends.
+supporting “near-live” updates, whereas we will only see those updates
+flushed eight times when using any other types of future backends.
 
 (\*) Other future backends may gain support for “near-live” progress
 updating later. Adding support for those is independent of the
