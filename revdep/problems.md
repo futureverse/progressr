@@ -6,7 +6,7 @@
 * GitHub: NA
 * Source code: https://github.com/cran/adestr
 * Date/Publication: 2024-07-12 13:50:09 UTC
-* Number of recursive dependencies: 122
+* Number of recursive dependencies: 135
 
 Run `revdepcheck::revdep_details(, "adestr")` for more info
 
@@ -99,7 +99,7 @@ Run `revdepcheck::revdep_details(, "baseballr")` for more info
 * GitHub: https://github.com/lbau7/baskexact
 * Source code: https://github.com/cran/baskexact
 * Date/Publication: 2024-04-09 13:30:02 UTC
-* Number of recursive dependencies: 74
+* Number of recursive dependencies: 75
 
 Run `revdepcheck::revdep_details(, "baskexact")` for more info
 
@@ -113,34 +113,6 @@ Run `revdepcheck::revdep_details(, "baskexact")` for more info
       All declared Imports should be used.
     ```
 
-# collinear
-
-<details>
-
-* Version: 2.0.0
-* GitHub: https://github.com/blasbenito/collinear
-* Source code: https://github.com/cran/collinear
-* Date/Publication: 2024-11-08 13:50:02 UTC
-* Number of recursive dependencies: 47
-
-Run `revdepcheck::revdep_details(, "collinear")` for more info
-
-</details>
-
-## In both
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        ‘collinear.R’ ‘cor_cramer_v.R’ ‘cor_df.R’ ‘cor_select.R’ ‘f_auc.Rd’
-        ‘f_r2.Rd’ ‘f_r2_counts.Rd’ ‘f_v.Rd’ ‘f_v_rf_categorical.Rd’
-        ‘identify.R’ ‘model_formula.R’ ‘preference_order.R’
-        ‘preference_order_methods.R’ ‘target_encoding_methods.R’ ‘validate.R’
-        ‘vif_df.R’ ‘vif_select.R’
-    ```
-
 # crumble
 
 <details>
@@ -149,7 +121,7 @@ Run `revdepcheck::revdep_details(, "collinear")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/crumble
 * Date/Publication: 2024-12-02 17:50:02 UTC
-* Number of recursive dependencies: 128
+* Number of recursive dependencies: 142
 
 Run `revdepcheck::revdep_details(, "crumble")` for more info
 
@@ -185,34 +157,6 @@ Run `revdepcheck::revdep_details(, "cSEM")` for more info
     ```
     Namespace in Imports field not imported from: ‘Rdpack’
       All declared Imports should be used.
-    ```
-
-# dipsaus
-
-<details>
-
-* Version: 0.3.1
-* GitHub: https://github.com/dipterix/dipsaus
-* Source code: https://github.com/cran/dipsaus
-* Date/Publication: 2025-04-03 16:50:02 UTC
-* Number of recursive dependencies: 63
-
-Run `revdepcheck::revdep_details(, "dipsaus")` for more info
-
-</details>
-
-## In both
-
-*   checking compiled code ... NOTE
-    ```
-    File ‘dipsaus/libs/dipsaus.so’:
-      Found non-API call to R: ‘ENCLOS’
-    
-    Compiled code should not call non-API entry points in R.
-    
-    See ‘Writing portable packages’ in the ‘Writing R Extensions’ manual,
-    and section ‘Moving into C API compliance’ for issues with the use of
-    non-API entry points.
     ```
 
 # econet
@@ -302,44 +246,6 @@ Run `revdepcheck::revdep_details(, "fastRhockey")` for more info
     checkRd: (-1) update_phf_db.Rd:54-57: Lost braces in \itemize; meant \describe ?
     ```
 
-# fdacluster
-
-<details>
-
-* Version: 0.4.1
-* GitHub: https://github.com/astamm/fdacluster
-* Source code: https://github.com/cran/fdacluster
-* Date/Publication: 2025-01-14 16:50:09 UTC
-* Number of recursive dependencies: 126
-
-Run `revdepcheck::revdep_details(, "fdacluster")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘fdacluster’ can be installed ... WARNING
-    ```
-    Found the following significant warnings:
-      baseDissimilarityClass.cpp:39:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
-      baseDissimilarityClass.cpp:39:57: warning: ‘bool arma::is_finite(const Base<typename T1::elem_type, T1>&) [with T1 = subview<double>; typename T1::elem_type = double]’ is deprecated: change arma::is_finite(X) to X.is_finite() [-Wdeprecated-declarations]
-      baseDissimilarityClass.cpp:53:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
-      baseDissimilarityClass.cpp:53:57: warning: ‘bool arma::is_finite(const Base<typename T1::elem_type, T1>&) [with T1 = subview<double>; typename T1::elem_type = double]’ is deprecated: change arma::is_finite(X) to X.is_finite() [-Wdeprecated-declarations]
-      lowessCenterClass.cpp:41:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
-      lowessCenterClass.cpp:41:64: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
-      polyCenterClass.cpp:39:28: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
-      polyCenterClass.cpp:39:64: warning: ‘bool arma::is_finite(eT, const typename arma_scalar_only<eT>::result*) [with eT = double; typename arma_scalar_only<eT>::result = double]’ is deprecated: change arma::is_finite(val) to std::isfinite(val) [-Wdeprecated-declarations]
-    See ‘/scratch/henrik/revdep/progressr/checks/fdacluster/new/fdacluster.Rcheck/00install.out’ for details.
-    ```
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.2.0 because package code uses the pipe
-      placeholder syntax added in R 4.2.0.
-      File(s) using such syntax:
-        ‘caps-plot.R’ ‘utils.R’
-    ```
-
 # ISAnalytics
 
 <details>
@@ -384,23 +290,23 @@ Run `revdepcheck::revdep_details(, "mapme.biodiversity")` for more info
       Running ‘testthat.R’
      ERROR
     Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
+    Last 50 lines of output:
       > library(mapme.biodiversity)
       > 
       > options(pillar.advice = FALSE)
       > mapme_options(verbose = FALSE)
       > test_check("mapme.biodiversity")
+      You agreed to abide to ACLED's Terms of Use (https://acleddata.com/terms-of-use/).
     ...
-      `x2 <- .split_dateline(x)` produced warnings.
-      ── Failure ('test-chunking.R:8:3'): .crosses_dateline and .split_dateline works ──
-      nrow(x2) (`actual`) not equal to 2 (`expected`).
-      
+      Expected `nrow(x2)` to equal 2.
+      Differences:
         `actual`: 1.0
       `expected`: 2.0
       
-      [ FAIL 2 | WARN 0 | SKIP 43 | PASS 532 ]
-      Error: Test failures
+      
+      [ FAIL 2 | WARN 0 | SKIP 43 | PASS 543 ]
+      Error:
+      ! Test failures.
       Execution halted
     ```
 
@@ -424,32 +330,6 @@ Run `revdepcheck::revdep_details(, "mikropml")` for more info
     ```
     Namespace in Imports field not imported from: ‘methods’
       All declared Imports should be used.
-    ```
-
-# mpathsenser
-
-<details>
-
-* Version: 1.2.3
-* GitHub: NA
-* Source code: https://github.com/cran/mpathsenser
-* Date/Publication: 2024-03-29 16:00:02 UTC
-* Number of recursive dependencies: 107
-
-Run `revdepcheck::revdep_details(, "mpathsenser")` for more info
-
-</details>
-
-## In both
-
-*   checking DESCRIPTION meta-information ... NOTE
-    ```
-      Missing dependency on R >= 4.1.0 because package code uses the pipe
-      |> or function shorthand \(...) syntax added in R 4.1.0.
-      File(s) using such syntax:
-        ‘alias_column_names.R’ ‘bin_data.Rd’ ‘coverage.R’ ‘database.R’
-        ‘decrypt_gps.Rd’ ‘import.R’ ‘import_functions.R’ ‘linking.R’
-        ‘location_functions.R’ ‘sensor_functions.R’
     ```
 
 # pavo
@@ -483,7 +363,7 @@ Run `revdepcheck::revdep_details(, "pavo")` for more info
 * GitHub: https://github.com/JeroenDMulder/powRICLPM
 * Source code: https://github.com/cran/powRICLPM
 * Date/Publication: 2024-10-26 13:50:03 UTC
-* Number of recursive dependencies: 64
+* Number of recursive dependencies: 65
 
 Run `revdepcheck::revdep_details(, "powRICLPM")` for more info
 
@@ -507,7 +387,7 @@ Run `revdepcheck::revdep_details(, "powRICLPM")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/PWIR
 * Date/Publication: 2025-07-24 11:10:17 UTC
-* Number of recursive dependencies: 108
+* Number of recursive dependencies: 112
 
 Run `revdepcheck::revdep_details(, "PWIR")` for more info
 
@@ -547,10 +427,9 @@ Run `revdepcheck::revdep_details(, "receptiviti")` for more info
       > library(receptiviti)
       > 
       > test_check("receptiviti")
+      Saving _problems/test-receptiviti-18.R
       [ FAIL 1 | WARN 0 | SKIP 4 | PASS 5 ]
-      
     ...
-       3. │   └─testthat:::quasi_capture(...)
        4. │     ├─testthat (local) .capture(...)
        5. │     │ └─base::withCallingHandlers(...)
        6. │     └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
@@ -558,7 +437,8 @@ Run `revdepcheck::revdep_details(, "receptiviti")` for more info
        8.   └─receptiviti:::manage_request(...)
       
       [ FAIL 1 | WARN 0 | SKIP 4 | PASS 5 ]
-      Error: Test failures
+      Error:
+      ! Test failures.
       Execution halted
     ```
 
@@ -575,6 +455,33 @@ Run `revdepcheck::revdep_details(, "receptiviti")` for more info
 Run `revdepcheck::revdep_details(, "rsi")` for more info
 
 </details>
+
+## Newly fixed
+
+*   checking tests ...
+    ```
+      Running ‘testthat.R’
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 50 lines of output:
+      > library(testthat)
+      > library(rsi)
+      > 
+      > test_check("rsi")
+      Starting 2 test processes.
+      Saving _problems/test-filters-6.R
+    ...
+       2. │ └─base::withCallingHandlers(...)
+       3. └─rsi::spectral_indices(update_cache = FALSE)
+       4.   ├─tibble::as_tibble(readRDS(indices_path))
+       5.   └─base::readRDS(indices_path)
+       6.     └─base::gzfile(file, "rb")
+      
+      [ FAIL 1 | WARN 1 | SKIP 51 | PASS 29 ]
+      Error:
+      ! Test failures.
+      Execution halted
+    ```
 
 ## In both
 
@@ -659,7 +566,7 @@ Run `revdepcheck::revdep_details(, "tsdistributions")` for more info
 * GitHub: https://github.com/tsmodels/tsgarch
 * Source code: https://github.com/cran/tsgarch
 * Date/Publication: 2024-10-12 00:50:02 UTC
-* Number of recursive dependencies: 94
+* Number of recursive dependencies: 104
 
 Run `revdepcheck::revdep_details(, "tsgarch")` for more info
 
@@ -683,7 +590,7 @@ Run `revdepcheck::revdep_details(, "tsgarch")` for more info
 * GitHub: NA
 * Source code: https://github.com/cran/vmeasur
 * Date/Publication: 2021-11-11 19:00:02 UTC
-* Number of recursive dependencies: 108
+* Number of recursive dependencies: 122
 
 Run `revdepcheck::revdep_details(, "vmeasur")` for more info
 
@@ -702,11 +609,11 @@ Run `revdepcheck::revdep_details(, "vmeasur")` for more info
 
 <details>
 
-* Version: 1.8-1
+* Version: 2.0
 * GitHub: NA
 * Source code: https://github.com/cran/WeightedCluster
-* Date/Publication: 2024-12-10 22:00:02 UTC
-* Number of recursive dependencies: 72
+* Date/Publication: 2025-12-10 08:40:02 UTC
+* Number of recursive dependencies: 91
 
 Run `revdepcheck::revdep_details(, "WeightedCluster")` for more info
 
