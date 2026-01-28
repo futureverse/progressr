@@ -1,5 +1,10 @@
 # Version (development version)
 
+* `handler_cli()` no longer forces a display update after every
+  tick, instead relying on cli itself to decide how often to
+  refresh the display. This results in much better performance.
+
+
 ## Deprecated and Defunct
 
  * Remove `progress()`, which has been defunct since **progressr**
