@@ -4,8 +4,8 @@
 
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
   no longer forces a display update after every tick, instead relying on
-  cli itself to decide how often to refresh the display. This results in
-  much better performance.
+  **cli** itself to decide how often to refresh the display. This
+  results in much better performance.
 
 ### Deprecated and Defunct
 
