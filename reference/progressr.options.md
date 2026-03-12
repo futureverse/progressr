@@ -2,8 +2,8 @@
 
 Below are environment variables and R options that are used by the
 progressr package. Below are all R options that are currently used by
-the progressr package.  
-  
+the progressr package.\
+\
 *WARNING: Note that the names and the default values of these options
 may change in future versions of the package. Please use with care until
 further notice.*
@@ -53,7 +53,7 @@ further notice.*
 
   (numeric) A non-negative scalar on how intrusive (disruptive) the
   reporter to the user. This multiplicative scalar applies to the
-  *interval* and *times* parameters. (Default: `1.0`)  
+  *interval* and *times* parameters. (Default: `1.0`)\
 
   progressr.intrusiveness.audio:
 

@@ -100,6 +100,7 @@ function, within `with_progress({ ... })`, `local({ ... })`, or a
 similar construct. For example, the following:
 
 ``` r
+
 library(progressr)
 handlers(global = TRUE)
 
@@ -124,6 +125,7 @@ The solution is to wrap it in a `local({ ... })` call, or more
 explicitly, in a `with_progress({ ... })` call:
 
 ``` r
+
 library(progressr)
 handlers(global = TRUE)
 
@@ -152,6 +154,7 @@ coloring by default when there is an active progressor. The workaround
 is to set **cli** option `cli.num_colors` to:
 
 ``` r
+
 options(cli.num_colors = cli::num_ansi_colors())
 ```
 
@@ -175,6 +178,7 @@ Setting the global progressr handler in `~/.Rprofile` does *not* work in
 RStudio 2025.09:
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   progressr::handlers(global = TRUE)
 }
@@ -186,6 +190,7 @@ been fixed for the next release RStudio 2025.11. If you are using
 RStudio 2025.09, the workaround is to instead use:
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   progressr::handlers(global = TRUE)
 
@@ -215,6 +220,7 @@ Positron](https://github.com/posit-dev/positron/issues/6892)
 on Linux. Because of this, having something like in your `~/.Rprofile`:
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   progressr::handlers(global = TRUE)
 }
@@ -224,6 +230,7 @@ will have no effect. If used, the workaround is to manually
 re-registering all calling handlers, which can be done as:
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   progressr::handlers(global = TRUE)
 
@@ -245,12 +252,14 @@ if (requireNamespace("progressr", quietly = TRUE)) {
 Alternatively, call:
 
 ``` r
+
 globalCallingHandlers(globalCallingHandlers(NULL))
 ```
 
 or
 
 ``` r
+
 progressr::handlers(global = FALSE)  ## important
 progressr::handlers(global = TRUE)
 ```
@@ -306,6 +315,7 @@ hello stdout
 If we try the following
 
 ``` r
+
 library(progressr)
 handlers(globals = TRUE)
 handlers("txtprogressbar")
@@ -317,6 +327,7 @@ there will be no progress being reported. This is not specific to
 for instance,
 
 ``` r
+
 void <- cli::cli_progress_demo(delay = 1.0)
 ```
 
@@ -325,6 +336,7 @@ The workaround is to direct all progress output to the standard output
 disable the buffering (“delaying”) of any other output to stdout.
 
 ``` r
+
 library(progressr)
 handlers(globals = TRUE)
 
@@ -393,23 +405,23 @@ currently kept at a very minimum. This will allow for the framework and
 the API to evolve while minimizing the risk for breaking code that
 depends on it. The roadmap for developing the API is roughly:
 
-- Provide minimal API for producing progress updates,
-  i.e. [`progressor()`](https://progressr.futureverse.org/reference/progressor.md),
-  [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
-  [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+Provide minimal API for producing progress updates,
+i.e. [`progressor()`](https://progressr.futureverse.org/reference/progressor.md),
+[`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
+[`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
 
-- Add support for global progress handlers removing the need for the
-  user having to specify
-  [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
-  i.e. `handlers(global = TRUE)` and `handlers(global = FALSE)`
+Add support for global progress handlers removing the need for the user
+having to specify
+[`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
+i.e. `handlers(global = TRUE)` and `handlers(global = FALSE)`
 
-- Make it possible to create a progressor also in the global environment
-  (see ‘Known Issues’ above)
+Make it possible to create a progressor also in the global environment
+(see ‘Known Issues’ above)
 
-- Add support for nested progress updates
+Add support for nested progress updates
 
-- Add API to allow users and package developers to design additional
-  progression handlers
+Add API to allow users and package developers to design additional
+progression handlers
 
 For a more up-to-date view on what features might be added, see
 <https://github.com/futureverse/progressr/issues>.

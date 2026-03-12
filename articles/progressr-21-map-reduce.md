@@ -12,6 +12,7 @@ cases.
 ## Base R apply functions
 
 ``` r
+
 library(progressr)
 handlers(global = TRUE)
 
@@ -31,6 +32,7 @@ y <- my_fcn(1:10)
 ## The foreach package
 
 ``` r
+
 library(foreach)
 library(progressr)
 handlers(global = TRUE)
@@ -51,6 +53,7 @@ y <- my_fcn(1:10)
 ## The purrr package
 
 ``` r
+
 library(purrr)
 library(progressr)
 handlers(global = TRUE)
@@ -71,6 +74,7 @@ y <- my_fcn(1:10)
 ## The plyr package
 
 ``` r
+
 library(plyr)
 library(progressr)
 handlers(global = TRUE)

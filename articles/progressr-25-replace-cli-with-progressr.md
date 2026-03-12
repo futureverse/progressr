@@ -4,6 +4,7 @@ The **cli** package is used for progress reporting by several packages,
 notably tidyverse packages. For instance, in **purrr**, you can do:
 
 ``` r
+
 y <- purrr::map(1:100, \(x) Sys.sleep(0.1), .progress = TRUE)
 ```
 
@@ -15,6 +16,7 @@ progress bar, we can customize **cli** to report on progress via
 set R option `cli.progress_handlers` as:
 
 ``` r
+
 options(cli.progress_handlers = "progressr")
 ```
 
@@ -24,6 +26,7 @@ your
 settings. For example, with:
 
 ``` r
+
 progressr::handlers(c("beepr", "rstudio"))
 ```
 
@@ -34,6 +37,7 @@ To make **cli** report via **progressr** in all your R session, set the
 above R option in your `~/.Rprofile` startup file, e.g.
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   options(cli.progress_handlers = "progressr")
 }

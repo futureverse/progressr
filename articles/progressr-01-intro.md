@@ -38,6 +38,7 @@ provide progress updates to whoever might be interested in it. With the
 **progressr** package, this can be done as:
 
 ``` r
+
 slow_sum <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
@@ -107,6 +108,7 @@ visually, auditory, and via notification systems. You can also use a mix
 of these, e.g.
 
 ``` r
+
 handlers(c("cli", "beepr", "ntfy"))
 ```
 
@@ -163,6 +165,7 @@ interfere with progress reported via **progressr**. For example, say we
 have:
 
 ``` r
+
 slow_sqrt <- function(xs) {
   p <- progressor(along = xs)
   lapply(xs, function(x) {
@@ -213,6 +216,7 @@ attribute `"sticky"` to the progression signaled. This works for several
 progress handlers that output to the terminal. For example, with:
 
 ``` r
+
 slow_sum <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0

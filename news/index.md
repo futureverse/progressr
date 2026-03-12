@@ -2,10 +2,21 @@
 
 ## Version (development version)
 
+### Peformance
+
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
   no longer forces a display update after every tick, instead relying on
   **cli** itself to decide how often to refresh the display. This
   results in much better performance.
+
+### Bug Fixes
+
+- Buffering and flushing of standard output (stdout) would cause a
+  progress bar in the terminal to overwrite flush output that did not
+  include a newline. Although it was technically flushed, it would be
+  invisible in the terminal. Now buffered stdout is only flushed up
+  until the last newline, keeping the remaining output buffered until it
+  is safe to flush.
 
 ### Deprecated and Defunct
 

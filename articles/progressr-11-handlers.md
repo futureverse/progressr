@@ -19,6 +19,7 @@ We can tweak this “txtprogressbar” handler to use red hearts for the
 bar, e.g.
 
 ``` r
+
 handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
 ```
 
@@ -32,6 +33,7 @@ SVG animation of the “txtprogressbar” progress handler with red hearts
 Another example is:
 
 ``` r
+
 handlers(handler_pbcol(
       adjust = 1.0,
     complete = function(s) cli::bg_red(cli::col_black(s)),
@@ -51,6 +53,7 @@ To change the default, to, say, `cli_progress_bar()` by the
 **[cli](https://cran.r-project.org/package=cli)** package, set:
 
 ``` r
+
 handlers("cli")
 ```
 
@@ -66,6 +69,7 @@ To instead use `progress_bar()` by the
 set:
 
 ``` r
+
 handlers("progress")
 ```
 
@@ -82,6 +86,7 @@ Progress updates do not have to be presented visually. They can equally
 well be communicated via audio. For example, using:
 
 ``` r
+
 handlers("beepr")
 ```
 
@@ -104,6 +109,7 @@ updates at the same time. For example, to get both visual and auditory
 updates, use:
 
 ``` r
+
 handlers("txtprogressbar", "beepr")
 ```
 
@@ -112,6 +118,7 @@ handlers("txtprogressbar", "beepr")
 To silence all progress updates, use:
 
 ``` r
+
 handlers("void")
 ```
 
@@ -125,6 +132,7 @@ flexible specification where we can pass a list of handler functions,
 e.g.
 
 ``` r
+
 handlers(list(
   handler_progress(),
   handler_beepr()
@@ -138,6 +146,7 @@ tell **beepr** to use a different `finish` sound and generate sounds at
 most every two seconds by setting:
 
 ``` r
+
 handlers(list(
   handler_progress(
     format   = ":spin :current/:total (:message) [:bar] :percent in :elapsed ETA: :eta",
@@ -158,6 +167,7 @@ sessions, call `progressr::handlers(...)` in your `~/.Rprofile` startup
 file. For example,
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   progressr::handlers(global = TRUE)
   if (requireNamespace("cli", quietly = TRUE)) {

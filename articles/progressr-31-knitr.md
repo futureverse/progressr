@@ -9,6 +9,7 @@ progress reporting. To have **knitr** report on progress via
 **progressr**, set R option `knitr.progress.fun` as:
 
 ``` r
+
 options(knitr.progress.fun = function(total, labels) {
   p <- progressr::progressor(total, on_exit = FALSE)
   list(
@@ -22,6 +23,7 @@ That’s it! With the above `knitr.progress.fun` option set, try to knit a
 document, e.g.
 
 ``` r
+
 progressr::handlers(global = TRUE)
 infile <- system.file("examples", "knitr-minimal.Rnw", package = "knitr")
 outfile <- knitr::knit(infile)
@@ -30,6 +32,7 @@ outfile <- knitr::knit(infile)
 To customize the progress bar, try for instance:
 
 ``` r
+
 progressr::handlers(global = TRUE)
 options(crayon.enabled = TRUE)  ## force use of colors
 progressr::handlers("pbcol")
@@ -42,6 +45,7 @@ see the progress updates, you can add the “slowdown” handler to slow
 down the knitting process, e.g.
 
 ``` r
+
 progressr::handlers(c("pbcol", "slowdown"))
 ```
 
@@ -52,6 +56,7 @@ To make **knitr** report via **progressr** in all your R session, set
 the above R option in your `~/.Rprofile` startup file, e.g.
 
 ``` r
+
 if (requireNamespace("progressr", quietly = TRUE)) {
   options(knitr.progress.fun = function(total, labels) {
     p <- progressr::progressor(total, on_exit = FALSE)

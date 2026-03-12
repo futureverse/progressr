@@ -8,6 +8,7 @@ will also provide near-live progress updates while the parallel
 processing is still running. For example,
 
 ``` r
+
 library(future)
 library(progressr)
 plan(multisession, workers = 2)
@@ -54,6 +55,7 @@ to parallelize on the local machine while at the same time signaling
 progression updates:
 
 ``` r
+
 library(future.apply)
 plan(multisession, workers = 2)
 
@@ -84,6 +86,7 @@ while reporting on progress. This example parallelizes on the local
 machine; it works also for remote machines:
 
 ``` r
+
 library(doFuture)    ## %dofuture%
 plan(multisession, workers = 2)
 
@@ -111,6 +114,7 @@ adapter and use the same **progressr** as above to report progress
 updates;
 
 ``` r
+
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
 plan(multisession, workers = 2)
@@ -141,6 +145,7 @@ on the local machine while at the same time signaling progression
 updates:
 
 ``` r
+
 library(furrr)
 plan(multisession, workers = 2)
 
@@ -177,6 +182,7 @@ package to parallelize on the local machine while at the same time
 signaling progression updates:
 
 ``` r
+
 library(BiocParallel)
 library(doFuture)
 register(DoparParam())  ## BiocParallel parallelizes via %dopar%
@@ -209,6 +215,7 @@ parallelize on the local machine while at the same time signaling
 progression updates:
 
 ``` r
+
 library(plyr)
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
