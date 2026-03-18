@@ -2,6 +2,13 @@
 
 ## Version (development version)
 
+### New Features
+
+- [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+  gained support for specifying both progression handlers and enabling
+  the global progression handler in one call,
+  e.g. `handlers("beepr", "cli", global = TRUE)`.
+
 ### Peformance
 
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9006</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,7 +105,7 @@ are set.</p></dd>
 <dt id="arg-global">global<a class="anchor" aria-label="anchor" href="#arg-global"></a></dt>
 <dd><p>If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-otherwise FALSE.  Argument <code>global</code> must not be used with other arguments.</p></dd>
+otherwise FALSE.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -121,7 +121,9 @@ be set.</p></dd>
 If no arguments are specified, then the current set of progression
 handlers is returned.
 If <code>global</code> is specified, then TRUE is returned if the global progression
-handler is enabled, otherwise FALSE.</p>
+handler is enabled, otherwise FALSE.
+If both handlers and <code>global</code> are specified, then the previous list of
+progression handlers is returned.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

@@ -36,7 +36,7 @@ handlers(
 
   If TRUE, then the global progression handler is enabled. If FALSE, it
   is disabled. If NA, then TRUE is returned if it is enabled, otherwise
-  FALSE. Argument `global` must not be used with other arguments.
+  FALSE.
 
 - ...:
 
@@ -50,7 +50,9 @@ handlers(
 (invisibly) the previous list of progression handlers set. If no
 arguments are specified, then the current set of progression handlers is
 returned. If `global` is specified, then TRUE is returned if the global
-progression handler is enabled, otherwise FALSE.
+progression handler is enabled, otherwise FALSE. If both handlers and
+`global` are specified, then the previous list of progression handlers
+is returned.
 
 ## Details
 
