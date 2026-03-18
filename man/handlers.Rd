@@ -26,7 +26,7 @@ are set.}
 
 \item{global}{If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-otherwise FALSE.  Argument \code{global} must not be used with other arguments.}
+otherwise FALSE.}
 
 \item{\ldots}{One or more progression handlers.  Alternatively, this
 function also accepts a single vector of progression handlers as input.
@@ -39,6 +39,8 @@ If no arguments are specified, then the current set of progression
 handlers is returned.
 If \code{global} is specified, then TRUE is returned if the global progression
 handler is enabled, otherwise FALSE.
+If both handlers and \code{global} are specified, then the previous list of
+progression handlers is returned.
 }
 \description{
 Control How Progress is Reported

@@ -46,5 +46,25 @@ stopifnot(inherits(res, "error"))
 
 message("handlers() - exceptions ... DONE")
 
+message("handlers(..., global = TRUE) ...")
+if (getRversion() >= "4.0.0") {
+  old_global <- handlers(global = NA)
+  on.exit(handlers(global = old_global), add = TRUE)
+  
+  handlers(global = FALSE)
+  stopifnot(handlers(global = NA) == FALSE)
+  
+  handlers("txtprogressbar", global = TRUE)
+  stopifnot(handlers(global = NA) == TRUE)
+  
+  handlers("txtprogressbar", global = FALSE)
+  stopifnot(handlers(global = NA) == FALSE)
+
+  handlers(global = TRUE)
+  handlers("txtprogressbar", global = FALSE)
+  stopifnot(handlers(global = NA) == FALSE)
+}
+message("handlers(..., global = TRUE) ... DONE")
+
 message("handlers() ... DONE")
 

@@ -18,13 +18,15 @@
 #'
 #' @param global If TRUE, then the global progression handler is enabled.
 #' If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-#' otherwise FALSE.  Argument `global` must not be used with other arguments.
+#' otherwise FALSE.
 #'
 #' @return (invisibly) the previous list of progression handlers set.
 #' If no arguments are specified, then the current set of progression
 #' handlers is returned.
 #' If `global` is specified, then TRUE is returned if the global progression
 #' handler is enabled, otherwise FALSE.
+#' If both handlers and `global` are specified, then the previous list of
+#' progression handlers is returned.
 #'
 #' @details
 #' This function provides a convenient alternative for getting and setting
@@ -96,10 +98,6 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
     return(invisible(register_global_progression_handler(action = action)))
   }
 
-  if (!is.null(global)) {
-    stop("Argument 'global' must not be specified when also registering progress handlers")
-  }
-
   on_missing <- match.arg(on_missing)
   
   ## Was a list specified?
@@ -166,6 +164,13 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
 
   old_handlers <- options(progressr.handlers = handlers)[[1]]
   if (is.null(old_handlers)) old_handlers <- list()
+
+  if (!is.null(global)) {
+    if (!is.na(global)) {
+      action <- if (isTRUE(global)) "add" else "remove"
+      register_global_progression_handler(action = action)
+    }
+  }
   
   invisible(old_handlers)
 }
