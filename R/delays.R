@@ -67,15 +67,39 @@ flush_stdout <- function(stdout_file, close = TRUE, must_work = FALSE) {
   
   sink(split = FALSE, type = "output")
   stdout <- rawToChar(rawConnectionValue(stdout_file))
+  close(stdout_file)
+  stdout_file <- NULL
+
+  ## With an active progressor, flush only complete lines in the buffer.
+  ## Any trailing line without a newline is kept in the buffer. This avoid
+  ## in-terminal progress bars from overwriting flushed output.
+  remainder <- NULL
+  if (!close) {
+    pos <- regexpr("\\n[^\\n]*$", stdout)
+    if (pos > 0L) {
+      ## Flush up to and including the last newline
+      remainder <- substring(stdout, pos + 1L)
+      stdout <- substring(stdout, 1L, pos)
+    } else {
+      remainder <- stdout
+      stdout <- ""
+    }
+  }
+
   ## WORKAROUND: Positron 2025.09.0 appends a newline for cat("") [1], while
   ## it should output nothing. We use nzchar(stdout) here to avoid this
   ## from happening.
   ## [1] https://github.com/posit-dev/positron/issues/9486
-  ## cat("") nzchar(stdout) is used to handle the cat("") case
   if (length(stdout) > 0 && nzchar(stdout)) cat(stdout, file = stdout())
-  close(stdout_file)
-  stdout_file <- NULL
-  if (!close) stdout_file <- buffer_stdout()
+
+  if (!close) {
+    stdout_file <- buffer_stdout()
+    ## Re-buffer any incomplete line
+    if (length(remainder) > 0 && nzchar(remainder)) {
+      cat(remainder)
+    }
+  }
+
   stdout_file
 } ## flush_stdout()
 
