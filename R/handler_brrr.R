@@ -1,12 +1,12 @@
 #' Progression Handler: Progress Reported as 'BRRR' Sounds (Audio)
 #'
-#' A progression handler for [BRRR::skrrrahh()].
+#' A progression handler for `skrrrahh()` of the \pkg{BRRR} package.
 #'
 #' @inheritParams make_progression_handler
 #'
 #' @param initiate,update,finish,interrupt (integer or character) Indices or
-#' names of [BRRR::skrrrahh()] sounds to play when progress starts, is
-#' updated, completes, or is interrupted.  For silence, use `NA_integer_`.
+#' names of `skrrrahh()` sounds to play when progress starts, is updated,
+#' completes, or is interrupted. For silence, use `NA_integer_`.
 #'
 #' @param \ldots Additional arguments passed to [make_progression_handler()].
 #'

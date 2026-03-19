@@ -16,8 +16,8 @@ handler_brrr(
 }
 \arguments{
 \item{initiate, update, finish, interrupt}{(integer or character) Indices or
-names of \code{\link[BRRR:skrrrahh]{BRRR::skrrrahh()}} sounds to play when progress starts, is
-updated, completes, or is interrupted.  For silence, use \code{NA_integer_}.}
+names of \code{skrrrahh()} sounds to play when progress starts, is updated,
+completes, or is interrupted. For silence, use \code{NA_integer_}.}
 
 \item{intrusiveness}{(numeric) A non-negative scalar on how intrusive
 (disruptive) the reporter to the user.}
@@ -28,7 +28,7 @@ rendered.}
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
 \description{
-A progression handler for \code{\link[BRRR:skrrrahh]{BRRR::skrrrahh()}}.
+A progression handler for \code{skrrrahh()} of the \pkg{BRRR} package.
 }
 \section{Requirements}{
 
