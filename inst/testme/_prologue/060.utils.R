@@ -1,6 +1,6 @@
 non_supported_progression_handlers <- function() {
   names <- character(0L)
-  for (pkg in c("beepr", "notifier", "pbmcapply", "progress", "shiny")) {
+  for (pkg in c("beepr", "BRRR", "notifier", "pbmcapply", "progress", "shiny")) {
     if (!requireNamespace(pkg, quietly = TRUE))
       names <- c(names, pkg)
   }

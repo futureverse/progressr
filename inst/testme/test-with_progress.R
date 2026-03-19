@@ -118,6 +118,17 @@ stopifnot(sum == truth)
 message("with_progress() - beepr::beep() ... done")
 
 
+message("with_progress() - BRRR::skrrrahh() ...")
+
+with_progress({
+  sum <- slow_sum(x)
+}, handlers = handler_brrr)
+print(sum)
+stopifnot(sum == truth)
+
+message("with_progress() - BRRR::skrrrahh() ... done")
+
+
 message("with_progress() - notifier::notify() ...")
 
 with_progress({

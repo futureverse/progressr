@@ -6,6 +6,9 @@
    handlers and enabling the global progression handler in one
    call, e.g. `handlers("beepr", "cli", global = TRUE)`.
 
+ * Added `handler_brrr()` for reporting progress via rap ad-libs
+   (audio) using the **BRRR** package.
+
 ## Peformance
 
  * `handler_cli()` no longer forces a display update after every
