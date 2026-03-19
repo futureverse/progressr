@@ -194,7 +194,16 @@ vignettes for details. Prominent examples are:
  * `foreach()` iterations by the **[foreach]** package
 
 and near-live progress reporting in parallel and distributed
-processing via the **[future]** framework:
+processing via the **[future]** framework. The modern approach is to
+use the **[futurize]** package, e.g.
+
+ * `lapply(...) |> futurize()`
+ * `map(...) |> futurize()` (**[purrr]**)
+ * `llply(...) |> futurize()` (**[plyr]**)
+ * `foreach(...) |> futurize()` (**[foreach]**)
+ * `bplapply(...) |> futurize()` (**[BiocParallel]**)
+ 
+The traditional counterparts are:
 
  * `future_lapply()` etc.  by the **[future.apply]** package
  * `future_map()` etc. by the **[furrr]** package
@@ -306,6 +315,7 @@ Step 10
 [futureverse]: https://www.futureverse.org
 [progressr]: https://progressr.futureverse.org
 [future]: https://future.futureverse.org
+[futurize]: https://futurize.futureverse.org
 [future.apply]: https://future.apply.futureverse.org
 [furrr]: https://furrr.futureverse.org
 [doFuture]: https://doFuture.futureverse.org
@@ -320,6 +330,7 @@ Step 10
 [pbmcapply]: https://cran.r-project.org/package=pbmcapply
 [plyr]: https://cran.r-project.org/package=plyr
 [BiocParallel]: https://www.bioconductor.org/packages/BiocParallel/
+
 ## Installation
 R package progressr is available on [CRAN](https://cran.r-project.org/package=progressr) and can be installed in R as:
 ```r
