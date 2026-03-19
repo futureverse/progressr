@@ -1,7 +1,6 @@
 # Progression Handler: Progress Reported as 'BRRR' Sounds (Audio)
 
-A progression handler for
-[`BRRR::skrrrahh()`](https://rdrr.io/pkg/BRRR/man/skrrrahh.html).
+A progression handler for `skrrrahh()` of the BRRR package.
 
 ## Usage
 
@@ -21,10 +20,9 @@ handler_brrr(
 
 - initiate, update, finish, interrupt:
 
-  (integer or character) Indices or names of
-  [`BRRR::skrrrahh()`](https://rdrr.io/pkg/BRRR/man/skrrrahh.html)
-  sounds to play when progress starts, is updated, completes, or is
-  interrupted. For silence, use `NA_integer_`.
+  (integer or character) Indices or names of `skrrrahh()` sounds to play
+  when progress starts, is updated, completes, or is interrupted. For
+  silence, use `NA_integer_`.
 
 - intrusiveness:
 
