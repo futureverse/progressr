@@ -9,6 +9,11 @@
   the global progression handler in one call,
   e.g. `handlers("beepr", "cli", global = TRUE)`.
 
+- Added
+  [`handler_brrr()`](https://progressr.futureverse.org/reference/handler_brrr.md)
+  for reporting progress via rap ad-libs (audio) using the **BRRR**
+  package.
+
 ### Peformance
 
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)

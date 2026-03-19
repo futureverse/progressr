@@ -17,7 +17,7 @@ using parallel processing."><!-- Global site tag (gtag.js) - Google Analytics --
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@ in the terminal using <code><a href="https://rdrr.io/r/utils/txtProgressBar.html
 using <code><a href="https://rdrr.io/r/utils/winProgressBar.html" class="external-link">utils::winProgressBar()</a></code> or <code><a href="https://rdrr.io/r/tcltk/tkProgressBar.html" class="external-link">tcltk::tkProgressBar()</a></code>, or
 via the RStudio GUI using <code><a href="https://rstudio.github.io/rstudioapi/reference/jobSetProgress.html" class="external-link">rstudioapi::jobSetProgress()</a></code>.
 An alternative to above visual rendering, is to report progress as audio
-using <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code>.
+using <code><a href="https://rdrr.io/pkg/beepr/man/beep.html" class="external-link">beepr::beep()</a></code> or <code><a href="https://rdrr.io/pkg/BRRR/man/skrrrahh.html" class="external-link">BRRR::skrrrahh()</a></code>.
 It is also possible to use a combination of above progression handlers,
 e.g. a progress bar in the terminal together with audio updates.
 Besides the existing handlers, it is possible to develop custom
@@ -120,6 +120,7 @@ the <span class="pkg">future</span> framework, e.g. <code><a href="https://futur
 <li><p><a href="handler_winprogressbar.html">handler_winprogressbar</a> (built-in)</p></li>
 </ul><p>As sound:</p><ul><li><p><a href="handler_ascii_alert.html">handler_ascii_alert</a> (built-in)</p></li>
 <li><p><a href="handler_beepr.html">handler_beepr</a> (requires the <span class="pkg">beepr</span> package)</p></li>
+<li><p><a href="handler_brrr.html">handler_brrr</a> (requires the <span class="pkg">BRRR</span> package)</p></li>
 </ul><p>Via the file system:</p><ul><li><p><a href="handler_filesize.html">handler_filesize</a> (built-in)</p></li>
 </ul><p>In Shiny:</p><ul><li><p><a href="withProgressShiny.html">withProgressShiny</a> (requires the <span class="pkg">shiny</span> package)</p></li>
 </ul><p>Via notification systems:</p><ul><li><p><a href="handler_ntfy.html">handler_ntfy</a> (requires the <span class="pkg">ntfy</span> package)</p></li>

@@ -283,6 +283,8 @@ This will install the package from source.
   or Blink) in the Terminal
 - [`handler_beepr()`](https://progressr.futureverse.org/reference/handler_beepr.md)
   : Progression Handler: Progress Reported as 'beepr' Sounds (Audio)
+- [`handler_brrr()`](https://progressr.futureverse.org/reference/handler_brrr.md)
+  : Progression Handler: Progress Reported as 'BRRR' Sounds (Audio)
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
   : Progression Handler: Progress Reported via 'cli' Progress Bars
   (Text) in the Terminal
