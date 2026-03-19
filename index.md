@@ -132,7 +132,21 @@ vignettes for details. Prominent examples are:
   **[foreach](https://cran.r-project.org/package=foreach)** package
 
 and near-live progress reporting in parallel and distributed processing
-via the **[future](https://future.futureverse.org)** framework:
+via the **[future](https://future.futureverse.org)** framework. The
+modern approach is to use the
+**[futurize](https://futurize.futureverse.org)** package, e.g.
+
+- `lapply(...) |> futurize()`
+- `map(...) |> futurize()`
+  (**[purrr](https://cran.r-project.org/package=purrr)**)
+- `llply(...) |> futurize()`
+  (**[plyr](https://cran.r-project.org/package=plyr)**)
+- `foreach(...) |> futurize()`
+  (**[foreach](https://cran.r-project.org/package=foreach)**)
+- `bplapply(...) |> futurize()`
+  (**[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**)
+
+The traditional counterparts are:
 
 - `future_lapply()` etc. by the
   **[future.apply](https://future.apply.futureverse.org)** package

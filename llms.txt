@@ -132,7 +132,21 @@ vignettes for details. Prominent examples are:
   **[foreach](https://cran.r-project.org/package=foreach)** package
 
 and near-live progress reporting in parallel and distributed processing
-via the **[future](https://future.futureverse.org)** framework:
+via the **[future](https://future.futureverse.org)** framework. The
+modern approach is to use the
+**[futurize](https://futurize.futureverse.org)** package, e.g.
+
+- `lapply(...) |> futurize()`
+- `map(...) |> futurize()`
+  (**[purrr](https://cran.r-project.org/package=purrr)**)
+- `llply(...) |> futurize()`
+  (**[plyr](https://cran.r-project.org/package=plyr)**)
+- `foreach(...) |> futurize()`
+  (**[foreach](https://cran.r-project.org/package=foreach)**)
+- `bplapply(...) |> futurize()`
+  (**[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**)
+
+The traditional counterparts are:
 
 - `future_lapply()` etc. by the
   **[future.apply](https://future.apply.futureverse.org)** package
@@ -363,3 +377,23 @@ This will install the package from source.
   [`without_progress()`](https://progressr.futureverse.org/reference/with_progress.md)
   : Report on Progress while Evaluating an R Expression
 
+# Articles
+
+### All vignettes
+
+- [progressr: An
+  Introduction](https://progressr.futureverse.org/articles/progressr-01-intro.md):
+- [progressr: Customize How Progress is
+  Reported](https://progressr.futureverse.org/articles/progressr-11-handlers.md):
+- [progressr: Map-Reduce Calls, e.g. lapply() and
+  map()](https://progressr.futureverse.org/articles/progressr-21-map-reduce.md):
+- [progressr: Parallel and Distributed
+  Processing](https://progressr.futureverse.org/articles/progressr-22-parallel-processing.md):
+- [progressr: Replace 'cli' Progress Bars with
+  'progressr'](https://progressr.futureverse.org/articles/progressr-25-replace-cli-with-progressr.md):
+- [progressr:
+  Debug](https://progressr.futureverse.org/articles/progressr-29-debug.md):
+- [progressr: Render 'knitr'
+  Documents](https://progressr.futureverse.org/articles/progressr-31-knitr.md):
+- [progressr:
+  Appendix](https://progressr.futureverse.org/articles/progressr-91-appendix.md):
