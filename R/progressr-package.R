@@ -15,7 +15,7 @@
 #' using `utils::winProgressBar()` or [tcltk::tkProgressBar()], or
 #' via the RStudio GUI using `rstudioapi::jobSetProgress()`.
 #' An alternative to above visual rendering, is to report progress as audio
-#' using [beepr::beep()] or [BRRR::skrrrahh()].
+#' using [beepr::beep()] or `BRRR::skrrrahh()`.
 #' It is also possible to use a combination of above progression handlers,
 #' e.g. a progress bar in the terminal together with audio updates.
 #' Besides the existing handlers, it is possible to develop custom

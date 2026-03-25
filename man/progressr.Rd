@@ -22,7 +22,7 @@ in the terminal using \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}
 using \code{utils::winProgressBar()} or \code{\link[tcltk:tkProgressBar]{tcltk::tkProgressBar()}}, or
 via the RStudio GUI using \code{rstudioapi::jobSetProgress()}.
 An alternative to above visual rendering, is to report progress as audio
-using \code{\link[beepr:beep]{beepr::beep()}} or \code{\link[BRRR:skrrrahh]{BRRR::skrrrahh()}}.
+using \code{\link[beepr:beep]{beepr::beep()}} or \code{BRRR::skrrrahh()}.
 It is also possible to use a combination of above progression handlers,
 e.g. a progress bar in the terminal together with audio updates.
 Besides the existing handlers, it is possible to develop custom
