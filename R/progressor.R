@@ -170,7 +170,6 @@ progressor <- local({
       ## Self-reference progressor function needed by the finalizer function
       progressor_envir$self <- fcn
       reg.finalizer(progressor_envir, function(e) {
-        print(utils::ls.str(e))
         if (is.function(e$self)) {
           e$self(type = "shutdown")
           e$self <- NULL

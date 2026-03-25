@@ -555,7 +555,6 @@ make_progression_handler <- function(name, reporter = list(), handler = NULL, en
 
 #' @export
 print.progression_handler <- function(x, ...) {
-  print(sys.calls())
   s <- sprintf("Progression calling handler of class %s:", sQuote(class(x)[1]))
   
   env <- environment(x)
