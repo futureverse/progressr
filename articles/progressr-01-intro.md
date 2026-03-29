@@ -13,7 +13,8 @@ framework is designed to work out-of-the-box also for parallel and
 distributed processing, especially with the
 **[futureverse](https://www.futureverse.org)** ecosystem.
 
-![Three strokes writing three in Chinese](imgs/three_in_chinese.gif)
+![The hexlogo for the 'progressr'
+package](../reference/figures/progressr-logo.png)
 
 Design motto:
 
