@@ -6,7 +6,7 @@
 
 # progressr: An Inclusive, Unifying API for Progress Updates 
 
-<img src="man/figures/progressr-logo.png" alt="The hexlogo for the 'progressr' package" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
+<img src="man/figures/progressr-logo.png" alt="The hexlogo for the 'progressr' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex;"/>
 
 The **[progressr]** package provides a minimal API for reporting
 progress updates in [R](https://www.r-project.org/).  The design is to
