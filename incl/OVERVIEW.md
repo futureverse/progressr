@@ -1,3 +1,5 @@
+<img src="../man/figures/progressr-logo.png" alt="The hexlogo for the 'progressr' package" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
+
 The **[progressr]** package provides a minimal API for reporting
 progress updates in [R](https://www.r-project.org/).  The design is to
 separate the representation of progress updates from how they are
@@ -8,8 +10,6 @@ such as a horizontal progress bar in the terminal, whereas others may
 prefer auditory feedback.  The **[progressr]** framework is designed
 to work out-of-the-box also for parallel and distributed processing,
 especially with the **[futureverse]** ecosystem.
-
-<img src="../man/figures/progressr-logo.png" alt="The hexlogo for the 'progressr' package" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
 
 Design motto:
 
