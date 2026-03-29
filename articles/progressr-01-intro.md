@@ -1,5 +1,8 @@
 # progressr: An Introduction
 
+![The hexlogo for the 'progressr'
+package](../reference/figures/progressr-logo.png)
+
 The **[progressr](https://progressr.futureverse.org)** package provides
 a minimal API for reporting progress updates in
 [R](https://www.r-project.org/). The design is to separate the
@@ -12,9 +15,6 @@ feedback. The **[progressr](https://progressr.futureverse.org)**
 framework is designed to work out-of-the-box also for parallel and
 distributed processing, especially with the
 **[futureverse](https://www.futureverse.org)** ecosystem.
-
-![The hexlogo for the 'progressr'
-package](../reference/figures/progressr-logo.png)
 
 Design motto:
 
