@@ -20,7 +20,7 @@ prefer auditory feedback.  The **[progressr]** framework is designed
 to work out-of-the-box also for parallel and distributed processing,
 especially with the **[futureverse]** ecosystem.
 
-<img src="imgs/three_in_chinese.gif" alt="Three strokes writing three in Chinese" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
+<img src="../man/figures/progressr-logo.png" alt="The hexlogo for the 'progressr' package" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
 
 Design motto:
 

@@ -8,6 +8,11 @@ vignettes/progressr-01-intro.md: incl/OVERVIEW.md vignettes/incl/clean.css
 
 vignettes: vignettes/progressr-01-intro.md
 
+README.md: .make/README.md.rsp
+	$(R_SCRIPT) -e "R.rsp::rfile('$<', postprocess=FALSE)"
+	sed -i 's#../man/#man/#g' "$@"
+
 spelling:
 	$(R_SCRIPT) -e "spelling::spell_check_package()"
 	$(R_SCRIPT) -e "spelling::spell_check_files(dir('vignettes', pattern='[.](md|rsp)$$', full.names=TRUE), ignore=readLines('inst/WORDLIST', warn=FALSE))"
+
