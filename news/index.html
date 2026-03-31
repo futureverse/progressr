@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.18.0-9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,23 +77,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.19.0" id="version-0190">Version 0.19.0<a class="anchor" aria-label="anchor" href="#version-0190"></a></h2><p class="text-muted">CRAN release: 2026-03-31</p>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li><p><code><a href="../reference/handlers.html">handlers()</a></code> gained support for specifying both progression handlers and enabling the global progression handler in one call, e.g. <code>handlers("beepr", "cli", global = TRUE)</code>.</p></li>
-<li><p>Added <code><a href="../reference/handler_brrr.html">handler_brrr()</a></code> for reporting progress via rap ad-libs (audio) using the <strong>BRRR</strong> package.</p></li>
+<h3 id="new-features-0-19-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-19-0"></a></h3>
+<ul><li>
+<code><a href="../reference/handlers.html">handlers()</a></code> gained support for specifying both progression handlers and enabling the global progression handler in one call, e.g. <code>handlers("beepr", "cli", global = TRUE)</code>.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="peformance-development-version">Peformance<a class="anchor" aria-label="anchor" href="#peformance-development-version"></a></h3>
+<h3 id="performance-0-19-0">Performance<a class="anchor" aria-label="anchor" href="#performance-0-19-0"></a></h3>
 <ul><li>
 <code><a href="../reference/handler_cli.html">handler_cli()</a></code> no longer forces a display update after every tick, instead relying on <strong>cli</strong> itself to decide how often to refresh the display. This results in much better performance.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-0-19-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-19-0"></a></h3>
 <ul><li>Buffering and flushing of standard output (stdout) would cause a progress bar in the terminal to overwrite flush output that did not include a newline. Although it was technically flushed, it would be invisible in the terminal. Now buffered stdout is only flushed up until the last newline, keeping the remaining output buffered until it is safe to flush.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="deprecated-and-defunct-development-version">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-development-version"></a></h3>
+<h3 id="deprecated-and-defunct-0-19-0">Deprecated and Defunct<a class="anchor" aria-label="anchor" href="#deprecated-and-defunct-0-19-0"></a></h3>
 <ul><li>Remove <code>progress()</code>, which has been defunct since <strong>progressr</strong> 0.10.0 (2021-12-18).</li>
 </ul></div>
 </div>
