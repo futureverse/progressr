@@ -30,7 +30,7 @@ jobs:
           - { r: "release", pkg: "SimDesign"       }
 #          - { r: "release", pkg: "tidySEM"         }  ## fails to install
           - { r: "release", pkg: "tsdistributions" }
-          - { r: "release", pkg: "tsgarch", sysdeps: "libcairo2-dev" }
+#          - { r: "release", pkg: "tsgarch", sysdeps: "libcairo2-dev" }  ## fails to install
           
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}

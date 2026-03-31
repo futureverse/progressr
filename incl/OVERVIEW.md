@@ -1,3 +1,5 @@
+<img src="../man/figures/progressr-logo.png" alt="The hexlogo for the 'progressr' package" style="width: 120px; float: right; margin-right: 1ex; margin-left: 1ex;"/>
+
 The **[progressr]** package provides a minimal API for reporting
 progress updates in [R](https://www.r-project.org/).  The design is to
 separate the representation of progress updates from how they are
@@ -8,8 +10,6 @@ such as a horizontal progress bar in the terminal, whereas others may
 prefer auditory feedback.  The **[progressr]** framework is designed
 to work out-of-the-box also for parallel and distributed processing,
 especially with the **[futureverse]** ecosystem.
-
-<img src="vignettes/imgs/three_in_chinese.gif" alt="Three strokes writing three in Chinese" style="float: right; margin-right: 1ex; margin-left: 1ex;"/>
 
 Design motto:
 
@@ -186,7 +186,16 @@ vignettes for details. Prominent examples are:
  * `foreach()` iterations by the **[foreach]** package
 
 and near-live progress reporting in parallel and distributed
-processing via the **[future]** framework:
+processing via the **[future]** framework. The modern approach is to
+use the **[futurize]** package, e.g.
+
+ * `lapply(...) |> futurize()`
+ * `map(...) |> futurize()` (**[purrr]**)
+ * `llply(...) |> futurize()` (**[plyr]**)
+ * `foreach(...) |> futurize()` (**[foreach]**)
+ * `bplapply(...) |> futurize()` (**[BiocParallel]**)
+ 
+The traditional counterparts are:
 
  * `future_lapply()` etc.  by the **[future.apply]** package
  * `future_map()` etc. by the **[furrr]** package
@@ -298,6 +307,7 @@ Step 10
 [futureverse]: https://www.futureverse.org
 [progressr]: https://progressr.futureverse.org
 [future]: https://future.futureverse.org
+[futurize]: https://futurize.futureverse.org
 [future.apply]: https://future.apply.futureverse.org
 [furrr]: https://furrr.futureverse.org
 [doFuture]: https://doFuture.futureverse.org

@@ -22,7 +22,7 @@ in the terminal using \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}
 using \code{utils::winProgressBar()} or \code{\link[tcltk:tkProgressBar]{tcltk::tkProgressBar()}}, or
 via the RStudio GUI using \code{rstudioapi::jobSetProgress()}.
 An alternative to above visual rendering, is to report progress as audio
-using \code{\link[beepr:beep]{beepr::beep()}}.
+using \code{\link[beepr:beep]{beepr::beep()}} or \code{BRRR::skrrrahh()}.
 It is also possible to use a combination of above progression handlers,
 e.g. a progress bar in the terminal together with audio updates.
 Besides the existing handlers, it is possible to develop custom
@@ -63,6 +63,7 @@ As sound:
 \itemize{
 \item \link{handler_ascii_alert} (built-in)
 \item \link{handler_beepr} (requires the \pkg{beepr} package)
+\item \link{handler_brrr} (requires the \pkg{BRRR} package)
 }
 
 Via the file system:

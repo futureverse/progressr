@@ -8,4 +8,4 @@ options(progressr.interval = 0.1)
 options(progressr.times = +Inf)
 
 
-options(progressr.tests.fake_handlers = c(non_supported_progression_handlers(), "handler_beepr", "handler_notifier", "handler_progress"))
+options(progressr.tests.fake_handlers = c(non_supported_progression_handlers(), "handler_beepr", "handler_brrr", "handler_notifier", "handler_progress"))
