@@ -1,5 +1,9 @@
 # Changelog
 
+## Version (development version)
+
+- …
+
 ## Version 0.19.0
 
 CRAN release: 2026-03-31
