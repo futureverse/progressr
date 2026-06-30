@@ -9,7 +9,7 @@
   "handlers('progress', 'beepr')"
                          .
   "y <- with_progress({" |
-    "slow_sum(1:10)"     |
+    "slow_sum_p(1:10)"     |
   "})"                   '------.
                                 |
                                 | progression
