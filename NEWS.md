@@ -12,6 +12,8 @@
  * `handler_progress()` gained argument `type` to choose from a
    predefined set of `progress::progress_bar()` `format` strings.
 
+ * New the demo function `slow_sqrt()` to complement `slow_sum()`.
+
 
 # Version 0.19.0 [2026-03-18]
 

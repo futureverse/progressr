@@ -106,7 +106,7 @@
 #' @section Options for progressr examples and demos:
 #'
 #' \describe{
-#'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum()]. (Default: `1.0`)}
+#'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum()] and [slow_sqrt()]. (Default: `1.0`)}
 #' }
 #'
 #' @section Environment variables that set R options:

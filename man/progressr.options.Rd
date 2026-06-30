@@ -134,7 +134,7 @@ If TRUE, standard output is captured and relayed at the end just before any capt
 
 
 \describe{
-\item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of \code{\link[=slow_sum]{slow_sum()}}. (Default: \code{1.0})}
+\item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of \code{\link[=slow_sum]{slow_sum()}} and \code{\link[=slow_sqrt]{slow_sqrt()}}. (Default: \code{1.0})}
 }
 }
 
