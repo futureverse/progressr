@@ -9,6 +9,11 @@
   [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html)
   `format` strings.
 
+- [`handler_progress()`](https://progressr.futureverse.org/reference/handler_progress.md)
+  gained argument `type` to choose from a predefined set of
+  [`progress::progress_bar()`](http://r-lib.github.io/progress/reference/progress_bar.md)
+  `format` strings.
+
 ## Version 0.19.0
 
 CRAN release: 2026-03-31

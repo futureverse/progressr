@@ -7,10 +7,11 @@ A progression handler for
 
 ``` r
 handler_progress(
-  format = ":spin [:bar] :percent :message",
+  format = NULL,
   show_after = 0,
   intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
   target = "terminal",
+  type = c("default", "steps", "percent", "time"),
   ...
 )
 ```
@@ -19,7 +20,8 @@ handler_progress(
 
 - format:
 
-  (character string) The format of the progress bar.
+  (character string) The format of the progress bar. If `NULL`, the
+  format is determined by the `type` argument.
 
 - show_after:
 
@@ -34,6 +36,21 @@ handler_progress(
 - target:
 
   (character vector) Specifies where progression updates are rendered.
+
+- type:
+
+  (character) The type of progress bar to display, which controls the
+  default `format` passed to
+  [`progress::progress_bar()`](http://r-lib.github.io/progress/reference/progress_bar.md).
+  If `"default"`, the format string is
+  `":spin [:bar] :percent :message"`. If `"steps"`, the format string is
+  `":spin [:bar] :current/:total :message"`. If `"percent"`, the format
+  string is `":spin [:bar] :percent :message"`. If `"time"`, the format
+  string is
+  `"[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"`.
+  For the meaning of these format variables, see
+  [progress::progress_bar](http://r-lib.github.io/progress/reference/progress_bar.md).
+  This argument is ignored if `format` is explicitly specified.
 
 - ...:
 
