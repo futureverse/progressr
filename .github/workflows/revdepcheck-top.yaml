@@ -18,7 +18,7 @@ jobs:
         config:
           - { r: "release", pkg: "cSEM"            }
           - { r: "release", pkg: "dipsaus"         }
-          - { r: "release", pkg: "EFAtools"        }
+#          - { r: "release", pkg: "EFAtools"        }  ## broken on 2026-06
 #          - { r: "release", pkg: "EGAnet"          }  ## libglpk.so missing
 #          - { r: "release", pkg: "elevatr"         }  ## libproj.so missing
           - { r: "release", pkg: "fabletools"      }
