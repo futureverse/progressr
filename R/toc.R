@@ -8,20 +8,22 @@
 #' Return the value of `expr`, if specified, otherwise NULL invisible.
 #' 
 #' @examples
+#' tic <- progressr:::tic
 #' toc <- progressr:::toc
 #'
+#' tic()
 #' Sys.sleep(1.2) |> toc()
 #' Sys.sleep(0.2) |> toc()
 #' toc()
 #'
-#' toc(reset = FALSE)
+#' tic()
 #' Sys.sleep(1.2) |> toc()
 #'
 #' @noRd
 toc <- local({
   start <- NULL
              
-  function(expr = NULL, reset = FALSE) {
+  function(expr = NULL, reset = FALSE, width = 30L) {
     t0 <- Sys.time()
     if (isTRUE(reset) || is.null(start)) start <<- t0
     if (missing(expr)) {
@@ -29,12 +31,24 @@ toc <- local({
       message(sprintf("[%s]", format(dt_start)))
       return(invisible())
     }
-    
-    res <- eval(substitute(expr), envir = parent.frame())
-    t1 <- Sys.time()
-    dt <- round(difftime(t1, t0), digits = 2L)
-    dt_tic <- round(difftime(t0, start), digits = 1L)
-    message(sprintf("[%s] +%s", format(dt_tic), format(dt)))
-    res    
+
+    on.exit({
+      code <- deparse(substitute(expr))
+      code <- paste(code, collapse = " ")
+      code <- gsub(" +", " ", code)
+      if (nchar(code) > width) {
+        code <- substr(code[1], start = 1L, stop = width)
+        code <- sprintf("%s ...", code)
+      }
+      t1 <- Sys.time()
+      dt <- round(difftime(t1, t0), digits = 2L)
+      dt_tic <- round(difftime(t1, start), digits = 1L)
+      message(sprintf("[%s] +%s : %s", format(dt_tic), format(dt), code))
+    })
+
+    expr
   }
 })    
+
+#' @noRd
+tic <- function() toc(reset = TRUE)
