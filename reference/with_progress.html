@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9009</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9012</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -210,16 +210,26 @@ Internally, this function is built around <code><a href="https://rdrr.io/r/base/
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## The slow_sum() example function</span></span></span>
 <span class="r-in"><span><span class="va">slow_sum</span> <span class="op">&lt;-</span> <span class="fu">progressr</span><span class="fu">::</span><span class="va"><a href="slow_sum.html">slow_sum</a></span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">slow_sum</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> function (x, delay = getOption("progressr.demo.delay", 1), stdout = FALSE, </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     message = TRUE, sticky = TRUE) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x, delay = getOption("progressr.demo.delay", 1), stdout = getOption("progressr.demo.stdout", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     FALSE), message = getOption("progressr.demo.message", TRUE), </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         TRUE)) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(stdout)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         stdout &lt;- getOption("progressr.slow_sum.stdout", FALSE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         stdout &lt;- getOption("progressr.slow_sum.stdout", stdout)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(message)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         message &lt;- getOption("progressr.slow_sum.message", TRUE)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         message &lt;- getOption("progressr.slow_sum.message", message)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(sticky)) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         sticky &lt;- getOption("progressr.slow_sum.sticky", TRUE)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     p &lt;- progressor(along = x)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         sticky &lt;- getOption("progressr.slow_sum.sticky", sticky)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     if (missing(progress)) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         progress &lt;- getOption("progressr.slow_sum.progress", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             progress)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     if (progress) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         p &lt;- progressor(along = x)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     else {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         p &lt;- function(...) NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     sum &lt;- 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     for (kk in seq_along(x)) {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         p(amount = 0)</span>
@@ -244,7 +254,7 @@ Internally, this function is built around <code><a href="https://rdrr.io/r/base/
 <span class="r-out co"><span class="r-pr">#&gt;</span>     p(amount = 0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     sum</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5f3bc9611110&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x64ebfa64e090&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:progressr&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span></span>

@@ -20,6 +20,11 @@
   [`progress::progress_bar()`](http://r-lib.github.io/progress/reference/progress_bar.md)
   `format` strings.
 
+- New the demo function
+  [`slow_sqrt()`](https://progressr.futureverse.org/reference/slow_sqrt.md)
+  to complement
+  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md).
+
 ## Version 0.19.0
 
 CRAN release: 2026-03-31

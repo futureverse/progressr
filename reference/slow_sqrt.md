@@ -1,11 +1,11 @@
-# Slowly Calculate Sum of Elements
+# Slowly Calculate Square Roots of Elements
 
-Slowly Calculate Sum of Elements
+Slowly Calculate Square Roots of Elements
 
 ## Usage
 
 ``` r
-slow_sum(
+slow_sqrt(
   x,
   delay = getOption("progressr.demo.delay", 1),
   stdout = getOption("progressr.demo.stdout", FALSE),
@@ -19,11 +19,11 @@ slow_sum(
 
 - x:
 
-  Numeric vector to sum
+  Numeric vector to calculate square roots for.
 
 - delay:
 
-  Delay in seconds after each addition.
+  Delay in seconds after each calculation.
 
 - stdout:
 
@@ -44,7 +44,7 @@ slow_sum(
 
 ## Value
 
-The sum of all elements in `x`.
+The square roots of all elements in `x` as a numeric vector.
 
 ## Progress updates
 

@@ -123,8 +123,30 @@ further notice.*
 - progressr.demo.delay::
 
   (numeric) Delay (in seconds) between each iteration of
-  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md).
+  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
+  and
+  [`slow_sqrt()`](https://progressr.futureverse.org/reference/slow_sqrt.md).
   (Default: `1.0`)
+
+- progressr.demo.stdout::
+
+  (logical) If TRUE, then a text is outputted to the standard output per
+  element. (Default: `FALSE`)
+
+- progressr.demo.message::
+
+  (logical) If TRUE, then a message is outputted per element. (Default:
+  `TRUE`)
+
+- progressr.demo.sticky::
+
+  (logical) If TRUE, then a "sticky" message is outputted every ten
+  element. (Default: `TRUE`)
+
+- progressr.demo.progress::
+
+  (logical) If TRUE, then a progressor is created, otherwise a void
+  progressor that does nothing is used. (Default: `TRUE`)
 
 ## Environment variables that set R options
 

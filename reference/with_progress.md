@@ -141,16 +141,26 @@ instead of this function. Internally, this function is built around
 ## The slow_sum() example function
 slow_sum <- progressr::slow_sum
 print(slow_sum)
-#> function (x, delay = getOption("progressr.demo.delay", 1), stdout = FALSE, 
-#>     message = TRUE, sticky = TRUE) 
+#> function (x, delay = getOption("progressr.demo.delay", 1), stdout = getOption("progressr.demo.stdout", 
+#>     FALSE), message = getOption("progressr.demo.message", TRUE), 
+#>     sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", 
+#>         TRUE)) 
 #> {
 #>     if (missing(stdout)) 
-#>         stdout <- getOption("progressr.slow_sum.stdout", FALSE)
+#>         stdout <- getOption("progressr.slow_sum.stdout", stdout)
 #>     if (missing(message)) 
-#>         message <- getOption("progressr.slow_sum.message", TRUE)
+#>         message <- getOption("progressr.slow_sum.message", message)
 #>     if (missing(sticky)) 
-#>         sticky <- getOption("progressr.slow_sum.sticky", TRUE)
-#>     p <- progressor(along = x)
+#>         sticky <- getOption("progressr.slow_sum.sticky", sticky)
+#>     if (missing(progress)) 
+#>         progress <- getOption("progressr.slow_sum.progress", 
+#>             progress)
+#>     if (progress) {
+#>         p <- progressor(along = x)
+#>     }
+#>     else {
+#>         p <- function(...) NULL
+#>     }
 #>     sum <- 0
 #>     for (kk in seq_along(x)) {
 #>         p(amount = 0)
@@ -175,7 +185,7 @@ print(slow_sum)
 #>     p(amount = 0)
 #>     sum
 #> }
-#> <bytecode: 0x5f3bc9611110>
+#> <bytecode: 0x64ebfa64e090>
 #> <environment: namespace:progressr>
 
 x <- 1:10
