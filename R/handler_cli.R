@@ -14,10 +14,17 @@
 #' controls the default `format` passed to [cli::cli_progress_bar()].
 #' If `"default"`, the \pkg{cli} default format is used (`format = NULL`).
 #' If `"steps"`, the progress bar shows the current and total number of
-#' steps. If `"percent"`, the progress bar shows the percentage completed.
+#' steps using the format string
+#' `"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`.
+#' If `"percent"`, the progress bar shows the percentage completed using
+#' the format string
+#' `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`.
 #' If `"time"`, the progress bar shows the percentage completed, the
 #' current and total number of steps, the estimated time remaining (ETA),
-#' and the total elapsed time.
+#' and the total elapsed time using the format string
+#' `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}, total: {cli::pb_elapsed}) {cli::pb_status}"`.
+#' For the meaning of these format variables, see
+#' [Progress bar variables][cli::progress-variables] in the \pkg{cli} package.
 #' This argument is ignored if `format` is explicitly specified via `...`.
 #'
 #' @param \ldots Additional arguments passed to [cli::cli_progress_bar()]
