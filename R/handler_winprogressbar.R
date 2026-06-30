@@ -21,7 +21,7 @@
 #' @examples
 #' \donttest{\dontrun{
 #' handlers(handler_winprogressbar())
-#' with_progress(y <- slow_sum(1:100))
+#' with_progress(y <- slow_sum_p(1:100))
 #' }}
 #' 
 #' @section Requirements:

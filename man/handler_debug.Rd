@@ -51,6 +51,6 @@ With \code{handlers(handler_debug())}:
 
 \examples{
 handlers("debug")
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 print(y)
 }

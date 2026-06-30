@@ -42,7 +42,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers("cli")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_cli-format-1}
@@ -50,7 +50,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_cli.R

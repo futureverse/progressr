@@ -7,7 +7,7 @@ if (require("foreach", quietly = TRUE)) {
     p <- progressor(4)
     y <- foreach(n = 3:6) %do% {
       p()
-      slow_sum(1:n, stdout=TRUE, message=TRUE)
+      slow_sum_p(1:n, stdout=TRUE, message=TRUE)
     }
   })
 
@@ -19,7 +19,7 @@ if (require("foreach", quietly = TRUE)) {
     p <- progressor(4)
     y <- foreach(n = 3:6) %do% {
       p()
-      slow_sum(1:n, stdout=TRUE, message=TRUE)
+      slow_sum_p(1:n, stdout=TRUE, message=TRUE)
     }
   })
     

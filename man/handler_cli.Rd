@@ -60,13 +60,13 @@ Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("cli")
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_cli-default.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_cli(format = "\{cli::pb_spin\} \{cli::pb_bar\} \{cli::pb_current\}/\{cli::pb_total\} \{cli::pb_status\}"))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_cli-format-1.svg}}
@@ -75,7 +75,7 @@ y <- slow_sum(1:25)
 \examples{
 if (requireNamespace("cli", quietly = TRUE)) {
   handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"))
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
 }
 }

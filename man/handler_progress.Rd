@@ -60,25 +60,25 @@ Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("progress")
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-default.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_progress(complete = "#"))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-complete.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_progress(format = ":spin [:bar] :percent :message"))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-format-1.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_progress(format = ":percent [:bar] :eta :message"))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-format-2.svg}}
@@ -88,7 +88,7 @@ y <- slow_sum(1:25)
 if (requireNamespace("progress", quietly = TRUE)) {
 
   handlers(handler_progress(format = ":spin [:bar] :percent :message"))
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }

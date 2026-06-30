@@ -35,6 +35,6 @@ A progression handler based on \code{cat("\\a", file=stderr())}.
 }
 \examples{
 handlers("ascii_alert")
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 print(y)
 }

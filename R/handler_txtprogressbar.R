@@ -28,7 +28,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers("txtprogressbar")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_txtprogressbar-style-1}
@@ -36,7 +36,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_txtprogressbar(style = 1L))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_txtprogressbar-style-3}
@@ -44,7 +44,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_txtprogressbar(style = 3L))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_txtprogressbar-char}
@@ -52,7 +52,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_txtprogressbar(char = "#"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_txtprogressbar-char-width-2}
@@ -60,7 +60,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_txtprogressbar(char = "<>"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_txtprogressbar-char-ansi}
@@ -68,7 +68,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_txtprogressbar.R

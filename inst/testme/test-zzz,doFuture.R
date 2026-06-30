@@ -14,7 +14,7 @@ if (requireNamespace("doFuture", quietly = TRUE)) {
       p <- progressor(4)
       y <- foreach(n = 3:6) %dopar% {
         p()
-        slow_sum(1:n, stdout=TRUE, message=TRUE)
+        slow_sum_p(1:n, stdout=TRUE, message=TRUE)
       }
     })
 
@@ -27,7 +27,7 @@ if (requireNamespace("doFuture", quietly = TRUE)) {
       p <- progressor(4)
       y <- foreach(n = 3:6) %dopar% {
         p()
-        slow_sum(1:n, stdout=TRUE, message=TRUE)
+        slow_sum_p(1:n, stdout=TRUE, message=TRUE)
       }
     })
     

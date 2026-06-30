@@ -1,8 +1,8 @@
-#' Slowly Calculate Sum of Elements
+#' Slowly Calculate Square Roots of Elements
 #'
-#' @param x Numeric vector to sum
+#' @param x Numeric vector to calculate square roots for.
 #'
-#' @param delay Delay in seconds after each addition.
+#' @param delay Delay in seconds after each calculation.
 #'
 #' @param stdout If TRUE, then a text is outputted to the standard output
 #' per element.
@@ -15,19 +15,19 @@
 #' @param progress If TRUE, then a progressor is created, otherwise a void
 #' progressor that does nothing is used.
 #'
-#' @return The sum of all elements in `x`.
+#' @return The square roots of all elements in `x` as a numeric vector.
 #'
 #' @section Progress updates:
 #' This function signals [progression] conditions as it progresses.
 #'
 #' @keywords internal
 #' @export
-slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", TRUE)) {
+slow_sqrt_p <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", TRUE)) {
   ## Hidden options to simplify help asciicast examples
-  if (missing(stdout)) stdout <- getOption("progressr.slow_sum.stdout", stdout)
-  if (missing(message)) message <- getOption("progressr.slow_sum.message", message)
-  if (missing(sticky)) sticky <- getOption("progressr.slow_sum.sticky", sticky)
-  if (missing(progress)) progress <- getOption("progressr.slow_sum.progress", progress)
+  if (missing(stdout)) stdout <- getOption("progressr.slow_sqrt_p.stdout", stdout)
+  if (missing(message)) message <- getOption("progressr.slow_sqrt_p.message", message)
+  if (missing(sticky)) sticky <- getOption("progressr.slow_sqrt_p.sticky", sticky)
+  if (missing(progress)) progress <- getOption("progressr.slow_sqrt_p.progress", progress)
 
   if (progress) {
     p <- progressor(along = x)
@@ -35,7 +35,7 @@ slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout =
     p <- function(...) NULL
   }
 
-  sum <- 0
+  res <- numeric(length(x))
   for (kk in seq_along(x)) {
     p(amount = 0)   ## "I'm alive" progression update
     Sys.sleep(0.2*delay)
@@ -43,10 +43,10 @@ slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout =
     Sys.sleep(0.2*delay)
     p(amount = 0)
     Sys.sleep(0.2*delay)
-    sum <- sum + x[kk]
-    p(message = sprintf("P: Adding %g", kk))
+    res[kk] <- sqrt(x[kk])
+    p(message = sprintf("P: Calculating sqrt(%g)", kk))
     Sys.sleep(0.2*delay)
-    if (message) message(sprintf("M: Added value %g", x[kk]))
+    if (message) message(sprintf("M: Calculated value %g", res[kk]))
     p(amount = 0)
     Sys.sleep(0.2*delay)
     if (sticky && kk %% 10 == 0) {
@@ -60,5 +60,5 @@ slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout =
 
   p(amount = 0)
 
-  sum
+  res
 }

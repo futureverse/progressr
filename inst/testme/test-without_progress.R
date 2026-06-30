@@ -3,13 +3,13 @@ library(progressr)
 message("without_progress() ...")
 
 x <- 1:10
-y0 <- slow_sum(x)
+y0 <- slow_sum_p(x)
 
-with_progress(y <- slow_sum(x))
+with_progress(y <- slow_sum_p(x))
 
-without_progress(y <- slow_sum(x))
+without_progress(y <- slow_sum_p(x))
 
-with_progress(without_progress(y <- slow_sum(x)))
+with_progress(without_progress(y <- slow_sum_p(x)))
 
 message("without_progress() ... done")
 

@@ -32,7 +32,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers("pbcol")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_pbcol-adjust-mid}
@@ -40,7 +40,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_pbcol(adjust = 0.5))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_pbcol-adjust-right-complete}
@@ -52,7 +52,7 @@
 #'   complete = function(s) cli::bg_red(cli::col_black(s)),
 #'   incomplete = function(s) cli::bg_cyan(cli::col_black(s))
 #' ))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_pbcol.R

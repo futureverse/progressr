@@ -71,8 +71,8 @@ p("loading ...")  # pass on a message
 <pre>
 handlers(global = TRUE)
 
-y &lt;- slow_sum(1:5)
-y &lt;- slow_sum(6:10)
+y &lt;- slow_sum_p(1:5)
+y &lt;- slow_sum_p(6:10)
 </pre>
 
 <p>
@@ -81,8 +81,8 @@ y &lt;- slow_sum(6:10)
 
 <pre>
 with_progress({
-  y &lt;- slow_sum(1:5)
-  y &lt;- slow_sum(6:10)
+  y &lt;- slow_sum_p(1:5)
+  y &lt;- slow_sum_p(6:10)
 })
 </pre>
 
@@ -103,13 +103,13 @@ handlers(handler_progress(complete = "#"))
 
 ## A simple example
 
-Assume that we have a function `slow_sum()` for adding up the values
+Assume that we have a function `slow_sum_p()` for adding up the values
 in a vector.  It is so slow, that we like to provide progress updates
 to whoever might be interested in it.  With the **progressr** package,
 this can be done as:
 
 ```r
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -136,7 +136,7 @@ reporting function of interest).
 Now, if we call this function, without further settings:
 
 ```r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
 > y
 [1] 55
 >
@@ -153,9 +153,9 @@ by:
 After this, progress will be reported:
 
 ```r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
   |====================                               |  40%
-> y <- slow_sum(10:1)
+> y <- slow_sum_p(10:1)
   |========================================           |  80%
 ```
 
@@ -229,7 +229,7 @@ In contrast to other progress-bar frameworks, output from `message()`,
 reported via **progressr**.  For example, say we have:
 
 ```r
-slow_sqrt <- function(xs) {
+slow_sqrt_p <- function(xs) {
   p <- progressor(along = xs)
   lapply(xs, function(x) {
     message("Calculating the square root of ", x)
@@ -246,7 +246,7 @@ we will get:
 > library(progressr)
 > handlers(global = TRUE)
 > handlers("progress")
-> y <- slow_sqrt(1:8)
+> y <- slow_sqrt_p(1:8)
 Calculating the square root of 1
 Calculating the square root of 2
 - [===========>-----------------------------------]  25% x=2
@@ -281,7 +281,7 @@ This works for several progress handlers that output to the terminal.
 For example, with:
 
 ```r
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -298,7 +298,7 @@ we get
 
 ```r
 > handlers("txtprogressbar")
-> y <- slow_sum(1:30)
+> y <- slow_sum_p(1:30)
 Step 5
 Step 10
   |====================                               |  43%
@@ -308,7 +308,7 @@ and
 
 ```r
 > handlers("progress")
-> y <- slow_sum(1:30)
+> y <- slow_sum_p(1:30)
 Step 5
 Step 10
 / [===============>-------------------------]  43% Adding 13

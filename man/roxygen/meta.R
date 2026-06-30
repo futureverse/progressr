@@ -17,9 +17,9 @@ asciicast::init_knitr_engine(
     options(progressr.clear = FALSE)
     
     ## To simplify examples
-    options(progressr.slow_sum.stdout = FALSE)
-    options(progressr.slow_sum.message = FALSE)
-    options(progressr.slow_sum.sticky = FALSE)
+    options(progressr.slow_sum_p.stdout = FALSE)
+    options(progressr.slow_sum_p.message = FALSE)
+    options(progressr.slow_sum_p.sticky = FALSE)
     
     handlers(global = TRUE)
   })

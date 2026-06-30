@@ -78,7 +78,7 @@ handlers("beepr")
 will present itself as sounds played at the beginning, while progressing, and at the end (using different **[beepr]** sounds).  There will be _no_ output written to the terminal;
 
 ```r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
 > y
 [1] 55
 >

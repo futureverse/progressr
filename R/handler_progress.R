@@ -41,7 +41,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers("progress")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_progress-complete}
@@ -49,7 +49,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_progress(complete = "#"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_progress-format-1}
@@ -57,7 +57,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_progress(format = ":spin [:bar] :percent :message"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_progress-format-2}
@@ -65,7 +65,7 @@
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
 #' handlers(handler_progress(format = ":percent [:bar] :eta :message"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_progress.R

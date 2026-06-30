@@ -5,7 +5,7 @@ if (requireNamespace("plyr", quietly = TRUE)) {
 
   with_progress({
     y <- plyr::llply(3:6, function(n, ...) {
-      slow_sum(1:n, stdout=TRUE, message=TRUE)
+      slow_sum_p(1:n, stdout=TRUE, message=TRUE)
     }, .progress = "progressr")
   })
 
@@ -17,7 +17,7 @@ if (requireNamespace("plyr", quietly = TRUE)) {
     
   local({
     y <- plyr::llply(3:6, function(n, ...) {
-      slow_sum(1:n, stdout=TRUE, message=TRUE)
+      slow_sum_p(1:n, stdout=TRUE, message=TRUE)
     }, .progress = "progressr")
   })
     

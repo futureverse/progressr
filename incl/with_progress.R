@@ -1,24 +1,24 @@
-## The slow_sum() example function
-slow_sum <- progressr::slow_sum
-print(slow_sum)
+## The slow_sum_p() example function
+slow_sum_p <- progressr::slow_sum_p
+print(slow_sum_p)
 
 x <- 1:10
 
 ## Without progress updates
-y <- slow_sum(x)
+y <- slow_sum_p(x)
 
 
 ## Progress reported via txtProgressBar (default)
 handlers("txtprogressbar")  ## default
 with_progress({
-  y <- slow_sum(x)
+  y <- slow_sum_p(x)
 })
 
 ## Progress reported via tcltk::tkProgressBar
 if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
   handlers("tkprogressbar")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 
@@ -26,7 +26,7 @@ if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
 if (requireNamespace("progress", quietly = TRUE)) {
   handlers("progress")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 
@@ -34,7 +34,7 @@ if (requireNamespace("progress", quietly = TRUE)) {
 if (requireNamespace("beepr", quietly = TRUE)) {
   handlers("beepr", "txtprogressbar")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 
@@ -46,5 +46,5 @@ if (requireNamespace("beepr", quietly = TRUE)) {
 }
 
 with_progress({
-  y <- slow_sum(1:30)
+  y <- slow_sum_p(1:30)
 })

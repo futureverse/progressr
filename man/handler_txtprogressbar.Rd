@@ -45,37 +45,37 @@ Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("txtprogressbar")
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-default.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(style = 1L))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-style-1.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(style = 3L))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-style-3.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = "#"))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = "<>"))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char-width-2.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char-ansi.svg}}
@@ -84,6 +84,6 @@ y <- slow_sum(1:25)
 \examples{
 handlers("txtprogressbar")
 
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 print(y)
 }

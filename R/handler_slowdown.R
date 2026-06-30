@@ -14,7 +14,7 @@
 #' @examples
 #' \donttest{\dontrun{
 #' handlers(handler_slowdown(duration = 30.0)) ## 30-second total slowdown
-#' with_progress(y <- slow_sum(1:100))
+#' with_progress(y <- slow_sum_p(1:100))
 #' print(y)
 #' }}
 #'

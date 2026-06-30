@@ -67,12 +67,12 @@
 #' to `TRUE`.  Alternatively, one can set argument `enable=TRUE` when calling
 #' `with_progress()`.  For example,
 #' ```sh
-#' $ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+#' $ Rscript -e "library(progressr)" -e "with_progress(slow_sum_p(1:5))"
 #' ```
 #' will _not_ report on progress, whereas:
 #' ```sh
 #' $ export R_PROGRESSR_ENABLE=TRUE
-#' $ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+#' $ Rscript -e "library(progressr)" -e "with_progress(slow_sum_p(1:5))"
 #' ```
 #' will.
 #'

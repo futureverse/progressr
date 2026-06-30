@@ -55,7 +55,7 @@ with \code{style = substyle}, the main usage of this handler is with
 \code{style = "ETA"} (default) for which \code{substyle} is ignored.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("pbmcapply")
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_pbmcapply-default.svg}}
@@ -65,7 +65,7 @@ y <- slow_sum(1:25)
 if (requireNamespace("pbmcapply", quietly = TRUE)) {
 
   handlers("pbmcapply")
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }

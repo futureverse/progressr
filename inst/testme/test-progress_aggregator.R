@@ -6,8 +6,8 @@ with_progress({
   progress <- progressor(steps = 1 + 3 + 10 + 1)
   relay_progress <- progress_aggregator(progress)
   progress()
-  relay_progress(slow_sum(1:3))
-  relay_progress(slow_sum(1:10))
+  relay_progress(slow_sum_p(1:3))
+  relay_progress(slow_sum_p(1:10))
   progress()
 })
 
@@ -34,9 +34,9 @@ slow_prod <- function(x, delay = getOption("progressr.demo.delay", 0.05)) {
 ## a different source
 with_progress({
   x <- 1:10
-  a <- slow_sum(x)
+  a <- slow_sum_p(x)
   b <- slow_prod(x)
-  c <- slow_sum(-x)
+  c <- slow_sum_p(-x)
 })
 
 
@@ -47,9 +47,9 @@ with_progress({
   progress <- progressor(3*length(x))
   relay_progress <- progress_aggregator(progress)
   relay_progress({
-    a <- slow_sum(x)
+    a <- slow_sum_p(x)
     b <- slow_prod(x)
-    c <- slow_sum(-x)
+    c <- slow_sum_p(-x)
   })
 })
 
