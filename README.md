@@ -185,31 +185,32 @@ See the 'Customizing How Progress is Reported' vignette for examples.
 ### Support for progressr elsewhere
 
 Note that progression updates by **progressr** are designed to work out
-of the box for any iterator framework in R. See the different package
-vignettes for details. Prominent examples are:
+of the box for any iterator framework in R. Prominent examples are:
 
  * `lapply()` etc. in base R
  * `map()` etc. by the **[purrr]** package
  * `llply()` etc. by the **[plyr]** package
  * `foreach()` iterations by the **[foreach]** package
 
-and near-live progress reporting in parallel and distributed
-processing via the **[future]** framework. The modern approach is to
-use the **[futurize]** package, e.g.
+You can manually inject `progressor()` code in these calls, or let the
+**[progressify]** package take care of it for you, e.g.
 
- * `lapply(...) |> futurize()`
- * `map(...) |> futurize()` (**[purrr]**)
- * `llply(...) |> futurize()` (**[plyr]**)
- * `foreach(...) |> futurize()` (**[foreach]**)
- * `bplapply(...) |> futurize()` (**[BiocParallel]**)
+ * `lapply(...) |> progressify()`
+ * `map(...) |> progressify()`
+ * `llply(...) |> progressify()`
+ * `foreach(...) |> progressify()`
+
+You can use this to obtain near-live progress reporting in parallel
+and distributed processing via the **[future]** framework. The modern
+approach is to combine **[progressify]** and **[futurize]**, e.g.
+
+ * `lapply(...) |> progressify() |> futurize()`
+ * `map(...) |> progressify() |> futurize()`
+ * `llply(...) |> progressify() |> futurize()`
+ * `foreach(...) |> progressify() |> futurize()`
+ * `bplapply(...) |> progressify() |> futurize()` (**[BiocParallel]**)
  
-The traditional counterparts are:
-
- * `future_lapply()` etc.  by the **[future.apply]** package
- * `future_map()` etc. by the **[furrr]** package
- * `llply()` etc. by the **[plyr]** and **[doFuture]** packages
- * `foreach()` iterations via the **foreach** and **[doFuture]** packages
- * `bplapply()` etc. by the **[BiocParallel]** and **[doFuture]** packages
+You can also use `progressify()` with traditional **[future.apply]**, **[furrr]** and **[doFuture]** packages.
 
 Other uses of **progressr** are:
 
@@ -314,6 +315,7 @@ Step 10
 
 [futureverse]: https://www.futureverse.org
 [progressr]: https://progressr.futureverse.org
+[progressify]: https://progressify.futureverse.org
 [future]: https://future.futureverse.org
 [futurize]: https://futurize.futureverse.org
 [future.apply]: https://future.apply.futureverse.org
