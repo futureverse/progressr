@@ -4,6 +4,12 @@
 
 ### New Features
 
+- Add
+  [`handler_tutorial()`](https://progressr.futureverse.org/reference/handler_tutorial.md)
+  useful for benchmarking and illustrating sequential and parallel
+  processing, e.g. `handlers("tutorial")` and
+  `handlers("tutorial", "newline")`.
+
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
   gained argument `type` to choose from a predefined set of
   [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html)

@@ -43,6 +43,8 @@
 - [`handler_tkprogressbar()`](https://progressr.futureverse.org/reference/handler_tkprogressbar.md)
   : Progression Handler: Progress Reported as a Tcl/Tk Progress Bars in
   the GUI
+- [`handler_tutorial()`](https://progressr.futureverse.org/reference/handler_tutorial.md)
+  : A progressr handler useful for Futureverse tutorials
 - [`handler_txtprogressbar()`](https://progressr.futureverse.org/reference/handler_txtprogressbar.md)
   : Progression Handler: Progress Reported as Plain Progress Bars (Text)
   in the Terminal
