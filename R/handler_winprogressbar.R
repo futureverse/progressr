@@ -3,6 +3,9 @@
 #' A progression handler for `winProgressBar()` in the \pkg{utils} package.
 #'
 #' @inheritParams make_progression_handler
+#'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
 #' 
 #' @param inputs (named list) Specifies from what sources the MS Windows
 #' progress elements 'title' and 'label' should be updated. Valid sources are

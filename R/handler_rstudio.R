@@ -2,6 +2,9 @@
 #'
 #' @inheritParams make_progression_handler 
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param title (character or a function) The "name" of the progressor, which
 #' is displayed in front of the progress bar.  If a function, then the name
 #' is created dynamically by calling the function when the progressor is

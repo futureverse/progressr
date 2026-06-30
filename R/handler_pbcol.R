@@ -2,6 +2,9 @@
 #'
 #' @inheritParams make_progression_handler 
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param adjust (numeric) The adjustment of the progress update,
 #' where `adjust = 0` positions the message to the very left, and
 #' `adjust = 1` positions the message to the very right.

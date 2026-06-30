@@ -4,6 +4,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param initiate,update,finish,interrupt (integer) Indices of [beepr::beep()]
 #' sounds to play when progress starts, is updated, completes, or is
 #' interrupted.  For silence, use `NA_integer_`.

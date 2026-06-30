@@ -4,6 +4,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param \ldots Additional arguments passed to [make_progression_handler()].
 #'
 #' @example incl/handler_notifier.R

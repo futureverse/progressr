@@ -29,6 +29,10 @@ whereas the 'label' component is updated using any message.}
 \item{\ldots}{Additional arguments passed to \code{\link[tcltk:tkProgressBar]{tcltk::tkProgressBar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 A progression handler for \code{\link[tcltk:tkProgressBar]{tcltk::tkProgressBar()}}.
 }

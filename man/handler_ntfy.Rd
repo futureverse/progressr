@@ -22,6 +22,10 @@ rendered.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 A progression handler for \code{\link[ntfy:ntfy_send]{ntfy::ntfy_send()}} of the \pkg{ntfy} package,
 which sends notifications via the \url{https://ntfy.sh} framework.

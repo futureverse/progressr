@@ -4,6 +4,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param char (character) The symbols to form the progress bar for
 #' [utils::txtProgressBar()]. Contrary to `txtProgressBar()`, this handler
 #' supports also ANSI-colored symbols.
