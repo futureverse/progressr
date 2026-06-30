@@ -22,7 +22,7 @@
 #' If `"time"`, the progress bar shows the percentage completed, the
 #' current and total number of steps, the estimated time remaining (ETA),
 #' and the total elapsed time using the format string
-#' `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}, total: {cli::pb_elapsed}) {cli::pb_status}"`.
+#' `"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"`.
 #' For the meaning of these format variables, see
 #' [Progress bar variables][cli::progress-variables] in the \pkg{cli} package.
 #' This argument is ignored if `format` is explicitly specified via `...`.
@@ -68,7 +68,7 @@ handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.i
       default = NULL,
       steps   = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}",
       percent = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}",
-      time    = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}, total: {cli::pb_elapsed}) {cli::pb_status}"
+      time    = "[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"
     )
     if (!is.null(format)) backend_args[["format"]] <- format
   }

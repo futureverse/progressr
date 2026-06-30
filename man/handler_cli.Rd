@@ -34,7 +34,7 @@ the format string
 If \code{"time"}, the progress bar shows the percentage completed, the
 current and total number of steps, the estimated time remaining (ETA),
 and the total elapsed time using the format string
-\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}, total: {cli::pb_elapsed}) {cli::pb_status}"}.
+\code{"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"}.
 For the meaning of these format variables, see
 \link[cli:progress-variables]{Progress bar variables} in the \pkg{cli} package.
 This argument is ignored if \code{format} is explicitly specified via \code{...}.}
