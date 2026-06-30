@@ -121,23 +121,22 @@
 #' @seealso
 #' To set \R options when \R starts (even before the \pkg{progressr} package is loaded), see the \link[base]{Startup} help page.  The \href{https://cran.r-project.org/package=startup}{\pkg{startup}} package provides a friendly mechanism for configuring \R at startup.
 #'
-#' @aliases
-#' progressr.clear
-#' progressr.debug
-#' progressr.demo.delay
-#' progressr.delay_stdout progressr.delay_conditions
-#' progressr.enable progressr.enable_after
-#' progressr.interrupts
-#' progressr.interval
-#' progressr.intrusiveness
-#' progressr.intrusiveness.audio
-#' progressr.intrusiveness.debug
-#' progressr.intrusiveness.file
-#' progressr.intrusiveness.gui
-#' progressr.intrusiveness.notifier
-#' progressr.intrusiveness.terminal
-#' progressr.handlers
-#' progressr.times
+#' @aliases progressr.clear
+#' @aliases progressr.debug
+#' @aliases progressr.demo.delay
+#' @aliases progressr.delay_stdout progressr.delay_conditions
+#' @aliases progressr.enable progressr.enable_after
+#' @aliases progressr.interrupts
+#' @aliases progressr.interval
+#' @aliases progressr.intrusiveness
+#' @aliases progressr.intrusiveness.audio
+#' @aliases progressr.intrusiveness.debug
+#' @aliases progressr.intrusiveness.file
+#' @aliases progressr.intrusiveness.gui
+#' @aliases progressr.intrusiveness.notifier
+#' @aliases progressr.intrusiveness.terminal
+#' @aliases progressr.handlers
+#' @aliases progressr.times
 #'
 #' @name progressr.options
 NULL

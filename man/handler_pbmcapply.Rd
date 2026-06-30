@@ -23,7 +23,7 @@ handler_pbmcapply(
 
 \item{style}{(character) The progress-bar style according to}
 
-\item{file}{(connection) A \link[base:connections]{base::connection} to where output should be sent.}
+\item{file}{(connection) A \link[base:connection]{base::connection} to where output should be sent.}
 
 \item{intrusiveness}{(numeric) A non-negative scalar on how intrusive
 (disruptive) the reporter to the user.}
