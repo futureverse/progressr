@@ -2,7 +2,10 @@
 % Please edit documentation in R/slow_sum_p.R
 \name{slow_sum_p}
 \alias{slow_sum_p}
-\title{Slowly Calculate Sum of Elements}
+\alias{slow_sum}
+\alias{slow_sqrt_p}
+\alias{slow_sqrt}
+\title{Slowly Calculate Sum or Square Roots of Elements}
 \usage{
 slow_sum_p(
   x,
@@ -12,11 +15,38 @@ slow_sum_p(
   sticky = getOption("progressr.demo.sticky", TRUE),
   progress = getOption("progressr.demo.progress", TRUE)
 )
+
+slow_sum(
+  x,
+  delay = getOption("progressr.demo.delay", 1),
+  stdout = FALSE,
+  message = FALSE,
+  sticky = FALSE,
+  progress = FALSE
+)
+
+slow_sqrt_p(
+  x,
+  delay = getOption("progressr.demo.delay", 1),
+  stdout = getOption("progressr.demo.stdout", FALSE),
+  message = getOption("progressr.demo.message", TRUE),
+  sticky = getOption("progressr.demo.sticky", TRUE),
+  progress = getOption("progressr.demo.progress", TRUE)
+)
+
+slow_sqrt(
+  x,
+  delay = getOption("progressr.demo.delay", 1),
+  stdout = FALSE,
+  message = FALSE,
+  sticky = FALSE,
+  progress = FALSE
+)
 }
 \arguments{
-\item{x}{Numeric vector to sum}
+\item{x}{Numeric vector to sum or calculate square roots for.}
 
-\item{delay}{Delay in seconds after each addition.}
+\item{delay}{Delay in seconds after each addition/calculation.}
 
 \item{stdout}{If TRUE, then a text is outputted to the standard output
 per element.}
@@ -30,14 +60,14 @@ ten element.}
 progressor that does nothing is used.}
 }
 \value{
-The sum of all elements in \code{x}.
+The sum or square roots of all elements in \code{x}.
 }
 \description{
-Slowly Calculate Sum of Elements
+Slowly Calculate Sum or Square Roots of Elements
 }
 \section{Progress updates}{
 
-This function signals \link{progression} conditions as it progresses.
+These functions signal \link{progression} conditions as they progress.
 }
 
 \keyword{internal}

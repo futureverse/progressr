@@ -4,6 +4,54 @@ options(progressr.demo.delay = 0.001)
 options(progressr.interval = 0.0)
 options(progressr.clear = FALSE)
 
+
+message("slow_sum_p() ...")
+
+x <- 1:5
+truth <- sum(x)
+
+res <- slow_sum_p(x)
+stopifnot(identical(res, truth))
+
+res <- with_progress({
+  slow_sum_p(x)
+})
+stopifnot(identical(res, truth))
+
+message("slow_sum_p() ... done")
+
+
+message("slow_sum() ...")
+
+x <- 1:5
+truth <- sum(x)
+
+# slow_sum should not produce any output or messages or progress updates by default
+out <- capture.output({
+  msgs <- list()
+  progressions <- list()
+  withCallingHandlers({
+    res <- slow_sum(x)
+  }, message = function(m) {
+    msgs[[length(msgs) + 1L]] <<- m$message
+  }, progression = function(p) {
+    progressions[[length(progressions) + 1L]] <<- p
+  })
+})
+stopifnot(identical(res, truth))
+stopifnot(length(out) == 0L)
+stopifnot(length(msgs) == 0L)
+stopifnot(length(progressions) == 0L)
+
+# check that we can enable options/arguments on slow_sum
+out <- capture.output({
+  res <- slow_sum(1:2, stdout = TRUE)
+})
+stopifnot(any(grepl("O: Element", out)))
+
+message("slow_sum() ... done")
+
+
 message("slow_sqrt_p() ...")
 
 x <- c(1, 4, 9, 16, 25)
@@ -100,3 +148,34 @@ stopifnot(length(progressions) == 0L)
 options(progressr.demo.progress = NULL)
 
 message("slow_sqrt_p() ... done")
+
+
+message("slow_sqrt() ...")
+
+x <- c(1, 4, 9, 16, 25)
+truth <- sqrt(x)
+
+# slow_sqrt should not produce any output or messages or progress updates by default
+out <- capture.output({
+  msgs <- list()
+  progressions <- list()
+  withCallingHandlers({
+    res <- slow_sqrt(x)
+  }, message = function(m) {
+    msgs[[length(msgs) + 1L]] <<- m$message
+  }, progression = function(p) {
+    progressions[[length(progressions) + 1L]] <<- p
+  })
+})
+stopifnot(identical(res, truth))
+stopifnot(length(out) == 0L)
+stopifnot(length(msgs) == 0L)
+stopifnot(length(progressions) == 0L)
+
+# check that we can enable options/arguments on slow_sqrt
+out <- capture.output({
+  res <- slow_sqrt(1:2, stdout = TRUE)
+})
+stopifnot(any(grepl("O: Element", out)))
+
+message("slow_sqrt() ... done")

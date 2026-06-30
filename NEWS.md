@@ -13,6 +13,7 @@
    predefined set of `progress::progress_bar()` `format` strings.
 
  * Renamed `slow_sum()` to `slow_sum_p()` and added `slow_sqrt_p()`.
+   Added new basic `slow_sum()` and `slow_sqrt()`.
 
 
 # Version 0.19.0 [2026-03-18]
