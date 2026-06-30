@@ -8,6 +8,7 @@ handler_cli(
   show_after = 0,
   intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
   target = "terminal",
+  type = c("default", "steps", "percent", "time"),
   ...
 )
 }
@@ -20,6 +21,16 @@ the progress bar.}
 
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
+
+\item{type}{(character) The type of progress bar to display, which
+controls the default \code{format} passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}.
+If \code{"default"}, the \pkg{cli} default format is used (\code{format = NULL}).
+If \code{"steps"}, the progress bar shows the current and total number of
+steps. If \code{"percent"}, the progress bar shows the percentage completed.
+If \code{"time"}, the progress bar shows the percentage completed, the
+current and total number of steps, the estimated time remaining (ETA),
+and the total elapsed time.
+This argument is ignored if \code{format} is explicitly specified via \code{...}.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}

@@ -7,6 +7,16 @@
 #' @param show_after (numeric) Number of seconds to wait before displaying
 #' the progress bar.
 #'
+#' @param type (character) The type of progress bar to display, which
+#' controls the default `format` passed to [cli::cli_progress_bar()].
+#' If `"default"`, the \pkg{cli} default format is used (`format = NULL`).
+#' If `"steps"`, the progress bar shows the current and total number of
+#' steps. If `"percent"`, the progress bar shows the percentage completed.
+#' If `"time"`, the progress bar shows the percentage completed, the
+#' current and total number of steps, the estimated time remaining (ETA),
+#' and the total elapsed time.
+#' This argument is ignored if `format` is explicitly specified via `...`.
+#'
 #' @param \ldots Additional arguments passed to [cli::cli_progress_bar()]
 #' and [make_progression_handler()].
 #'
@@ -36,9 +46,22 @@
 #' @example incl/handler_cli.R
 #'
 #' @export
-handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", ...) {
+handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", type = c("default", "steps", "percent", "time"), ...) {
+  type <- match.arg(type)
+
   ## Additional arguments passed to the progress-handler backend
   backend_args <- handler_backend_args(...)
+
+  ## Default 'format' depending on 'type', unless 'format' is already specified
+  if (is.null(backend_args[["format"]])) {
+    format <- switch(type,
+      default = NULL,
+      steps   = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}",
+      percent = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}",
+      time    = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}, total: {cli::pb_elapsed}) {cli::pb_status}"
+    )
+    if (!is.null(format)) backend_args[["format"]] <- format
+  }
 
   if (!is_fake("handler_cli")) {
     cli_n_colors <- cli::num_ansi_colors()
