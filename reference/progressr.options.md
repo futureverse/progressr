@@ -126,7 +126,7 @@ further notice.*
   [`slow_sum_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
   and
   [`slow_sqrt_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md).
-  (Default: `1.0`)
+  (Default: `0.5`)
 
 - progressr.demo.stdout::
 
