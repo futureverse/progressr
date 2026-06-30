@@ -120,8 +120,7 @@ See the ‘Customizing How Progress is Reported’ vignette for examples.
 ### Support for progressr elsewhere
 
 Note that progression updates by **progressr** are designed to work out
-of the box for any iterator framework in R. See the different package
-vignettes for details. Prominent examples are:
+of the box for any iterator framework in R. Prominent examples are:
 
 - [`lapply()`](https://rdrr.io/r/base/lapply.html) etc. in base R
 - `map()` etc. by the
@@ -131,35 +130,35 @@ vignettes for details. Prominent examples are:
 - `foreach()` iterations by the
   **[foreach](https://cran.r-project.org/package=foreach)** package
 
-and near-live progress reporting in parallel and distributed processing
-via the **[future](https://future.futureverse.org)** framework. The
-modern approach is to use the
-**[futurize](https://futurize.futureverse.org)** package, e.g.
+You can manually inject
+[`progressor()`](https://progressr.futureverse.org/reference/progressor.md)
+code in these calls, or let the
+**[progressify](https://progressify.futureverse.org)** package take care
+of it for you, e.g.
 
-- `lapply(...) |> futurize()`
-- `map(...) |> futurize()`
-  (**[purrr](https://cran.r-project.org/package=purrr)**)
-- `llply(...) |> futurize()`
-  (**[plyr](https://cran.r-project.org/package=plyr)**)
-- `foreach(...) |> futurize()`
-  (**[foreach](https://cran.r-project.org/package=foreach)**)
-- `bplapply(...) |> futurize()`
+- `lapply(...) |> progressify()`
+- `map(...) |> progressify()`
+- `llply(...) |> progressify()`
+- `foreach(...) |> progressify()`
+
+You can use this to obtain near-live progress reporting in parallel and
+distributed processing via the
+**[future](https://future.futureverse.org)** framework. The modern
+approach is to combine
+**[progressify](https://progressify.futureverse.org)** and
+**[futurize](https://futurize.futureverse.org)**, e.g.
+
+- `lapply(...) |> progressify() |> futurize()`
+- `map(...) |> progressify() |> futurize()`
+- `llply(...) |> progressify() |> futurize()`
+- `foreach(...) |> progressify() |> futurize()`
+- `bplapply(...) |> progressify() |> futurize()`
   (**[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**)
 
-The traditional counterparts are:
-
-- `future_lapply()` etc. by the
-  **[future.apply](https://future.apply.futureverse.org)** package
-- `future_map()` etc. by the **[furrr](https://furrr.futureverse.org)**
-  package
-- `llply()` etc. by the
-  **[plyr](https://cran.r-project.org/package=plyr)** and
-  **[doFuture](https://doFuture.futureverse.org)** packages
-- `foreach()` iterations via the **foreach** and
-  **[doFuture](https://doFuture.futureverse.org)** packages
-- `bplapply()` etc. by the
-  **[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
-  and **[doFuture](https://doFuture.futureverse.org)** packages
+You can also use `progressify()` with traditional
+**[future.apply](https://future.apply.futureverse.org)**,
+**[furrr](https://furrr.futureverse.org)** and
+**[doFuture](https://doFuture.futureverse.org)** packages.
 
 Other uses of **progressr** are:
 

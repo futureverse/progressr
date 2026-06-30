@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -298,8 +298,8 @@ examples.</p>
 <h3 id="support-for-progressr-elsewhere">Support for progressr elsewhere<a class="anchor" aria-label="anchor" href="#support-for-progressr-elsewhere"></a>
 </h3>
 <p>Note that progression updates by <strong>progressr</strong> are
-designed to work out of the box for any iterator framework in R. See the
-different package vignettes for details. Prominent examples are:</p>
+designed to work out of the box for any iterator framework in R.
+Prominent examples are:</p>
 <ul>
 <li>
 <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply()</a></code> etc. in base R</li>
@@ -313,41 +313,33 @@ package</li>
 <code>foreach()</code> iterations by the <strong><a href="https://cran.r-project.org/package=foreach" class="external-link">foreach</a></strong>
 package</li>
 </ul>
-<p>and near-live progress reporting in parallel and distributed
-processing via the <strong><a href="https://future.futureverse.org" class="external-link">future</a></strong> framework. The
-modern approach is to use the <strong><a href="https://futurize.futureverse.org" class="external-link">futurize</a></strong> package,
-e.g.</p>
+<p>You can manually inject <code><a href="../reference/progressor.html">progressor()</a></code> code in these
+calls, or let the <strong><a href="https://progressify.futureverse.org" class="external-link">progressify</a></strong>
+package take care of it for you, e.g.</p>
 <ul>
-<li><code>lapply(...) |&gt; futurize()</code></li>
-<li>
-<code>map(...) |&gt; futurize()</code> (<strong><a href="https://cran.r-project.org/package=purrr" class="external-link">purrr</a></strong>)</li>
-<li>
-<code>llply(...) |&gt; futurize()</code> (<strong><a href="https://cran.r-project.org/package=plyr" class="external-link">plyr</a></strong>)</li>
-<li>
-<code>foreach(...) |&gt; futurize()</code> (<strong><a href="https://cran.r-project.org/package=foreach" class="external-link">foreach</a></strong>)</li>
-<li>
-<code>bplapply(...) |&gt; futurize()</code> (<strong><a href="https://www.bioconductor.org/packages/BiocParallel/" class="external-link">BiocParallel</a></strong>)</li>
+<li><code>lapply(...) |&gt; progressify()</code></li>
+<li><code>map(...) |&gt; progressify()</code></li>
+<li><code>llply(...) |&gt; progressify()</code></li>
+<li><code>foreach(...) |&gt; progressify()</code></li>
 </ul>
-<p>The traditional counterparts are:</p>
+<p>You can use this to obtain near-live progress reporting in parallel
+and distributed processing via the <strong><a href="https://future.futureverse.org" class="external-link">future</a></strong> framework. The
+modern approach is to combine <strong><a href="https://progressify.futureverse.org" class="external-link">progressify</a></strong> and
+<strong><a href="https://futurize.futureverse.org" class="external-link">futurize</a></strong>, e.g.</p>
 <ul>
+<li><code>lapply(...) |&gt; progressify() |&gt; futurize()</code></li>
+<li><code>map(...) |&gt; progressify() |&gt; futurize()</code></li>
+<li><code>llply(...) |&gt; progressify() |&gt; futurize()</code></li>
+<li><code>foreach(...) |&gt; progressify() |&gt; futurize()</code></li>
 <li>
-<code>future_lapply()</code> etc. by the <strong><a href="https://future.apply.futureverse.org" class="external-link">future.apply</a></strong>
-package</li>
-<li>
-<code>future_map()</code> etc. by the <strong><a href="https://furrr.futureverse.org" class="external-link">furrr</a></strong> package</li>
-<li>
-<code>llply()</code> etc. by the <strong><a href="https://cran.r-project.org/package=plyr" class="external-link">plyr</a></strong> and
+<code>bplapply(...) |&gt; progressify() |&gt; futurize()</code>
+(<strong><a href="https://www.bioconductor.org/packages/BiocParallel/" class="external-link">BiocParallel</a></strong>)</li>
+</ul>
+<p>You can also use <code>progressify()</code> with traditional
+<strong><a href="https://future.apply.futureverse.org" class="external-link">future.apply</a></strong>,
+<strong><a href="https://furrr.futureverse.org" class="external-link">furrr</a></strong> and
 <strong><a href="https://doFuture.futureverse.org" class="external-link">doFuture</a></strong>
-packages</li>
-<li>
-<code>foreach()</code> iterations via the <strong>foreach</strong>
-and <strong><a href="https://doFuture.futureverse.org" class="external-link">doFuture</a></strong>
-packages</li>
-<li>
-<code>bplapply()</code> etc. by the <strong><a href="https://www.bioconductor.org/packages/BiocParallel/" class="external-link">BiocParallel</a></strong>
-and <strong><a href="https://doFuture.futureverse.org" class="external-link">doFuture</a></strong>
-packages</li>
-</ul>
+packages.</p>
 <p>Other uses of <strong>progressr</strong> are:</p>
 <ul>
 <li>make packages that report progress via the <strong><a href="https://cran.r-project.org/package=cli" class="external-link">cli</a></strong> package
