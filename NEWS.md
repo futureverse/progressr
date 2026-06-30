@@ -2,6 +2,10 @@
 
 ## New Features
 
+ * Add `handler_tutorial()` useful for benchmarking and illustrating
+   sequential and parallel processing, e.g. `handlers("tutorial")` and
+   `handlers("tutorial", "newline")`.
+
  * `handler_cli()` gained argument `type` to choose from a predefined
    set of `cli::cli_progress_bar()` `format` strings.
 
