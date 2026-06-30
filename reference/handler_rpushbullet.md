@@ -1,8 +1,7 @@
 # Progression Handler: Progress Reported via the Pushbullet Messaging Service
 
-A progression handler for
-[`RPushbullet::pbPost()`](https://rdrr.io/pkg/RPushbullet/man/pbPost.html)
-of the RPushbullet package.
+A progression handler for `RPushbullet::pbPost()` of the RPushbullet
+package.
 
 ## Usage
 
@@ -89,22 +88,4 @@ if (requireNamespace(pkg, quietly = TRUE)) {
   print(y)
   
 }
-#> Error : lexical error: invalid char in json text.
-#>                                        ~/.rpushbullet.json
-#>                      (right here) ------^
-#> 
-#> Warning: The 'rpushbullet' progress handler will not work, because RPushbullet is not properly configured. See help("pbSetup", package = "RPushbullet") for instructions. RPushbullet::pbValidateConf() reported:
-#>     No configuration specified.  Assuming user meant: ~/.rpushbullet.json
-#>     ~/.rpushbullet.json is not a valid JSON string or a file containing such.
-#> M: Added value 1
-#> M: Added value 2
-#> M: Added value 3
-#> M: Added value 4
-#> M: Added value 5
-#> M: Added value 6
-#> M: Added value 7
-#> M: Added value 8
-#> M: Added value 9
-#> M: Added value 10
-#> [1] 55
 ```

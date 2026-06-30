@@ -24,11 +24,10 @@ or via the RStudio GUI using
 [`rstudioapi::jobSetProgress()`](https://rstudio.github.io/rstudioapi/reference/jobSetProgress.html).
 An alternative to above visual rendering, is to report progress as audio
 using [`beepr::beep()`](https://rdrr.io/pkg/beepr/man/beep.html) or
-[`BRRR::skrrrahh()`](https://rdrr.io/pkg/BRRR/man/skrrrahh.html). It is
-also possible to use a combination of above progression handlers, e.g. a
-progress bar in the terminal together with audio updates. Besides the
-existing handlers, it is possible to develop custom progression
-handlers.
+`BRRR::skrrrahh()`. It is also possible to use a combination of above
+progression handlers, e.g. a progress bar in the terminal together with
+audio updates. Besides the existing handlers, it is possible to develop
+custom progression handlers.
 
 The progressr package is compatible with shiny applications and knitr
 rendering.
