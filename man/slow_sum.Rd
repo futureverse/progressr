@@ -7,9 +7,9 @@
 slow_sum(
   x,
   delay = getOption("progressr.demo.delay", 1),
-  stdout = FALSE,
-  message = TRUE,
-  sticky = TRUE
+  stdout = getOption("progressr.demo.stdout", FALSE),
+  message = getOption("progressr.demo.message", TRUE),
+  sticky = getOption("progressr.demo.sticky", TRUE)
 )
 }
 \arguments{

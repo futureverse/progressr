@@ -19,11 +19,11 @@
 #'
 #' @keywords internal
 #' @export
-slow_sqrt <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = FALSE, message = TRUE, sticky = TRUE) {
+slow_sqrt <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE)) {
   ## Hidden options to simplify help asciicast examples
-  if (missing(stdout)) stdout <- getOption("progressr.slow_sqrt.stdout", FALSE)
-  if (missing(message)) message <- getOption("progressr.slow_sqrt.message", TRUE)
-  if (missing(sticky)) sticky <- getOption("progressr.slow_sqrt.sticky", TRUE)
+  if (missing(stdout)) stdout <- getOption("progressr.slow_sqrt.stdout", stdout)
+  if (missing(message)) message <- getOption("progressr.slow_sqrt.message", message)
+  if (missing(sticky)) sticky <- getOption("progressr.slow_sqrt.sticky", sticky)
 
   p <- progressor(along = x)
 

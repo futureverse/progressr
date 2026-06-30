@@ -107,6 +107,12 @@
 #'
 #' \describe{
 #'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum()] and [slow_sqrt()]. (Default: `1.0`)}
+#'
+#'  \item{\option{progressr.demo.stdout}:}{(logical) If TRUE, then a text is outputted to the standard output per element. (Default: `FALSE`)}
+#'
+#'  \item{\option{progressr.demo.message}:}{(logical) If TRUE, then a message is outputted per element. (Default: `TRUE`)}
+#'
+#'  \item{\option{progressr.demo.sticky}:}{(logical) If TRUE, then a "sticky" message is outputted every ten element. (Default: `TRUE`)}
 #' }
 #'
 #' @section Environment variables that set R options:
@@ -124,6 +130,7 @@
 #' @aliases progressr.clear
 #' @aliases progressr.debug
 #' @aliases progressr.demo.delay
+#' @aliases progressr.demo.stdout progressr.demo.message progressr.demo.sticky
 #' @aliases progressr.delay_stdout progressr.delay_conditions
 #' @aliases progressr.enable progressr.enable_after
 #' @aliases progressr.interrupts
@@ -240,6 +247,9 @@ update_package_option <- function(name, mode = "character", default = NULL, pack
 ## Set package options based on environment variables
 update_package_options <- function(debug = FALSE) {
   update_package_option("demo.delay", mode = "numeric", debug = debug)
+  update_package_option("demo.stdout", mode = "logical", debug = debug)
+  update_package_option("demo.message", mode = "logical", debug = debug)
+  update_package_option("demo.sticky", mode = "logical", debug = debug)
 
   ## make_progression_handler() arguments
   update_package_option("clear", mode = "logical", default = TRUE, debug = debug)

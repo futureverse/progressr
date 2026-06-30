@@ -19,11 +19,11 @@
 #'
 #' @keywords internal
 #' @export
-slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = FALSE, message = TRUE, sticky = TRUE) {
+slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE)) {
   ## Hidden options to simplify help asciicast examples
-  if (missing(stdout)) stdout <- getOption("progressr.slow_sum.stdout", FALSE)
-  if (missing(message)) message <- getOption("progressr.slow_sum.message", TRUE)
-  if (missing(sticky)) sticky <- getOption("progressr.slow_sum.sticky", TRUE)
+  if (missing(stdout)) stdout <- getOption("progressr.slow_sum.stdout", stdout)
+  if (missing(message)) message <- getOption("progressr.slow_sum.message", message)
+  if (missing(sticky)) sticky <- getOption("progressr.slow_sum.sticky", sticky)
 
   p <- progressor(along = x)
 
