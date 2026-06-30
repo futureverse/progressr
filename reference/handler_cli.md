@@ -38,11 +38,19 @@ handler_cli(
   [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html).
   If `"default"`, the cli default format is used (`format = NULL`). If
   `"steps"`, the progress bar shows the current and total number of
-  steps. If `"percent"`, the progress bar shows the percentage
-  completed. If `"time"`, the progress bar shows the percentage
-  completed, the current and total number of steps, the estimated time
-  remaining (ETA), and the total elapsed time. This argument is ignored
-  if `format` is explicitly specified via `...`.
+  steps using the format string
+  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`.
+  If `"percent"`, the progress bar shows the percentage completed using
+  the format string
+  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`.
+  If `"time"`, the progress bar shows the percentage completed, the
+  current and total number of steps, the estimated time remaining (ETA),
+  and the total elapsed time using the format string
+  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}, total: {cli::pb_elapsed}) {cli::pb_status}"`.
+  For the meaning of these format variables, see [Progress bar
+  variables](https://cli.r-lib.org/reference/progress-variables.html) in
+  the cli package. This argument is ignored if `format` is explicitly
+  specified via `...`.
 
 - ...:
 
