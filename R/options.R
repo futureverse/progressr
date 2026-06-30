@@ -106,7 +106,7 @@
 #' @section Options for progressr examples and demos:
 #'
 #' \describe{
-#'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum_p()] and [slow_sqrt_p()]. (Default: `1.0`)}
+#'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum_p()] and [slow_sqrt_p()]. (Default: `0.5`)}
 #'
 #'  \item{\option{progressr.demo.stdout}:}{(logical) If TRUE, then a text is outputted to the standard output per element. (Default: `FALSE`)}
 #'
@@ -279,4 +279,3 @@ update_package_options <- function(debug = FALSE) {
   ## For RStudio users
   update_package_option("rstudio.patch", mode = "logical", debug = debug)
 }
-
