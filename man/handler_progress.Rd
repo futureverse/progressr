@@ -5,15 +5,17 @@
 \title{Progression Handler: Progress Reported via 'progress' Progress Bars (Text) in the Terminal}
 \usage{
 handler_progress(
-  format = ":spin [:bar] :percent :message",
+  format = NULL,
   show_after = 0,
   intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
   target = "terminal",
+  type = c("default", "steps", "percent", "time"),
   ...
 )
 }
 \arguments{
-\item{format}{(character string) The format of the progress bar.}
+\item{format}{(character string) The format of the progress bar.
+If \code{NULL}, the format is determined by the \code{type} argument.}
 
 \item{show_after}{(numeric) Number of seconds to wait before displaying
 the progress bar.}
@@ -23,6 +25,19 @@ the progress bar.}
 
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
+
+\item{type}{(character) The type of progress bar to display, which
+controls the default \code{format} passed to \code{\link[progress:progress_bar]{progress::progress_bar()}}.
+If \code{"default"}, the format string is
+\code{":spin [:bar] :percent :message"}.
+If \code{"steps"}, the format string is
+\code{":spin [:bar] :current/:total :message"}.
+If \code{"percent"}, the format string is
+\code{":spin [:bar] :percent :message"}.
+If \code{"time"}, the format string is
+\code{"[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"}.
+For the meaning of these format variables, see \link[progress:progress_bar]{progress::progress_bar}.
+This argument is ignored if \code{format} is explicitly specified.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[progress:progress_bar]{progress::progress_bar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}

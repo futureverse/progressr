@@ -8,6 +8,20 @@
 #' [progression] condition as its first and only argument.
 #'
 #' @param format (character string) The format of the progress bar.
+#' If `NULL`, the format is determined by the `type` argument.
+#'
+#' @param type (character) The type of progress bar to display, which
+#' controls the default `format` passed to [progress::progress_bar()].
+#' If `"default"`, the format string is
+#' `":spin [:bar] :percent :message"`.
+#' If `"steps"`, the format string is
+#' `":spin [:bar] :current/:total :message"`.
+#' If `"percent"`, the format string is
+#' `":spin [:bar] :percent :message"`.
+#' If `"time"`, the format string is
+#' `"[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"`.
+#' For the meaning of these format variables, see [progress::progress_bar].
+#' This argument is ignored if `format` is explicitly specified.
 #'
 #' @param show_after (numeric) Number of seconds to wait before displaying
 #' the progress bar.
@@ -57,7 +71,18 @@
 #' @example incl/handler_progress.R
 #'
 #' @export
-handler_progress <- function(format = ":spin [:bar] :percent :message", show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", ...) {
+handler_progress <- function(format = NULL, show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", type = c("default", "steps", "percent", "time"), ...) {
+  type <- match.arg(type)
+
+  if (is.null(format)) {
+    format <- switch(type,
+      default = ":spin [:bar] :percent :message",
+      steps   = ":spin [:bar] :current/:total :message",
+      percent = ":spin [:bar] :percent :message",
+      time    = "[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"
+    )
+  }
+
   ## Additional arguments passed to the progress-handler backend
   backend_args <- handler_backend_args(...)
 

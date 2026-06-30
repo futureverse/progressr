@@ -5,6 +5,9 @@
  * `handler_cli()` gained argument `type` to choose from a predefined
    set of `cli::cli_progress_bar()` `format` strings.
 
+ * `handler_progress()` gained argument `type` to choose from a
+   predefined set of `progress::progress_bar()` `format` strings.
+
 
 # Version 0.19.0 [2026-03-18]
 
