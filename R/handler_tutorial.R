@@ -12,9 +12,10 @@
 #' [progression] condition as its first and only argument.
 #'
 #' @details
-#' The default is to use the \pkg{progress} package. Contrary to \pkg{cli},
-#' \pkg{progress} has the capacity to display _all_ progress updates, even
-#' when recieved at a high rate from via parallel processing.
+#' The default is to use the \pkg{progress} package. Contrary to the
+#' \pkg{cli} package, the \pkg{progress} package has the capacity to
+#' display _all_ progress updates, even when recieving progress updates
+#' at a high rate from, for example, parallel processing.
 #' 
 #' @examples
 #' # Display progress and keep the progress output when done

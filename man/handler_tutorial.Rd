@@ -29,9 +29,10 @@ A function of class \code{progression_handler} that takes a
 A progressr handler useful for Futureverse tutorials
 }
 \details{
-The default is to use the \pkg{progress} package. Contrary to \pkg{cli},
-\pkg{progress} has the capacity to display \emph{all} progress updates, even
-when recieved at a high rate from via parallel processing.
+The default is to use the \pkg{progress} package. Contrary to the
+\pkg{cli} package, the \pkg{progress} package has the capacity to
+display \emph{all} progress updates, even when recieving progress updates
+at a high rate from, for example, parallel processing.
 }
 \examples{
 # Display progress and keep the progress output when done
