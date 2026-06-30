@@ -40,9 +40,10 @@ condition as its first and only argument.
 
 ## Details
 
-The default is to use the progress package. Contrary to cli, progress
-has the capacity to display *all* progress updates, even when recieved
-at a high rate from via parallel processing.
+The default is to use the progress package. Contrary to the cli package,
+the progress package has the capacity to display *all* progress updates,
+even when recieving progress updates at a high rate from, for example,
+parallel processing.
 
 ## Examples
 
