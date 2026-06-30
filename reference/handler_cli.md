@@ -10,6 +10,7 @@ handler_cli(
   show_after = 0,
   intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
   target = "terminal",
+  type = c("default", "steps", "percent", "time"),
   ...
 )
 ```
@@ -30,12 +31,31 @@ handler_cli(
 
   (character vector) Specifies where progression updates are rendered.
 
+- type:
+
+  (character) The type of progress bar to display, which controls the
+  default `format` passed to
+  [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html).
+  If `"default"`, the cli default format is used (`format = NULL`). If
+  `"steps"`, the progress bar shows the current and total number of
+  steps. If `"percent"`, the progress bar shows the percentage
+  completed. If `"time"`, the progress bar shows the percentage
+  completed, the current and total number of steps, the estimated time
+  remaining (ETA), and the total elapsed time. This argument is ignored
+  if `format` is explicitly specified via `...`.
+
 - ...:
 
   Additional arguments passed to
   [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html)
   and
   [`make_progression_handler()`](https://progressr.futureverse.org/reference/make_progression_handler.md).
+
+## Value
+
+A function of class `progression_handler` that takes a
+[progression](https://progressr.futureverse.org/reference/progression.md)
+condition as its first and only argument.
 
 ## Requirements
 

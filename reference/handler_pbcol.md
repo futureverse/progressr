@@ -52,6 +52,12 @@ handler_pbcol(
   Additional arguments passed to
   [`make_progression_handler()`](https://progressr.futureverse.org/reference/make_progression_handler.md).
 
+## Value
+
+A function of class `progression_handler` that takes a
+[progression](https://progressr.futureverse.org/reference/progression.md)
+condition as its first and only argument.
+
 ## Requirements
 
 This progression handler requires the cli package.

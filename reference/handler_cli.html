@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,6 +88,7 @@
 <span>  show_after <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  intrusiveness <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"progressr.intrusiveness.terminal"</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  target <span class="op">=</span> <span class="st">"terminal"</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"default"</span>, <span class="st">"steps"</span>, <span class="st">"percent"</span>, <span class="st">"time"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -111,11 +112,28 @@ the progress bar.</p></dd>
 rendered.</p></dd>
 
 
+<dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
+<dd><p>(character) The type of progress bar to display, which
+controls the default <code>format</code> passed to <code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code>.
+If <code>"default"</code>, the <span class="pkg">cli</span> default format is used (<code>format = NULL</code>).
+If <code>"steps"</code>, the progress bar shows the current and total number of
+steps. If <code>"percent"</code>, the progress bar shows the percentage completed.
+If <code>"time"</code>, the progress bar shows the percentage completed, the
+current and total number of steps, the estimated time remaining (ETA),
+and the total elapsed time.
+This argument is ignored if <code>format</code> is explicitly specified via <code>...</code>.</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to <code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code>
 and <code><a href="make_progression_handler.html">make_progression_handler()</a></code>.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A function of class <code>progression_handler</code> that takes a
+<a href="progression.html">progression</a> condition as its first and only argument.</p>
+    </div>
     <div class="section level2">
     <h2 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a></h2>
 

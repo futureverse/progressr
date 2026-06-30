@@ -2,7 +2,12 @@
 
 ## Version (development version)
 
-- …
+### New Features
+
+- [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
+  gained argument `type` to choose from a predefined set of
+  [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html)
+  `format` strings.
 
 ## Version 0.19.0
 

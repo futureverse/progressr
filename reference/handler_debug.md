@@ -41,6 +41,12 @@ handler_debug(
   Additional arguments passed to
   [`make_progression_handler()`](https://progressr.futureverse.org/reference/make_progression_handler.md).
 
+## Value
+
+A function of class `progression_handler` that takes a
+[progression](https://progressr.futureverse.org/reference/progression.md)
+condition as its first and only argument.
+
 ## Appearance
 
 Below is how this progress handler renders by default at 0%, 30% and 99%

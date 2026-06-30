@@ -53,6 +53,12 @@ handler_txtprogressbar(
   and
   [`make_progression_handler()`](https://progressr.futureverse.org/reference/make_progression_handler.md).
 
+## Value
+
+A function of class `progression_handler` that takes a
+[progression](https://progressr.futureverse.org/reference/progression.md)
+condition as its first and only argument.
+
 ## Appearance
 
 Below are a few examples on how to use and customize this progress
