@@ -9,7 +9,8 @@ slow_sqrt(
   delay = getOption("progressr.demo.delay", 1),
   stdout = getOption("progressr.demo.stdout", FALSE),
   message = getOption("progressr.demo.message", TRUE),
-  sticky = getOption("progressr.demo.sticky", TRUE)
+  sticky = getOption("progressr.demo.sticky", TRUE),
+  progress = getOption("progressr.demo.progress", TRUE)
 )
 }
 \arguments{
@@ -24,6 +25,9 @@ per element.}
 
 \item{sticky}{If TRUE, then a "sticky" message is outputted every
 ten element.}
+
+\item{progress}{If TRUE, then a progressor is created, otherwise a void
+progressor that does nothing is used.}
 }
 \value{
 The square roots of all elements in \code{x} as a numeric vector.

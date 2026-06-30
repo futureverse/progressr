@@ -8,6 +8,7 @@
 \alias{progressr.demo.stdout}
 \alias{progressr.demo.message}
 \alias{progressr.demo.sticky}
+\alias{progressr.demo.progress}
 \alias{progressr.delay_stdout}
 \alias{progressr.delay_conditions}
 \alias{progressr.enable}
@@ -144,6 +145,8 @@ If TRUE, standard output is captured and relayed at the end just before any capt
 \item{\option{progressr.demo.message}:}{(logical) If TRUE, then a message is outputted per element. (Default: \code{TRUE})}
 
 \item{\option{progressr.demo.sticky}:}{(logical) If TRUE, then a "sticky" message is outputted every ten element. (Default: \code{TRUE})}
+
+\item{\option{progressr.demo.progress}:}{(logical) If TRUE, then a progressor is created, otherwise a void progressor that does nothing is used. (Default: \code{TRUE})}
 }
 }
 

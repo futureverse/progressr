@@ -71,4 +71,32 @@ withCallingHandlers({
 stopifnot(length(msgs) > 0L)
 options(progressr.demo.message = NULL)
 
+# 4. Test progressr.demo.progress option and parameter
+progressions <- list()
+withCallingHandlers({
+  res <- slow_sqrt(1:2, progress = FALSE)
+}, progression = function(p) {
+  progressions[[length(progressions) + 1L]] <<- p
+})
+stopifnot(length(progressions) == 0L)
+
+progressions <- list()
+withCallingHandlers({
+  res <- slow_sqrt(1:2, progress = TRUE)
+}, progression = function(p) {
+  progressions[[length(progressions) + 1L]] <<- p
+})
+stopifnot(length(progressions) > 0L)
+
+# Test option progressr.demo.progress
+options(progressr.demo.progress = FALSE)
+progressions <- list()
+withCallingHandlers({
+  res <- slow_sqrt(1:2)
+}, progression = function(p) {
+  progressions[[length(progressions) + 1L]] <<- p
+})
+stopifnot(length(progressions) == 0L)
+options(progressr.demo.progress = NULL)
+
 message("slow_sqrt() ... done")

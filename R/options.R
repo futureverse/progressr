@@ -113,6 +113,8 @@
 #'  \item{\option{progressr.demo.message}:}{(logical) If TRUE, then a message is outputted per element. (Default: `TRUE`)}
 #'
 #'  \item{\option{progressr.demo.sticky}:}{(logical) If TRUE, then a "sticky" message is outputted every ten element. (Default: `TRUE`)}
+#'
+#'  \item{\option{progressr.demo.progress}:}{(logical) If TRUE, then a progressor is created, otherwise a void progressor that does nothing is used. (Default: `TRUE`)}
 #' }
 #'
 #' @section Environment variables that set R options:
@@ -130,7 +132,7 @@
 #' @aliases progressr.clear
 #' @aliases progressr.debug
 #' @aliases progressr.demo.delay
-#' @aliases progressr.demo.stdout progressr.demo.message progressr.demo.sticky
+#' @aliases progressr.demo.stdout progressr.demo.message progressr.demo.sticky progressr.demo.progress
 #' @aliases progressr.delay_stdout progressr.delay_conditions
 #' @aliases progressr.enable progressr.enable_after
 #' @aliases progressr.interrupts
@@ -250,6 +252,7 @@ update_package_options <- function(debug = FALSE) {
   update_package_option("demo.stdout", mode = "logical", debug = debug)
   update_package_option("demo.message", mode = "logical", debug = debug)
   update_package_option("demo.sticky", mode = "logical", debug = debug)
+  update_package_option("demo.progress", mode = "logical", debug = debug)
 
   ## make_progression_handler() arguments
   update_package_option("clear", mode = "logical", default = TRUE, debug = debug)

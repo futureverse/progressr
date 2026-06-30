@@ -12,6 +12,9 @@
 #' @param sticky If TRUE, then a "sticky" message is outputted every
 #' ten element.
 #'
+#' @param progress If TRUE, then a progressor is created, otherwise a void
+#' progressor that does nothing is used.
+#'
 #' @return The square roots of all elements in `x` as a numeric vector.
 #'
 #' @section Progress updates:
@@ -19,13 +22,18 @@
 #'
 #' @keywords internal
 #' @export
-slow_sqrt <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE)) {
+slow_sqrt <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", TRUE)) {
   ## Hidden options to simplify help asciicast examples
   if (missing(stdout)) stdout <- getOption("progressr.slow_sqrt.stdout", stdout)
   if (missing(message)) message <- getOption("progressr.slow_sqrt.message", message)
   if (missing(sticky)) sticky <- getOption("progressr.slow_sqrt.sticky", sticky)
+  if (missing(progress)) progress <- getOption("progressr.slow_sqrt.progress", progress)
 
-  p <- progressor(along = x)
+  if (progress) {
+    p <- progressor(along = x)
+  } else {
+    p <- function(...) NULL
+  }
 
   res <- numeric(length(x))
   for (kk in seq_along(x)) {
