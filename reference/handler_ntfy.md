@@ -58,7 +58,7 @@ if (requireNamespace(pkg, quietly = TRUE)) {
   Sys.setenv(NTFY_TOPIC = "R-my-secret-topic")
 
   handlers("ntfy")
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
 }
 #> M: Added value 1

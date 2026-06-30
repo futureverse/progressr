@@ -60,7 +60,7 @@ progress can be assessed from a remote location.
 ``` r
 if (FALSE) { # \dontrun{
 handlers(handler_filesize(file = "myscript.progress"))
-with_progress(y <- slow_sum(1:100))
+with_progress(y <- slow_sum_p(1:100))
 print(y)
 } # }
 ```

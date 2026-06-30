@@ -162,7 +162,7 @@ my_handler <- make_progression_handler(name = "my", reporter = list(
 handlers(my_handler)
 
 with_progress({
-  y <- slow_sum(1:5)
+  y <- slow_sum_p(1:5)
 })
 #> M: Added value 1
 #> M: Added value 2

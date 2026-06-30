@@ -75,7 +75,7 @@ with `style = substyle`, the main usage of this handler is with
 `style = "ETA"` (default) for which `substyle` is ignored.
 
     handlers("pbmcapply")
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_pbmcapply-default.svg)
 
@@ -85,7 +85,7 @@ with `style = substyle`, the main usage of this handler is with
 if (requireNamespace("pbmcapply", quietly = TRUE)) {
 
   handlers("pbmcapply")
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }

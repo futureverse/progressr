@@ -43,7 +43,7 @@ This progression handler gives not output - it is invisible and silent.
 ``` r
 if (FALSE) { # \dontrun{
 handlers(handler_void())
-with_progress(y <- slow_sum(1:100))
+with_progress(y <- slow_sum_p(1:100))
 print(y)
 } # }
 ```

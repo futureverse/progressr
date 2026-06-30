@@ -123,9 +123,9 @@ further notice.*
 - progressr.demo.delay::
 
   (numeric) Delay (in seconds) between each iteration of
-  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
+  [`slow_sum_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
   and
-  [`slow_sqrt()`](https://progressr.futureverse.org/reference/slow_sqrt.md).
+  [`slow_sqrt_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md).
   (Default: `1.0`)
 
 - progressr.demo.stdout::

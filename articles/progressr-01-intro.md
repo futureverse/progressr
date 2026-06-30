@@ -33,14 +33,14 @@ Design motto:
 ## A simple example
 
 Assume that we have a function
-[`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
+[`slow_sum_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
 for adding up the values in a vector. It is so slow, that we like to
 provide progress updates to whoever might be interested in it. With the
 **progressr** package, this can be done as:
 
 ``` r
 
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -67,7 +67,7 @@ interest).
 Now, if we call this function, without further settings:
 
 ``` r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
 > y
 [1] 55
 >
@@ -83,9 +83,9 @@ updates, we need to request them to be “handled”, which we do by:
 After this, progress will be reported:
 
 ``` r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
   |====================                               |  40%
-> y <- slow_sum(10:1)
+> y <- slow_sum_p(10:1)
   |========================================           |  80%
 ```
 
@@ -180,7 +180,7 @@ have:
 
 ``` r
 
-slow_sqrt <- function(xs) {
+slow_sqrt_p <- function(xs) {
   p <- progressor(along = xs)
   lapply(xs, function(x) {
     message("Calculating the square root of ", x)
@@ -197,7 +197,7 @@ we will get:
 > library(progressr)
 > handlers(global = TRUE)
 > handlers("progress")
-> y <- slow_sqrt(1:8)
+> y <- slow_sqrt_p(1:8)
 Calculating the square root of 1
 Calculating the square root of 2
 - [===========>-----------------------------------]  25% x=2
@@ -231,7 +231,7 @@ progress handlers that output to the terminal. For example, with:
 
 ``` r
 
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -248,7 +248,7 @@ we get
 
 ``` r
 > handlers("txtprogressbar")
-> y <- slow_sum(1:30)
+> y <- slow_sum_p(1:30)
 Step 5
 Step 10
   |====================                               |  43%
@@ -258,7 +258,7 @@ and
 
 ``` r
 > handlers("progress")
-> y <- slow_sum(1:30)
+> y <- slow_sum_p(1:30)
 Step 5
 Step 10
 / [===============>-------------------------]  43% Adding 13

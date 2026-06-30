@@ -61,6 +61,6 @@ This progression handler requires the shiny package.
 ``` r
 if (FALSE) { # \dontrun{
 handlers(handler_shiny())
-with_progress(y <- slow_sum(1:100))
+with_progress(y <- slow_sum_p(1:100))
 } # }
 ```

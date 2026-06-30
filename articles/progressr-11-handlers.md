@@ -96,7 +96,7 @@ progressing, and at the end (using different
 will be *no* output written to the terminal;
 
 ``` r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
 > y
 [1] 55
 >

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9015</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,7 +84,7 @@
 <ul><li><p>Add <code><a href="../reference/handler_tutorial.html">handler_tutorial()</a></code> useful for benchmarking and illustrating sequential and parallel processing, e.g. <code>handlers("tutorial")</code> and <code>handlers("tutorial", "newline")</code>.</p></li>
 <li><p><code><a href="../reference/handler_cli.html">handler_cli()</a></code> gained argument <code>type</code> to choose from a predefined set of <code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code> <code>format</code> strings.</p></li>
 <li><p><code><a href="../reference/handler_progress.html">handler_progress()</a></code> gained argument <code>type</code> to choose from a predefined set of <code><a href="http://r-lib.github.io/progress/reference/progress_bar.html" class="external-link">progress::progress_bar()</a></code> <code>format</code> strings.</p></li>
-<li><p>New the demo function <code><a href="../reference/slow_sqrt.html">slow_sqrt()</a></code> to complement <code><a href="../reference/slow_sum.html">slow_sum()</a></code>.</p></li>
+<li><p>Renamed <code><a href="../reference/slow_sum_p.html">slow_sum()</a></code> to <code><a href="../reference/slow_sum_p.html">slow_sum_p()</a></code> and added <code><a href="../reference/slow_sum_p.html">slow_sqrt_p()</a></code>. Added new basic <code><a href="../reference/slow_sum_p.html">slow_sum()</a></code> and <code><a href="../reference/slow_sum_p.html">slow_sqrt()</a></code>.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -244,7 +244,7 @@
 <div class="section level3">
 <h3 id="new-features-0-11-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-0-11-0"></a></h3>
 <ul><li><p>When using a ‘winprogressbar’ or a ‘tkprogressbar’ handler, progression messages updates the <code>label</code> component of the progress panel. Now, it is also possible to update the <code>title</code> component based on progression messages. How the <code>title</code> and <code>label</code> components are updated and from what type of progression message is configured via the new <code>inputs</code> argument. For example, <code>inputs = list(title = "sticky_message", label = "message")</code> causes progression messages to update the <code>label</code> component and sticky ones to update both. For backward compatible reasons, the default is <code>inputs = list(title = NULL, label = "message")</code>.</p></li>
-<li><p>Now the demo function <code><a href="../reference/slow_sum.html">slow_sum()</a></code> also outputs “sticky” messages.</p></li>
+<li><p>Now the demo function <code><a href="../reference/slow_sum_p.html">slow_sum()</a></code> also outputs “sticky” messages.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="miscellaneous-0-11-0">Miscellaneous<a class="anchor" aria-label="anchor" href="#miscellaneous-0-11-0"></a></h3>

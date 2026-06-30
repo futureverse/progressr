@@ -55,6 +55,6 @@ This progression handler requires MS Windows.
 ``` r
 if (FALSE) { # \dontrun{
 handlers(handler_winprogressbar())
-with_progress(y <- slow_sum(1:100))
+with_progress(y <- slow_sum_p(1:100))
 } # }
 ```

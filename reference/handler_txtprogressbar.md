@@ -65,32 +65,32 @@ Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
     handlers("txtprogressbar")
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-default.svg)
 
     handlers(handler_txtprogressbar(style = 1L))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-style-1.svg)
 
     handlers(handler_txtprogressbar(style = 3L))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-style-3.svg)
 
     handlers(handler_txtprogressbar(char = "#"))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-char.svg)
 
     handlers(handler_txtprogressbar(char = "<>"))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-char-width-2.svg)
 
     handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-char-ansi.svg)
 
@@ -99,7 +99,7 @@ handler. In all cases, we use `handlers(global = TRUE)`.
 ``` r
 handlers("txtprogressbar")
 
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 #> M: Added value 1
 #> M: Added value 2
 #> M: Added value 3

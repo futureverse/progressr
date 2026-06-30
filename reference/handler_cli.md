@@ -75,12 +75,12 @@ Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
     handlers("cli")
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_cli-default.svg)
 
     handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_cli-format-1.svg)
 
@@ -89,7 +89,7 @@ handler. In all cases, we use `handlers(global = TRUE)`.
 ``` r
 if (requireNamespace("cli", quietly = TRUE)) {
   handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"))
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
 }
 #> M: Added value 1

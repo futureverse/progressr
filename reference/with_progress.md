@@ -119,12 +119,12 @@ also then, set R options progressr.enable or environment variable
 `R_PROGRESSR_ENABLE` to `TRUE`. Alternatively, one can set argument
 `enable=TRUE` when calling `with_progress()`. For example,
 
-    $ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+    $ Rscript -e "library(progressr)" -e "with_progress(slow_sum_p(1:5))"
 
 will *not* report on progress, whereas:
 
     $ export R_PROGRESSR_ENABLE=TRUE
-    $ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+    $ Rscript -e "library(progressr)" -e "with_progress(slow_sum_p(1:5))"
 
 will.
 
@@ -138,22 +138,23 @@ instead of this function. Internally, this function is built around
 ## Examples
 
 ``` r
-## The slow_sum() example function
-slow_sum <- progressr::slow_sum
-print(slow_sum)
+## The slow_sum_p() example function
+slow_sum_p <- progressr::slow_sum_p
+print(slow_sum_p)
 #> function (x, delay = getOption("progressr.demo.delay", 1), stdout = getOption("progressr.demo.stdout", 
 #>     FALSE), message = getOption("progressr.demo.message", TRUE), 
 #>     sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", 
 #>         TRUE)) 
 #> {
 #>     if (missing(stdout)) 
-#>         stdout <- getOption("progressr.slow_sum.stdout", stdout)
+#>         stdout <- getOption("progressr.slow_sum_p.stdout", stdout)
 #>     if (missing(message)) 
-#>         message <- getOption("progressr.slow_sum.message", message)
+#>         message <- getOption("progressr.slow_sum_p.message", 
+#>             message)
 #>     if (missing(sticky)) 
-#>         sticky <- getOption("progressr.slow_sum.sticky", sticky)
+#>         sticky <- getOption("progressr.slow_sum_p.sticky", sticky)
 #>     if (missing(progress)) 
-#>         progress <- getOption("progressr.slow_sum.progress", 
+#>         progress <- getOption("progressr.slow_sum_p.progress", 
 #>             progress)
 #>     if (progress) {
 #>         p <- progressor(along = x)
@@ -185,13 +186,13 @@ print(slow_sum)
 #>     p(amount = 0)
 #>     sum
 #> }
-#> <bytecode: 0x64ebfa64e090>
+#> <bytecode: 0x5e90d327bbb0>
 #> <environment: namespace:progressr>
 
 x <- 1:10
 
 ## Without progress updates
-y <- slow_sum(x)
+y <- slow_sum_p(x)
 #> M: Added value 1
 #> M: Added value 2
 #> M: Added value 3
@@ -207,7 +208,7 @@ y <- slow_sum(x)
 ## Progress reported via txtProgressBar (default)
 handlers("txtprogressbar")  ## default
 with_progress({
-  y <- slow_sum(x)
+  y <- slow_sum_p(x)
 })
 #> M: Added value 1
 #> M: Added value 2
@@ -224,7 +225,7 @@ with_progress({
 if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
   handlers("tkprogressbar")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 #> M: Added value 1
@@ -242,7 +243,7 @@ if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
 if (requireNamespace("progress", quietly = TRUE)) {
   handlers("progress")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 #> M: Added value 1
@@ -260,7 +261,7 @@ if (requireNamespace("progress", quietly = TRUE)) {
 if (requireNamespace("beepr", quietly = TRUE)) {
   handlers("beepr", "txtprogressbar")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 #> M: Added value 1
@@ -282,7 +283,7 @@ if (requireNamespace("beepr", quietly = TRUE)) {
 }
 
 with_progress({
-  y <- slow_sum(1:30)
+  y <- slow_sum_p(1:30)
 })
 #> M: Added value 1
 #> M: Added value 2

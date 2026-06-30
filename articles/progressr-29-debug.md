@@ -12,7 +12,7 @@ can use the built-in “debug” handler. For example,
 > handlers("debug")
 > handlers(global = TRUE)
 > 
-> y <- slow_sum(1:3)
+> y <- slow_sum_p(1:3)
 [21:17:01.786] (0.000s => +0.015s) initiate: 0/3 (+0) '' {clear=TRUE, enabled=TRUE, status=}
 [21:17:01.975] (0.189s => +0.179s) update: 0/3 (+0) '' {clear=TRUE, enabled=TRUE, status=}
 [21:17:02.378] (0.593s => +0.002s) update: 0/3 (+0) '' {clear=TRUE, enabled=TRUE, status=}

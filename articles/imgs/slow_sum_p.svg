@@ -305,7 +305,7 @@ R
 </g>
 <g>
 <text x="33" y="188">
-slow_sum(1:10)
+slow_sum_p(1:10)
 </text>
 </g>
 <g>

@@ -68,12 +68,12 @@ Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
     handlers("pbcol")
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_pbcol-default.svg)
 
     handlers(handler_pbcol(adjust = 0.5))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_pbcol-adjust-mid.svg)
 
@@ -82,7 +82,7 @@ handler. In all cases, we use `handlers(global = TRUE)`.
       complete = function(s) cli::bg_red(cli::col_black(s)),
       incomplete = function(s) cli::bg_cyan(cli::col_black(s))
     ))
-    y <- slow_sum(1:25)
+    y <- slow_sum_p(1:25)
 
 ![](figures/handler_pbcol-adjust-right-complete.svg)
 
@@ -90,7 +90,7 @@ handler. In all cases, we use `handlers(global = TRUE)`.
 
 ``` r
 handlers(handler_pbcol)
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 #> M: Added value 1
 #> M: Added value 2
 #> M: Added value 3

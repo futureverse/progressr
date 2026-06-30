@@ -20,10 +20,16 @@
   [`progress::progress_bar()`](http://r-lib.github.io/progress/reference/progress_bar.md)
   `format` strings.
 
-- New the demo function
-  [`slow_sqrt()`](https://progressr.futureverse.org/reference/slow_sqrt.md)
-  to complement
-  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md).
+- Renamed
+  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
+  to
+  [`slow_sum_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
+  and added
+  [`slow_sqrt_p()`](https://progressr.futureverse.org/reference/slow_sum_p.md).
+  Added new basic
+  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
+  and
+  [`slow_sqrt()`](https://progressr.futureverse.org/reference/slow_sum_p.md).
 
 ## Version 0.19.0
 
@@ -331,7 +337,7 @@ CRAN release: 2022-09-02
   `inputs = list(title = NULL, label = "message")`.
 
 - Now the demo function
-  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum.md)
+  [`slow_sum()`](https://progressr.futureverse.org/reference/slow_sum_p.md)
   also outputs “sticky” messages.
 
 ### Miscellaneous

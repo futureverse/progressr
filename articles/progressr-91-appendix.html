@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9015</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,10 +139,10 @@ default behavior of <strong>progressr</strong> is to <em>not</em> report
 on progress in non-interactive mode. To report on progress also then,
 set R options <code>progressr.enable</code> or environment variable
 <code>R_PROGRESSR_ENABLE</code> to <code>TRUE</code>. For example,</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"library(progressr)"</span> <span class="at">-e</span> <span class="st">"with_progress(y &lt;- slow_sum(1:10))"</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"library(progressr)"</span> <span class="at">-e</span> <span class="st">"with_progress(y &lt;- slow_sum_p(1:10))"</span></span></code></pre></div>
 <p>will <em>not</em> report on progress, whereas</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">$</span> export R_PROGRESSR_ENABLE=TRUE</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"library(progressr)"</span> <span class="at">-e</span> <span class="st">"with_progress(y &lt;- slow_sum(1:10))"</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">$</span> Rscript <span class="at">-e</span> <span class="st">"library(progressr)"</span> <span class="at">-e</span> <span class="st">"with_progress(y &lt;- slow_sum_p(1:10))"</span></span></code></pre></div>
 <p>will.</p>
 </div>
 </div>
@@ -158,9 +158,9 @@ than the task we are processing in each step. However, if the task we
 iterate over is quick, then the extra time induced by the progress
 updates might end up dominating the overall processing time. If that is
 the case, a simple solution is to only signal progress updates every nth
-step. Here is a version of <code><a href="../reference/slow_sum.html">slow_sum()</a></code> that signals progress
-every 10th iteration:</p>
-<pre><code><span><span class="va">slow_sum</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+step. Here is a version of <code><a href="../reference/slow_sum_p.html">slow_sum_p()</a></code> that signals
+progress every 10th iteration:</p>
+<pre><code><span><span class="va">slow_sum_p</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">p</span> <span class="op">&lt;-</span> <span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="../reference/progressor.html">progressor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
 <span>  <span class="va">sum</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
 <span>  <span class="kw">for</span> <span class="op">(</span><span class="va">kk</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_along</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -367,7 +367,7 @@ whether progress is reported or not.</p>
 <em>final</em> progress step is reported, e.g.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="st">"cli"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">1</span></span>
 <span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">2</span></span>
 <span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">3</span></span>
@@ -397,7 +397,7 @@ silently drops</a> any output sent to stderr, e.g.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span>globals <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"txtprogressbar"</span><span class="op">)</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum.html">slow_sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p>there will be no progress being reported. This is not specific to
 <strong>progressr</strong>, we have the same problem with for instance
 <strong>cli</strong>. Try for instance,</p>
@@ -417,7 +417,7 @@ to disable the buffering (“delaying”) of any other output to stdout.</p>
 <span><span class="co">## it does not work with the default standard error</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_txtprogressbar.html">handler_txtprogressbar</a></span><span class="op">(</span>file <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/showConnections.html" class="external-link">stdout</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum.html">slow_sum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="jupyter-bug-732---handlersprogress-output-is-messy">Jupyter bug #732 - handlers(“progress”) output is messy<a class="anchor" aria-label="anchor" href="#jupyter-bug-732---handlersprogress-output-is-messy"></a>
@@ -456,7 +456,7 @@ relayed as soon as possible by the <strong><a href="https://future.futureverse.o
 which means that progression updates produced in parallel workers are
 reported to the end user as soon as the main R session have received
 them.</p>
-<p><img src="imgs/slow_sum.svg"></p>
+<p><img src="imgs/slow_sum_p.svg"></p>
 <p><em>Figure: Sequence diagram illustrating how signaled progression
 conditions are captured by <code><a href="../reference/with_progress.html">with_progress()</a></code>, or the global
 progression handler, and relayed to the two progression handlers
