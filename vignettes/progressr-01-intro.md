@@ -91,6 +91,7 @@ with_progress({
 </p>
 
 <pre>
+handlers("cli")
 handlers("progress")
 handlers("txtprogressbar", "beepr")
 handlers(handler_pbcol(enable_after = 3.0))
