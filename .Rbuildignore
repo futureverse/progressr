@@ -11,3 +11,4 @@
 ^Makefile$
 ^.*[.]tar[.]gz$
 ^[.]pre-commit-config.yaml$
+^LICENSE\.md$
