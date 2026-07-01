@@ -74,6 +74,7 @@ handler. In all cases, we use `handlers(global = TRUE)`. Since
 with `style = substyle`, the main usage of this handler is with
 `style = "ETA"` (default) for which `substyle` is ignored.
 
+    library(progressr)
     handlers("pbmcapply")
     y <- slow_sum_p(1:25)
 

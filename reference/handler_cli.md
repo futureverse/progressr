@@ -74,11 +74,13 @@ This progression handler requires the cli package.
 Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
+    library(progressr)
     handlers("cli")
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_cli-default.svg)
 
+    library(progressr)
     handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"))
     y <- slow_sum_p(1:25)
 

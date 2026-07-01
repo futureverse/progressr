@@ -9,12 +9,11 @@ processing is still running. For example,
 
 ``` r
 
-library(future)
 library(progressr)
+handlers("progress", global = TRUE)
+
 library(futurize)
 plan(multisession, workers = 2)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressr::progressor(along = xs)
@@ -27,6 +26,31 @@ my_fcn <- function(xs) {
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
+```
+
+Alternatively, we can use
+[`progressify()`](https://progressify.futureverse.org/reference/progressify.html)
+from the **[progressify](https://progressify.futureverse.org)** package
+to automatically add progress reporting without modifying the function’s
+internal code:
+
+``` r
+
+library(progressify)
+handlers("progress", global = TRUE)
+
+library(futurize)
+plan(multisession, workers = 2)
+
+my_fcn <- function(xs) {
+  lapply(xs, function(x, ...) {
+    Sys.sleep((10.0-x)/2)
+    sqrt(x)
+  }) |> progressify() |> futurize()
+}
+
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40%
 ```
 
 ## Introduction
@@ -71,11 +95,11 @@ updates:
 
 ``` r
 
+library(progressr)
+handlers("progress", global = TRUE)
+
 library(futurize)
 plan(multisession, workers = 2)
-
-library(progressr)
-handlers(global = TRUE)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -108,13 +132,12 @@ for remote machines:
 
 ``` r
 
-library(futurize)
-library(foreach)
-plan(multisession, workers = 2)
-
 library(progressr)
-handlers(global = TRUE)
-handlers("progress")
+handlers("progress", global = TRUE)
+
+library(foreach)
+library(futurize)
+plan(multisession, workers = 2)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -137,13 +160,12 @@ is still supported. For example:
 
 ``` r
 
+library(progressr)
+handlers("progress", global = TRUE)
+
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
 plan(multisession, workers = 2)
-
-library(progressr)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -168,12 +190,11 @@ progression updates:
 
 ``` r
 
+library(progressr)
+handlers("progress", global = TRUE)
+
 library(futurize)
 plan(multisession, workers = 2)
-
-library(progressr)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -209,13 +230,12 @@ progression updates:
 
 ``` r
 
+library(progressr)
+handlers("progress", global = TRUE)
+
 library(BiocParallel)
 library(futurize)
 plan(multisession, workers = 2)
-
-library(progressr)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -241,13 +261,12 @@ progression updates:
 
 ``` r
 
+library(progressr)
+handlers("progress", global = TRUE)
+
 library(plyr)
 library(futurize)
 plan(multisession, workers = 2)
-
-library(progressr)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)

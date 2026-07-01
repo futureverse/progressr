@@ -74,21 +74,25 @@ This progression handler requires the progress package.
 Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
+    library(progressr)
     handlers("progress")
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_progress-default.svg)
 
+    library(progressr)
     handlers(handler_progress(complete = "#"))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_progress-complete.svg)
 
+    library(progressr)
     handlers(handler_progress(format = ":spin [:bar] :percent :message"))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_progress-format-1.svg)
 
+    library(progressr)
     handlers(handler_progress(format = ":percent [:bar] :eta :message"))
     y <- slow_sum_p(1:25)
 

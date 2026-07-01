@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9019</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,7 +152,8 @@ In all cases, we use <code>handlers(global = TRUE)</code>.
 Since <code>style = "txt"</code> corresponds to using <code><a href="handler_txtprogressbar.html">handler_txtprogressbar()</a></code>
 with <code>style = substyle</code>, the main usage of this handler is with
 <code>style = "ETA"</code> (default) for which <code>substyle</code> is ignored.</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"pbmcapply"</span><span class="op">)</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"pbmcapply"</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></code></pre><p></p></div>
 <p><img src="figures/handler_pbmcapply-default.svg" alt=""></p>
     </div>

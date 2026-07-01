@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9019</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -365,16 +365,15 @@ whether progress is reported or not.</p>
 <p>Currently, when using Positron (e.g. Positron 2025.09.0), any
 <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> output adds an extra newline before the
 <em>final</em> progress step is reported, e.g.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="st">"cli"</span>)</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">1</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">2</span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">3</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">4</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">5</span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="sc">&gt;</span> </span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="st">"cli"</span>, <span class="at">global =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> progressr<span class="sc">::</span><span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">message =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">1</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">2</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">3</span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">4</span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>M<span class="sc">:</span> Added value <span class="dv">5</span></span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="sc">&gt;</span> </span></code></pre></div>
 <p>I do not fully understand the reason for this, but I hope we can get
 to the bottom of it and fix it, either in <strong>progressr</strong> or
 in Positron, e.g. <a href="https://github.com/posit-dev/positron/issues/9486" class="external-link">Bug #9486</a>

@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9016</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9019</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -370,12 +370,11 @@ on will <em>not</em> interfere with progress reported via
 <span><span class="op">}</span></span></code></pre></div>
 <p>we will get:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(progressr)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="st">"progress"</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sqrt_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Calculating the square root of <span class="dv">1</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>Calculating the square root of <span class="dv">2</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="sc">-</span> [<span class="sc">==</span><span class="er">=========&gt;</span><span class="sc">-----------------------------------</span>]  <span class="dv">25</span>% x<span class="ot">=</span><span class="dv">2</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="st">"progress"</span>, <span class="at">global =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sqrt_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>Calculating the square root of <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Calculating the square root of <span class="dv">2</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">-</span> [<span class="sc">==</span><span class="er">=========&gt;</span><span class="sc">-----------------------------------</span>]  <span class="dv">25</span>% x<span class="ot">=</span><span class="dv">2</span></span></code></pre></div>
 <p>This works because <strong>progressr</strong> will briefly buffer any
 output internally and only release it when the next progress update is
 received just before the progress is re-rendered in the terminal. This

@@ -67,16 +67,19 @@ This progression handler requires the cli package.
 Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
+    library(progressr)
     handlers("pbcol")
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_pbcol-default.svg)
 
+    library(progressr)
     handlers(handler_pbcol(adjust = 0.5))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_pbcol-adjust-mid.svg)
 
+    library(progressr)
     handlers(handler_pbcol(
       adjust = 1,
       complete = function(s) cli::bg_red(cli::col_black(s)),

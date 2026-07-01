@@ -279,8 +279,7 @@ Currently, when using Positron (e.g. Positron 2025.09.0), any
 newline before the *final* progress step is reported, e.g.
 
 ``` r
-> progressr::handlers(global = TRUE)
-> progressr::handlers("cli")
+> progressr::handlers("cli", global = TRUE)
 > y <- progressr::slow_sum_p(1:5, message = TRUE)
 M: Added value 1
 M: Added value 2

@@ -64,31 +64,37 @@ condition as its first and only argument.
 Below are a few examples on how to use and customize this progress
 handler. In all cases, we use `handlers(global = TRUE)`.
 
+    library(progressr)
     handlers("txtprogressbar")
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-default.svg)
 
+    library(progressr)
     handlers(handler_txtprogressbar(style = 1L))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-style-1.svg)
 
+    library(progressr)
     handlers(handler_txtprogressbar(style = 3L))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-style-3.svg)
 
+    library(progressr)
     handlers(handler_txtprogressbar(char = "#"))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-char.svg)
 
+    library(progressr)
     handlers(handler_txtprogressbar(char = "<>"))
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_txtprogressbar-char-width-2.svg)
 
+    library(progressr)
     handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
     y <- slow_sum_p(1:25)
 

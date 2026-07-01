@@ -9,8 +9,7 @@ can use the built-in “debug” handler. For example,
 
 ``` r
 > library(progressr)
-> handlers("debug")
-> handlers(global = TRUE)
+> handlers("debug", global = TRUE)
 > 
 > y <- slow_sum_p(1:3)
 [21:17:01.786] (0.000s => +0.015s) initiate: 0/3 (+0) '' {clear=TRUE, enabled=TRUE, status=}
