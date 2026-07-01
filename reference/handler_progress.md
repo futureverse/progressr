@@ -87,6 +87,24 @@ handler. In all cases, we use `handlers(global = TRUE)`.
 ![](figures/handler_progress-complete.svg)
 
     library(progressr)
+    handlers(handler_progress(type = "steps"))
+    y <- slow_sum_p(1:25)
+
+![](figures/handler_progress-type-steps.svg)
+
+    library(progressr)
+    handlers(handler_progress(type = "percent"))
+    y <- slow_sum_p(1:25)
+
+![](figures/handler_progress-type-percent.svg)
+
+    library(progressr)
+    handlers(handler_progress(type = "time"))
+    y <- slow_sum_p(1:25)
+
+![](figures/handler_progress-type-time.svg)
+
+    library(progressr)
     handlers(handler_progress(format = ":spin [:bar] :percent :message"))
     y <- slow_sum_p(1:25)
 

@@ -34,19 +34,25 @@ handler_cli(
 - type:
 
   (character) The type of progress bar to display, which controls the
-  default `format` passed to
+  default `format` and `format_done` passed to
   [`cli::cli_progress_bar()`](https://cli.r-lib.org/reference/cli_progress_bar.html).
   If `"default"`, the cli default format is used (`format = NULL`). If
   `"steps"`, the progress bar shows the current and total number of
   steps using the format string
-  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`.
+  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`
+  (and
+  `format_done = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`).
   If `"percent"`, the progress bar shows the percentage completed using
   the format string
-  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`.
+  `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`
+  (and
+  `format_done = "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`).
   If `"time"`, the progress bar shows the percentage completed, the
   current and total number of steps, the estimated time remaining (ETA),
   and the total elapsed time using the format string
-  `"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"`.
+  `"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"`
+  (and
+  `format_done = "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"`).
   For the meaning of these format variables, see [Progress bar
   variables](https://cli.r-lib.org/reference/progress-variables.html) in
   the cli package. This argument is ignored if `format` is explicitly
@@ -79,6 +85,24 @@ handler. In all cases, we use `handlers(global = TRUE)`.
     y <- slow_sum_p(1:25)
 
 ![](figures/handler_cli-default.svg)
+
+    library(progressr)
+    handlers(handler_cli(type = "steps"))
+    y <- slow_sum_p(1:25)
+
+![](figures/handler_cli-type-steps.svg)
+
+    library(progressr)
+    handlers(handler_cli(type = "percent"))
+    y <- slow_sum_p(1:25)
+
+![](figures/handler_cli-type-percent.svg)
+
+    library(progressr)
+    handlers(handler_cli(type = "time"))
+    y <- slow_sum_p(1:25)
+
+![](figures/handler_cli-type-time.svg)
 
     library(progressr)
     handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"))

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9019</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.19.0-9022</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,18 +114,21 @@ rendered.</p></dd>
 
 <dt id="arg-type">type<a class="anchor" aria-label="anchor" href="#arg-type"></a></dt>
 <dd><p>(character) The type of progress bar to display, which
-controls the default <code>format</code> passed to <code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code>.
+controls the default <code>format</code> and <code>format_done</code> passed to <code><a href="https://cli.r-lib.org/reference/cli_progress_bar.html" class="external-link">cli::cli_progress_bar()</a></code>.
 If <code>"default"</code>, the <span class="pkg">cli</span> default format is used (<code>format = NULL</code>).
 If <code>"steps"</code>, the progress bar shows the current and total number of
 steps using the format string
-<code>"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"</code>.
+<code>"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"</code>
+(and <code>format_done = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"</code>).
 If <code>"percent"</code>, the progress bar shows the percentage completed using
 the format string
-<code>"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"</code>.
+<code>"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"</code>
+(and <code>format_done = "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}"</code>).
 If <code>"time"</code>, the progress bar shows the percentage completed, the
 current and total number of steps, the estimated time remaining (ETA),
 and the total elapsed time using the format string
-<code>"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"</code>.
+<code>"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"</code>
+(and <code>format_done = "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"</code>).
 For the meaning of these format variables, see
 <a href="https://cli.r-lib.org/reference/progress-variables.html" class="external-link">Progress bar variables</a> in the <span class="pkg">cli</span> package.
 This argument is ignored if <code>format</code> is explicitly specified via <code>...</code>.</p></dd>
@@ -157,6 +160,18 @@ In all cases, we use <code>handlers(global = TRUE)</code>.</p>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></code></pre><p></p></div>
 <p><img src="figures/handler_cli-default.svg" alt=""></p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_cli.html">handler_cli</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"steps"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></code></pre><p></p></div>
+<p><img src="figures/handler_cli-type-steps.svg" alt=""></p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_cli.html">handler_cli</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"percent"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></code></pre><p></p></div>
+<p><img src="figures/handler_cli-type-percent.svg" alt=""></p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_cli.html">handler_cli</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"time"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></code></pre><p></p></div>
+<p><img src="figures/handler_cli-type-time.svg" alt=""></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_cli.html">handler_cli</a></span><span class="op">(</span>format <span class="op">=</span> <span class="st">"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">)</span></span></code></pre><p></p></div>
