@@ -31,6 +31,7 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers("pbcol")
 #' y <- slow_sum_p(1:25)
 #' ```
@@ -39,6 +40,7 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_pbcol(adjust = 0.5))
 #' y <- slow_sum_p(1:25)
 #' ```
@@ -47,6 +49,7 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_pbcol(
 #'   adjust = 1,
 #'   complete = function(s) cli::bg_red(cli::col_black(s)),

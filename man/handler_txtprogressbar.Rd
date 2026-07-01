@@ -44,37 +44,43 @@ A progression handler for \code{\link[utils:txtProgressBar]{utils::txtProgressBa
 Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("txtprogressbar")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("txtprogressbar")
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-default.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(style = 1L))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(style = 1L))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-style-1.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(style = 3L))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(style = 3L))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-style-3.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = "#"))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(char = "#"))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = "<>"))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(char = "<>"))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char-width-2.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 

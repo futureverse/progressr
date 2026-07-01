@@ -54,7 +54,8 @@ Since \code{style = "txt"} corresponds to using \code{\link[=handler_txtprogress
 with \code{style = substyle}, the main usage of this handler is with
 \code{style = "ETA"} (default) for which \code{substyle} is ignored.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("pbmcapply")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("pbmcapply")
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 

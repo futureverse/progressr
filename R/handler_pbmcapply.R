@@ -35,6 +35,7 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers("pbmcapply")
 #' y <- slow_sum_p(1:25)
 #' ```
