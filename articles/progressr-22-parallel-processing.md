@@ -11,17 +11,18 @@ processing is still running. For example,
 
 library(future)
 library(progressr)
+library(futurize)
 plan(multisession, workers = 2)
 handlers(global = TRUE)
 handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressr::progressor(along = xs)
-  future.apply::future_lapply(xs, function(x, ...) {
+  lapply(xs, function(x, ...) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
@@ -33,30 +34,44 @@ y <- my_fcn(1:10)
 The **[futureverse](https://www.futureverse.org)** framework, which
 provides a unified API for parallel and distributed processing in R, has
 built-in support for the kind of progression updates produced by the
-**progressr** package. This means that you can use it with, for
-instance, **[future.apply](https://future.apply.futureverse.org)**,
+**progressr** package. The modern, recommended approach to parallelize
+such code is using
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+from the **[futurize](https://futurize.futureverse.org)** package, which
+supports common map-reduce and iteration functions like
+[`lapply()`](https://rdrr.io/r/base/lapply.html),
+[`purrr::map()`](https://purrr.tidyverse.org/reference/map.html),
+[`foreach()`](https://rdrr.io/pkg/foreach/man/foreach.html),
+[`bplapply()`](https://rdrr.io/pkg/BiocParallel/man/bplapply.html), and
+[`llply()`](https://rdrr.io/pkg/plyr/man/llply.html).
+
+Traditional parallelization packages such as
+**[future.apply](https://future.apply.futureverse.org)**,
 **[furrr](https://furrr.futureverse.org)**, and
 **[foreach](https://cran.r-project.org/package=foreach)** with
-**[doFuture](https://doFuture.futureverse.org)**, and
-**[plyr](https://cran.r-project.org/package=plyr)** or
-**[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
-with **doFuture**. In contrast, *non-future* parallelization methods
-such as **parallel**’s `mclapply()` and
+**[doFuture](https://doFuture.futureverse.org)** (specifically,
+`%dofuture%` or registered via
+[`registerDoFuture()`](https://doFuture.futureverse.org/reference/registerDoFuture.html))
+are still fully supported and can be used as alternatives.
+
+In contrast, *non-future* parallelization methods such as **parallel**’s
+`mclapply()` and
 [`parallel::parLapply()`](https://rdrr.io/r/parallel/clusterApply.html),
 and **foreach** adapters like **doParallel** do *not* support progress
 reports via **progressr**.
 
-### future_lapply() - parallel lapply()
+### lapply() with futurize()
 
 Here is an example that uses
-[`future_lapply()`](https://future.apply.futureverse.org/reference/future_lapply.html)
-of the **[future.apply](https://future.apply.futureverse.org)** package
-to parallelize on the local machine while at the same time signaling
-progression updates:
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+of the **[futurize](https://futurize.futureverse.org)** package to
+parallelize a standard [`lapply()`](https://rdrr.io/r/base/lapply.html)
+call on the local machine while at the same time signaling progression
+updates:
 
 ``` r
 
-library(future.apply)
+library(futurize)
 plan(multisession, workers = 2)
 
 library(progressr)
@@ -64,30 +79,37 @@ handlers(global = TRUE)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
-  future_lapply(xs, function(x, ...) {
+  lapply(xs, function(x, ...) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-### foreach() with doFuture
+Note that using `future_lapply()` of the
+**[future.apply](https://future.apply.futureverse.org)** package is
+still supported as a traditional alternative.
+
+### foreach() with futurize()
 
 Here is an example that uses
 [`foreach()`](https://rdrr.io/pkg/foreach/man/foreach.html) of the
 **[foreach](https://cran.r-project.org/package=foreach)** package
-together with `%dofuture%` of the
-**[doFuture](https://doFuture.futureverse.org)** package to parallelize
-while reporting on progress. This example parallelizes on the local
-machine; it works also for remote machines:
+together with
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+of the **[futurize](https://futurize.futureverse.org)** package to
+parallelize a standard sequential `%do%` loop while reporting on
+progress. This example parallelizes on the local machine; it works also
+for remote machines:
 
 ``` r
 
-library(doFuture)    ## %dofuture%
+library(futurize)
+library(foreach)
 plan(multisession, workers = 2)
 
 library(progressr)
@@ -96,22 +118,22 @@ handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
-  foreach(x = xs) %dofuture% {
+  foreach(x = xs) %do% {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  }
+  } |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-For existing code using the traditional `%dopar%` operators of the
-**[foreach](https://cran.r-project.org/package=foreach)** package, we
-can register the **[doFuture](https://doFuture.futureverse.org)**
-adapter and use the same **progressr** as above to report progress
-updates;
+Note that using the `%dofuture%` operator of the
+**[doFuture](https://doFuture.futureverse.org)** package, or traditional
+`%dopar%` registered via
+[`registerDoFuture()`](https://doFuture.futureverse.org/reference/registerDoFuture.html),
+is still supported. For example:
 
 ``` r
 
@@ -136,17 +158,17 @@ y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-### future_map() - parallel purrr::map()
+### purrr::map() with futurize()
 
 Here is an example that uses
-[`future_map()`](https://furrr.futureverse.org/reference/future_map.html)
-of the **[furrr](https://furrr.futureverse.org)** package to parallelize
-on the local machine while at the same time signaling progression
-updates:
+[`purrr::map()`](https://purrr.tidyverse.org/reference/map.html) and
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+to parallelize on the local machine while at the same time signaling
+progression updates:
 
 ``` r
 
-library(furrr)
+library(futurize)
 plan(multisession, workers = 2)
 
 library(progressr)
@@ -155,38 +177,40 @@ handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
-  future_map(xs, function(x) {
+  purrr::map(xs, function(x) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-*Note:* This solution does not involve the `.progress = TRUE` argument
-that **furrr** implements. Because **progressr** is more generic and
-because `.progress = TRUE` only supports certain future backends and
-produces errors on non-supported backends, I recommend to stop using
+*Note:* Using `future_map()` of the
+**[furrr](https://furrr.futureverse.org)** package is still supported.
+This solution does not involve the `.progress = TRUE` argument that
+**furrr** implements. Because **progressr** is more generic and because
+`.progress = TRUE` only supports certain future backends and produces
+errors on non-supported backends, I recommend to stop using
 `.progress = TRUE` and use the **progressr** package instead.
 
-### BiocParallel::bplapply() - parallel lapply()
+### BiocParallel::bplapply() with futurize()
 
 Here is an example that uses
 [`bplapply()`](https://rdrr.io/pkg/BiocParallel/man/bplapply.html) of
 the
 **[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
-package to parallelize on the local machine while at the same time
-signaling progression updates:
+package and
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+to parallelize on the local machine while at the same time signaling
+progression updates:
 
 ``` r
 
 library(BiocParallel)
-library(doFuture)
-register(DoparParam())  ## BiocParallel parallelizes via %dopar%
-registerDoFuture()      ## %dopar% parallelizes via future
+library(futurize)
 plan(multisession, workers = 2)
 
 library(progressr)
@@ -199,26 +223,26 @@ my_fcn <- function(xs) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-### plyr::llply(…, .parallel = TRUE) with doFuture
+### plyr::llply() with futurize()
 
 Here is an example that uses
 [`llply()`](https://rdrr.io/pkg/plyr/man/llply.html) of the
-**[plyr](https://cran.r-project.org/package=plyr)** package to
-parallelize on the local machine while at the same time signaling
+**[plyr](https://cran.r-project.org/package=plyr)** package and
+[`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
+to parallelize on the local machine while at the same time signaling
 progression updates:
 
 ``` r
 
 library(plyr)
-library(doFuture)
-registerDoFuture()      ## %dopar% parallelizes via future
+library(futurize)
 plan(multisession, workers = 2)
 
 library(progressr)
@@ -231,7 +255,7 @@ my_fcn <- function(xs) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  }, .parallel = TRUE)
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
@@ -239,8 +263,9 @@ y <- my_fcn(1:10)
 ```
 
 *Note:* As an alternative to the above, recommended approach, one can
-use `.progress = "progressr"` together with `.parallel = TRUE`. This
-requires **plyr** (\>= 1.8.7).
+use `.progress = "progressr"` together with `.parallel = TRUE` and the
+**[doFuture](https://doFuture.futureverse.org)** package. This requires
+**plyr** (\>= 1.8.7).
 
 ### Near-live versus buffered progress updates with futures
 
@@ -261,11 +286,12 @@ class `immediateCondition` - they detect when such conditions are
 signaled and relay them to the parent R process as soon as possible. For
 all other future backends, the progress updates are only relayed back to
 the main machine and reported together with the results of the futures.
-For instance, if `future_lapply(X, FUN)` chunks up the processing of,
-say, 100 elements in `X` into eight futures, we will see progress from
-each of the 100 elements as they are done when using a future backend
-supporting “near-live” updates, whereas we will only see those updates
-flushed eight times when using any other types of future backends.
+For instance, if `lapply(X, FUN) |> futurize()` chunks up the processing
+of, say, 100 elements in `X` into eight futures, we will see progress
+from each of the 100 elements as they are done when using a future
+backend supporting “near-live” updates, whereas we will only see those
+updates flushed eight times when using any other types of future
+backends.
 
 (\*) Other future backends may gain support for “near-live” progress
 updating later. Adding support for those is independent of the
