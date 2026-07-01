@@ -4,6 +4,31 @@ options(progressr.clear = FALSE)
 
 if (requireNamespace("cli", quietly = TRUE)) {
   options(progressr.handlers = handler_cli)
+  
+  # Test 'type' argument defaults for format and format_done
+  for (type in c("default", "steps", "percent", "time")) {
+    h <- handler_cli(type = type)
+    env <- environment(environment(h)$reporter$initiate)
+    backend_args <- parent.env(env)$backend_args
+    if (type == "default") {
+      stopifnot(is.null(backend_args$format), is.null(backend_args$format_done))
+    } else if (type == "steps") {
+      stopifnot(
+        backend_args$format == "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}",
+        backend_args$format_done == "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"
+      )
+    } else if (type == "percent") {
+      stopifnot(
+        backend_args$format == "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}",
+        backend_args$format_done == "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}"
+      )
+    } else if (type == "time") {
+      stopifnot(
+        backend_args$format == "[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}",
+        backend_args$format_done == "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"
+      )
+    }
+  }
 }  
 
 message("handler_cli() ...")

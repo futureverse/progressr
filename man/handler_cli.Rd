@@ -23,18 +23,21 @@ the progress bar.}
 rendered.}
 
 \item{type}{(character) The type of progress bar to display, which
-controls the default \code{format} passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}.
+controls the default \code{format} and \code{format_done} passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}.
 If \code{"default"}, the \pkg{cli} default format is used (\code{format = NULL}).
 If \code{"steps"}, the progress bar shows the current and total number of
 steps using the format string
-\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"}.
+\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"}
+(and \code{format_done = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"}).
 If \code{"percent"}, the progress bar shows the percentage completed using
 the format string
-\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"}.
+\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"}
+(and \code{format_done = "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}"}).
 If \code{"time"}, the progress bar shows the percentage completed, the
 current and total number of steps, the estimated time remaining (ETA),
 and the total elapsed time using the format string
-\code{"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"}.
+\code{"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"}
+(and \code{format_done = "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"}).
 For the meaning of these format variables, see
 \link[cli:progress-variables]{Progress bar variables} in the \pkg{cli} package.
 This argument is ignored if \code{format} is explicitly specified via \code{...}.}
