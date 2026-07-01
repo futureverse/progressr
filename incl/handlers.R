@@ -8,7 +8,7 @@ print(y)
 
 if (getRversion() >= "4.0.0") {
   \dontshow{if (!is.element("pkgdown", loadedNamespaces()))}
-  handlers(global = TRUE)
+  handlers("txtprogressbar", global = TRUE)
   y <- slow_sum_p(1:4)
   z <- slow_sum_p(6:9)
   \dontshow{if (!is.element("pkgdown", loadedNamespaces()))}

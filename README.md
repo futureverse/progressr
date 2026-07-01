@@ -241,8 +241,7 @@ we will get:
 
 ```r
 > library(progressr)
-> handlers(global = TRUE)
-> handlers("progress")
+> handlers("progress", global = TRUE)
 > y <- slow_sqrt_p(1:8)
 Calculating the square root of 1
 Calculating the square root of 2

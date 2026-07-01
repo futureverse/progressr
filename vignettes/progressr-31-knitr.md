@@ -36,9 +36,8 @@ outfile <- knitr::knit(infile)
 To customize the progress bar, try for instance:
 
 ```r
-progressr::handlers(global = TRUE)
 options(crayon.enabled = TRUE)  ## force use of colors
-progressr::handlers("pbcol")
+progressr::handlers("pbcol", global = TRUE)
 ```
 
 This will produce a colored progress bar in the terminal.

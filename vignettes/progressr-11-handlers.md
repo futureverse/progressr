@@ -149,9 +149,10 @@ sessions, call `progressr::handlers(...)` in your
 
 ```r
 if (requireNamespace("progressr", quietly = TRUE)) {
-  progressr::handlers(global = TRUE)
   if (requireNamespace("cli", quietly = TRUE)) {
-    progressr::handlers("cli")
+    progressr::handlers("cli", global = TRUE)
+  } else {
+    progressr::handlers(global = TRUE)
   }
 }
 ```
