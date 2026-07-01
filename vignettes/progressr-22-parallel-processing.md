@@ -18,105 +18,130 @@ provide near-live progress updates while the parallel processing is
 still running. For example,
 
 ```r
-library(future)
 library(progressr)
+handlers("progress", global = TRUE)
+
+library(futurize)
 plan(multisession, workers = 2)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressr::progressor(along = xs)
-  future.apply::future_lapply(xs, function(x, ...) {
+  lapply(xs, function(x, ...) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
+Alternatively, we can use `progressify()` from the **[progressify]** package
+to automatically add progress reporting without modifying the function's
+internal code:
+
+```r
+library(progressify)
+handlers("progress", global = TRUE)
+
+library(futurize)
+plan(multisession, workers = 2)
+
+my_fcn <- function(xs) {
+  lapply(xs, function(x, ...) {
+    Sys.sleep((10.0-x)/2)
+    sqrt(x)
+  }) |> progressify() |> futurize()
+}
+
+y <- my_fcn(1:10)
+# / [================>-----------------------------]  40%
+```
 
 ## Introduction
 
 The **[futureverse]** framework, which provides a unified API for parallel
 and distributed processing in R, has built-in support for the kind of
-progression updates produced by the **progressr** package.  This means
-that you can use it with, for instance, **[future.apply]**, **[furrr]**,
-and **[foreach]** with **[doFuture]**, and **[plyr]** or
-**[BiocParallel]** with **doFuture**.  In contrast, _non-future_
-parallelization methods such as **parallel**'s `mclapply()` and
-`parallel::parLapply()`, and **foreach** adapters like **doParallel**
-do _not_ support progress reports via **progressr**.
+progression updates produced by the **progressr** package.  The modern,
+recommended approach to parallelize such code is using `futurize()` from
+the **[futurize]** package, which supports common map-reduce and iteration
+functions like `lapply()`, `purrr::map()`, `foreach()`, `bplapply()`, and
+`llply()`.
 
+Traditional parallelization packages such as **[future.apply]**, **[furrr]**,
+and **[foreach]** with **[doFuture]** (specifically, `%dofuture%` or registered
+via `registerDoFuture()`) are still fully supported and can be used as alternatives.
 
-### future_lapply() - parallel lapply()
+In contrast, _non-future_ parallelization methods such as **parallel**'s
+`mclapply()` and `parallel::parLapply()`, and **foreach** adapters like
+**doParallel** do _not_ support progress reports via **progressr**.
 
-Here is an example that uses `future_lapply()` of the **[future.apply]** package to parallelize on the local machine while at the same time signaling progression updates:
+### lapply() with futurize()
+
+Here is an example that uses `futurize()` of the **[futurize]** package to parallelize a standard `lapply()` call on the local machine while at the same time signaling progression updates:
 
 ```r
-library(future.apply)
-plan(multisession, workers = 2)
-
 library(progressr)
-handlers(global = TRUE)
+handlers("progress", global = TRUE)
+
+library(futurize)
+plan(multisession, workers = 2)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
-  future_lapply(xs, function(x, ...) {
+  lapply(xs, function(x, ...) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
+Note that using `future_lapply()` of the **[future.apply]** package is still supported as a traditional alternative.
 
-### foreach() with doFuture
+### foreach() with futurize()
 
 Here is an example that uses `foreach()` of the **[foreach]** package
-together with `%dofuture%` of the **[doFuture]** package to
-parallelize while reporting on progress.  This example parallelizes on
-the local machine; it works also for remote machines:
+together with `futurize()` of the **[futurize]** package to
+parallelize a standard sequential `%do%` loop while reporting on progress.
+This example parallelizes on the local machine; it works also for remote machines:
 
 ```r
-library(doFuture)    ## %dofuture%
-plan(multisession, workers = 2)
-
 library(progressr)
-handlers(global = TRUE)
-handlers("progress")
+handlers("progress", global = TRUE)
+
+library(foreach)
+library(futurize)
+plan(multisession, workers = 2)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
-  foreach(x = xs) %dofuture% {
+  foreach(x = xs) %do% {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  }
+  } |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-
-For existing code using the traditional `%dopar%` operators of the
-**[foreach]** package, we can register the **[doFuture]** adapter and
-use the same **progressr** as above to report progress updates;
+Note that using the `%dofuture%` operator of the **[doFuture]** package,
+or traditional `%dopar%` registered via `registerDoFuture()`, is still supported.
+For example:
 
 ```r
+library(progressr)
+handlers("progress", global = TRUE)
+
 library(doFuture)
 registerDoFuture()      ## %dopar% parallelizes via future
 plan(multisession, workers = 2)
-
-library(progressr)
-handlers(global = TRUE)
-handlers("progress")
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -131,58 +156,52 @@ y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
+### purrr::map() with futurize()
 
-### future_map() - parallel purrr::map()
-
-Here is an example that uses `future_map()` of the **[furrr]** package
-to parallelize on the local machine while at the same time signaling
-progression updates:
+Here is an example that uses `purrr::map()` and `futurize()` to parallelize
+on the local machine while at the same time signaling progression updates:
 
 ```r
-library(furrr)
-plan(multisession, workers = 2)
-
 library(progressr)
-handlers(global = TRUE)
-handlers("progress")
+handlers("progress", global = TRUE)
+
+library(futurize)
+plan(multisession, workers = 2)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
-  future_map(xs, function(x) {
+  purrr::map(xs, function(x) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
-_Note:_ This solution does not involve the `.progress = TRUE`
+_Note:_ Using `future_map()` of the **[furrr]** package is still supported.
+This solution does not involve the `.progress = TRUE`
 argument that **furrr** implements.  Because **progressr** is more
 generic and because `.progress = TRUE` only supports certain future
 backends and produces errors on non-supported backends, I recommend
 to stop using `.progress = TRUE` and use the **progressr** package
 instead.
 
-
-### BiocParallel::bplapply() - parallel lapply()
+### BiocParallel::bplapply() with futurize()
 
 Here is an example that uses `bplapply()` of the **[BiocParallel]**
-package to parallelize on the local machine while at the same time
-signaling progression updates:
+package and `futurize()` to parallelize on the local machine while
+at the same time signaling progression updates:
 
 ```r
-library(BiocParallel)
-library(doFuture)
-register(DoparParam())  ## BiocParallel parallelizes via %dopar%
-registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession, workers = 2)
-
 library(progressr)
-handlers(global = TRUE)
-handlers("progress")
+handlers("progress", global = TRUE)
+
+library(BiocParallel)
+library(futurize)
+plan(multisession, workers = 2)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -190,29 +209,26 @@ my_fcn <- function(xs) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  })
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
 # / [================>-----------------------------]  40% x=2
 ```
 
+### plyr::llply() with futurize()
 
-### plyr::llply(..., .parallel = TRUE) with doFuture
-
-Here is an example that uses `llply()` of the **[plyr]** package to
-parallelize on the local machine while at the same time signaling
-progression updates:
+Here is an example that uses `llply()` of the **[plyr]** package and
+`futurize()` to parallelize on the local machine while at the same
+time signaling progression updates:
 
 ```r
-library(plyr)
-library(doFuture)
-registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession, workers = 2)
-
 library(progressr)
-handlers(global = TRUE)
-handlers("progress")
+handlers("progress", global = TRUE)
+
+library(plyr)
+library(futurize)
+plan(multisession, workers = 2)
 
 my_fcn <- function(xs) {
   p <- progressor(along = xs)
@@ -220,7 +236,7 @@ my_fcn <- function(xs) {
     Sys.sleep((10.0-x)/2)
     p(sprintf("x=%g", x))
     sqrt(x)
-  }, .parallel = TRUE)
+  }) |> futurize()
 }
 
 y <- my_fcn(1:10)
@@ -228,9 +244,8 @@ y <- my_fcn(1:10)
 ```
 
 _Note:_ As an alternative to the above, recommended approach, one can
-use `.progress = "progressr"` together with `.parallel = TRUE`.  This
+use `.progress = "progressr"` together with `.parallel = TRUE` and the **[doFuture]** package.  This
 requires **plyr** (>= 1.8.7).
-
 
 ### Near-live versus buffered progress updates with futures
 
@@ -251,7 +266,7 @@ condition class `immediateCondition` - they detect when such
 conditions are signaled and relay them to the parent R process as soon
 as possible. For all other future backends, the progress updates are
 only relayed back to the main machine and reported together with the
-results of the futures.  For instance, if `future_lapply(X, FUN)`
+results of the futures.  For instance, if `lapply(X, FUN) |> futurize()`
 chunks up the processing of, say, 100 elements in `X` into eight
 futures, we will see progress from each of the 100 elements as they
 are done when using a future backend supporting "near-live" updates,
@@ -266,6 +281,8 @@ should go to those future-backend packages.
 [futureverse]: https://www.futureverse.org
 [progressr]: https://progressr.futureverse.org
 [future]: https://future.futureverse.org
+[futurize]: https://futurize.futureverse.org
+[progressify]: https://progressify.futureverse.org
 [future.apply]: https://future.apply.futureverse.org
 [furrr]: https://furrr.futureverse.org
 [doFuture]: https://doFuture.futureverse.org
