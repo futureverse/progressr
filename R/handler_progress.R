@@ -54,6 +54,33 @@
 #' y <- slow_sum_p(1:25)
 #' ```
 #'
+#' ```{asciicast handler_progress-type-steps}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_progress(type = "steps"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_progress-type-percent}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_progress(type = "percent"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_progress-type-time}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_progress(type = "time"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
 #' ```{asciicast handler_progress-format-1}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",

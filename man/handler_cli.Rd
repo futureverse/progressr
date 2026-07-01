@@ -67,6 +67,27 @@ y <- slow_sum_p(1:25)
 \if{html}{\figure{handler_cli-default.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(type = "steps"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_cli-type-steps.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(type = "percent"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_cli-type-percent.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(type = "time"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_cli-type-time.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
 handlers(handler_cli(format = "\{cli::pb_spin\} \{cli::pb_bar\} \{cli::pb_current\}/\{cli::pb_total\} \{cli::pb_status\}"))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}

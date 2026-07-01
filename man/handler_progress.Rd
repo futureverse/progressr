@@ -74,6 +74,27 @@ y <- slow_sum_p(1:25)
 \if{html}{\figure{handler_progress-complete.svg}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(type = "steps"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_progress-type-steps.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(type = "percent"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_progress-type-percent.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(type = "time"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_progress-type-time.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
 handlers(handler_progress(format = ":spin [:bar] :percent :message"))
 y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
