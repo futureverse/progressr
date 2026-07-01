@@ -313,6 +313,9 @@ testme_run_test <- function(testme) {
       files <- dir(file.path(path, "_epilogue"), pattern = "*[.]R$", full.names = TRUE)
       files <- sort(files)
       testme[["epilogue_scripts"]] <- files
+      if (exists("globalenv", envir = testme, inherits = FALSE)) rm("globalenv", envir = testme)
+      if (exists("baseenv", envir = testme, inherits = FALSE)) rm("baseenv", envir = testme)
+    
     
       ## Source all epilogue scripts inside the 'testme' environment
       expr <- bquote({
