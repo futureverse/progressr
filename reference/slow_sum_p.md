@@ -7,7 +7,7 @@ Slowly Calculate Sum or Square Roots of Elements
 ``` r
 slow_sum_p(
   x,
-  delay = getOption("progressr.demo.delay", 0.5),
+  delay = getOption("progressr.demo.delay", 1),
   stdout = getOption("progressr.demo.stdout", FALSE),
   message = getOption("progressr.demo.message", TRUE),
   sticky = getOption("progressr.demo.sticky", TRUE),
@@ -16,7 +16,7 @@ slow_sum_p(
 
 slow_sum(
   x,
-  delay = getOption("progressr.demo.delay", 0.5),
+  delay = getOption("progressr.demo.delay", 1),
   stdout = FALSE,
   message = FALSE,
   sticky = FALSE,

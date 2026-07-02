@@ -141,10 +141,10 @@ instead of this function. Internally, this function is built around
 ## The slow_sum_p() example function
 slow_sum_p <- progressr::slow_sum_p
 print(slow_sum_p)
-#> function (x, delay = getOption("progressr.demo.delay", 0.5), 
-#>     stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", 
-#>         TRUE), sticky = getOption("progressr.demo.sticky", TRUE), 
-#>     progress = getOption("progressr.demo.progress", TRUE)) 
+#> function (x, delay = getOption("progressr.demo.delay", 1), stdout = getOption("progressr.demo.stdout", 
+#>     FALSE), message = getOption("progressr.demo.message", TRUE), 
+#>     sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", 
+#>         TRUE)) 
 #> {
 #>     if (missing(stdout)) 
 #>         stdout <- getOption("progressr.slow_sum_p.stdout", stdout)
@@ -187,7 +187,7 @@ print(slow_sum_p)
 #>     p(amount = 0)
 #>     sum
 #> }
-#> <bytecode: 0x626ca5e2a9f8>
+#> <bytecode: 0x5eed18f8ecd0>
 #> <environment: namespace:progressr>
 
 x <- 1:10
