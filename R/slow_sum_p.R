@@ -22,7 +22,7 @@
 #'
 #' @keywords internal
 #' @export
-slow_sum_p <- function(x, delay = getOption("progressr.demo.delay", 0.5), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", TRUE)) {
+slow_sum_p <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = getOption("progressr.demo.stdout", FALSE), message = getOption("progressr.demo.message", TRUE), sticky = getOption("progressr.demo.sticky", TRUE), progress = getOption("progressr.demo.progress", TRUE)) {
   ## Hidden options to simplify help asciicast examples
   if (missing(stdout)) stdout <- getOption("progressr.slow_sum_p.stdout", stdout)
   if (missing(message)) message <- getOption("progressr.slow_sum_p.message", message)
@@ -67,7 +67,7 @@ slow_sum_p <- function(x, delay = getOption("progressr.demo.delay", 0.5), stdout
 
 #' @rdname slow_sum_p
 #' @export
-slow_sum <- function(x, delay = getOption("progressr.demo.delay", 0.5), stdout = FALSE, message = FALSE, sticky = FALSE, progress = FALSE) {
+slow_sum <- function(x, delay = getOption("progressr.demo.delay", 1.0), stdout = FALSE, message = FALSE, sticky = FALSE, progress = FALSE) {
   slow_sum_p(x = x, delay = delay, stdout = stdout, message = message, sticky = sticky, progress = progress)
 }
 
