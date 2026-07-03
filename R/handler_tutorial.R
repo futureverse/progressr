@@ -14,7 +14,7 @@
 #' @details
 #' The default is to use the \pkg{progress} package. Contrary to the
 #' \pkg{cli} package, the \pkg{progress} package has the capacity to
-#' display _all_ progress updates, even when recieving progress updates
+#' display _all_ progress updates, even when receiving progress updates
 #' at a high rate from, for example, parallel processing.
 #' 
 #' @examples
