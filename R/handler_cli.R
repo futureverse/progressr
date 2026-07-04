@@ -4,8 +4,31 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param show_after (numeric) Number of seconds to wait before displaying
 #' the progress bar.
+#'
+#' @param type (character) The type of progress bar to display, which
+#' controls the default `format` and `format_done` passed to [cli::cli_progress_bar()].
+#' If `"default"`, the \pkg{cli} default format is used (`format = NULL`).
+#' If `"steps"`, the progress bar shows the current and total number of
+#' steps using the format string
+#' `"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`
+#' (and `format_done = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"`).
+#' If `"percent"`, the progress bar shows the percentage completed using
+#' the format string
+#' `"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`
+#' (and `format_done = "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}"`).
+#' If `"time"`, the progress bar shows the percentage completed, the
+#' current and total number of steps, the estimated time remaining (ETA),
+#' and the total elapsed time using the format string
+#' `"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"`
+#' (and `format_done = "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"`).
+#' For the meaning of these format variables, see
+#' [Progress bar variables][cli::progress-variables] in the \pkg{cli} package.
+#' This argument is ignored if `format` is explicitly specified via `...`.
 #'
 #' @param \ldots Additional arguments passed to [cli::cli_progress_bar()]
 #' and [make_progression_handler()].
@@ -21,24 +44,77 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers("cli")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_cli-type-steps}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_cli(type = "steps"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_cli-type-percent}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_cli(type = "percent"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_cli-type-time}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_cli(type = "time"))
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_cli-format-1}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_cli.R
 #'
 #' @export
-handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", ...) {
+handler_cli <- function(show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", type = c("default", "steps", "percent", "time"), ...) {
+  type <- match.arg(type)
+
   ## Additional arguments passed to the progress-handler backend
   backend_args <- handler_backend_args(...)
+
+  ## Default 'format' depending on 'type', unless 'format' is already specified
+  if (is.null(backend_args[["format"]])) {
+    format <- switch(type,
+      default = NULL,
+      steps   = "{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}",
+      percent = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}",
+      time    = "[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"
+    )
+    if (!is.null(format)) backend_args[["format"]] <- format
+  }
+
+  ## Default 'format_done' depending on 'type', unless 'format_done' is already specified
+  if (is.null(backend_args[["format_done"]])) {
+    format_done <- switch(type,
+      default = NULL,
+      steps   = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}",
+      percent = "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}",
+      time    = "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"
+    )
+    if (!is.null(format_done)) backend_args[["format_done"]] <- format_done
+  }
 
   if (!is_fake("handler_cli")) {
     cli_n_colors <- cli::num_ansi_colors()

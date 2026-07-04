@@ -2,6 +2,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param file (character) A filename.
 #'
 #' @param \ldots Additional arguments passed to [make_progression_handler()].
@@ -9,7 +12,7 @@
 #' @examples
 #' \donttest{\dontrun{
 #' handlers(handler_filesize(file = "myscript.progress"))
-#' with_progress(y <- slow_sum(1:100))
+#' with_progress(y <- slow_sum_p(1:100))
 #' print(y)
 #' }}
 #'

@@ -34,7 +34,7 @@ the terminal will be delayed.}
 \item{delay_stdout}{If TRUE, standard output is captured and relayed
 at the end just before any captured conditions are relayed.}
 
-\item{delay_conditions}{A character vector specifying \link[base:conditions]{base::condition}
+\item{delay_conditions}{A character vector specifying \link[base:condition]{base::condition}
 classes to be captured and relayed at the end after any captured
 standard output is relayed.}
 
@@ -95,40 +95,40 @@ To have progress being reported also then, set R options
 to \code{TRUE}.  Alternatively, one can set argument \code{enable=TRUE} when calling
 \code{with_progress()}.  For example,
 
-\if{html}{\out{<div class="sourceCode sh">}}\preformatted{$ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+\if{html}{\out{<div class="sourceCode sh">}}\preformatted{$ Rscript -e "library(progressr)" -e "with_progress(slow_sum_p(1:5))"
 }\if{html}{\out{</div>}}
 
 will \emph{not} report on progress, whereas:
 
 \if{html}{\out{<div class="sourceCode sh">}}\preformatted{$ export R_PROGRESSR_ENABLE=TRUE
-$ Rscript -e "library(progressr)" -e "with_progress(slow_sum(1:5))"
+$ Rscript -e "library(progressr)" -e "with_progress(slow_sum_p(1:5))"
 }\if{html}{\out{</div>}}
 
 will.
 }
 
 \examples{
-## The slow_sum() example function
-slow_sum <- progressr::slow_sum
-print(slow_sum)
+## The slow_sum_p() example function
+slow_sum_p <- progressr::slow_sum_p
+print(slow_sum_p)
 
 x <- 1:10
 
 ## Without progress updates
-y <- slow_sum(x)
+y <- slow_sum_p(x)
 
 
 ## Progress reported via txtProgressBar (default)
 handlers("txtprogressbar")  ## default
 with_progress({
-  y <- slow_sum(x)
+  y <- slow_sum_p(x)
 })
 
 ## Progress reported via tcltk::tkProgressBar
 if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
   handlers("tkprogressbar")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 
@@ -136,7 +136,7 @@ if (capabilities("tcltk") && requireNamespace("tcltk", quietly = TRUE)) {
 if (requireNamespace("progress", quietly = TRUE)) {
   handlers("progress")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 
@@ -144,7 +144,7 @@ if (requireNamespace("progress", quietly = TRUE)) {
 if (requireNamespace("beepr", quietly = TRUE)) {
   handlers("beepr", "txtprogressbar")
   with_progress({
-    y <- slow_sum(x)
+    y <- slow_sum_p(x)
   })
 }
 
@@ -156,10 +156,10 @@ if (requireNamespace("beepr", quietly = TRUE)) {
 }
 
 with_progress({
-  y <- slow_sum(1:30)
+  y <- slow_sum_p(1:30)
 })
 }
 \seealso{
 For Shiny apps, use \code{\link[=withProgressShiny]{withProgressShiny()}} instead of this function.
-Internally, this function is built around \code{\link[base:conditions]{base::withCallingHandlers()}}.
+Internally, this function is built around \code{\link[base:withCallingHandlers]{base::withCallingHandlers()}}.
 }

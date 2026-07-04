@@ -8,3 +8,4 @@ revdep/
 docs/
 man/_cache/
 .Rdump
+.osgrep

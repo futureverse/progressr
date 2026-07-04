@@ -51,6 +51,10 @@ initialization.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 A progression handler for \code{\link[RPushbullet:pbPost]{RPushbullet::pbPost()}} of the \pkg{RPushbullet}
 package.
@@ -68,7 +72,7 @@ pkg <- "RPushbullet"
 if (requireNamespace(pkg, quietly = TRUE)) {
 
   handlers("rpushbullet")
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }

@@ -8,7 +8,7 @@
 %\VignetteEngine{progressr::selfonly}
 -->
 
-## How tos
+## How-tos
 
 ### Report on progress in non-interactive mode ("batch mode")
 
@@ -19,14 +19,14 @@ To report on progress also then, set R options `progressr.enable` or
 environment variable `R_PROGRESSR_ENABLE` to `TRUE`.  For example,
 
 ```sh
-$ Rscript -e "library(progressr)" -e "with_progress(y <- slow_sum(1:10))"
+$ Rscript -e "library(progressr)" -e "with_progress(y <- slow_sum_p(1:10))"
 ```
 
 will _not_ report on progress, whereas
 
 ```sh
 $ export R_PROGRESSR_ENABLE=TRUE
-$ Rscript -e "library(progressr)" -e "with_progress(y <- slow_sum(1:10))"
+$ Rscript -e "library(progressr)" -e "with_progress(y <- slow_sum_p(1:10))"
 ```
 
 will.
@@ -42,11 +42,11 @@ than the task we are processing in each step.  However, if the task we
 iterate over is quick, then the extra time induced by the progress
 updates might end up dominating the overall processing time.  If that
 is the case, a simple solution is to only signal progress updates
-every nth step.  Here is a version of `slow_sum()` that signals
+every nth step.  Here is a version of `slow_sum_p()` that signals
 progress every 10th iteration:
 
 ```
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(length(x) / 10)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -169,7 +169,7 @@ options(cli.num_colors = cli::num_ansi_colors())
 This will force **cli** to use the same number of colors with and
 without an active progressor.
 
-The same happens when using the superseeded **[crayon]** package for
+The same happens when using the superseded **[crayon]** package for
 colorization. To re-enable coloring for **crayon**, set the same
 (sic!)  above R options.
 
@@ -284,9 +284,8 @@ Currently, when using Positron (e.g. Positron 2025.09.0), any
 step is reported, e.g.
 
 ```r
-> progressr::handlers(global = TRUE)
-> progressr::handlers("cli")
-> y <- progressr::slow_sum(1:5, message = TRUE)
+> progressr::handlers("cli", global = TRUE)
+> y <- progressr::slow_sum_p(1:5, message = TRUE)
 M: Added value 1
 M: Added value 2
 M: Added value 3
@@ -324,7 +323,7 @@ If we try the following
 library(progressr)
 handlers(globals = TRUE)
 handlers("txtprogressbar")
-y <- slow_sum(1:20)
+y <- slow_sum_p(1:20)
 ```
 
 there will be no progress being reported. This is not specific to
@@ -350,7 +349,7 @@ options(progressr.enable = TRUE, progressr.delay_stdout = FALSE)
 ## it does not work with the default standard error
 handlers(handler_txtprogressbar(file = stdout()))
 
-y <- slow_sum(1:20)
+y <- slow_sum_p(1:20)
 ```
 
 
@@ -393,7 +392,7 @@ as possible by the **[future]** framework, which means that
 progression updates produced in parallel workers are reported to the
 end user as soon as the main R session have received them.
 
-![](imgs/slow_sum.svg)
+![](imgs/slow_sum_p.svg)
 
 _Figure: Sequence diagram illustrating how signaled progression
 conditions are captured by `with_progress()`, or the global

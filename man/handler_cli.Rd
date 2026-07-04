@@ -8,6 +8,7 @@ handler_cli(
   show_after = 0,
   intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
   target = "terminal",
+  type = c("default", "steps", "percent", "time"),
   ...
 )
 }
@@ -21,8 +22,32 @@ the progress bar.}
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
 
+\item{type}{(character) The type of progress bar to display, which
+controls the default \code{format} and \code{format_done} passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}.
+If \code{"default"}, the \pkg{cli} default format is used (\code{format = NULL}).
+If \code{"steps"}, the progress bar shows the current and total number of
+steps using the format string
+\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"}
+(and \code{format_done = "{cli::pb_bar} {cli::pb_current}/{cli::pb_total} {cli::pb_status}"}).
+If \code{"percent"}, the progress bar shows the percentage completed using
+the format string
+\code{"{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"}
+(and \code{format_done = "{cli::pb_bar} {cli::pb_percent} {cli::pb_status}"}).
+If \code{"time"}, the progress bar shows the percentage completed, the
+current and total number of steps, the estimated time remaining (ETA),
+and the total elapsed time using the format string
+\code{"[{cli::pb_elapsed}] {cli::pb_spin} {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] (ETA: {cli::pb_eta}) {cli::pb_status}"}
+(and \code{format_done = "[{cli::pb_elapsed}] {cli::pb_bar} {cli::pb_percent} [{cli::pb_current}/{cli::pb_total}] {cli::pb_status}"}).
+For the meaning of these format variables, see
+\link[cli:progress-variables]{Progress bar variables} in the \pkg{cli} package.
+This argument is ignored if \code{format} is explicitly specified via \code{...}.}
+
 \item{\ldots}{Additional arguments passed to \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
+}
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
 }
 \description{
 A progression handler for \code{\link[cli:cli_progress_bar]{cli::cli_progress_bar()}}.
@@ -37,14 +62,37 @@ This progression handler requires the \pkg{cli} package.
 Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("cli")
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("cli")
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_cli-default.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_cli(format = "\{cli::pb_spin\} \{cli::pb_bar\} \{cli::pb_current\}/\{cli::pb_total\} \{cli::pb_status\}"))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(type = "steps"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_cli-type-steps.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(type = "percent"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_cli-type-percent.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(type = "time"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_cli-type-time.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_cli(format = "\{cli::pb_spin\} \{cli::pb_bar\} \{cli::pb_current\}/\{cli::pb_total\} \{cli::pb_status\}"))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_cli-format-1.svg}}
@@ -53,7 +101,7 @@ y <- slow_sum(1:25)
 \examples{
 if (requireNamespace("cli", quietly = TRUE)) {
   handlers(handler_cli(format = "{cli::pb_spin} {cli::pb_bar} {cli::pb_percent} {cli::pb_status}"))
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
 }
 }

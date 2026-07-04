@@ -78,7 +78,7 @@ handlers("beepr")
 will present itself as sounds played at the beginning, while progressing, and at the end (using different **[beepr]** sounds).  There will be _no_ output written to the terminal;
 
 ```r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
 > y
 [1] 55
 >
@@ -149,9 +149,10 @@ sessions, call `progressr::handlers(...)` in your
 
 ```r
 if (requireNamespace("progressr", quietly = TRUE)) {
-  progressr::handlers(global = TRUE)
   if (requireNamespace("cli", quietly = TRUE)) {
-    progressr::handlers("cli")
+    progressr::handlers("cli", global = TRUE)
+  } else {
+    progressr::handlers(global = TRUE)
   }
 }
 ```

@@ -2,6 +2,9 @@
 #'
 #' @inheritParams make_progression_handler 
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param adjust (numeric) The adjustment of the progress update,
 #' where `adjust = 0` positions the message to the very left, and
 #' `adjust = 1` positions the message to the very right.
@@ -28,28 +31,31 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers("pbcol")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_pbcol-adjust-mid}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_pbcol(adjust = 0.5))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_pbcol-adjust-right-complete}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_pbcol(
 #'   adjust = 1,
 #'   complete = function(s) cli::bg_red(cli::col_black(s)),
 #'   incomplete = function(s) cli::bg_cyan(cli::col_black(s))
 #' ))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_pbcol.R

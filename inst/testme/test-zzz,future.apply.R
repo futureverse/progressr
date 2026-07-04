@@ -11,7 +11,7 @@ if (requireNamespace("future.apply", quietly = TRUE) && !covr) {
       p <- progressor(4)
       y <- future.apply::future_lapply(3:6, function(n) {
         p()
-        slow_sum(1:n, stdout=TRUE, message=TRUE)
+        slow_sum_p(1:n, stdout=TRUE, message=TRUE)
       })
     })
 
@@ -24,7 +24,7 @@ if (requireNamespace("future.apply", quietly = TRUE) && !covr) {
       p <- progressor(4)
       y <- future.apply::future_lapply(3:6, function(n) {
         p()
-        slow_sum(1:n, stdout=TRUE, message=TRUE)
+        slow_sum_p(1:n, stdout=TRUE, message=TRUE)
       })
     })
     

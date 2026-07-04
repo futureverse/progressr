@@ -29,6 +29,10 @@ whereas the 'label' component is updated using any message.}
 \item{\ldots}{Additional arguments passed to \code{tcltk::winProgressBar()}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 A progression handler for \code{winProgressBar()} in the \pkg{utils} package.
 }
@@ -40,7 +44,7 @@ This progression handler requires MS Windows.
 \examples{
 \donttest{\dontrun{
 handlers(handler_winprogressbar())
-with_progress(y <- slow_sum(1:100))
+with_progress(y <- slow_sum_p(1:100))
 }}
 
 }

@@ -7,7 +7,7 @@ if (requireNamespace("purrr", quietly = TRUE)) {
     p <- progressor(4)
     y <- purrr::map(3:6, function(n) {
       p()
-      slow_sum(1:n, stdout=TRUE, message=TRUE)
+      slow_sum_p(1:n, stdout=TRUE, message=TRUE)
     })
   })
 
@@ -20,7 +20,7 @@ if (requireNamespace("purrr", quietly = TRUE)) {
     p <- progressor(4)
     y <- purrr::map(3:6, function(n) {
       p()
-      slow_sum(1:n, stdout=TRUE, message=TRUE)
+      slow_sum_p(1:n, stdout=TRUE, message=TRUE)
     })
   })
     

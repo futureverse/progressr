@@ -9,7 +9,7 @@ if (requireNamespace("shiny", quietly = TRUE)) {
       p <- progressor(3L)
       y <- lapply(1:3, function(n) {
         p()
-        slow_sum(1:n, stdout=TRUE, message=TRUE)
+        slow_sum_p(1:n, stdout=TRUE, message=TRUE)
       })
       y
     })

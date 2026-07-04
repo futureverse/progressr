@@ -13,7 +13,7 @@ message("with_progress() - default ...")
 
 if (requireNamespace("utils")) {
   with_progress({
-    sum <- slow_sum(x)
+    sum <- slow_sum_p(x)
   })
   print(sum)
   stopifnot(sum == truth)
@@ -23,7 +23,7 @@ if (requireNamespace("utils")) {
     message("This message will be delayed")
     warning("This warning will be delayed")
     signalCondition(simpleCondition("This simpleCondition will be delayed"))
-    sum <- slow_sum(x)
+    sum <- slow_sum_p(x)
   }, interval = 0.1, enable = TRUE, delay_conditions = "condition")
   print(sum)
   stopifnot(sum == truth)
@@ -34,7 +34,7 @@ message("with_progress() - default ... done")
 message("with_progress() - filesize ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_filesize())
 print(sum)
 stopifnot(sum == truth)
@@ -46,7 +46,7 @@ message("with_progress() - utils::txtProgressBar() ...")
 
 if (requireNamespace("utils")) {
   with_progress({
-    sum <- slow_sum(x)
+    sum <- slow_sum_p(x)
   }, handlers = handler_txtprogressbar(style = 2L))
   print(sum)
   stopifnot(sum == truth)
@@ -58,7 +58,7 @@ message("with_progress() - utils::txtProgressBar() ... done")
 message("with_progress() - tcltk::tkProgressBar() ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_tkprogressbar)
 
 message("with_progress() - tcltk::tkProgressBar() ... done")
@@ -67,7 +67,7 @@ message("with_progress() - tcltk::tkProgressBar() ... done")
 message("with_progress() - utils::winProgressBar() ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_winprogressbar)
 
 message("with_progress() - utils::winProgressBar() ... done")
@@ -78,7 +78,7 @@ message("with_progress() - progress::progress_bar() ...")
 if (requireNamespace("progress")) {
   ## Display progress using default handler
   with_progress({
-    sum <- slow_sum(x)
+    sum <- slow_sum_p(x)
   }, handlers = handler_progress(clear = FALSE))
   print(sum)
   stopifnot(sum == truth)
@@ -90,7 +90,7 @@ message("with_progress() - progress::progress_bar() ... done")
 message("with_progress() - pbmcapply::progressBar() ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_pbmcapply)
 
 message("with_progress() - pbmcapply::progressBar() ... done")
@@ -99,7 +99,7 @@ message("with_progress() - pbmcapply::progressBar() ... done")
 message("with_progress() - ascii_alert ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_ascii_alert())
 print(sum)
 stopifnot(sum == truth)
@@ -110,7 +110,7 @@ message("with_progress() - ascii_alert ... done")
 message("with_progress() - beepr::beep() ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_beepr)
 print(sum)
 stopifnot(sum == truth)
@@ -121,7 +121,7 @@ message("with_progress() - beepr::beep() ... done")
 message("with_progress() - BRRR::skrrrahh() ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_brrr)
 print(sum)
 stopifnot(sum == truth)
@@ -132,7 +132,7 @@ message("with_progress() - BRRR::skrrrahh() ... done")
 message("with_progress() - notifier::notify() ...")
 
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = handler_notifier)
 print(sum)
 stopifnot(sum == truth)
@@ -144,7 +144,7 @@ message("with_progress() - void ...")
 
 ## Mute progress updates
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 }, handlers = NULL)
 print(sum)
 stopifnot(sum == truth)
@@ -154,7 +154,7 @@ message(" - via option")
 ## NOTE: Set it to NULL, will use the default utils::txtProgressBar()
 options(progressr.handlers = list())
 with_progress({
-  sum <- slow_sum(x)
+  sum <- slow_sum_p(x)
 })
 print(sum)
 stopifnot(sum == truth)
@@ -169,7 +169,7 @@ if (requireNamespace("utils", quietly = TRUE)) {
   options(progressr.handlers = handlers)
   
   with_progress({
-    sum <- slow_sum(x)
+    sum <- slow_sum_p(x)
   })
   print(sum)
   stopifnot(sum == truth)

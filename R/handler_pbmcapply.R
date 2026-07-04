@@ -4,6 +4,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @inheritParams handler_txtprogressbar
 #'
 #' @param char (character) The symbols to form the progress bar for
@@ -32,8 +35,9 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers("pbmcapply")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_pbmcapply.R

@@ -17,6 +17,10 @@ rendered.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 Progression Handler: No Progress Report
 }
@@ -26,7 +30,7 @@ This progression handler gives not output - it is invisible and silent.
 \examples{
 \donttest{\dontrun{
 handlers(handler_void())
-with_progress(y <- slow_sum(1:100))
+with_progress(y <- slow_sum_p(1:100))
 print(y)
 }}
 

@@ -2,6 +2,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param duration (numeric) Added slowdown (in seconds) across all progress
 #' steps, e.g. if `duration = 10.0` and `steps = 100L`, then each step unit is
 #' delayed 0.1 seconds, totaling a ten-second slowdown.
@@ -11,7 +14,7 @@
 #' @examples
 #' \donttest{\dontrun{
 #' handlers(handler_slowdown(duration = 30.0)) ## 30-second total slowdown
-#' with_progress(y <- slow_sum(1:100))
+#' with_progress(y <- slow_sum_p(1:100))
 #' print(y)
 #' }}
 #'

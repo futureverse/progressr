@@ -36,6 +36,10 @@ rendered.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 Progression Handler: Progress Reported as an ANSI Background Color in the Terminal
 }
@@ -49,24 +53,27 @@ This progression handler requires the \pkg{cli} package.
 Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("pbcol")
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("pbcol")
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_pbcol-default.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_pbcol(adjust = 0.5))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_pbcol(adjust = 0.5))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_pbcol-adjust-mid.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_pbcol(
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_pbcol(
   adjust = 1,
   complete = function(s) cli::bg_red(cli::col_black(s)),
   incomplete = function(s) cli::bg_cyan(cli::col_black(s))
 ))
-y <- slow_sum(1:25)
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_pbcol-adjust-right-complete.svg}}
@@ -74,6 +81,6 @@ y <- slow_sum(1:25)
 
 \examples{
 handlers(handler_pbcol)
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 print(y)
 }

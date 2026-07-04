@@ -4,7 +4,24 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param format (character string) The format of the progress bar.
+#' If `NULL`, the format is determined by the `type` argument.
+#'
+#' @param type (character) The type of progress bar to display, which
+#' controls the default `format` passed to [progress::progress_bar()].
+#' If `"default"`, the format string is
+#' `":spin [:bar] :percent :message"`.
+#' If `"steps"`, the format string is
+#' `":spin [:bar] :current/:total :message"`.
+#' If `"percent"`, the format string is
+#' `":spin [:bar] :percent :message"`.
+#' If `"time"`, the format string is
+#' `"[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"`.
+#' For the meaning of these format variables, see [progress::progress_bar].
+#' This argument is ignored if `format` is explicitly specified.
 #'
 #' @param show_after (numeric) Number of seconds to wait before displaying
 #' the progress bar.
@@ -23,38 +40,80 @@
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers("progress")
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_progress-complete}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_progress(complete = "#"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_progress-type-steps}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_progress(type = "steps"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_progress-type-percent}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_progress(type = "percent"))
+#' y <- slow_sum_p(1:25)
+#' ```
+#'
+#' ```{asciicast handler_progress-type-time}
+#' #| asciicast_at = "all",
+#' #| asciicast_knitr_output = "svg",
+#' #| asciicast_cursor = FALSE
+#' library(progressr)
+#' handlers(handler_progress(type = "time"))
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_progress-format-1}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_progress(format = ":spin [:bar] :percent :message"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' ```{asciicast handler_progress-format-2}
 #' #| asciicast_at = "all",
 #' #| asciicast_knitr_output = "svg",
 #' #| asciicast_cursor = FALSE
+#' library(progressr)
 #' handlers(handler_progress(format = ":percent [:bar] :eta :message"))
-#' y <- slow_sum(1:25)
+#' y <- slow_sum_p(1:25)
 #' ```
 #'
 #' @example incl/handler_progress.R
 #'
 #' @export
-handler_progress <- function(format = ":spin [:bar] :percent :message", show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", ...) {
+handler_progress <- function(format = NULL, show_after = 0.0, intrusiveness = getOption("progressr.intrusiveness.terminal", 1), target = "terminal", type = c("default", "steps", "percent", "time"), ...) {
+  type <- match.arg(type)
+
+  if (is.null(format)) {
+    format <- switch(type,
+      default = ":spin [:bar] :percent :message",
+      steps   = ":spin [:bar] :current/:total :message",
+      percent = ":spin [:bar] :percent :message",
+      time    = "[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"
+    )
+  }
+
   ## Additional arguments passed to the progress-handler backend
   backend_args <- handler_backend_args(...)
 

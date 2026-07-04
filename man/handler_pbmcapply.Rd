@@ -23,7 +23,7 @@ handler_pbmcapply(
 
 \item{style}{(character) The progress-bar style according to}
 
-\item{file}{(connection) A \link[base:connections]{base::connection} to where output should be sent.}
+\item{file}{(connection) A \link[base:connection]{base::connection} to where output should be sent.}
 
 \item{intrusiveness}{(numeric) A non-negative scalar on how intrusive
 (disruptive) the reporter to the user.}
@@ -33,6 +33,10 @@ rendered.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[pbmcapply:progressBar]{pbmcapply::progressBar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
+}
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
 }
 \description{
 A progression handler for \code{\link[pbmcapply:progressBar]{pbmcapply::progressBar()}}.
@@ -50,8 +54,9 @@ Since \code{style = "txt"} corresponds to using \code{\link[=handler_txtprogress
 with \code{style = substyle}, the main usage of this handler is with
 \code{style = "ETA"} (default) for which \code{substyle} is ignored.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("pbmcapply")
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("pbmcapply")
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_pbmcapply-default.svg}}
@@ -61,7 +66,7 @@ y <- slow_sum(1:25)
 if (requireNamespace("pbmcapply", quietly = TRUE)) {
 
   handlers("pbmcapply")
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }

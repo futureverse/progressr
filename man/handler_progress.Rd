@@ -5,15 +5,17 @@
 \title{Progression Handler: Progress Reported via 'progress' Progress Bars (Text) in the Terminal}
 \usage{
 handler_progress(
-  format = ":spin [:bar] :percent :message",
+  format = NULL,
   show_after = 0,
   intrusiveness = getOption("progressr.intrusiveness.terminal", 1),
   target = "terminal",
+  type = c("default", "steps", "percent", "time"),
   ...
 )
 }
 \arguments{
-\item{format}{(character string) The format of the progress bar.}
+\item{format}{(character string) The format of the progress bar.
+If \code{NULL}, the format is determined by the \code{type} argument.}
 
 \item{show_after}{(numeric) Number of seconds to wait before displaying
 the progress bar.}
@@ -24,8 +26,25 @@ the progress bar.}
 \item{target}{(character vector) Specifies where progression updates are
 rendered.}
 
+\item{type}{(character) The type of progress bar to display, which
+controls the default \code{format} passed to \code{\link[progress:progress_bar]{progress::progress_bar()}}.
+If \code{"default"}, the format string is
+\code{":spin [:bar] :percent :message"}.
+If \code{"steps"}, the format string is
+\code{":spin [:bar] :current/:total :message"}.
+If \code{"percent"}, the format string is
+\code{":spin [:bar] :percent :message"}.
+If \code{"time"}, the format string is
+\code{"[:elapsed] :spin [:bar] :percent [:current/:total] (ETA: :eta) :message"}.
+For the meaning of these format variables, see \link[progress:progress_bar]{progress::progress_bar}.
+This argument is ignored if \code{format} is explicitly specified.}
+
 \item{\ldots}{Additional arguments passed to \code{\link[progress:progress_bar]{progress::progress_bar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
+}
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
 }
 \description{
 A progression handler for \code{\link[progress:progress_bar]{progress::progress_bar()}}.
@@ -40,26 +59,51 @@ This progression handler requires the \pkg{progress} package.
 Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("progress")
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("progress")
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-default.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_progress(complete = "#"))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(complete = "#"))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-complete.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_progress(format = ":spin [:bar] :percent :message"))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(type = "steps"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_progress-type-steps.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(type = "percent"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_progress-type-percent.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(type = "time"))
+y <- slow_sum_p(1:25)
+}\if{html}{\out{</div>}}
+
+\if{html}{\figure{handler_progress-type-time.svg}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(format = ":spin [:bar] :percent :message"))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-format-1.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_progress(format = ":percent [:bar] :eta :message"))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_progress(format = ":percent [:bar] :eta :message"))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_progress-format-2.svg}}
@@ -69,7 +113,7 @@ y <- slow_sum(1:25)
 if (requireNamespace("progress", quietly = TRUE)) {
 
   handlers(handler_progress(format = ":spin [:bar] :percent :message"))
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }

@@ -1,4 +1,4 @@
-all: slow_sum.svg
+all: slow_sum_p.svg
 
 %.svg: %.bob
 	svgbob --font-family=monospace --output $@ < $<

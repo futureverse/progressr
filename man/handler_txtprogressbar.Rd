@@ -21,7 +21,7 @@ supports also ANSI-colored symbols.}
 \item{style}{(integer) The progress-bar style according to
 \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}}.}
 
-\item{file}{(connection) A \link[base:connections]{base::connection} to where output should be sent.}
+\item{file}{(connection) A \link[base:connection]{base::connection} to where output should be sent.}
 
 \item{intrusiveness}{(numeric) A non-negative scalar on how intrusive
 (disruptive) the reporter to the user.}
@@ -32,6 +32,10 @@ rendered.}
 \item{\ldots}{Additional arguments passed to \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}}
 and \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 A progression handler for \code{\link[utils:txtProgressBar]{utils::txtProgressBar()}}.
 }
@@ -40,38 +44,44 @@ A progression handler for \code{\link[utils:txtProgressBar]{utils::txtProgressBa
 Below are a few examples on how to use and customize this progress handler.
 In all cases, we use \code{handlers(global = TRUE)}.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers("txtprogressbar")
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers("txtprogressbar")
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-default.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(style = 1L))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(style = 1L))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-style-1.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(style = 3L))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(style = 3L))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-style-3.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = "#"))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(char = "#"))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = "<>"))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(char = "<>"))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char-width-2.svg}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
-y <- slow_sum(1:25)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(progressr)
+handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
+y <- slow_sum_p(1:25)
 }\if{html}{\out{</div>}}
 
 \if{html}{\figure{handler_txtprogressbar-char-ansi.svg}}
@@ -80,6 +90,6 @@ y <- slow_sum(1:25)
 \examples{
 handlers("txtprogressbar")
 
-with_progress({ y <- slow_sum(1:10) })
+with_progress({ y <- slow_sum_p(1:10) })
 print(y)
 }

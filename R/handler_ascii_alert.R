@@ -4,6 +4,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param symbol (character string) The character symbol to be outputted,
 #' which by default is the ASCII BEL character (`'\a'` = `'\007'`) character.
 #'

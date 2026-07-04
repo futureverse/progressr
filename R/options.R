@@ -106,7 +106,15 @@
 #' @section Options for progressr examples and demos:
 #'
 #' \describe{
-#'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum()]. (Default: `1.0`)}
+#'  \item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of [slow_sum_p()] and [slow_sqrt_p()]. (Default: `1.0` and `0.5`)}
+#'
+#'  \item{\option{progressr.demo.stdout}:}{(logical) If TRUE, then a text is outputted to the standard output per element. (Default: `FALSE`)}
+#'
+#'  \item{\option{progressr.demo.message}:}{(logical) If TRUE, then a message is outputted per element. (Default: `TRUE`)}
+#'
+#'  \item{\option{progressr.demo.sticky}:}{(logical) If TRUE, then a "sticky" message is outputted every ten element. (Default: `TRUE`)}
+#'
+#'  \item{\option{progressr.demo.progress}:}{(logical) If TRUE, then a progressor is created, otherwise a void progressor that does nothing is used. (Default: `TRUE`)}
 #' }
 #'
 #' @section Environment variables that set R options:
@@ -121,23 +129,23 @@
 #' @seealso
 #' To set \R options when \R starts (even before the \pkg{progressr} package is loaded), see the \link[base]{Startup} help page.  The \href{https://cran.r-project.org/package=startup}{\pkg{startup}} package provides a friendly mechanism for configuring \R at startup.
 #'
-#' @aliases
-#' progressr.clear
-#' progressr.debug
-#' progressr.demo.delay
-#' progressr.delay_stdout progressr.delay_conditions
-#' progressr.enable progressr.enable_after
-#' progressr.interrupts
-#' progressr.interval
-#' progressr.intrusiveness
-#' progressr.intrusiveness.audio
-#' progressr.intrusiveness.debug
-#' progressr.intrusiveness.file
-#' progressr.intrusiveness.gui
-#' progressr.intrusiveness.notifier
-#' progressr.intrusiveness.terminal
-#' progressr.handlers
-#' progressr.times
+#' @aliases progressr.clear
+#' @aliases progressr.debug
+#' @aliases progressr.demo.delay
+#' @aliases progressr.demo.stdout progressr.demo.message progressr.demo.sticky progressr.demo.progress
+#' @aliases progressr.delay_stdout progressr.delay_conditions
+#' @aliases progressr.enable progressr.enable_after
+#' @aliases progressr.interrupts
+#' @aliases progressr.interval
+#' @aliases progressr.intrusiveness
+#' @aliases progressr.intrusiveness.audio
+#' @aliases progressr.intrusiveness.debug
+#' @aliases progressr.intrusiveness.file
+#' @aliases progressr.intrusiveness.gui
+#' @aliases progressr.intrusiveness.notifier
+#' @aliases progressr.intrusiveness.terminal
+#' @aliases progressr.handlers
+#' @aliases progressr.times
 #'
 #' @name progressr.options
 NULL
@@ -241,6 +249,10 @@ update_package_option <- function(name, mode = "character", default = NULL, pack
 ## Set package options based on environment variables
 update_package_options <- function(debug = FALSE) {
   update_package_option("demo.delay", mode = "numeric", debug = debug)
+  update_package_option("demo.stdout", mode = "logical", debug = debug)
+  update_package_option("demo.message", mode = "logical", debug = debug)
+  update_package_option("demo.sticky", mode = "logical", debug = debug)
+  update_package_option("demo.progress", mode = "logical", debug = debug)
 
   ## make_progression_handler() arguments
   update_package_option("clear", mode = "logical", default = TRUE, debug = debug)
@@ -267,4 +279,3 @@ update_package_options <- function(debug = FALSE) {
   ## For RStudio users
   update_package_option("rstudio.patch", mode = "logical", debug = debug)
 }
-

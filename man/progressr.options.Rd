@@ -5,6 +5,10 @@
 \alias{progressr.clear}
 \alias{progressr.debug}
 \alias{progressr.demo.delay}
+\alias{progressr.demo.stdout}
+\alias{progressr.demo.message}
+\alias{progressr.demo.sticky}
+\alias{progressr.demo.progress}
 \alias{progressr.delay_stdout}
 \alias{progressr.delay_conditions}
 \alias{progressr.enable}
@@ -134,7 +138,15 @@ If TRUE, standard output is captured and relayed at the end just before any capt
 
 
 \describe{
-\item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of \code{\link[=slow_sum]{slow_sum()}}. (Default: \code{1.0})}
+\item{\option{progressr.demo.delay}:}{(numeric) Delay (in seconds) between each iteration of \code{\link[=slow_sum_p]{slow_sum_p()}} and \code{\link[=slow_sqrt_p]{slow_sqrt_p()}}. (Default: \code{1.0} and \code{0.5})}
+
+\item{\option{progressr.demo.stdout}:}{(logical) If TRUE, then a text is outputted to the standard output per element. (Default: \code{FALSE})}
+
+\item{\option{progressr.demo.message}:}{(logical) If TRUE, then a message is outputted per element. (Default: \code{TRUE})}
+
+\item{\option{progressr.demo.sticky}:}{(logical) If TRUE, then a "sticky" message is outputted every ten element. (Default: \code{TRUE})}
+
+\item{\option{progressr.demo.progress}:}{(logical) If TRUE, then a progressor is created, otherwise a void progressor that does nothing is used. (Default: \code{TRUE})}
 }
 }
 

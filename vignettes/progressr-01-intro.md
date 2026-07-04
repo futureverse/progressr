@@ -71,8 +71,8 @@ p("loading ...")  # pass on a message
 <pre>
 handlers(global = TRUE)
 
-y &lt;- slow_sum(1:5)
-y &lt;- slow_sum(6:10)
+y &lt;- slow_sum_p(1:5)
+y &lt;- slow_sum_p(6:10)
 </pre>
 
 <p>
@@ -81,8 +81,8 @@ y &lt;- slow_sum(6:10)
 
 <pre>
 with_progress({
-  y &lt;- slow_sum(1:5)
-  y &lt;- slow_sum(6:10)
+  y &lt;- slow_sum_p(1:5)
+  y &lt;- slow_sum_p(6:10)
 })
 </pre>
 
@@ -91,6 +91,7 @@ with_progress({
 </p>
 
 <pre>
+handlers("cli")
 handlers("progress")
 handlers("txtprogressbar", "beepr")
 handlers(handler_pbcol(enable_after = 3.0))
@@ -103,13 +104,13 @@ handlers(handler_progress(complete = "#"))
 
 ## A simple example
 
-Assume that we have a function `slow_sum()` for adding up the values
+Assume that we have a function `slow_sum_p()` for adding up the values
 in a vector.  It is so slow, that we like to provide progress updates
 to whoever might be interested in it.  With the **progressr** package,
 this can be done as:
 
 ```r
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -136,7 +137,7 @@ reporting function of interest).
 Now, if we call this function, without further settings:
 
 ```r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
 > y
 [1] 55
 >
@@ -153,9 +154,9 @@ by:
 After this, progress will be reported:
 
 ```r
-> y <- slow_sum(1:10)
+> y <- slow_sum_p(1:10)
   |====================                               |  40%
-> y <- slow_sum(10:1)
+> y <- slow_sum_p(10:1)
   |========================================           |  80%
 ```
 
@@ -188,31 +189,32 @@ See the 'Customizing How Progress is Reported' vignette for examples.
 ### Support for progressr elsewhere
 
 Note that progression updates by **progressr** are designed to work out
-of the box for any iterator framework in R. See the different package
-vignettes for details. Prominent examples are:
+of the box for any iterator framework in R. Prominent examples are:
 
  * `lapply()` etc. in base R
  * `map()` etc. by the **[purrr]** package
  * `llply()` etc. by the **[plyr]** package
  * `foreach()` iterations by the **[foreach]** package
 
-and near-live progress reporting in parallel and distributed
-processing via the **[future]** framework. The modern approach is to
-use the **[futurize]** package, e.g.
+You can manually inject `progressor()` code in these calls, or let the
+**[progressify]** package take care of it for you, e.g.
 
- * `lapply(...) |> futurize()`
- * `map(...) |> futurize()` (**[purrr]**)
- * `llply(...) |> futurize()` (**[plyr]**)
- * `foreach(...) |> futurize()` (**[foreach]**)
- * `bplapply(...) |> futurize()` (**[BiocParallel]**)
+ * `lapply(...) |> progressify()`
+ * `map(...) |> progressify()`
+ * `llply(...) |> progressify()`
+ * `foreach(...) |> progressify()`
+
+You can use this to obtain near-live progress reporting in parallel
+and distributed processing via the **[future]** framework. The modern
+approach is to combine **[progressify]** and **[futurize]**, e.g.
+
+ * `lapply(...) |> progressify() |> futurize()`
+ * `map(...) |> progressify() |> futurize()`
+ * `llply(...) |> progressify() |> futurize()`
+ * `foreach(...) |> progressify() |> futurize()`
+ * `bplapply(...) |> progressify() |> futurize()` (**[BiocParallel]**)
  
-The traditional counterparts are:
-
- * `future_lapply()` etc.  by the **[future.apply]** package
- * `future_map()` etc. by the **[furrr]** package
- * `llply()` etc. by the **[plyr]** and **[doFuture]** packages
- * `foreach()` iterations via the **foreach** and **[doFuture]** packages
- * `bplapply()` etc. by the **[BiocParallel]** and **[doFuture]** packages
+You can also use `progressify()` with traditional **[future.apply]**, **[furrr]** and **[doFuture]** packages.
 
 Other uses of **progressr** are:
 
@@ -228,7 +230,7 @@ In contrast to other progress-bar frameworks, output from `message()`,
 reported via **progressr**.  For example, say we have:
 
 ```r
-slow_sqrt <- function(xs) {
+slow_sqrt_p <- function(xs) {
   p <- progressor(along = xs)
   lapply(xs, function(x) {
     message("Calculating the square root of ", x)
@@ -243,9 +245,8 @@ we will get:
 
 ```r
 > library(progressr)
-> handlers(global = TRUE)
-> handlers("progress")
-> y <- slow_sqrt(1:8)
+> handlers("progress", global = TRUE)
+> y <- slow_sqrt_p(1:8)
 Calculating the square root of 1
 Calculating the square root of 2
 - [===========>-----------------------------------]  25% x=2
@@ -280,7 +281,7 @@ This works for several progress handlers that output to the terminal.
 For example, with:
 
 ```r
-slow_sum <- function(x) {
+slow_sum_p <- function(x) {
   p <- progressr::progressor(along = x)
   sum <- 0
   for (kk in seq_along(x)) {
@@ -297,7 +298,7 @@ we get
 
 ```r
 > handlers("txtprogressbar")
-> y <- slow_sum(1:30)
+> y <- slow_sum_p(1:30)
 Step 5
 Step 10
   |====================                               |  43%
@@ -307,7 +308,7 @@ and
 
 ```r
 > handlers("progress")
-> y <- slow_sum(1:30)
+> y <- slow_sum_p(1:30)
 Step 5
 Step 10
 / [===============>-------------------------]  43% Adding 13
@@ -317,6 +318,7 @@ Step 10
 
 [futureverse]: https://www.futureverse.org
 [progressr]: https://progressr.futureverse.org
+[progressify]: https://progressify.futureverse.org
 [future]: https://future.futureverse.org
 [futurize]: https://futurize.futureverse.org
 [future.apply]: https://future.apply.futureverse.org

@@ -2,6 +2,9 @@
 #'
 #' @inheritParams make_progression_handler
 #'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
+#'
 #' @param uuid If TRUE, then the progressor UUID and the owner UUID are shown,
 #' otherwise not (default).
 #'

@@ -54,9 +54,9 @@ A function of class \code{progression_handler} that takes a
 \link{progression} condition as its first and only argument.
 }
 \description{
-A progression calling handler is a function that takes a \link[base:conditions]{base::condition}
+A progression calling handler is a function that takes a \link[base:condition]{base::condition}
 as its first argument and that can be use together with
-\code{\link[base:conditions]{base::withCallingHandlers()}}.  This function helps creating such
+\code{\link[base:withCallingHandlers]{base::withCallingHandlers()}}.  This function helps creating such
 progression calling handler functions.
 }
 \details{
@@ -128,11 +128,11 @@ my_handler <- make_progression_handler(name = "my", reporter = list(
 handlers(my_handler)
 
 with_progress({
-  y <- slow_sum(1:5)
+  y <- slow_sum_p(1:5)
 })
 
 }
 \seealso{
-\code{\link[base:conditions]{base::withCallingHandlers()}}.
+\code{\link[base:withCallingHandlers]{base::withCallingHandlers()}}.
 }
 \keyword{internal}

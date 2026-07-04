@@ -3,6 +3,9 @@
 #' A progression handler for [tcltk::tkProgressBar()].
 #'
 #' @inheritParams make_progression_handler
+#'
+#' @return A function of class `progression_handler` that takes a
+#' [progression] condition as its first and only argument.
 #' @inheritParams handler_winprogressbar
 #'
 #' @param \ldots Additional arguments passed to [tcltk::tkProgressBar()]

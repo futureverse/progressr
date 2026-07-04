@@ -25,6 +25,10 @@ created.}
 
 \item{\ldots}{Additional arguments passed to \code{\link[=make_progression_handler]{make_progression_handler()}}.}
 }
+\value{
+A function of class \code{progression_handler} that takes a
+\link{progression} condition as its first and only argument.
+}
 \description{
 Progression Handler: Progress Reported in the RStudio Console
 }
@@ -50,7 +54,7 @@ the following to your \file{~/.Rprofile} startup file:
 if (requireNamespace("rstudioapi", quietly = TRUE) && rstudioapi::isAvailable()) {
 
   handlers("rstudio")
-  with_progress({ y <- slow_sum(1:10) })
+  with_progress({ y <- slow_sum_p(1:10) })
   print(y)
   
 }
