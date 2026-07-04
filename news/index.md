@@ -1,6 +1,8 @@
 # Changelog
 
-## Version (development version)
+## Version 1.0.0
+
+CRAN release: 2026-07-04
 
 ### Significant Changes
 
@@ -321,7 +323,7 @@ CRAN release: 2022-12-13
   now disables the global progress handler temporarily while running.
 
 - The `pbmclapply()` handler went from 0 to 100% in one step, because we
-  forgot to set the `max`:imum value.
+  forgot to set the maximum value.
 
 ## Version 0.11.0
 

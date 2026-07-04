@@ -1,6 +1,6 @@
 # progressr: Appendix
 
-## How tos
+## How-tos
 
 ### Report on progress in non-interactive mode (“batch mode”)
 
@@ -161,7 +161,7 @@ options(cli.num_colors = cli::num_ansi_colors())
 This will force **cli** to use the same number of colors with and
 without an active progressor.
 
-The same happens when using the superseeded
+The same happens when using the superseded
 **[crayon](https://cran.r-project.org/package=crayon)** package for
 colorization. To re-enable coloring for **crayon**, set the same (sic!)
 above R options.

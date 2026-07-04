@@ -11,13 +11,12 @@ Source:
 [`DESCRIPTION`](https://github.com/futureverse/progressr/blob/HEAD/DESCRIPTION)
 
 Bengtsson H (2026). *progressr: An Inclusive, Unifying API for Progress
-Updates*. R package version 0.19.0-9102,
-<https://progressr.futureverse.org>.
+Updates*. R package version 1.0.0, <https://progressr.futureverse.org>.
 
     @Manual{,
       title = {progressr: An Inclusive, Unifying API for Progress Updates},
       author = {Henrik Bengtsson},
       year = {2026},
-      note = {R package version 0.19.0-9102},
+      note = {R package version 1.0.0},
       url = {https://progressr.futureverse.org},
     }

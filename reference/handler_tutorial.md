@@ -42,7 +42,7 @@ condition as its first and only argument.
 
 The default is to use the progress package. Contrary to the cli package,
 the progress package has the capacity to display *all* progress updates,
-even when recieving progress updates at a high rate from, for example,
+even when receiving progress updates at a high rate from, for example,
 parallel processing.
 
 ## Examples
