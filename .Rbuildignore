@@ -5,8 +5,6 @@
 ^revdep/
 ^INSTALL[.]md$
 ^OVERVIEW[.]md$
-^CONDUCT[.]md$
-^CONTRIBUTING[.]md$
 ^README.*[.]md$
 ^Makefile$
 ^.*[.]tar[.]gz$
