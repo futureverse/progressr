@@ -10,3 +10,4 @@
 ^.*[.]tar[.]gz$
 ^[.]pre-commit-config.yaml$
 ^LICENSE\.md$
+^CITATION\.cff$
