@@ -1,6 +1,13 @@
 # Version (development version)
 
- * ...
+## New Features
+
+ * `handlers()` now supports specifying progression handlers as
+   comma-separated strings, e.g. `handlers("cli,beepr")`.
+
+ * `handlers()` now supports specifying a list mixed with names of
+   progression handlers and explicit handler functions,
+   e.g. `handlers(list("cli,debug", handler_beepr()))`.
 
 
 # Version 1.0.0 [2026-07-03]

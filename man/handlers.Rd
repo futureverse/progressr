@@ -28,10 +28,9 @@ are set.}
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
 otherwise FALSE.}
 
-\item{\ldots}{One or more progression handlers.  Alternatively, this
-function also accepts a single vector of progression handlers as input.
-If this vector is empty, then an empty set of progression handlers will
-be set.}
+\item{\ldots}{One or more progression handlers, specified as functions,
+handler names (character strings), or a mix of such. Strings may hold
+comma-separated handler names.}
 }
 \value{
 (invisibly) the previous list of progression handlers set.

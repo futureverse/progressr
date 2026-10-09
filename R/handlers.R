@@ -1,9 +1,8 @@
 #' Control How Progress is Reported
 #'
-#' @param \ldots One or more progression handlers.  Alternatively, this
-#' function also accepts a single vector of progression handlers as input.
-#' If this vector is empty, then an empty set of progression handlers will
-#' be set.
+#' @param \ldots One or more progression handlers, specified as functions,
+#' handler names (character strings), or a mix of such. Strings may hold
+#' comma-separated handler names.
 #'
 #' @param append (logical) If FALSE, the specified progression handlers
 #' replace the current ones, otherwise they are appended to them.
@@ -99,14 +98,38 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
   }
 
   on_missing <- match.arg(on_missing)
-  
+
   ## Was a list specified?
   if (nargs == 1L && is.vector(args[[1]])) {
     args <- args[[1]]
   }
 
+  ## Expand comma-separated handler names into separate elements, e.g.
+  ## "cli,beepr" becomes c("cli", "beepr")
+  orig_names <- names(args)
+  expanded <- list()
+  expanded_names <- if (!is.null(orig_names)) character(0) else NULL
+  for (kk in seq_along(args)) {
+    arg <- args[[kk]]
+    if (is.character(arg) && length(arg) == 1L && grepl(",", arg, fixed = TRUE)) {
+      parts <- trim(strsplit(arg, split = ",", fixed = TRUE)[[1]])
+      parts <- parts[nzchar(parts)]
+      expanded <- c(expanded, as.list(parts))
+      if (!is.null(expanded_names)) {
+        expanded_names <- c(expanded_names, rep("", times = length(parts)))
+      }
+    } else {
+      expanded <- c(expanded, list(arg))
+      if (!is.null(expanded_names)) {
+        expanded_names <- c(expanded_names, orig_names[kk])
+      }
+    }
+  }
+  args <- expanded
+  if (!is.null(expanded_names)) names(args) <- expanded_names
+
   handlers <- list()
-  
+
   names <- names(args)
   for (kk in seq_along(args)) {
     handler <- args[[kk]]

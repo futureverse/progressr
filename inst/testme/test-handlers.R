@@ -63,6 +63,14 @@ if (getRversion() >= "4.0.0") {
   handlers(global = TRUE)
   handlers("txtprogressbar", global = FALSE)
   stopifnot(handlers(global = NA) == FALSE)
+
+  ## Comma-separated handler names combined with global = TRUE
+  handlers("cli,txtprogressbar", global = TRUE)
+  hs <- handlers()
+  stopifnot(is.list(hs), length(hs) == 2L,
+            identical(hs[[1]], handler_cli), identical(hs[[2]], handler_txtprogressbar))
+  stopifnot(handlers(global = NA) == TRUE)
+  handlers(global = FALSE)
 }
 message("handlers(..., global = TRUE) ... DONE")
 
