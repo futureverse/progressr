@@ -30,6 +30,9 @@ patch_rstudio_console_evidence <- function() {
 
   ## RStudio?
   if (Sys.getenv("RSTUDIO") == "1") {
+    ## Affected RStudio versions require R (>= 4.0.0)
+    if (getRversion() < "4.0.0") return(res)
+
     ## Not RStudio Terminal, i.e. RStudio Console?
     if (!nzchar(Sys.getenv("RSTUDIO_TERM"))) {
       res["console"] <- TRUE
