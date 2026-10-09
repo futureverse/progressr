@@ -9,6 +9,11 @@
    progression handlers and explicit handler functions,
    e.g. `handlers(list("cli,debug", handler_beepr()))`.
 
+ * `handlers()` now always parses, expands, and incorporates the
+   progression handlers specified by R option `progressr.handlers`. As
+   a side effect, unknown handlers are reported on sooner, if
+   `handlers()` is called.
+
 
 # Version 1.0.0 [2026-07-03]
 

@@ -86,8 +86,19 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
   if (nargs == 0L) {
     ## Get the current set of progression handlers?
     if (is.null(global)) {
-      if (!is.list(default) && !is.null(default)) default <- list(default)
-      return(getOption("progressr.handlers", default))
+      ## Parse and expand R option 'progressr.handlers', if set
+      value <- getOption("progressr.handlers", default)
+      if (is.character(value)) {
+        if (any(nzchar(trim(value)))) {
+          handlers(value, on_missing = on_missing)
+        } else {
+          options(progressr.handlers = list())
+        }
+        value <- getOption("progressr.handlers", default)
+      }
+      ## Always return a list
+      if (!is.list(value) && !is.null(value)) value <- list(value)
+      return(value)
     }
 
     ## Check, register, or reset global calling handlers?
@@ -95,6 +106,11 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
       return(register_global_progression_handler(action = "query"))
     }
     action <- if (isTRUE(global)) "add" else "remove"
+    if (action == "add") {
+      ## Resolve R option 'progressr.handlers' with strings into progression
+      ## handler functions. This also asserts they exist.
+      handlers(on_missing = on_missing)
+    }
     return(invisible(register_global_progression_handler(action = action)))
   }
 

@@ -12,8 +12,11 @@
 #'
 #' \describe{
 #'   \item{\option{progressr.handlers}:}{
-#'     (function or list of functions)
-#'     Zero or more progression handlers that will report on any progression updates.  If empty list, progress updates are ignored.  If NULL, the default (`handler_txtprogressbar`) progression handlers is used.  The recommended way to set this option is via [progressr::handlers()]. (Default: NULL)
+#'     (function, list of functions, or one or more handler names)
+#'     Zero or more progression handlers that will report on any progression updates. The R option value is parsed, expanded,
+#'     and validated by [progressr::handlers()]. If an empty list, progress updates are ignored. If NULL, the default
+#'     (`handler_txtprogressbar`) progression handlers is used. The recommended way to set this option is via
+#'     [progressr::handlers()]. (Default: NULL)
 #'   }
 #' }
 #'
