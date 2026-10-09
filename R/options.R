@@ -128,6 +128,9 @@
 #' \option{progressr.enable} is set to `TRUE` (logical).
 #' For example, if `R_PROGRESSR_ENABLE_AFTER = "2.0"`, then option
 #' \option{progressr.enable_after} is set to `2.0` (numeric).
+#' Environment variable \env{R_PROGRESSR_HANDLERS} sets option
+#' \option{progressr.handlers}, e.g.
+#' `R_PROGRESSR_HANDLERS="cli,beepr"`.
 #'
 #' @seealso
 #' To set \R options when \R starts (even before the \pkg{progressr} package is loaded), see the \link[base]{Startup} help page.  The \href{https://cran.r-project.org/package=startup}{\pkg{startup}} package provides a friendly mechanism for configuring \R at startup.
@@ -251,6 +254,8 @@ update_package_option <- function(name, mode = "character", default = NULL, pack
 
 ## Set package options based on environment variables
 update_package_options <- function(debug = FALSE) {
+  update_package_option("handlers", mode = "character", debug = debug)
+
   update_package_option("demo.delay", mode = "numeric", debug = debug)
   update_package_option("demo.stdout", mode = "logical", debug = debug)
   update_package_option("demo.message", mode = "logical", debug = debug)

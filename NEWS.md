@@ -14,6 +14,9 @@
    a side effect, unknown handlers are reported on sooner, if
    `handlers()` is called.
 
+ * Add support for environment variable `R_PROGRESSR_HANDLERS` to set
+   R option `progressr.handlers` when package is loaded.
+
 
 # Version 1.0.0 [2026-07-03]
 

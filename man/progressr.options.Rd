@@ -162,6 +162,9 @@ For example, if \code{R_PROGRESSR_ENABLE = "true"}, then option
 \option{progressr.enable} is set to \code{TRUE} (logical).
 For example, if \code{R_PROGRESSR_ENABLE_AFTER = "2.0"}, then option
 \option{progressr.enable_after} is set to \code{2.0} (numeric).
+Environment variable \env{R_PROGRESSR_HANDLERS} sets option
+\option{progressr.handlers}, e.g.
+\code{R_PROGRESSR_HANDLERS="cli,beepr"}.
 }
 
 \seealso{
