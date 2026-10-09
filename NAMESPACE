@@ -40,11 +40,13 @@ export(withProgressShiny)
 export(with_progress)
 export(without_progress)
 importFrom(digest,digest)
-importFrom(utils,capture.output)
-importFrom(utils,file_test)
-importFrom(utils,flush.console)
-importFrom(utils,object.size)
-importFrom(utils,packageVersion)
-importFrom(utils,setTxtProgressBar)
-importFrom(utils,str)
-importFrom(utils,txtProgressBar)
+importFrom(utils,
+  capture.output,
+  file_test,
+  flush.console,
+  object.size,
+  packageVersion,
+  setTxtProgressBar,
+  str,
+  txtProgressBar
+)
