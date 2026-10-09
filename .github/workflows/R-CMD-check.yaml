@@ -71,11 +71,17 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      ## 'commonmark' and 'base64enc' are listed explicitly because the
+      ## 'r: 3.6' row below uses 'dependencies: "hard"', which excludes
+      ## Suggests - but they're still needed to build the vignettes via
+      ## our own 'VignetteBuilder: progressr'.
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
             any::rcmdcheck
             any::remotes
+            any::commonmark
+            any::base64enc
           dependencies: ${{ matrix.config.dependencies || '"all"' }}
           needs: check
 
