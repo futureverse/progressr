@@ -38,19 +38,17 @@ for adding up the values in a vector. It is so slow, that we like to
 provide progress updates to whoever might be interested in it. With the
 **progressr** package, this can be done as:
 
-``` r
-
-slow_sum_p <- function(x) {
-  p <- progressr::progressor(along = x)
-  sum <- 0
-  for (kk in seq_along(x)) {
-    Sys.sleep(0.1)
-    sum <- sum + x[kk]
-    p(message = sprintf("Adding %g", x[kk]))
-  }
-  sum
-}
-```
+\
+`slow_sum_p`` ``<-`` ``function``(``x``)`` ``{`\
+`  ``p`` ``<-`` ``progressr``::`[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``x``)`\
+`  ``sum`` ``<-`` ``0`\
+`  ``for`` ``(``kk`` ``in`` `[`seq_along`](https://rdrr.io/r/base/seq.html)`(``x``)``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    ``sum`` ``<-`` ``sum`` ``+`` ``x``[``kk``]`\
+`    ``p``(``message ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Adding %g"``, ``x``[``kk``]``)``)`\
+`  ``}`\
+`  ``sum`\
+`}`
 
 Note how there are *no* arguments (e.g. `.progress = TRUE`) in the code
 that specify how progress is presented. This is by design and because
@@ -108,10 +106,8 @@ Unicode. There are many other ways to report on progress, including
 visually, auditory, and via notification systems. You can also use a mix
 of these, e.g.
 
-``` r
-
-handlers(c("cli", "beepr", "ntfy"))
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`c`](https://rdrr.io/r/base/c.html)`(``"cli"``, ``"beepr"``, ``"ntfy"``)``)`
 
 See the ‘Customizing How Progress is Reported’ vignette for examples.
 
@@ -178,18 +174,16 @@ In contrast to other progress-bar frameworks, output from
 interfere with progress reported via **progressr**. For example, say we
 have:
 
-``` r
-
-slow_sqrt_p <- function(xs) {
-  p <- progressor(along = xs)
-  lapply(xs, function(x) {
-    message("Calculating the square root of ", x)
-    Sys.sleep(2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  })
-}
-```
+\
+`slow_sqrt_p`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``)`` ``{`\
+`    `[`message`](https://rdrr.io/r/base/message.html)`(``"Calculating the square root of "``, ``x``)`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``2``)`\
+`    ``p``(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`\
+`}`
 
 we will get:
 
@@ -228,20 +222,18 @@ up together with other terminal output. This can be done by adding class
 attribute `"sticky"` to the progression signaled. This works for several
 progress handlers that output to the terminal. For example, with:
 
-``` r
-
-slow_sum_p <- function(x) {
-  p <- progressr::progressor(along = x)
-  sum <- 0
-  for (kk in seq_along(x)) {
-    Sys.sleep(0.1)
-    sum <- sum + x[kk]
-    p(sprintf("Step %d", kk), class = if (kk %% 5 == 0) "sticky", amount = 0)
-    p(message = sprintf("Adding %g", x[kk]))
-  }
-  sum
-}
-```
+\
+`slow_sum_p`` ``<-`` ``function``(``x``)`` ``{`\
+`  ``p`` ``<-`` ``progressr``::`[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``x``)`\
+`  ``sum`` ``<-`` ``0`\
+`  ``for`` ``(``kk`` ``in`` `[`seq_along`](https://rdrr.io/r/base/seq.html)`(``x``)``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    ``sum`` ``<-`` ``sum`` ``+`` ``x``[``kk``]`\
+`    ``p``(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Step %d"``, ``kk``)``, class ``=`` ``if`` ``(``kk`` `[`%%`](https://rdrr.io/r/base/Arithmetic.html)` ``5`` ``==`` ``0``)`` ``"sticky"``, amount ``=`` ``0``)`\
+`    ``p``(``message ``=`` `[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"Adding %g"``, ``x``[``kk``]``)``)`\
+`  ``}`\
+`  ``sum`\
+`}`
 
 we get
 
@@ -269,20 +261,16 @@ R package progressr is available on
 [CRAN](https://cran.r-project.org/package=progressr) and can be
 installed in R as:
 
-``` r
-
-install.packages("progressr")
-```
+\
+[`install.packages`](https://rdrr.io/r/utils/install.packages.html)`(``"progressr"``)`
 
 ### Pre-release version
 
 To install the pre-release version that is available in Git branch
 `develop` on GitHub, use:
 
-``` r
-
-remotes::install_github("futureverse/progressr", ref="develop")
-```
+\
+`remotes``::`[`install_github`](https://remotes.r-lib.org/reference/install_github.html)`(``"futureverse/progressr"``, ref``=``"develop"``)`
 
 This will install the package from source.
 

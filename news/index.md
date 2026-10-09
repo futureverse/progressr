@@ -2,7 +2,26 @@
 
 ## Version (development version)
 
-- …
+### New Features
+
+- [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+  now supports specifying progression handlers as comma-separated
+  strings, e.g. `handlers("cli,beepr")`.
+
+- [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+  now supports specifying a list mixed with names of progression
+  handlers and explicit handler functions,
+  e.g. `handlers(list("cli,debug", handler_beepr()))`.
+
+- [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+  now always parses, expands, and incorporates the progression handlers
+  specified by R option `progressr.handlers`. As a side effect, unknown
+  handlers are reported on sooner, if
+  [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+  is called.
+
+- Add support for environment variable `R_PROGRESSR_HANDLERS` to set R
+  option `progressr.handlers` when package is loaded.
 
 ## Version 1.0.0
 
@@ -187,7 +206,7 @@ CRAN release: 2024-10-29
 - [`withProgressShiny()`](https://progressr.futureverse.org/reference/withProgressShiny.md)
   could produce an \`if (config\$max_steps ==
 
-  0.  : … argument is of length zero\` error.
+  0\) : … argument is of length zero\` error.
 
 - `handlers(new_handlers)` would return `NULL`, instead of
   [`list()`](https://rdrr.io/r/base/list.html), if there were no prior

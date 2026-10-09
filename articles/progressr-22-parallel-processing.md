@@ -7,26 +7,24 @@ processing using **[futureverse](https://www.futureverse.org)**, and it
 will also provide near-live progress updates while the parallel
 processing is still running. For example,
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressr::progressor(along = xs)
-  lapply(xs, function(x, ...) {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }) |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` ``progressr``::`[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``, ``...``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 Alternatively, we can use
 [`progressify()`](https://progressify.futureverse.org/reference/progressify.html)
@@ -34,24 +32,22 @@ from the **[progressify](https://progressify.futureverse.org)** package
 to automatically add progress reporting without modifying the function’s
 internal code:
 
-``` r
-
-library(progressify)
-handlers("progress", global = TRUE)
-
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  lapply(xs, function(x, ...) {
-    Sys.sleep((10.0-x)/2)
-    sqrt(x)
-  }) |> progressify() |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40%
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressify`](https://progressify.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``, ``...``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`` ``|>`` `[`progressify`](https://progressify.futureverse.org/reference/progressify.html)`(``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40%`
 
 ## Introduction
 
@@ -66,8 +62,7 @@ supports common map-reduce and iteration functions like
 [`lapply()`](https://rdrr.io/r/base/lapply.html),
 [`purrr::map()`](https://purrr.tidyverse.org/reference/map.html),
 [`foreach()`](https://rdrr.io/pkg/foreach/man/foreach.html),
-[`bplapply()`](https://rdrr.io/pkg/BiocParallel/man/bplapply.html), and
-[`llply()`](https://rdrr.io/pkg/plyr/man/llply.html).
+`bplapply()`, and [`llply()`](https://rdrr.io/pkg/plyr/man/llply.html).
 
 Traditional parallelization packages such as
 **[future.apply](https://future.apply.futureverse.org)**,
@@ -93,26 +88,24 @@ parallelize a standard [`lapply()`](https://rdrr.io/r/base/lapply.html)
 call on the local machine while at the same time signaling progression
 updates:
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  lapply(xs, function(x, ...) {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }) |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``, ``...``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 Note that using `future_lapply()` of the
 **[future.apply](https://future.apply.futureverse.org)** package is
@@ -130,27 +123,25 @@ parallelize a standard sequential `%do%` loop while reporting on
 progress. This example parallelizes on the local machine; it works also
 for remote machines:
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(foreach)
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  foreach(x = xs) %do% {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  } |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`foreach`](https://github.com/RevolutionAnalytics/foreach)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`foreach`](https://rdrr.io/pkg/foreach/man/foreach.html)`(``x ``=`` ``xs``)`` `[`%do%`](https://rdrr.io/pkg/foreach/man/foreach.html)` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 Note that using the `%dofuture%` operator of the
 **[doFuture](https://doFuture.futureverse.org)** package, or traditional
@@ -158,27 +149,25 @@ Note that using the `%dofuture%` operator of the
 [`registerDoFuture()`](https://doFuture.futureverse.org/reference/registerDoFuture.html),
 is still supported. For example:
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(doFuture)
-registerDoFuture()      ## %dopar% parallelizes via future
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  foreach(x = xs) %dopar% {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`doFuture`](https://doFuture.futureverse.org)`)`\
+[`registerDoFuture`](https://doFuture.futureverse.org/reference/registerDoFuture.html)`(``)``      ``## %dopar% parallelizes via future`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`foreach`](https://rdrr.io/pkg/foreach/man/foreach.html)`(``x ``=`` ``xs``)`` `[`%dopar%`](https://rdrr.io/pkg/foreach/man/foreach.html)` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 ### purrr::map() with futurize()
 
@@ -188,26 +177,24 @@ Here is an example that uses
 to parallelize on the local machine while at the same time signaling
 progression updates:
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  purrr::map(xs, function(x) {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }) |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  ``purrr``::`[`map`](https://purrr.tidyverse.org/reference/map.html)`(``xs``, ``function``(``x``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 *Note:* Using `future_map()` of the
 **[furrr](https://furrr.futureverse.org)** package is still supported.
@@ -219,36 +206,32 @@ errors on non-supported backends, I recommend to stop using
 
 ### BiocParallel::bplapply() with futurize()
 
-Here is an example that uses
-[`bplapply()`](https://rdrr.io/pkg/BiocParallel/man/bplapply.html) of
-the
+Here is an example that uses `bplapply()` of the
 **[BiocParallel](https://www.bioconductor.org/packages/BiocParallel/)**
 package and
 [`futurize()`](https://futurize.futureverse.org/reference/futurize.html)
 to parallelize on the local machine while at the same time signaling
 progression updates:
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(BiocParallel)
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  bplapply(xs, function(x) {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }) |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(``BiocParallel``)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  ``bplapply``(``xs``, ``function``(``x``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 ### plyr::llply() with futurize()
 
@@ -259,27 +242,25 @@ Here is an example that uses
 to parallelize on the local machine while at the same time signaling
 progression updates:
 
-``` r
-
-library(progressr)
-handlers("progress", global = TRUE)
-
-library(plyr)
-library(futurize)
-plan(multisession, workers = 2)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  llply(xs, function(x, ...) {
-    Sys.sleep((10.0-x)/2)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }) |> futurize()
-}
-
-y <- my_fcn(1:10)
-# / [================>-----------------------------]  40% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`plyr`](http://had.co.nz/plyr)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`futurize`](https://futurize.futureverse.org)`)`\
+[`plan`](https://future.futureverse.org/reference/plan.html)`(``multisession``, workers ``=`` ``2``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``function``(``x``, ``...``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``(``10.0``-``x``)``/``2``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`` ``|>`` `[`futurize`](https://futurize.futureverse.org/reference/futurize.html)`(``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`# / [================>-----------------------------]  40% x=2`
 
 *Note:* As an alternative to the above, recommended approach, one can
 use `.progress = "progressr"` together with `.parallel = TRUE` and the

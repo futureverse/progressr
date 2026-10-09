@@ -8,34 +8,28 @@ of code chunks processed thus far using a progress bar. We can use
 progress reporting. To have **knitr** report on progress via
 **progressr**, set R option `knitr.progress.fun` as:
 
-``` r
-
-options(knitr.progress.fun = function(total, labels) {
-  p <- progressr::progressor(total, on_exit = FALSE)
-  list(
-    update = function(i) p(sprintf("chunk: %s", labels[i])),
-    done = function() p(type = "finish")
-  )
-})
-```
+\
+[`options`](https://rdrr.io/r/base/options.html)`(``knitr.progress.fun ``=`` ``function``(``total``, ``labels``)`` ``{`\
+`  ``p`` ``<-`` ``progressr``::`[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``total``, on_exit ``=`` ``FALSE``)`\
+`  `[`list`](https://rdrr.io/r/base/list.html)`(`\
+`    update ``=`` ``function``(``i``)`` `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"chunk: %s"``, ``labels``[``i``]``)``)``,`\
+`    done ``=`` ``function``(``)`` `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(``type ``=`` ``"finish"``)`\
+`  ``)`\
+`}``)`
 
 That’s it! With the above `knitr.progress.fun` option set, try to knit a
 document, e.g.
 
-``` r
-
-progressr::handlers(global = TRUE)
-infile <- system.file("examples", "knitr-minimal.Rnw", package = "knitr")
-outfile <- knitr::knit(infile)
-```
+\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+`infile`` ``<-`` `[`system.file`](https://rdrr.io/r/base/system.file.html)`(``"examples"``, ``"knitr-minimal.Rnw"``, package ``=`` ``"knitr"``)`\
+`outfile`` ``<-`` ``knitr``::`[`knit`](https://rdrr.io/pkg/knitr/man/knit.html)`(``infile``)`
 
 To customize the progress bar, try for instance:
 
-``` r
-
-options(crayon.enabled = TRUE)  ## force use of colors
-progressr::handlers("pbcol", global = TRUE)
-```
+\
+[`options`](https://rdrr.io/r/base/options.html)`(``crayon.enabled ``=`` ``TRUE``)``  ``## force use of colors`\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"pbcol"``, global ``=`` ``TRUE``)`
 
 This will produce a colored progress bar in the terminal.
 
@@ -43,10 +37,8 @@ This will produce a colored progress bar in the terminal.
 see the progress updates, you can add the “slowdown” handler to slow
 down the knitting process, e.g.
 
-``` r
-
-progressr::handlers(c("pbcol", "slowdown"))
-```
+\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`c`](https://rdrr.io/r/base/c.html)`(``"pbcol"``, ``"slowdown"``)``)`
 
 This will cause the overall process to take at least ten seconds
 (default).
@@ -54,15 +46,13 @@ This will cause the overall process to take at least ten seconds
 To make **knitr** report via **progressr** in all your R session, set
 the above R option in your `~/.Rprofile` startup file, e.g.
 
-``` r
-
-if (requireNamespace("progressr", quietly = TRUE)) {
-  options(knitr.progress.fun = function(total, labels) {
-    p <- progressr::progressor(total, on_exit = FALSE)
-    list(
-      update = function(i) p(sprintf("chunk: %s", labels[i])),
-      done = function() p(type = "finish")
-    )
-  })
-}
-```
+\
+`if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"progressr"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`  `[`options`](https://rdrr.io/r/base/options.html)`(``knitr.progress.fun ``=`` ``function``(``total``, ``labels``)`` ``{`\
+`    ``p`` ``<-`` ``progressr``::`[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``total``, on_exit ``=`` ``FALSE``)`\
+`    `[`list`](https://rdrr.io/r/base/list.html)`(`\
+`      update ``=`` ``function``(``i``)`` `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"chunk: %s"``, ``labels``[``i``]``)``)``,`\
+`      done ``=`` ``function``(``)`` `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(``type ``=`` ``"finish"``)`\
+`    ``)`\
+`  ``}``)`\
+`}`

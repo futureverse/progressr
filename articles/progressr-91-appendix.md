@@ -99,19 +99,17 @@ e.g. in the top-level of a script. It can only be created inside a
 function, within `with_progress({ ... })`, `local({ ... })`, or a
 similar construct. For example, the following:
 
-``` r
-
-library(progressr)
-handlers(global = TRUE)
-
-xs <- 1:5
-p <- progressor(along = xs)
-y <- lapply(xs, function(x) {
-  Sys.sleep(0.1)
-  p(sprintf("x=%g", x))
-  sqrt(x)
-})
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``5`\
+`p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`y`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``)`` ``{`\
+`  `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`  `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`  `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`}``)`
 
 results in an error if tried:
 
@@ -124,22 +122,20 @@ results in an error if tried:
 The solution is to wrap it in a `local({ ... })` call, or more
 explicitly, in a `with_progress({ ... })` call:
 
-``` r
-
-library(progressr)
-handlers(global = TRUE)
-
-xs <- 1:5
-with_progress({
-  p <- progressor(along = xs)
-  y <- lapply(xs, function(x) {
-    Sys.sleep(0.1)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  })
-})
-#  |====================                               |  40%
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`xs`` ``<-`` ``1``:``5`\
+[`with_progress`](https://progressr.futureverse.org/reference/with_progress.md)`(``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  ``y`` ``<-`` `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`\
+`}``)`\
+`#  |====================                               |  40%`
 
 The main reason for this is to limit the lifespan of each progressor. If
 we created it in the global environment, there is a significant risk it
@@ -153,10 +149,8 @@ e.g. `message(cli::col_blue("hey"))`. However, **cli** disables such
 coloring by default when there is an active progressor. The workaround
 is to set **cli** option `cli.num_colors` to:
 
-``` r
-
-options(cli.num_colors = cli::num_ansi_colors())
-```
+\
+[`options`](https://rdrr.io/r/base/options.html)`(``cli.num_colors ``=`` ``cli``::`[`num_ansi_colors`](https://cli.r-lib.org/reference/num_ansi_colors.html)`(``)``)`
 
 This will force **cli** to use the same number of colors with and
 without an active progressor.
@@ -177,38 +171,34 @@ which these packages consider to be mono-color only.
 Setting the global progressr handler in `~/.Rprofile` does *not* work in
 RStudio 2025.09:
 
-``` r
-
-if (requireNamespace("progressr", quietly = TRUE)) {
-  progressr::handlers(global = TRUE)
-}
-```
+\
+`if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"progressr"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`  ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+`}`
 
 This is due to a [bug introduced in RStudio
 2025.09](https://github.com/rstudio/rstudio/issues/16331), which has
 been fixed for the next release RStudio 2025.11. If you are using
 RStudio 2025.09, the workaround is to instead use:
 
-``` r
-
-if (requireNamespace("progressr", quietly = TRUE)) {
-  progressr::handlers(global = TRUE)
-
-  ## Workaround for RStudio 2025.09 console bug #16331
-  if (nzchar(Sys.getenv("RSTUDIO")) && !nzchar(Sys.getenv("RSTUDIO_TERM"))) {
-    invisible(addTaskCallback(function(...) {
-      ver <- RStudio.Version()$version
-      if (ver >= "2025.09" && ver < "2025.11") {
-        message("Workaround for RStudio 2025.09 bug #16331: Added progressr global handler")
-        progressr::handlers(global = TRUE)
-      } else {
-        warning("Workaround for RStudio 2025.09 bug #16331: Not needed in RStudio v", ver, ". Please remove task callback 'rstudio::progressr::once' in your Rprofile startup file", call. = FALSE, immediate. = TRUE)
-      }
-      removeTaskCallback("rstudio::progressr::once")
-    }, name = "rstudio::progressr::once"))
-  }
-}
-```
+\
+`if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"progressr"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`  ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`  ``## Workaround for RStudio 2025.09 console bug #16331`\
+`  ``if`` ``(`[`nzchar`](https://rdrr.io/r/base/nchar.html)`(`[`Sys.getenv`](https://rdrr.io/r/base/Sys.getenv.html)`(``"RSTUDIO"``)``)`` ``&&`` ``!`[`nzchar`](https://rdrr.io/r/base/nchar.html)`(`[`Sys.getenv`](https://rdrr.io/r/base/Sys.getenv.html)`(``"RSTUDIO_TERM"``)``)``)`` ``{`\
+`    `[`invisible`](https://rdrr.io/r/base/invisible.html)`(`[`addTaskCallback`](https://rdrr.io/r/base/taskCallback.html)`(``function``(``...``)`` ``{`\
+`      ``ver`` ``<-`` ``RStudio.Version``(``)``$``version`\
+`      ``if`` ``(``ver`` ``>=`` ``"2025.09"`` ``&&`` ``ver`` ``<`` ``"2025.11"``)`` ``{`\
+`        `[`message`](https://rdrr.io/r/base/message.html)`(``"Workaround for RStudio 2025.09 bug #16331: Added progressr global handler"``)`\
+`        ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+`      ``}`` ``else`` ``{`\
+`        `[`warning`](https://rdrr.io/r/base/warning.html)`(``"Workaround for RStudio 2025.09 bug #16331: Not needed in RStudio v"``, ``ver``, ``". Please remove task callback 'rstudio::progressr::once' in your Rprofile startup file"``, call. ``=`` ``FALSE``, immediate. ``=`` ``TRUE``)`\
+`      ``}`\
+`      `[`removeTaskCallback`](https://rdrr.io/r/base/taskCallback.html)`(``"rstudio::progressr::once"``)`\
+`    ``}``, name ``=`` ``"rstudio::progressr::once"``)``)`\
+`  ``}`\
+`}`
 
 ### Positron bug \#6892: Setting global progressr handlers during startup does not work
 
@@ -219,50 +209,42 @@ Positron](https://github.com/posit-dev/positron/issues/6892)
 (2025-03-20), which was most recently confirmed with Position 2025.09.0
 on Linux. Because of this, having something like in your `~/.Rprofile`:
 
-``` r
-
-if (requireNamespace("progressr", quietly = TRUE)) {
-  progressr::handlers(global = TRUE)
-}
-```
+\
+`if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"progressr"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`  ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+`}`
 
 will have no effect. If used, the workaround is to manually
 re-registering all calling handlers, which can be done as:
 
-``` r
-
-if (requireNamespace("progressr", quietly = TRUE)) {
-  progressr::handlers(global = TRUE)
-
-  ## Workaround for Positron (>= 2025.09) bug #16331
-  if (nzchar(Sys.getenv("POSITRON"))) local({
-    ver <- numeric_version(Sys.getenv("POSITRON_VERSION"))
-    if (ver >= "2025.09") {
-      message("Workaround for Positron (>= 2025.09) bug #6892: progressr global handler will be installed *after* the next call has been completed")
-      invisible(addTaskCallback(function(...) {
-        message("Workaround for Positron (>= 2025.09) bug #6892: re-installed progressr global handler")
-        globalCallingHandlers(globalCallingHandlers(NULL))
-        removeTaskCallback("positron::progressr::once")
-      }, name = "positron::progressr::once"))
-    }
-  })
-}
-```
+\
+`if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"progressr"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`  ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`  ``## Workaround for Positron (>= 2025.09) bug #16331`\
+`  ``if`` ``(`[`nzchar`](https://rdrr.io/r/base/nchar.html)`(`[`Sys.getenv`](https://rdrr.io/r/base/Sys.getenv.html)`(``"POSITRON"``)``)``)`` `[`local`](https://rdrr.io/r/base/eval.html)`(``{`\
+`    ``ver`` ``<-`` `[`numeric_version`](https://rdrr.io/r/base/numeric_version.html)`(`[`Sys.getenv`](https://rdrr.io/r/base/Sys.getenv.html)`(``"POSITRON_VERSION"``)``)`\
+`    ``if`` ``(``ver`` ``>=`` ``"2025.09"``)`` ``{`\
+`      `[`message`](https://rdrr.io/r/base/message.html)`(``"Workaround for Positron (>= 2025.09) bug #6892: progressr global handler will be installed *after* the next call has been completed"``)`\
+`      `[`invisible`](https://rdrr.io/r/base/invisible.html)`(`[`addTaskCallback`](https://rdrr.io/r/base/taskCallback.html)`(``function``(``...``)`` ``{`\
+`        `[`message`](https://rdrr.io/r/base/message.html)`(``"Workaround for Positron (>= 2025.09) bug #6892: re-installed progressr global handler"``)`\
+`        `[`globalCallingHandlers`](https://rdrr.io/r/base/conditions.html)`(`[`globalCallingHandlers`](https://rdrr.io/r/base/conditions.html)`(``NULL``)``)`\
+`        `[`removeTaskCallback`](https://rdrr.io/r/base/taskCallback.html)`(``"positron::progressr::once"``)`\
+`      ``}``, name ``=`` ``"positron::progressr::once"``)``)`\
+`    ``}`\
+`  ``}``)`\
+`}`
 
 Alternatively, call:
 
-``` r
-
-globalCallingHandlers(globalCallingHandlers(NULL))
-```
+\
+[`globalCallingHandlers`](https://rdrr.io/r/base/conditions.html)`(`[`globalCallingHandlers`](https://rdrr.io/r/base/conditions.html)`(``NULL``)``)`
 
 or
 
-``` r
-
-progressr::handlers(global = FALSE)  ## important
-progressr::handlers(global = TRUE)
-```
+\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``FALSE``)``  ``## important`\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`
 
 at the prompt.
 
@@ -313,41 +295,35 @@ hello stdout
 
 If we try the following
 
-``` r
-
-library(progressr)
-handlers(globals = TRUE)
-handlers("txtprogressbar")
-y <- slow_sum_p(1:20)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``globals ``=`` ``TRUE``)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"txtprogressbar"``)`\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``20``)`
 
 there will be no progress being reported. This is not specific to
 **progressr**, we have the same problem with for instance **cli**. Try
 for instance,
 
-``` r
-
-void <- cli::cli_progress_demo(delay = 1.0)
-```
+\
+`void`` ``<-`` ``cli``::`[`cli_progress_demo`](https://cli.r-lib.org/reference/cli_progress_demo.html)`(``delay ``=`` ``1.0``)`
 
 The workaround is to direct all progress output to the standard output
 (stdout) when working in Jupyter. For this to work, we also need to
 disable the buffering (“delaying”) of any other output to stdout.
 
-``` r
-
-library(progressr)
-handlers(globals = TRUE)
-
-## Workaround for Jupyter
-options(progressr.enable = TRUE, progressr.delay_stdout = FALSE)
-
-## Jupyter requires that progress is rendered to standard output;
-## it does not work with the default standard error
-handlers(handler_txtprogressbar(file = stdout()))
-
-y <- slow_sum_p(1:20)
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``globals ``=`` ``TRUE``)`\
+\
+`## Workaround for Jupyter`\
+[`options`](https://rdrr.io/r/base/options.html)`(``progressr.enable ``=`` ``TRUE``, progressr.delay_stdout ``=`` ``FALSE``)`\
+\
+`## Jupyter requires that progress is rendered to standard output;`\
+`## it does not work with the default standard error`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`handler_txtprogressbar`](https://progressr.futureverse.org/reference/handler_txtprogressbar.md)`(``file ``=`` `[`stdout`](https://rdrr.io/r/base/showConnections.html)`(``)``)``)`\
+\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``20``)`
 
 ### Jupyter bug \#732 - handlers(“progress”) output is messy
 
@@ -404,23 +380,23 @@ currently kept at a very minimum. This will allow for the framework and
 the API to evolve while minimizing the risk for breaking code that
 depends on it. The roadmap for developing the API is roughly:
 
-Provide minimal API for producing progress updates,
-i.e. [`progressor()`](https://progressr.futureverse.org/reference/progressor.md),
-[`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
-[`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
+- [x] Provide minimal API for producing progress updates,
+  i.e. [`progressor()`](https://progressr.futureverse.org/reference/progressor.md),
+  [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
+  [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
 
-Add support for global progress handlers removing the need for the user
-having to specify
-[`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
-i.e. `handlers(global = TRUE)` and `handlers(global = FALSE)`
+- [x] Add support for global progress handlers removing the need for the
+  user having to specify
+  [`with_progress()`](https://progressr.futureverse.org/reference/with_progress.md),
+  i.e. `handlers(global = TRUE)` and `handlers(global = FALSE)`
 
-Make it possible to create a progressor also in the global environment
-(see ‘Known Issues’ above)
+- [ ] Make it possible to create a progressor also in the global
+  environment (see ‘Known Issues’ above)
 
-Add support for nested progress updates
+- [ ] Add support for nested progress updates
 
-Add API to allow users and package developers to design additional
-progression handlers
+- [ ] Add API to allow users and package developers to design additional
+  progression handlers
 
 For a more up-to-date view on what features might be added, see
 <https://github.com/futureverse/progressr/issues>.

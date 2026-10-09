@@ -11,86 +11,78 @@ cases.
 
 ## Base R apply functions
 
-``` r
-
-library(progressr)
-handlers(global = TRUE)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  lapply(xs, function(x) {
-    Sys.sleep(0.1)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  })
-}
-
-y <- my_fcn(1:10)
-#  |====================                               |  40%
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`lapply`](https://rdrr.io/r/base/lapply.html)`(``xs``, ``function``(``x``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`#  |====================                               |  40%`
 
 ## The foreach package
 
-``` r
-
-library(foreach)
-library(progressr)
-handlers(global = TRUE)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  foreach(x = xs) %do% {
-    Sys.sleep(0.1)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  }
-}
-
-y <- my_fcn(1:10)
-#  |====================                               |  40%
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`foreach`](https://github.com/RevolutionAnalytics/foreach)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`foreach`](https://rdrr.io/pkg/foreach/man/foreach.html)`(``x ``=`` ``xs``)`` `[`%do%`](https://rdrr.io/pkg/foreach/man/foreach.html)` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`#  |====================                               |  40%`
 
 ## The purrr package
 
-``` r
-
-library(purrr)
-library(progressr)
-handlers(global = TRUE)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  map(xs, function(x) {
-    Sys.sleep(0.1)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  })
-}
-
-y <- my_fcn(1:10)
-#  |====================                               |  40%
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`purrr`](https://purrr.tidyverse.org/)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`map`](https://purrr.tidyverse.org/reference/map.html)`(``xs``, ``function``(``x``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`#  |====================                               |  40%`
 
 ## The plyr package
 
-``` r
-
-library(plyr)
-library(progressr)
-handlers(global = TRUE)
-
-my_fcn <- function(xs) {
-  p <- progressor(along = xs)
-  llply(xs, function(x, ...) {
-    Sys.sleep(0.1)
-    p(sprintf("x=%g", x))
-    sqrt(x)
-  })
-}
-
-y <- my_fcn(1:10)
-#  |====================                               |  40%
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`plyr`](http://had.co.nz/plyr)`)`\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+\
+`my_fcn`` ``<-`` ``function``(``xs``)`` ``{`\
+`  ``p`` ``<-`` `[`progressor`](https://progressr.futureverse.org/reference/progressor.md)`(``along ``=`` ``xs``)`\
+`  `[`llply`](https://rdrr.io/pkg/plyr/man/llply.html)`(``xs``, ``function``(``x``, ``...``)`` ``{`\
+`    `[`Sys.sleep`](https://rdrr.io/r/base/Sys.sleep.html)`(``0.1``)`\
+`    `[`p`](https://rstudio.github.io/htmltools/reference/builder.html)`(`[`sprintf`](https://rdrr.io/r/base/sprintf.html)`(``"x=%g"``, ``x``)``)`\
+`    `[`sqrt`](https://rdrr.io/r/base/MathFun.html)`(``x``)`\
+`  ``}``)`\
+`}`\
+\
+`y`` ``<-`` ``my_fcn``(``1``:``10``)`\
+`#  |====================                               |  40%`
 
 Note how this solution does not make use of **plyr**’s `.progress`
 argument, because the above solution is more powerful and more flexible,

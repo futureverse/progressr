@@ -21,7 +21,7 @@ WARNING: Note that the names and the default values of these options may change 
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -100,8 +100,11 @@ Below are all <span style="R">R</span> options that are currently used by the <s
 
 
 <dl><dt><span class="option">progressr.handlers</span>:</dt>
-<dd><p>(function or list of functions)
-Zero or more progression handlers that will report on any progression updates.  If empty list, progress updates are ignored.  If NULL, the default (<code>handler_txtprogressbar</code>) progression handlers is used.  The recommended way to set this option is via <code><a href="handlers.html">handlers()</a></code>. (Default: NULL)</p></dd>
+<dd><p>(function, list of functions, or one or more handler names)
+Zero or more progression handlers that will report on any progression updates. The R option value is parsed, expanded,
+and validated by <code><a href="handlers.html">handlers()</a></code>. If an empty list, progress updates are ignored. If NULL, the default
+(<code>handler_txtprogressbar</code>) progression handlers is used. The recommended way to set this option is via
+<code><a href="handlers.html">handlers()</a></code>. (Default: NULL)</p></dd>
 
 
 </dl></div>
@@ -245,7 +248,10 @@ is loaded</em>.
 For example, if <code>R_PROGRESSR_ENABLE = "true"</code>, then option
 <span class="option">progressr.enable</span> is set to <code>TRUE</code> (logical).
 For example, if <code>R_PROGRESSR_ENABLE_AFTER = "2.0"</code>, then option
-<span class="option">progressr.enable_after</span> is set to <code>2.0</code> (numeric).</p>
+<span class="option">progressr.enable_after</span> is set to <code>2.0</code> (numeric).
+Environment variable <code class="env">R_PROGRESSR_HANDLERS</code> sets option
+<span class="option">progressr.handlers</span>, e.g.
+<code>R_PROGRESSR_HANDLERS="cli,beepr"</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,8 +80,14 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
-<ul><li>…</li>
+<div class="section level3">
+<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying progression handlers as comma-separated strings, e.g. <code>handlers("cli,beepr")</code>.</p></li>
+<li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying a list mixed with names of progression handlers and explicit handler functions, e.g. <code>handlers(list("cli,debug", handler_beepr()))</code>.</p></li>
+<li><p><code><a href="../reference/handlers.html">handlers()</a></code> now always parses, expands, and incorporates the progression handlers specified by R option <code>progressr.handlers</code>. As a side effect, unknown handlers are reported on sooner, if <code><a href="../reference/handlers.html">handlers()</a></code> is called.</p></li>
+<li><p>Add support for environment variable <code>R_PROGRESSR_HANDLERS</code> to set R option <code>progressr.handlers</code> when package is loaded.</p></li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.0" id="version-100">Version 1.0.0<a class="anchor" aria-label="anchor" href="#version-100"></a></h2><p class="text-muted">CRAN release: 2026-07-04</p>
 <div class="section level3">
@@ -182,8 +188,8 @@
 <h3 id="bug-fixes-0-15-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-15-0"></a></h3>
 <ul><li>
 <p><code><a href="../reference/withProgressShiny.html">withProgressShiny()</a></code> could produce an `if (config$max_steps ==</p>
-<ol start="0" style="list-style-type: decimal"><li>: … argument is of length zero` error.</li>
-</ol></li>
+<p>0) : … argument is of length zero` error.</p>
+</li>
 <li><p><code>handlers(new_handlers)</code> would return <code>NULL</code>, instead of <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>, if there were no prior handlers set.</p></li>
 <li><p><code>handler_cli(..., format_done = "...", clear = TRUE)</code> would not render the <code>format_done</code> message, if set.</p></li>
 </ul></div>

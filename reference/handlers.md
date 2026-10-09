@@ -40,10 +40,9 @@ handlers(
 
 - ...:
 
-  One or more progression handlers. Alternatively, this function also
-  accepts a single vector of progression handlers as input. If this
-  vector is empty, then an empty set of progression handlers will be
-  set.
+  One or more progression handlers, specified as functions, handler
+  names (character strings), or a mix of such. Strings may hold
+  comma-separated handler names.
 
 ## Value
 

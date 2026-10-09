@@ -18,10 +18,8 @@ SVG animation of the default “txtprogressbar” progress handler
 We can tweak this “txtprogressbar” handler to use red hearts for the
 bar, e.g.
 
-``` r
-
-handlers(handler_txtprogressbar(char = cli::col_red(cli::symbol$heart)))
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`handler_txtprogressbar`](https://progressr.futureverse.org/reference/handler_txtprogressbar.md)`(``char ``=`` ``cli``::`[`col_red`](https://cli.r-lib.org/reference/ansi-styles.html)`(``cli``::`[`symbol`](https://cli.r-lib.org/reference/symbol.html)`$``heart``)``)``)`
 
 which results in:
 
@@ -32,14 +30,12 @@ SVG animation of the “txtprogressbar” progress handler with red hearts
 
 Another example is:
 
-``` r
-
-handlers(handler_pbcol(
-      adjust = 1.0,
-    complete = function(s) cli::bg_red(cli::col_black(s)),
-  incomplete = function(s) cli::bg_cyan(cli::col_black(s))
-))
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`handler_pbcol`](https://progressr.futureverse.org/reference/handler_pbcol.md)`(`\
+`      adjust ``=`` ``1.0``,`\
+`    complete ``=`` ``function``(``s``)`` ``cli``::`[`bg_red`](https://cli.r-lib.org/reference/ansi-styles.html)`(``cli``::`[`col_black`](https://cli.r-lib.org/reference/ansi-styles.html)`(``s``)``)``,`\
+`  incomplete ``=`` ``function``(``s``)`` ``cli``::`[`bg_cyan`](https://cli.r-lib.org/reference/ansi-styles.html)`(``cli``::`[`col_black`](https://cli.r-lib.org/reference/ansi-styles.html)`(``s``)``)`\
+`)``)`
 
 which results in:
 
@@ -52,10 +48,8 @@ right
 To change the default, to, say, `cli_progress_bar()` by the
 **[cli](https://cran.r-project.org/package=cli)** package, set:
 
-``` r
-
-handlers("cli")
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"cli"``)`
 
 This progress handler will present itself as:
 
@@ -68,10 +62,8 @@ To instead use `progress_bar()` by the
 **[progress](https://cran.r-project.org/package=progress)** package,
 set:
 
-``` r
-
-handlers("progress")
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``)`
 
 This progress handler will present itself as:
 
@@ -85,10 +77,8 @@ SVG animation of the default “progress” progress handler
 Progress updates do not have to be presented visually. They can equally
 well be communicated via audio. For example, using:
 
-``` r
-
-handlers("beepr")
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"beepr"``)`
 
 will present itself as sounds played at the beginning, while
 progressing, and at the end (using different
@@ -108,19 +98,15 @@ It is possible to have multiple progress handlers presenting progress
 updates at the same time. For example, to get both visual and auditory
 updates, use:
 
-``` r
-
-handlers("txtprogressbar", "beepr")
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"txtprogressbar"``, ``"beepr"``)`
 
 ## Silence all progress
 
 To silence all progress updates, use:
 
-``` r
-
-handlers("void")
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"void"``)`
 
 ## Further configuration of progress handlers
 
@@ -131,13 +117,11 @@ e.g. `handlers(c("progress", "beepr"))`. This is short for a more
 flexible specification where we can pass a list of handler functions,
 e.g.
 
-``` r
-
-handlers(list(
-  handler_progress(),
-  handler_beepr()
-))
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`list`](https://rdrr.io/r/base/list.html)`(`\
+`  `[`handler_progress`](https://progressr.futureverse.org/reference/handler_progress.md)`(``)``,`\
+`  `[`handler_beepr`](https://progressr.futureverse.org/reference/handler_beepr.md)`(``)`\
+`)``)`
 
 With this construct, we can make adjustments to the default behavior of
 these progress handlers. For example, we can configure the `format`,
@@ -145,20 +129,18 @@ these progress handlers. For example, we can configure the `format`,
 tell **beepr** to use a different `finish` sound and generate sounds at
 most every two seconds by setting:
 
-``` r
-
-handlers(list(
-  handler_progress(
-    format   = ":spin :current/:total (:message) [:bar] :percent in :elapsed ETA: :eta",
-    width    = 60,
-    complete = "+"
-  ),
-  handler_beepr(
-    finish   = "wilhelm",
-    interval = 2.0
-  )
-))
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`list`](https://rdrr.io/r/base/list.html)`(`\
+`  `[`handler_progress`](https://progressr.futureverse.org/reference/handler_progress.md)`(`\
+`    format   ``=`` ``":spin :current/:total (:message) [:bar] :percent in :elapsed ETA: :eta"``,`\
+`    width    ``=`` ``60``,`\
+`    complete ``=`` ``"+"`\
+`  ``)``,`\
+`  `[`handler_beepr`](https://progressr.futureverse.org/reference/handler_beepr.md)`(`\
+`    finish   ``=`` ``"wilhelm"``,`\
+`    interval ``=`` ``2.0`\
+`  ``)`\
+`)``)`
 
 ## Set a default progress handler for all your R sessions
 
@@ -166,13 +148,11 @@ To set the default progress handler, or handlers, in all your R
 sessions, call `progressr::handlers(...)` in your `~/.Rprofile` startup
 file. For example,
 
-``` r
-
-if (requireNamespace("progressr", quietly = TRUE)) {
-  if (requireNamespace("cli", quietly = TRUE)) {
-    progressr::handlers("cli", global = TRUE)
-  } else {
-    progressr::handlers(global = TRUE)
-  }
-}
-```
+\
+`if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"progressr"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`  ``if`` ``(`[`requireNamespace`](https://rdrr.io/r/base/ns-load.html)`(``"cli"``, quietly ``=`` ``TRUE``)``)`` ``{`\
+`    ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"cli"``, global ``=`` ``TRUE``)`\
+`  ``}`` ``else`` ``{`\
+`    ``progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+`  ``}`\
+`}`
