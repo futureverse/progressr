@@ -210,3 +210,15 @@ ansi_pattern <- "(?:(?:\\x{001b}\\[)|\\x{009b})(?:(?:[0-9]{1,3})?(?:(?:;[0-9]{0,
 drop_ansi <- function(x) {
   gsub(ansi_pattern, "", x, perl = TRUE, useBytes = TRUE)
 }
+
+
+## base::tryInvokeRestart() was added in R 4.0.0.
+if (getRversion() < "4.0.0") {
+  tryInvokeRestart <- function(r, ...) {
+    if (is.character(r)) {
+      r <- findRestart(r)
+      if (is.null(r)) return(invisible(NULL))
+    }
+    invokeRestart(r, ...)
+  }
+}
