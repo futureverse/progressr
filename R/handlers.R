@@ -76,9 +76,10 @@
 #' @export
 handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ignore"), default = handler_txtprogressbar, global = NULL) {
   stop_if_not(
-    is.null(global) ||
-    ( is.logical(global) && length(global) == 1L )
+    is.logical(append) && length(append) == 1L && !is.na(append),
+    is.null(global) || (is.logical(global) && length(global) == 1L)
   )
+  on_missing <- match.arg(on_missing)
   args <- list(...)
   nargs <- length(args)
 
@@ -96,8 +97,6 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
     action <- if (isTRUE(global)) "add" else "remove"
     return(invisible(register_global_progression_handler(action = action)))
   }
-
-  on_missing <- match.arg(on_missing)
 
   ## Was a list specified?
   if (nargs == 1L && is.vector(args[[1]])) {
