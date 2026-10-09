@@ -28,7 +28,7 @@ jobs:
           - {os: ubuntu-latest,  r: 'oldrel-1' }
           - {os: ubuntu-latest,  r: 'oldrel-2' }
           - {os: ubuntu-latest,  r: '4.1'      }
-          - {os: ubuntu-latest,  r: '3.6'      }
+          - {os: ubuntu-latest,  r: '3.6'      , dependencies: '"hard"' }
           - {os: ubuntu-latest,  r: 'release'  , language: ko,    label: ko    }
           - {os: ubuntu-latest,  r: 'release'  , language: zh_CN, label: zh_CN }
           - {os: ubuntu-latest,  r: 'release'  , language: zh_TW, label: zh_TW }
@@ -43,10 +43,12 @@ jobs:
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_MATRIX_DATA_: true
       _R_CHECK_THINGS_IN_TEMP_DIR_: true
-      ## 'ntfy', 'purrr', and 'furrr' require R (>= 4.1), which is older
-      ## than our 'r: 3.6' test case. Don't fail R CMD check because of
-      ## that; see the 'extra-packages' entry below for how those
-      ## optional Suggests are skipped on R (< 4.1).
+      ## Several optional Suggests ('ntfy', 'purrr', 'furrr', and,
+      ## transitively via 'shiny', 'rlang'/'glue'/'promises') require
+      ## R (>= 4.0 or 4.1), newer than our 'r: 3.6' test case. For that
+      ## job, only hard dependencies are installed (see the
+      ## 'dependencies' matrix field below), so don't fail R CMD check
+      ## just because Suggests are missing.
       _R_CHECK_FORCE_SUGGESTS_: false
       ## R (>= 4.4.0) Note, no trailing underscore (sic!)
       _R_COMPARE_LANG_OBJECTS: eqonly
@@ -74,9 +76,7 @@ jobs:
           extra-packages: |
             any::rcmdcheck
             any::remotes
-            ntfy=?ignore-before-r=4.1.0
-            purrr=?ignore-before-r=4.1.0
-            furrr=?ignore-before-r=4.1.0
+          dependencies: ${{ matrix.config.dependencies || '"all"' }}
           needs: check
 
       - name: Install itself (to build vignettes)
