@@ -25,7 +25,7 @@
 
 ### Bug Fixes
 
-- Package failed to on R (\< 4.0.0). This was due to a regression
+- Package failed to load on R (\< 4.0.0). This was due to a regression
   introduced in **progressr** 0.16.0 (2025-09-10).
 
 ## Version 1.0.0
