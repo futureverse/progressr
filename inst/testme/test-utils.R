@@ -89,6 +89,44 @@ print(TRUE %||% FALSE)
 
 message("*** %||% ... done")
 
+
+message("*** commaq() ...")
+
+stopifnot(identical(progressr:::commaq(c("a", "b")), paste(sQuote(c("a", "b")), collapse = ", ")))
+stopifnot(identical(progressr:::commaq(c("a", "b"), sep = "; "), paste(sQuote(c("a", "b")), collapse = "; ")))
+
+message("*** commaq() ... done")
+
+
+message("*** is_fork_child() ...")
+
+is_fork_child <- progressr:::is_fork_child
+stopifnot(!is_fork_child())
+
+message("*** is_fork_child() ... done")
+
+
+message("*** stealth_sample.int() ...")
+
+stealth_sample.int <- progressr:::stealth_sample.int
+
+## Case: No '.Random.seed' prior to call
+if (exists(".Random.seed", envir = globalenv(), inherits = FALSE)) {
+  rm(list = ".Random.seed", envir = globalenv())
+}
+res <- stealth_sample.int(100L, size = 1L)
+stopifnot(is.integer(res), length(res) == 1L)
+stopifnot(!exists(".Random.seed", envir = globalenv(), inherits = FALSE))
+
+## Case: An existing '.Random.seed' must be left untouched
+set.seed(42L)
+oseed <- get(".Random.seed", envir = globalenv(), inherits = FALSE)
+res <- stealth_sample.int(100L, size = 1L)
+stopifnot(is.integer(res), length(res) == 1L)
+stopifnot(identical(get(".Random.seed", envir = globalenv(), inherits = FALSE), oseed))
+
+message("*** stealth_sample.int() ... done")
+
 message("*** query_r_cmd_check() ...")
 
 print(query_r_cmd_check())
@@ -113,6 +151,19 @@ message("*** in_r_cmd_check() ... done")
 message("*** .onLoad() ...")
 
 progressr:::.onLoad(pkgname = "progressr")
+
+## Exercise the R_PROGRESSR_DEBUG=TRUE branch
+old_debug_env <- Sys.getenv("R_PROGRESSR_DEBUG", NA_character_)
+old_debug_opt <- getOption("progressr.debug")
+Sys.setenv(R_PROGRESSR_DEBUG = "TRUE")
+progressr:::.onLoad(pkgname = "progressr")
+stopifnot(isTRUE(getOption("progressr.debug")))
+if (is.na(old_debug_env)) {
+  Sys.unsetenv("R_PROGRESSR_DEBUG")
+} else {
+  Sys.setenv(R_PROGRESSR_DEBUG = old_debug_env)
+}
+options(progressr.debug = old_debug_opt)
 
 message("*** .onLoad() ... done")
 
