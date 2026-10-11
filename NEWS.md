@@ -2,6 +2,10 @@
 
 ## New Features
 
+ * Add `handler_callback()` that calls a user-defined hook function on
+   every progression update, e.g. to forward progress to logging, GUIs,
+   or other external systems not natively supported by **progressr**.
+
  * `handlers()` now supports specifying progression handlers as
    comma-separated strings, e.g. `handlers("cli,beepr")`.
 
