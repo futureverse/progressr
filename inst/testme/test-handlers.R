@@ -74,5 +74,52 @@ if (getRversion() >= "4.0.0") {
 }
 message("handlers(..., global = TRUE) ... DONE")
 
+message("handlers() - option value is an all-whitespace string ...")
+
+old <- options(progressr.handlers = "   ")
+res <- handlers()
+stopifnot(is.list(res), length(res) == 0L)
+options(old)
+
+message("handlers() - option value is an all-whitespace string ... done")
+
+
+message("handlers() - named arguments and comma-separated names ...")
+
+handlers(first = "cli,beepr", second = handler_void)
+res <- handlers()
+stopifnot(is.list(res), length(res) == 3L)
+stopifnot(identical(res[[1]], handler_cli))
+stopifnot(identical(res[[2]], handler_beepr))
+stopifnot(identical(res[[3]], handler_void))
+stopifnot(identical(names(res), c("cli", "beepr", "second")))
+
+message("handlers() - named arguments and comma-separated names ... done")
+
+
+message("handlers() - handler with a FALSE validator is dropped ...")
+
+dummy <- function(...) NULL
+attr(dummy, "validator") <- function() FALSE
+handlers(dummy, handler_void, on_missing = "ignore")
+res <- handlers()
+stopifnot(is.list(res), length(res) == 1L)
+stopifnot(identical(res[[1]], handler_void))
+
+message("handlers() - handler with a FALSE validator is dropped ... done")
+
+
+message("handlers() - append = TRUE ...")
+
+handlers(handler_void)
+res <- handlers(handler_debug, append = TRUE)
+stopifnot(is.list(res), length(res) == 1L, identical(res[[1]], handler_void))
+res <- handlers()
+stopifnot(is.list(res), length(res) == 2L,
+          identical(res[[1]], handler_void), identical(res[[2]], handler_debug))
+
+message("handlers() - append = TRUE ... done")
+
+
 message("handlers() ... DONE")
 
