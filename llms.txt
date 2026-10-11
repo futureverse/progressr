@@ -285,6 +285,9 @@ This will install the package from source.
   : Progression Handler: Progress Reported as 'beepr' Sounds (Audio)
 - [`handler_brrr()`](https://progressr.futureverse.org/reference/handler_brrr.md)
   : Progression Handler: Progress Reported as 'BRRR' Sounds (Audio)
+- [`handler_callback()`](https://progressr.futureverse.org/reference/handler_callback.md)
+  : Progression Handler: Progress Reported via a User-Defined Hook
+  Function
 - [`handler_cli()`](https://progressr.futureverse.org/reference/handler_cli.md)
   : Progression Handler: Progress Reported via 'cli' Progress Bars
   (Text) in the Terminal

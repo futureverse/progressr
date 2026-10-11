@@ -82,7 +82,8 @@
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying progression handlers as comma-separated strings, e.g. <code>handlers("cli,beepr")</code>.</p></li>
+<ul><li><p>Add <code><a href="../reference/handler_callback.html">handler_callback()</a></code> that calls a user-defined hook function on every progression update, e.g. to forward progress to logging, GUIs, or other external systems not natively supported by <strong>progressr</strong>.</p></li>
+<li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying progression handlers as comma-separated strings, e.g. <code>handlers("cli,beepr")</code>.</p></li>
 <li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying a list mixed with names of progression handlers and explicit handler functions, e.g. <code>handlers(list("cli,debug", handler_beepr()))</code>.</p></li>
 <li><p><code><a href="../reference/handlers.html">handlers()</a></code> now always parses, expands, and incorporates the progression handlers specified by R option <code>progressr.handlers</code>. As a side effect, unknown handlers are reported on sooner, if <code><a href="../reference/handlers.html">handlers()</a></code> is called.</p></li>
 <li><p>Add support for environment variable <code>R_PROGRESSR_HANDLERS</code> to set R option <code>progressr.handlers</code> when package is loaded.</p></li>

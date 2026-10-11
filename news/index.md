@@ -4,6 +4,12 @@
 
 ### New Features
 
+- Add
+  [`handler_callback()`](https://progressr.futureverse.org/reference/handler_callback.md)
+  that calls a user-defined hook function on every progression update,
+  e.g. to forward progress to logging, GUIs, or other external systems
+  not natively supported by **progressr**.
+
 - [`handlers()`](https://progressr.futureverse.org/reference/handlers.md)
   now supports specifying progression handlers as comma-separated
   strings, e.g. `handlers("cli,beepr")`.
