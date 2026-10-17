@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9008</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +90,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Package failed to load on R (&lt; 4.0.0). This was due to a regression introduced in <strong>progressr</strong> 0.16.0 (2025-09-10).</li>
+<ul><li><p>Package failed to load on R (&lt; 4.0.0). This was due to a regression introduced in <strong>progressr</strong> 0.16.0 (2025-09-10).</p></li>
+<li><p>When using <code>handlers(global = TRUE)</code>, interrupted (e.g. Ctrl-C) progress could produce a noisy warning on spurious “received a progression ‘update’ request …” That is now muffled.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
