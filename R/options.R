@@ -32,7 +32,11 @@
 #'   \item{\option{progressr.enable}:}{
 #'     (logical)
 #'     If FALSE, then progress is not reported.
-#'     (Default: TRUE in interactive mode, otherwise FALSE)
+#'     (Default: TRUE in interactive mode, otherwise FALSE)\cr
+#'     \cr
+#'     This option must be set _before_ setting up calling handlers via
+#'     `handler_nnn()` functions, e.g. `handlers(handler_txtprogressbar())`.
+#'     This is no needed when using `handlers("txtprogressbar")`.
 #'   }
 #'
 #'   \item{\option{progressr.enable_after}:}{
