@@ -41,6 +41,7 @@ export(withProgressShiny)
 export(with_progress)
 export(without_progress)
 importFrom(digest,digest)
+importFrom(tools,md5sum)
 importFrom(utils,
   capture.output,
   file_test,
