@@ -187,7 +187,7 @@ print(slow_sum_p)
 #>     p(amount = 0)
 #>     sum
 #> }
-#> <bytecode: 0x5beb702f62b0>
+#> <bytecode: 0x5ce07faf37e0>
 #> <environment: namespace:progressr>
 
 x <- 1:10

@@ -33,7 +33,11 @@ further notice.*
 - progressr.enable::
 
   (logical) If FALSE, then progress is not reported. (Default: TRUE in
-  interactive mode, otherwise FALSE)
+  interactive mode, otherwise FALSE)\
+  \
+  This option must be set *before* setting up calling handlers via
+  `handler_nnn()` functions, e.g. `handlers(handler_txtprogressbar())`.
+  This is no needed when using `handlers("txtprogressbar")`.
 
 - progressr.enable_after::
 
