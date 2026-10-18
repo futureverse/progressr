@@ -40,6 +40,12 @@
 - Add support for environment variable `R_PROGRESSR_HANDLERS` to set R
   option `progressr.handlers` when package is loaded.
 
+### Documentation
+
+- Clarify that progress updates relayed via the file system can be
+  delayed, or only arrive all at once. This can happen on system when
+  standard output redirected to file is buffered.
+
 ### Bug Fixes
 
 - Package failed to load on R (\< 4.0.0). This was due to a regression

@@ -164,6 +164,33 @@ The technical reason for **cli** and **crayon** disabling coloring, is
 that the **progressr** package buffers standard output using a sink,
 which these packages consider to be mono-color only.
 
+### Delayed progress updates due to file-system buffering
+
+When an R script is run non-interactively with its standard output
+redirected to a file, e.g. via a batch scheduler like Slurm
+(`sbatch script.sh > slurm.out`), progress updates may appear to
+“freeze” for a long time and then show up all at once. This is a
+behavior of the system where R runs and nothing that R or **progressr**
+controls.
+
+An alternative to monitor process on such systems is by using the more
+limited
+[`handler_filesize()`](https://progressr.futureverse.org/reference/handler_filesize.html)
+progress handlers. It reports on progress via the *size* of a dedicated
+file:
+
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(`[`handler_filesize`](https://progressr.futureverse.org/reference/handler_filesize.md)`(``file ``=`` ``"slurm.progress"``)``)`
+
+To monitor the progress, one can check the file size of that file, e.g.
+
+``` sh
+$ ls -l slurm.progress
+-rw-rw-r-- 1 alice alice 68 Dec 21 12:13 slurm.progress
+                    ^
+                    +-- = 68% progress
+```
+
 ## Known Issues
 
 ### RStudio bug \#16331: Setting global progressr handlers during startup does not work
