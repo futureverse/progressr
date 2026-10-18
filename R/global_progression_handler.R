@@ -218,7 +218,7 @@ global_progression_handler <- local({
       }
     } else if (type == "update") {
       if (is.null(current_progressor_uuid)) {
-        ## Ignore progression updates that are coming in late after a
+        ## Ignore progression updates that are coming in late after
         ## a specific progress run was interrupted (e.g. Ctrl-C)
         if (!identical(progressor_uuid, interrupted_progressor_uuid)) {
           warn_about_too_many_progressions(progression, global = TRUE)
