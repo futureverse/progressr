@@ -200,8 +200,8 @@ e.g.
 ```sh
 $ ls -l slurm.progress
 -rw-rw-r-- 1 alice alice 68 Dec 21 12:13 slurm.progress
-                    ^
-                    +-- = 68% progress
+                         ^
+                         +-- = 68% progress
 ```
 
 
