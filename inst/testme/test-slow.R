@@ -147,6 +147,20 @@ withCallingHandlers({
 stopifnot(length(progressions) == 0L)
 options(progressr.demo.progress = NULL)
 
+message("slow_sqrt_p() - sticky message every 10th element ...")
+
+sticky <- list()
+withCallingHandlers({
+  res <- slow_sqrt_p(1:10, sticky = TRUE)
+}, progression = function(p) {
+  if (inherits(p, "sticky")) sticky[[length(sticky) + 1L]] <<- p
+})
+stopifnot(length(sticky) == 1L)
+stopifnot(identical(conditionMessage(sticky[[1]]), "P: 10 elements done"))
+
+message("slow_sqrt_p() - sticky message every 10th element ... done")
+
+
 message("slow_sqrt_p() ... done")
 
 

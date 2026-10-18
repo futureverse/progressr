@@ -65,8 +65,9 @@ register_global_progression_handler <- function(action = c("add", "remove", "que
 #' @keywords internal
 global_progression_handler <- local({
   active <- TRUE
-  
+
   current_progressor_uuid <- NULL
+  interrupted_progressor_uuid <- NULL
   calling_handler <- NULL
   delays <- NULL
   stdout_file <- NULL
@@ -217,7 +218,11 @@ global_progression_handler <- local({
       }
     } else if (type == "update") {
       if (is.null(current_progressor_uuid)) {
-        warn_about_too_many_progressions(progression, global = TRUE)
+        ## Ignore progression updates that are coming in late after
+        ## a specific progress run was interrupted (e.g. Ctrl-C)
+        if (!identical(progressor_uuid, interrupted_progressor_uuid)) {
+          warn_about_too_many_progressions(progression, global = TRUE)
+        }
         return()
       }
 
@@ -273,6 +278,11 @@ global_progression_handler <- local({
           interrupt_calling_handler(control_progression("interrupt", message = msg), debug = debug)
         })
       }
+
+      ## Record which progressor was interrupted, so that the global
+      ## progression handler can ignore it in case more updates are
+      ## trickling in later
+      interrupted_progressor_uuid <<- current_progressor_uuid
 
       suspendInterrupts({
         progression <- control_progression("shutdown")

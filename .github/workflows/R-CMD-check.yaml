@@ -28,7 +28,8 @@ jobs:
           - {os: ubuntu-latest,  r: 'oldrel-1' }
           - {os: ubuntu-latest,  r: 'oldrel-2' }
           - {os: ubuntu-latest,  r: '4.1'      }
-#          - {os: ubuntu-latest,  r: '3.6'      } ## optional 'ntfy' requires R (>= 4.1), but triggers an error
+          # R 3.6 produces NOTEs on some Suggests:ed packages missing
+          - {os: ubuntu-latest,  r: '3.6'      , error_on: 'warning' }
           - {os: ubuntu-latest,  r: 'release'  , language: ko,    label: ko    }
           - {os: ubuntu-latest,  r: 'release'  , language: zh_CN, label: zh_CN }
           - {os: ubuntu-latest,  r: 'release'  , language: zh_TW, label: zh_TW }
@@ -43,6 +44,9 @@ jobs:
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_MATRIX_DATA_: true
       _R_CHECK_THINGS_IN_TEMP_DIR_: true
+      ## 'ntfy', 'purrr', 'furrr', 'shiny', and 'progress' require R (>= 4.0
+      ## and 4.1), so cannot be installed on R 3.6.
+      _R_CHECK_FORCE_SUGGESTS_: false
       ## R (>= 4.4.0) Note, no trailing underscore (sic!)
       _R_COMPARE_LANG_OBJECTS: eqonly
       R_FUTURE_BRANCH: ${{ matrix.config.future }}
@@ -64,11 +68,19 @@ jobs:
           http-user-agent: ${{ matrix.config.http-user-agent }}
           use-public-rspm: true
 
+      ## 'ntfy', 'purrr', and 'furrr' require R (>= 4.1); 'shiny' and
+      ## 'progress' require R (>= 4.0). Below, we tell 'pak' to ignore
+      ## these packages for select versions.
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: |
             any::rcmdcheck
             any::remotes
+            ntfy=?ignore-before-r=4.1.0
+            purrr=?ignore-before-r=4.1.0
+            furrr=?ignore-before-r=4.1.0
+            shiny=?ignore-before-r=4.0.0
+            progress=?ignore-before-r=4.0.0
           needs: check
 
       - name: Install itself (to build vignettes)
@@ -101,7 +113,7 @@ jobs:
         run: |
           rcmdcheck::rcmdcheck(
             args = "--as-cran",
-            error_on = "note",
+            error_on = "${{ matrix.config.error_on || 'note' }}",
             check_dir = "check"
           )
         shell: Rscript {0}

@@ -1,3 +1,52 @@
+# Version 1.1.0 [2026-10-18]
+
+## Significant Changes
+
+ * `digest` is no longer a hard dependency. The package now uses
+   `tools::md5sum(bytes = ...)`, which is available in R (>= 4.5.0),
+   to generate unique IDs for R objects. For older versions of R, it
+   uses `tools::md5sum(files = ...)` via a temporary file, which
+   does not add much overhead because these internal IDs are not
+   generated frequently. For the time being, `digest::digest()` is
+   still used for older versions of R, if **digest** is installed.
+
+## New Features
+
+ * Add `handler_callback()` that calls a user-defined hook function on
+   every progression update, e.g. to forward progress to logging, GUIs,
+   or other external systems not natively supported by **progressr**.
+
+ * `handlers()` now supports specifying progression handlers as
+   comma-separated strings, e.g. `handlers("cli,beepr")`.
+
+ * `handlers()` now supports specifying a list mixed with names of
+   progression handlers and explicit handler functions,
+   e.g. `handlers(list("cli,debug", handler_beepr()))`.
+
+ * `handlers()` now always parses, expands, and incorporates the
+   progression handlers specified by R option `progressr.handlers`. As
+   a side effect, unknown handlers are reported on sooner, if
+   `handlers()` is called.
+
+ * Add support for environment variable `R_PROGRESSR_HANDLERS` to set
+   R option `progressr.handlers` when package is loaded.
+
+## Documentation
+
+ * Clarify that progress updates relayed via the file system can be
+   delayed, or only arrive all at once. This can happen on system when
+   standard output redirected to file is buffered.
+
+## Bug Fixes
+
+ * Package failed to load on R (< 4.0.0). This was due to a regression
+   introduced in **progressr** 0.16.0 (2025-09-10).
+
+ * When using `handlers(global = TRUE)`, interrupted (e.g. Ctrl-C)
+   progress could produce a noisy warning on spurious "received a
+   progression 'update' request ..." That is now muffled.
+
+
 # Version 1.0.0 [2026-07-03]
 
 ## Significant Changes

@@ -47,3 +47,12 @@ for (delay in c(FALSE, TRUE)) {
 
 message("*** with_progress() - delaying output ... DONE")
 
+
+message("*** use_delays() with mixed terminal/non-terminal handlers ...")
+
+use_delays <- progressr:::use_delays
+delays <- use_delays(list(handler_txtprogressbar(), handler_void()))
+stopifnot(isTRUE(delays$terminal))
+
+message("*** use_delays() with mixed terminal/non-terminal handlers ... DONE")
+

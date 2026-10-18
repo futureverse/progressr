@@ -5,13 +5,15 @@ false && R --quiet --no-save <<EOF
     tinytex::install_tinytex(force = TRUE)
     message("TeX root: ", tinytex::tinytex_root())
     tinytex::tlmgr_update()
-    tinytex::tlmgr_install("multirow")    # econet
-    tinytex::tlmgr_install("colortbl")    # poppr
+    tinytex::tlmgr_install(c(
+      "multirow",   # econet
+      "orcidlink"   # econet
+    ))
 EOF
 
 ## Non-default system dependencies
 if command -v module &> /dev/null; then
-#    module try-load CBI htslib  ## iscream
+    module try-load CBI htslib  ## iscream
 fi    
 
 
@@ -22,17 +24,20 @@ fi
 ## Add packages to check
 revdep/run.R --add-children
 
-## Drop packages failing on CRAN (2026-07-04)
-# revdep/run.R --rm fmeffects
+## Drop packages failing on CRAN (2026-10-08)
+#revdep/run.R --rm ...
 
-## Drop packages no longer on CRAN (2026-07-04)
+## Drop packages failing on Bioconductor (2026-10-10)
 # revdep/run.R --rm ...
 
-## Drop packages failing on Bioconductor (2026-07-04)
-# revdep/run.R --rm ...
+## Drop packages no longer on CRAN (2026-10-08)
+#revdep/run.R --rm ...
 
-## Missing tools
-#revdep/run.R --rm proffer  # requires 'RProtoBuf' -> ProtoBuf library
+## Drop packages no longer on Bioconductor (2026-10-17)
+revdep/run.R --rm beer
+
+## Missing tools - fully skip
+revdep/run.R --rm proffer  # requires 'RProtoBuf' -> ProtoBuf library
 
 ## Errors for unknown reason
 ## 'iscream' fails with "error in evaluating the argument 'obj' in selecting a method
@@ -40,18 +45,29 @@ revdep/run.R --add-children
 ## on the PATH /2026-03-13 
 #revdep/run.R --rm iscream
 
+## Too many cores due to detectCores() - fully skip
+pkgs_detectCores=(AlpsNMR)
+if [[ ${#pkgs_detectCores[@]} -gt 0 ]]; then
+    revdep/run.R --rm "${pkgs_detectCores[@]}"
+fi
 
-## Too many threads /2026-07-05
+## Too many threads
 pkgs_threads=()
-revdep/run.R --rm "${pkgs_threads[@]}"
+if [[ ${#pkgs_threads[@]} -gt 0 ]]; then
+    revdep/run.R --rm "${pkgs_threads[@]}"
+fi
 
-## Too many cores /2026-07-04
-pkgs_cores=(ISAnalytics powRICLPM riemtan vecmatch)
-revdep/run.R --rm "${pkgs_cores[@]}"
+## Too many cores
+pkgs_cores=(ISAnalytics metaselection powRICLPM riemtan vecmatch)
+if [[ ${#pkgs_cores[@]} -gt 0 ]]; then
+    revdep/run.R --rm "${pkgs_cores[@]}"
+fi
 
-## Requires sequential processing due to clashes, e.g. port and cache
-pkgs_seq=() /2026-07-04
-revdep/run.R --rm "${pkgs_seq[@]}"
+## Requires sequential processing due to clashes, e.g. port and cache 
+pkgs_seq=()
+if [[ ${#pkgs_seq[@]} -gt 0 ]]; then
+    revdep/run.R --rm "${pkgs_seq[@]}"
+fi
 
 ## Run revdep check
 revdep/run.R
@@ -60,14 +76,20 @@ revdep/run.R
 ## ---------------------------------------------------------------------
 ## Phase 2
 ## ---------------------------------------------------------------------
-## Set: Too many threads
-revdep/run.R --add "${pkgs_threads[@]}"
-OMP_NUM_THREADS=4 revdep/run.R
+ ## Set: Too many threads
+if [[ ${#pkgs_threads[@]} -gt 0 ]]; then
+  revdep/run.R --add "${pkgs_threads[@]}"
+  OMP_NUM_THREADS=4 revdep/run.R
+fi
 
 ## Set: Too many cores
-revdep/run.R --add "${pkgs_cores[@]}"
-OMP_NUM_THREADS=4 NSLOTS=4 revdep/run.R
+if [[ ${#pkgs_cores[@]} -gt 0 ]]; then
+    revdep/run.R --add "${pkgs_cores[@]}"
+    NSLOTS=4 revdep/run.R
+fi
 
 ## Sequential
-revdep/run.R --add "${pkgs_seq[@]}"
-NSLOTS=1 revdep/run.R
+if [[ ${#pkgs_seq[@]} -gt 0 ]]; then
+  revdep/run.R --add "${pkgs_seq[@]}"
+  NSLOTS=1 revdep/run.R
+fi

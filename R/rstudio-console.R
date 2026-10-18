@@ -28,6 +28,11 @@ patch_rstudio_console_evidence <- function() {
     warning = FALSE  ## RStudio use custom warning handler?
   )
 
+  ## The RStudio versions that need patching of their global calling
+  ## handlers require R (>= 4.0.0). If we run R (< 4.0.0), there's
+  ## nothing to patch.
+  if (getRversion() < "4.0.0") return(res)
+
   ## RStudio?
   if (Sys.getenv("RSTUDIO") == "1") {
     ## Not RStudio Terminal, i.e. RStudio Console?

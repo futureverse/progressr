@@ -37,8 +37,11 @@ Below are all \R options that are currently used by the \pkg{progressr} package.
 
 \describe{
 \item{\option{progressr.handlers}:}{
-(function or list of functions)
-Zero or more progression handlers that will report on any progression updates.  If empty list, progress updates are ignored.  If NULL, the default (\code{handler_txtprogressbar}) progression handlers is used.  The recommended way to set this option is via \code{\link[=handlers]{handlers()}}. (Default: NULL)
+(function, list of functions, or one or more handler names)
+Zero or more progression handlers that will report on any progression updates. The R option value is parsed, expanded,
+and validated by \code{\link[=handlers]{handlers()}}. If an empty list, progress updates are ignored. If NULL, the default
+(\code{handler_txtprogressbar}) progression handlers is used. The recommended way to set this option is via
+\code{\link[=handlers]{handlers()}}. (Default: NULL)
 }
 }
 }
@@ -55,7 +58,11 @@ If TRUE, any output, typically visual, produced by a reporter will be cleared/re
 \item{\option{progressr.enable}:}{
 (logical)
 If FALSE, then progress is not reported.
-(Default: TRUE in interactive mode, otherwise FALSE)
+(Default: TRUE in interactive mode, otherwise FALSE)\cr
+\cr
+This option must be set \emph{before} setting up calling handlers via
+\code{handler_nnn()} functions, e.g. \code{handlers(handler_txtprogressbar())}.
+This is not needed when using \code{handlers("txtprogressbar")}.
 }
 
 \item{\option{progressr.enable_after}:}{
@@ -159,6 +166,9 @@ For example, if \code{R_PROGRESSR_ENABLE = "true"}, then option
 \option{progressr.enable} is set to \code{TRUE} (logical).
 For example, if \code{R_PROGRESSR_ENABLE_AFTER = "2.0"}, then option
 \option{progressr.enable_after} is set to \code{2.0} (numeric).
+Environment variable \env{R_PROGRESSR_HANDLERS} sets option
+\option{progressr.handlers}, e.g.
+\code{R_PROGRESSR_HANDLERS="cli,beepr"}.
 }
 
 \seealso{

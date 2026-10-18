@@ -178,6 +178,34 @@ that the **progressr** package buffers standard output using a sink,
 which these packages consider to be mono-color only.
 
 
+### Delayed progress updates due to file-system buffering
+
+When an R script is run non-interactively with its standard output
+redirected to a file, e.g. via a batch scheduler like Slurm (`sbatch
+script.sh > slurm.out`), progress updates may appear to "freeze" for a
+long time and then show up all at once. This is a behavior of the
+system on which R runs, and is not something that R or **progressr**
+controls.
+
+An alternative way to monitor progress on such systems is to use the
+more limited [`handler_filesize()`][handler_filesize] progress handler. It
+reports on progress via the _size_ of a dedicated file:
+
+```r
+handlers(handler_filesize(file = "slurm.progress"))
+```
+
+To monitor the progress, one can check the file size of that file,
+e.g.
+
+```sh
+$ ls -l slurm.progress
+-rw-rw-r-- 1 alice alice 68 Dec 21 12:13 slurm.progress
+                         ^
+                         +-- = 68% progress
+```
+
+
 ## Known Issues
 
 ### RStudio bug #16331: Setting global progressr handlers during startup does not work
@@ -431,3 +459,4 @@ For a more up-to-date view on what features might be added, see
 [future]: https://future.futureverse.org
 [cli]: https://cran.r-project.org/package=cli
 [crayon]: https://cran.r-project.org/package=crayon
+[handler_filesize]: https://progressr.futureverse.org/reference/handler_filesize.html

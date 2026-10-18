@@ -1,9 +1,8 @@
 #' Control How Progress is Reported
 #'
-#' @param \ldots One or more progression handlers.  Alternatively, this
-#' function also accepts a single vector of progression handlers as input.
-#' If this vector is empty, then an empty set of progression handlers will
-#' be set.
+#' @param \ldots One or more progression handlers, specified as functions,
+#' handler names (character strings), or a mix of such. Strings may hold
+#' comma-separated handler names.
 #'
 #' @param append (logical) If FALSE, the specified progression handlers
 #' replace the current ones, otherwise they are appended to them.
@@ -77,17 +76,29 @@
 #' @export
 handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ignore"), default = handler_txtprogressbar, global = NULL) {
   stop_if_not(
-    is.null(global) ||
-    ( is.logical(global) && length(global) == 1L )
+    is.logical(append) && length(append) == 1L && !is.na(append),
+    is.null(global) || (is.logical(global) && length(global) == 1L)
   )
+  on_missing <- match.arg(on_missing)
   args <- list(...)
   nargs <- length(args)
 
   if (nargs == 0L) {
     ## Get the current set of progression handlers?
     if (is.null(global)) {
-      if (!is.list(default) && !is.null(default)) default <- list(default)
-      return(getOption("progressr.handlers", default))
+      ## Parse and expand R option 'progressr.handlers', if set
+      value <- getOption("progressr.handlers", default)
+      if (is.character(value)) {
+        if (any(nzchar(trim(value)))) {
+          handlers(value, on_missing = on_missing)
+        } else {
+          options(progressr.handlers = list())
+        }
+        value <- getOption("progressr.handlers", default)
+      }
+      ## Always return a list
+      if (!is.list(value) && !is.null(value)) value <- list(value)
+      return(value)
     }
 
     ## Check, register, or reset global calling handlers?
@@ -95,18 +106,45 @@ handlers <- function(..., append = FALSE, on_missing = c("error", "warning", "ig
       return(register_global_progression_handler(action = "query"))
     }
     action <- if (isTRUE(global)) "add" else "remove"
+    if (action == "add") {
+      ## Resolve R option 'progressr.handlers' with strings into progression
+      ## handler functions. This also asserts they exist.
+      handlers(on_missing = on_missing)
+    }
     return(invisible(register_global_progression_handler(action = action)))
   }
 
-  on_missing <- match.arg(on_missing)
-  
   ## Was a list specified?
   if (nargs == 1L && is.vector(args[[1]])) {
     args <- args[[1]]
   }
 
+  ## Expand comma-separated handler names into separate elements, e.g.
+  ## "cli,beepr" becomes c("cli", "beepr")
+  orig_names <- names(args)
+  expanded <- list()
+  expanded_names <- if (!is.null(orig_names)) character(0) else NULL
+  for (kk in seq_along(args)) {
+    arg <- args[[kk]]
+    if (is.character(arg) && length(arg) == 1L && grepl(",", arg, fixed = TRUE)) {
+      parts <- trim(strsplit(arg, split = ",", fixed = TRUE)[[1]])
+      parts <- parts[nzchar(parts)]
+      expanded <- c(expanded, as.list(parts))
+      if (!is.null(expanded_names)) {
+        expanded_names <- c(expanded_names, rep("", times = length(parts)))
+      }
+    } else {
+      expanded <- c(expanded, list(arg))
+      if (!is.null(expanded_names)) {
+        expanded_names <- c(expanded_names, orig_names[kk])
+      }
+    }
+  }
+  args <- expanded
+  if (!is.null(expanded_names)) names(args) <- expanded_names
+
   handlers <- list()
-  
+
   names <- names(args)
   for (kk in seq_along(args)) {
     handler <- args[[kk]]
