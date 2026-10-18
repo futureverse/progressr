@@ -7,8 +7,8 @@ false && R --quiet --no-save <<EOF
     tinytex::tlmgr_update()
     tinytex::tlmgr_install(c(
       "multirow",   # econet
-      "colortbl"    # poppr
-    )
+      "orcidlink"   # econet
+    ))
 EOF
 
 ## Non-default system dependencies
@@ -33,8 +33,8 @@ revdep/run.R --add-children
 ## Drop packages no longer on CRAN (2026-10-08)
 #revdep/run.R --rm ...
 
-## Drop packages no longer on Bioconductor (2026-10-08)
-#revdep/run.R --rm ...
+## Drop packages no longer on Bioconductor (2026-10-17)
+revdep/run.R --rm beer
 
 ## Missing tools - fully skip
 revdep/run.R --rm proffer  # requires 'RProtoBuf' -> ProtoBuf library
@@ -46,7 +46,7 @@ revdep/run.R --rm proffer  # requires 'RProtoBuf' -> ProtoBuf library
 #revdep/run.R --rm iscream
 
 ## Too many cores due to detectCores() - fully skip
-pkgs_detectCores=()
+pkgs_detectCores=(AlpsNMR)
 if [[ ${#pkgs_detectCores[@]} -gt 0 ]]; then
     revdep/run.R --rm "${pkgs_detectCores[@]}"
 fi
@@ -58,7 +58,7 @@ if [[ ${#pkgs_threads[@]} -gt 0 ]]; then
 fi
 
 ## Too many cores
-pkgs_cores=(ISAnalytics powRICLPM riemtan vecmatch)
+pkgs_cores=(ISAnalytics metaselection powRICLPM riemtan vecmatch)
 if [[ ${#pkgs_cores[@]} -gt 0 ]]; then
     revdep/run.R --rm "${pkgs_cores[@]}"
 fi
