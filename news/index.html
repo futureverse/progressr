@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0-9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,13 +80,16 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="version-development-version">Version (development version)<a class="anchor" aria-label="anchor" href="#version-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.0" id="version-110">Version 1.1.0<a class="anchor" aria-label="anchor" href="#version-110"></a></h2>
 <div class="section level3">
-<h3 id="significant-changes-development-version">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-development-version"></a></h3>
+<h3 id="significant-changes-1-1-0">Significant Changes<a class="anchor" aria-label="anchor" href="#significant-changes-1-1-0"></a></h3>
 <ul><li>
-<code>digest</code> is no longer a hard dependency. The package now uses <code>tools::md5sum(bytes = ...)</code>, which is available in R (&gt;= 4.5.0), to generated unique IDs for R objects. For older versions of R, it uses <code>tools::md5sum(files = ...)</code> via a temporary file, which is does not add much overhead because these internal IDs are not generated frequently. For the time being, <code><a href="https://eddelbuettel.github.io/digest/man/digest.html" class="external-link">digest::digest()</a></code> is still used for older versions of R, if <strong>digest</strong> is installed.</li>
+<code>digest</code> is no longer a hard dependency. The package now uses <code>tools::md5sum(bytes = ...)</code>, which is available in R (&gt;= 4.5.0), to generate unique IDs for R objects. For older versions of R, it uses <code>tools::md5sum(files = ...)</code> via a temporary file, which does not add much overhead because these internal IDs are not generated frequently. For the time being, <code><a href="https://eddelbuettel.github.io/digest/man/digest.html" class="external-link">digest::digest()</a></code> is still used for older versions of R, if <strong>digest</strong> is installed.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<h3 id="new-features-1-1-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-1-0"></a></h3>
 <ul><li><p>Add <code><a href="../reference/handler_callback.html">handler_callback()</a></code> that calls a user-defined hook function on every progression update, e.g. to forward progress to logging, GUIs, or other external systems not natively supported by <strong>progressr</strong>.</p></li>
 <li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying progression handlers as comma-separated strings, e.g. <code>handlers("cli,beepr")</code>.</p></li>
 <li><p><code><a href="../reference/handlers.html">handlers()</a></code> now supports specifying a list mixed with names of progression handlers and explicit handler functions, e.g. <code>handlers(list("cli,debug", handler_beepr()))</code>.</p></li>
@@ -94,11 +97,11 @@
 <li><p>Add support for environment variable <code>R_PROGRESSR_HANDLERS</code> to set R option <code>progressr.handlers</code> when package is loaded.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-development-version">Documentation<a class="anchor" aria-label="anchor" href="#documentation-development-version"></a></h3>
+<h3 id="documentation-1-1-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-1-1-0"></a></h3>
 <ul><li>Clarify that progress updates relayed via the file system can be delayed, or only arrive all at once. This can happen on system when standard output redirected to file is buffered.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-1-1-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-1-0"></a></h3>
 <ul><li><p>Package failed to load on R (&lt; 4.0.0). This was due to a regression introduced in <strong>progressr</strong> 0.16.0 (2025-09-10).</p></li>
 <li><p>When using <code>handlers(global = TRUE)</code>, interrupted (e.g. Ctrl-C) progress could produce a noisy warning on spurious “received a progression ‘update’ request …” That is now muffled.</p></li>
 </ul></div>

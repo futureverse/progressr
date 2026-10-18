@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0-9012</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0-9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -282,11 +282,11 @@ which these packages consider to be mono-color only.</p>
 redirected to a file, e.g. via a batch scheduler like Slurm
 (<code>sbatch script.sh &gt; slurm.out</code>), progress updates may
 appear to “freeze” for a long time and then show up all at once. This is
-a behavior of the system where R runs and nothing that R or
+a behavior of the system on which R runs, and is not something that R or
 <strong>progressr</strong> controls.</p>
-<p>An alternative to monitor process on such systems is by using the
+<p>An alternative way to monitor progress on such systems is to use the
 more limited <a href="https://progressr.futureverse.org/reference/handler_filesize.html"><code>handler_filesize()</code></a>
-progress handlers. It reports on progress via the <em>size</em> of a
+progress handler. It reports on progress via the <em>size</em> of a
 dedicated file:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/handler_filesize.html">handler_filesize</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"slurm.progress"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -294,8 +294,8 @@ dedicated file:</p>
 e.g.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span> slurm.progress</span>
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="ex">-rw-rw-r--</span> 1 alice alice 68 Dec 21 12:13 slurm.progress</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>                    <span class="ex">^</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>                    <span class="ex">+--</span> = 68% progress</span></code></pre></div>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>                         <span class="ex">^</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>                         <span class="ex">+--</span> = 68% progress</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
