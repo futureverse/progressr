@@ -184,10 +184,11 @@ When an R script is run non-interactively with its standard output
 redirected to a file, e.g. via a batch scheduler like Slurm (`sbatch
 script.sh > slurm.out`), progress updates may appear to "freeze" for a
 long time and then show up all at once. This is a behavior of the
-system where R runs and nothing that R or **progressr** controls.
+system on which R runs, and is not something that R or **progressr**
+controls.
 
-An alternative to monitor process on such systems is by using the more
-limited [`handler_filesize()`][handler_filesize] progress handlers. It
+An alternative way to monitor progress on such systems is to use the
+more limited [`handler_filesize()`][handler_filesize] progress handler. It
 reports on progress via the _size_ of a dedicated file:
 
 ```r

@@ -62,7 +62,7 @@ If FALSE, then progress is not reported.
 \cr
 This option must be set \emph{before} setting up calling handlers via
 \code{handler_nnn()} functions, e.g. \code{handlers(handler_txtprogressbar())}.
-This is no needed when using \code{handlers("txtprogressbar")}.
+This is not needed when using \code{handlers("txtprogressbar")}.
 }
 
 \item{\option{progressr.enable_after}:}{
