@@ -134,10 +134,9 @@ reporting function of interest).
 Now, if we call this function, without further settings:
 
 ```r
-> y <- slow_sum_p(1:10)
-> y
-[1] 55
->
+y <- slow_sum_p(1:10)
+y
+#> [1] 55
 ``` 
 
 the default is that there will be _no_ progress updates. To get
@@ -145,22 +144,22 @@ progress updates, we need to request them to be "handled", which we do
 by:
 
 ```r
-> progressr::handlers(global = TRUE)
+progressr::handlers(global = TRUE)
 ```
 
 After this, progress will be reported:
 
 ```r
-> y <- slow_sum_p(1:10)
-  |====================                               |  40%
-> y <- slow_sum_p(10:1)
-  |========================================           |  80%
+y <- slow_sum_p(1:10)
+#>   |====================                               |  40%
+y <- slow_sum_p(10:1)
+#>   |========================================           |  80%
 ```
 
 To disable reporting again, do:
 
 ```r
-> handlers(global = FALSE)
+handlers(global = FALSE)
 ```
 
 
@@ -241,12 +240,12 @@ slow_sqrt_p <- function(xs) {
 we will get:
 
 ```r
-> library(progressr)
-> handlers("progress", global = TRUE)
-> y <- slow_sqrt_p(1:8)
-Calculating the square root of 1
-Calculating the square root of 2
-- [===========>-----------------------------------]  25% x=2
+library(progressr)
+handlers("progress", global = TRUE)
+y <- slow_sqrt_p(1:8)
+#> Calculating the square root of 1
+#> Calculating the square root of 2
+#> - [===========>-----------------------------------]  25% x=2
 ```
 
 This works because **progressr** will briefly buffer any output
@@ -294,21 +293,21 @@ slow_sum_p <- function(x) {
 we get
 
 ```r
-> handlers("txtprogressbar")
-> y <- slow_sum_p(1:30)
-Step 5
-Step 10
-  |====================                               |  43%
+handlers("txtprogressbar")
+y <- slow_sum_p(1:30)
+#> Step 5
+#> Step 10
+#>   |====================                               |  43%
 ```
 
 and
 
 ```r
-> handlers("progress")
-> y <- slow_sum_p(1:30)
-Step 5
-Step 10
-/ [===============>-------------------------]  43% Adding 13
+handlers("progress")
+y <- slow_sum_p(1:30)
+#> Step 5
+#> Step 10
+#> / [===============>-------------------------]  43% Adding 13
 ```
 
 

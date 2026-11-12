@@ -74,9 +74,9 @@ circumstances.  For example, it cannot be called within `tryCatch()`
 and `withCallingHandlers()`;
 
 ```r
-> tryCatch(handlers(global = TRUE), error = identity)
-Error in globalCallingHandlers(NULL) :
-  should not be called with handlers on the stack
+tryCatch(handlers(global = TRUE), error = identity)
+#> Error in globalCallingHandlers(NULL) :
+#>   should not be called with handlers on the stack
 ```
 
 This is not a bug - neither in **progressr** nor in R itself. It's due
@@ -96,8 +96,8 @@ such cases, the global progress handler has to be enabled _prior_ to
 processing the document, e.g.
 
 ```r
-> progressr::handlers(global = TRUE)
-> rmarkdown::render("input.Rmd")
+progressr::handlers(global = TRUE)
+rmarkdown::render("input.Rmd")
 ```
 
 
@@ -312,15 +312,14 @@ Currently, when using Positron (e.g. Positron 2025.09.0), any
 step is reported, e.g.
 
 ```r
-> progressr::handlers("cli", global = TRUE)
-> y <- progressr::slow_sum_p(1:5, message = TRUE)
-M: Added value 1
-M: Added value 2
-M: Added value 3
-M: Added value 4
-
-M: Added value 5
-> 
+progressr::handlers("cli", global = TRUE)
+y <- progressr::slow_sum_p(1:5, message = TRUE)
+#> M: Added value 1
+#> M: Added value 2
+#> M: Added value 3
+#> M: Added value 4
+#>
+#> M: Added value 5
 ```
 
 I do not fully understand the reason for this, but I hope we can get
@@ -339,10 +338,9 @@ drops](https://github.com/futureverse/progressr/issues/170) any output
 sent to stderr, e.g.
 
 ```r
-> cat("hello stderr\n", file = stderr())
-> cat("hello stdout\n", file = stdout())
-hello stdout
->
+cat("hello stderr\n", file = stderr())
+cat("hello stdout\n", file = stdout())
+#> hello stdout
 ```
 
 If we try the following
@@ -388,15 +386,13 @@ _extra_ newline at the end of every
 message](https://github.com/IRkernel/IRkernel/issues/732), e.g.
 
 ```r
-> message("abc", appendLF = FALSE); message("def", appendLF = FALSE)
-abc
-def
-> message("abc"); message("def")
-abc
-
-def
-
->
+message("abc", appendLF = FALSE); message("def", appendLF = FALSE)
+#> abc
+#> def
+message("abc"); message("def")
+#> abc
+#>
+#> def
 ```
 
 This causes any progress framework (e.g. the **progress** package)
