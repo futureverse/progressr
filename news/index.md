@@ -4,6 +4,8 @@
 
 ## Version 1.1.0
 
+CRAN release: 2026-10-18
+
 ### Significant Changes
 
 - `digest` is no longer a hard dependency. The package now uses

@@ -64,11 +64,10 @@ circumstances. For example, it cannot be called within
 [`tryCatch()`](https://rdrr.io/r/base/conditions.html) and
 [`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html);
 
-``` r
-> tryCatch(handlers(global = TRUE), error = identity)
-Error in globalCallingHandlers(NULL) :
-  should not be called with handlers on the stack
-```
+\
+[`tryCatch`](https://rdrr.io/r/base/conditions.html)`(`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)``, error ``=`` ``identity``)`\
+`#> Error in globalCallingHandlers(NULL) :`\
+`#>   should not be called with handlers on the stack`
 
 This is not a bug - neither in **progressr** nor in R itself. It’s due
 to a conservative design on how *global* calling handlers should work in
@@ -87,10 +86,9 @@ inside package vignettes and dynamic documents such as Rmarkdown. In
 such cases, the global progress handler has to be enabled *prior* to
 processing the document, e.g.
 
-``` r
-> progressr::handlers(global = TRUE)
-> rmarkdown::render("input.Rmd")
-```
+\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`\
+`rmarkdown``::`[`render`](https://pkgs.rstudio.com/rmarkdown/reference/render.html)`(``"input.Rmd"``)`
 
 ### A progressor cannot be created in the global environment
 
@@ -287,17 +285,15 @@ Currently, when using Positron (e.g. Positron 2025.09.0), any
 [`message()`](https://rdrr.io/r/base/message.html) output adds an extra
 newline before the *final* progress step is reported, e.g.
 
-``` r
-> progressr::handlers("cli", global = TRUE)
-> y <- progressr::slow_sum_p(1:5, message = TRUE)
-M: Added value 1
-M: Added value 2
-M: Added value 3
-M: Added value 4
-
-M: Added value 5
-> 
-```
+\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"cli"``, global ``=`` ``TRUE``)`\
+`y`` ``<-`` ``progressr``::`[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``5``, message ``=`` ``TRUE``)`\
+`#> M: Added value 1`\
+`#> M: Added value 2`\
+`#> M: Added value 3`\
+`#> M: Added value 4`\
+`#>`\
+`#> M: Added value 5`
 
 I do not fully understand the reason for this, but I hope we can get to
 the bottom of it and fix it, either in **progressr** or in Positron,
@@ -313,12 +309,10 @@ that [Jupyter silently
 drops](https://github.com/futureverse/progressr/issues/170) any output
 sent to stderr, e.g.
 
-``` r
-> cat("hello stderr\n", file = stderr())
-> cat("hello stdout\n", file = stdout())
-hello stdout
->
-```
+\
+[`cat`](https://rdrr.io/r/base/cat.html)`(``"hello stderr\n"``, file ``=`` `[`stderr`](https://rdrr.io/r/base/showConnections.html)`(``)``)`\
+[`cat`](https://rdrr.io/r/base/cat.html)`(``"hello stdout\n"``, file ``=`` `[`stdout`](https://rdrr.io/r/base/showConnections.html)`(``)``)`\
+`#> hello stdout`
 
 If we try the following
 
@@ -358,17 +352,14 @@ Jupyter has other outputting issues. Specifically, Jupyter [injects an
 *extra* newline at the end of every
 message](https://github.com/IRkernel/IRkernel/issues/732), e.g.
 
-``` r
-> message("abc", appendLF = FALSE); message("def", appendLF = FALSE)
-abc
-def
-> message("abc"); message("def")
-abc
-
-def
-
->
-```
+\
+[`message`](https://rdrr.io/r/base/message.html)`(``"abc"``, appendLF ``=`` ``FALSE``)``; `[`message`](https://rdrr.io/r/base/message.html)`(``"def"``, appendLF ``=`` ``FALSE``)`\
+`#> abc`\
+`#> def`\
+[`message`](https://rdrr.io/r/base/message.html)`(``"abc"``)``; `[`message`](https://rdrr.io/r/base/message.html)`(``"def"``)`\
+`#> abc`\
+`#>`\
+`#> def`
 
 This causes any progress framework (e.g. the **progress** package) that
 reports via messages to render progress output very poorly or not at

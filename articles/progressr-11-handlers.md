@@ -85,12 +85,10 @@ progressing, and at the end (using different
 **[beepr](https://cran.r-project.org/package=beepr)** sounds). There
 will be *no* output written to the terminal;
 
-``` r
-> y <- slow_sum_p(1:10)
-> y
-[1] 55
->
-```
+\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``10``)`\
+`y`\
+`#> [1] 55`
 
 ## Concurrent auditory and visual progress updates
 

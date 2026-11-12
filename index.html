@@ -34,7 +34,7 @@
 
     <a class="navbar-brand me-2" href="index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0-9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0-9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -214,19 +214,22 @@ handlers(handler_progress(complete = "#"))
 <span><span class="op">}</span></span></code></pre></div>
 <p>Note how there are <em>no</em> arguments (e.g. <code>.progress = TRUE</code>) in the code that specify how progress is presented. This is by design and because the only task for the developer is to decide on where in the code it makes sense to signal that progress has been made. As we will see next, it should be up to the end user, and end user only, of this code to decide whether they want to receive progress updates or not, and, if so, in what format. Asking them to specify a special “progress” argument adds a lot of friction, it clutters up the code, and, importantly, might not even be possible for end users to do (e.g. they call a package function that in turn calls the progress reporting function of interest).</p>
 <p>Now, if we call this function, without further settings:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="sc">&gt;</span> y</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">55</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="sc">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span></span>
+<span><span class="co">#&gt; [1] 55</span></span></code></pre></div>
 <p>the default is that there will be <em>no</em> progress updates. To get progress updates, we need to request them to be “handled”, which we do by:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="sc">&gt;</span> progressr<span class="sc">::</span><span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>After this, progress will be reported:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="sc">|</span><span class="er">====================</span>                               <span class="er">|</span>  <span class="dv">40</span>%</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sum_p</span>(<span class="dv">10</span><span class="sc">:</span><span class="dv">1</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="sc">|</span><span class="er">========================================</span>           <span class="er">|</span>  <span class="dv">80</span>%</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   |====================                               |  40%</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">10</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   |========================================           |  80%</span></span></code></pre></div>
 <p>To disable reporting again, do:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="at">global =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/handlers.html">handlers</a></span><span class="op">(</span>global <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="customizing-how-progress-is-reported">Customizing how progress is reported<a class="anchor" aria-label="anchor" href="#customizing-how-progress-is-reported"></a>
@@ -293,12 +296,13 @@ handlers(handler_progress(complete = "#"))
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>we will get:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">library</span>(progressr)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="st">"progress"</span>, <span class="at">global =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sqrt_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>Calculating the square root of <span class="dv">1</span></span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>Calculating the square root of <span class="dv">2</span></span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="sc">-</span> [<span class="sc">==</span><span class="er">=========&gt;</span><span class="sc">-----------------------------------</span>]  <span class="dv">25</span>% x<span class="ot">=</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org">progressr</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"progress"</span>, global <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slow_sum_p.html">slow_sqrt_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Calculating the square root of 1</span></span>
+<span><span class="co">#&gt; Calculating the square root of 2</span></span>
+<span><span class="co">#&gt; - [===========&gt;-----------------------------------]  25% x=2</span></span></code></pre></div>
 <p>This works because <strong>progressr</strong> will briefly buffer any output internally and only release it when the next progress update is received just before the progress is re-rendered in the terminal. This is why you see a two second delay when running the above example. Note that, if we use progress handlers that do not output to the terminal, such as <code>handlers("beepr")</code>, then output does not have to be buffered and will appear immediately.</p>
 <p><em>Comment</em>: When signaling a warning using <code>warning(msg, immediate. = TRUE)</code> the message is immediately outputted to the standard-error stream. However, this is not possible to emulate when warnings are intercepted using calling handlers. This is a limitation of R that cannot be worked around. Because of this, the above call will behave the same as <code>warning(msg)</code> - that is, all warnings will be buffered by R internally and released only when all computations are done.</p>
 </div>
@@ -319,17 +323,19 @@ handlers(handler_progress(complete = "#"))
 <span>  <span class="va">sum</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>we get</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="st">"txtprogressbar"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>Step <span class="dv">5</span></span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>Step <span class="dv">10</span></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>  <span class="sc">|</span><span class="er">====================</span>                               <span class="er">|</span>  <span class="dv">43</span>%</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"txtprogressbar"</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Step 5</span></span>
+<span><span class="co">#&gt; Step 10</span></span>
+<span><span class="co">#&gt;   |====================                               |  43%</span></span></code></pre></div>
 <p>and</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">handlers</span>(<span class="st">"progress"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="sc">&gt;</span> y <span class="ot">&lt;-</span> <span class="fu">slow_sum_p</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">30</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>Step <span class="dv">5</span></span>
-<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>Step <span class="dv">10</span></span>
-<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="sc">/</span> [<span class="sc">==</span><span class="er">=============&gt;</span><span class="sc">-------------------------</span>]  <span class="dv">43</span>% Adding <span class="dv">13</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/handlers.html">handlers</a></span><span class="op">(</span><span class="st">"progress"</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/slow_sum_p.html">slow_sum_p</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">30</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Step 5</span></span>
+<span><span class="co">#&gt; Step 10</span></span>
+<span><span class="co">#&gt; / [===============&gt;-------------------------]  43% Adding 13</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

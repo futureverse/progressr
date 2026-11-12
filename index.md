@@ -64,34 +64,29 @@ interest).
 
 Now, if we call this function, without further settings:
 
-``` r
-> y <- slow_sum_p(1:10)
-> y
-[1] 55
->
-```
+\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``10``)`\
+`y`\
+`#> [1] 55`
 
 the default is that there will be *no* progress updates. To get progress
 updates, we need to request them to be “handled”, which we do by:
 
-``` r
-> progressr::handlers(global = TRUE)
-```
+\
+`progressr``::`[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``TRUE``)`
 
 After this, progress will be reported:
 
-``` r
-> y <- slow_sum_p(1:10)
-  |====================                               |  40%
-> y <- slow_sum_p(10:1)
-  |========================================           |  80%
-```
+\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``10``)`\
+`#>   |====================                               |  40%`\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``10``:``1``)`\
+`#>   |========================================           |  80%`
 
 To disable reporting again, do:
 
-``` r
-> handlers(global = FALSE)
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``global ``=`` ``FALSE``)`
 
 ## Customizing how progress is reported
 
@@ -187,14 +182,13 @@ have:
 
 we will get:
 
-``` r
-> library(progressr)
-> handlers("progress", global = TRUE)
-> y <- slow_sqrt_p(1:8)
-Calculating the square root of 1
-Calculating the square root of 2
-- [===========>-----------------------------------]  25% x=2
-```
+\
+[`library`](https://rdrr.io/r/base/library.html)`(`[`progressr`](https://progressr.futureverse.org)`)`\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``, global ``=`` ``TRUE``)`\
+`y`` ``<-`` `[`slow_sqrt_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``8``)`\
+`#> Calculating the square root of 1`\
+`#> Calculating the square root of 2`\
+`#> - [===========>-----------------------------------]  25% x=2`
 
 This works because **progressr** will briefly buffer any output
 internally and only release it when the next progress update is received
@@ -237,23 +231,21 @@ progress handlers that output to the terminal. For example, with:
 
 we get
 
-``` r
-> handlers("txtprogressbar")
-> y <- slow_sum_p(1:30)
-Step 5
-Step 10
-  |====================                               |  43%
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"txtprogressbar"``)`\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``30``)`\
+`#> Step 5`\
+`#> Step 10`\
+`#>   |====================                               |  43%`
 
 and
 
-``` r
-> handlers("progress")
-> y <- slow_sum_p(1:30)
-Step 5
-Step 10
-/ [===============>-------------------------]  43% Adding 13
-```
+\
+[`handlers`](https://progressr.futureverse.org/reference/handlers.md)`(``"progress"``)`\
+`y`` ``<-`` `[`slow_sum_p`](https://progressr.futureverse.org/reference/slow_sum_p.md)`(``1``:``30``)`\
+`#> Step 5`\
+`#> Step 10`\
+`#> / [===============>-------------------------]  43% Adding 13`
 
 ## Installation
 
