@@ -36,7 +36,15 @@ handlers(
 
   If TRUE, then the global progression handler is enabled. If FALSE, it
   is disabled. If NA, then TRUE is returned if it is enabled, otherwise
-  FALSE.
+  FALSE. Enabling or disabling it requires that there are no condition
+  handlers active, which is a limitation of R's
+  [`base::globalCallingHandlers()`](https://rdrr.io/r/base/conditions.html).
+  For example, it cannot be done via
+  [`base::tryCatch()`](https://rdrr.io/r/base/conditions.html),
+  [`base::withCallingHandlers()`](https://rdrr.io/r/base/conditions.html),
+  or [`base::suppressMessages()`](https://rdrr.io/r/base/message.html),
+  or from within a package's `.onLoad()` or `.onAttach()` function.
+  Trying to do so results in an error.
 
 - ...:
 
@@ -72,6 +80,15 @@ used elsewhere. To undo your settings, you can do:
 
     old_handlers <- handlers(c("beepr", "progress"))
     on.exit(handlers(old_handlers), add = TRUE)
+
+It is not possible for a package to enable global progression handling
+when it is loaded or attached, i.e. by calling `handlers(global = TRUE)`
+in `.onLoad()` or `.onAttach()`. This is because R always calls those
+functions via [`tryCatch()`](https://rdrr.io/r/base/conditions.html),
+and R does not allow global calling handlers to be registered when there
+are condition handlers active. Instead, enabling global progression
+handling is up to the end user, e.g. in their `~/.Rprofile` startup
+file, as explained below.
 
 ## Configuring progression handling during R startup
 

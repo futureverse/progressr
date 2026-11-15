@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">progressr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0-9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0-9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -118,7 +118,13 @@ are set.</p></dd>
 <dt id="arg-global">global<a class="anchor" aria-label="anchor" href="#arg-global"></a></dt>
 <dd><p>If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-otherwise FALSE.</p></dd>
+otherwise FALSE.
+Enabling or disabling it requires that there are no condition handlers
+active, which is a limitation of R's <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">base::globalCallingHandlers()</a></code>.
+For example, it cannot be done via <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">base::tryCatch()</a></code>,
+<code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">base::withCallingHandlers()</a></code>, or <code><a href="https://rdrr.io/r/base/message.html" class="external-link">base::suppressMessages()</a></code>, or
+from within a package's <code>.onLoad()</code> or <code>.onAttach()</code> function.
+Trying to do so results in an error.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -156,6 +162,14 @@ whatever progression settings the user already has for other purposes
 used elsewhere.  To undo your settings, you can do:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">old_handlers</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"beepr"</span>, <span class="st">"progress"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/on.exit.html" class="external-link">on.exit</a></span><span class="op">(</span><span class="fu"><a href="../reference/handlers.html">handlers</a></span><span class="op">(</span><span class="va">old_handlers</span><span class="op">)</span>, add <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>It is not possible for a package to enable global progression
+handling when it is loaded or attached, i.e. by calling
+<code>handlers(global = TRUE)</code> in <code>.onLoad()</code> or <code>.onAttach()</code>. This is
+because R always calls those functions via <code><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch()</a></code>, and R does
+not allow global calling handlers to be registered when there are
+condition handlers active. Instead, enabling global progression
+handling is up to the end user, e.g. in their <code class="file">~/.Rprofile</code>
+startup file, as explained below.</p>
     </div>
     <div class="section level2">
     <h2 id="configuring-progression-handling-during-r-startup">Configuring progression handling during R startup<a class="anchor" aria-label="anchor" href="#configuring-progression-handling-during-r-startup"></a></h2>

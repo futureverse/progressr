@@ -2,6 +2,15 @@
 
 ## Version (development version)
 
+### Bug Fixes
+
+- `handlers(global = TRUE)` and `handlers(global = FALSE)` now gives an
+  informative error message when not supported. For example, it cannot
+  be set within [`tryCatch()`](https://rdrr.io/r/base/conditions.html)
+  or [`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html),
+  which happens automatically in Rmarkdown, knitr, and Quarto documents,
+  but also during package load.
+
 ## Version 1.1.0
 
 CRAN release: 2026-10-18
