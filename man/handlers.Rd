@@ -28,7 +28,7 @@ are set.}
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
 otherwise FALSE.
 Enabling or disabling it requires that there are no condition handlers
-active, which is a limitation of R's \code{\link[base:globalCallingHandlers]{base::globalCallingHandlers()}}.
+active, which is a limitation of R's \code{globalCallingHandlers()}.
 For example, it cannot be done via \code{\link[base:tryCatch]{base::tryCatch()}},
 \code{\link[base:withCallingHandlers]{base::withCallingHandlers()}}, or \code{\link[base:suppressMessages]{base::suppressMessages()}}, or
 from within a package's \code{.onLoad()} or \code{.onAttach()} function.

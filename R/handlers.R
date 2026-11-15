@@ -19,7 +19,7 @@
 #' If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
 #' otherwise FALSE.
 #' Enabling or disabling it requires that there are no condition handlers
-#' active, which is a limitation of R's [base::globalCallingHandlers()].
+#' active, which is a limitation of R's `globalCallingHandlers()`.
 #' For example, it cannot be done via [base::tryCatch()],
 #' [base::withCallingHandlers()], or [base::suppressMessages()], or
 #' from within a package's `.onLoad()` or `.onAttach()` function.
