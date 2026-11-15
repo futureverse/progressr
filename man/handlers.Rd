@@ -26,7 +26,13 @@ are set.}
 
 \item{global}{If TRUE, then the global progression handler is enabled.
 If FALSE, it is disabled.  If NA, then TRUE is returned if it is enabled,
-otherwise FALSE.}
+otherwise FALSE.
+Enabling or disabling it requires that there are no condition handlers
+active, which is a limitation of R's \code{\link[base:globalCallingHandlers]{base::globalCallingHandlers()}}.
+For example, it cannot be done via \code{\link[base:tryCatch]{base::tryCatch()}},
+\code{\link[base:withCallingHandlers]{base::withCallingHandlers()}}, or \code{\link[base:suppressMessages]{base::suppressMessages()}}, or
+from within a package's \code{.onLoad()} or \code{.onAttach()} function.
+Trying to do so results in an error.}
 
 \item{\ldots}{One or more progression handlers, specified as functions,
 handler names (character strings), or a mix of such. Strings may hold
@@ -63,6 +69,15 @@ used elsewhere.  To undo your settings, you can do:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{old_handlers <- handlers(c("beepr", "progress"))
 on.exit(handlers(old_handlers), add = TRUE)
 }\if{html}{\out{</div>}}
+
+It is not possible for a package to enable global progression
+handling when it is loaded or attached, i.e. by calling
+\code{handlers(global = TRUE)} in \code{.onLoad()} or \code{.onAttach()}. This is
+because R always calls those functions via \code{tryCatch()}, and R does
+not allow global calling handlers to be registered when there are
+condition handlers active. Instead, enabling global progression
+handling is up to the end user, e.g. in their \file{~/.Rprofile}
+startup file, as explained below.
 }
 
 \section{Configuring progression handling during R startup}{

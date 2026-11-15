@@ -33,10 +33,13 @@ register_global_progression_handler <- function(action = c("add", "remove", "que
   
   if (action == "add") {
     if (!any(exists)) {
+      assert_no_calling_handlers_on_stack(global = TRUE)
       globalCallingHandlers(condition = global_progression_handler)
     }
     invisible(TRUE)
   } else if (action == "remove") {
+    if (!any(exists)) return(invisible(FALSE))
+    assert_no_calling_handlers_on_stack(global = FALSE)
     global_progression_handler(control_progression("shutdown"))
     handlers <- handlers[!exists]
     ## Remove all
@@ -49,6 +52,75 @@ register_global_progression_handler <- function(action = c("add", "remove", "que
   } else if (action == "status") {
     global_progression_handler(control_progression("status"))
   }
+}
+
+
+## R's globalCallingHandlers() gives the rather cryptic error "should not
+## be called with handlers on the stack", if there are calling or exiting
+## condition handlers established on the call stack. Since we cannot catch
+## that error without establishing a handler ourselves, we instead inspect
+## the call stack for frames known to establish handlers, and produce a
+## more informative error message, if found.
+assert_no_calling_handlers_on_stack <- function(global = TRUE) {
+  calls <- sys.calls()
+  found <- character(0L)
+  hook <- NULL
+  for (ii in rev(seq_along(calls))) {
+    call <- calls[[ii]]
+    head <- call[[1]]
+    if (is.symbol(head) && identical(as.character(head), "tryCatchOne")) {
+      ## tryCatch() with at least one handler, which includes try()
+      found <- c(found, "tryCatch()")
+    } else if (identical(sys.function(ii), base::withCallingHandlers)) {
+      ## Ignore withCallingHandlers(expr) without handlers
+      handlers <- sys.frame(ii)[["handlers"]]
+      if (length(handlers) > 0L) found <- c(found, "withCallingHandlers()")
+    } else if (is.null(hook) && is.symbol(head) &&
+               identical(as.character(head), "runHook")) {
+      ## Called from a package's .onLoad() or .onAttach(), which
+      ## loadNamespace() and attachNamespace() call via tryCatch()
+      env <- sys.frame(ii)
+      hookname <- env[["hookname"]]
+      pkgname <- env[["pkgname"]]
+      if (is.character(hookname) && length(hookname) == 1L &&
+          hookname %in% c(".onLoad", ".onAttach") &&
+          is.character(pkgname) && length(pkgname) == 1L) {
+        hook <- list(hookname = hookname, pkgname = pkgname)
+      }
+    }
+  }
+  if (length(found) == 0L) return(invisible(TRUE))
+
+  ## Outer-most first
+  found <- rev(unique(found))
+  msg <- sprintf(paste(
+    "progressr::handlers(global = %s) cannot be called when condition",
+    "handlers are active, which is a limitation of R's",
+    "globalCallingHandlers(). Detected active handlers from: %s."
+  ), global, paste(found, collapse = ", "))
+  if (!is.null(hook)) {
+    msg <- sprintf(paste(
+      "%s It was called from the %s() function of package %s.",
+      "It is not possible to register global calling handlers when",
+      "a package is loaded or attached, because R always runs those",
+      "functions within tryCatch(). Global progress handling has to",
+      "be enabled by the end-user, e.g. by calling",
+      "progressr::handlers(global = TRUE) at the top of their R script",
+      "or in their ~/.Rprofile startup file."
+    ), msg, hook[["hookname"]], sQuote(hook[["pkgname"]]))
+  } else {
+    msg <- paste(msg,
+      "This happens when it is called via tryCatch(), try(),",
+      "withCallingHandlers(), suppressMessages(), suppressWarnings(),",
+      "etc., from within a 'knitr', 'rmarkdown', or 'quarto' document,",
+      "from a 'testthat' test, or from a package's .onLoad() or",
+      ".onAttach() function. Instead, call it at the top level, e.g. at",
+      "the R prompt, at the top of your R script, or in your ~/.Rprofile",
+      "startup file. Alternatively, use with_progress() to report on",
+      "progress for a specific expression."
+    )
+  }
+  stop(msg, call. = FALSE)
 }
 
 

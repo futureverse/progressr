@@ -71,6 +71,50 @@ if (getRversion() >= "4.0.0") {
             identical(hs[[1]], handler_cli), identical(hs[[2]], handler_txtprogressbar))
   stopifnot(handlers(global = NA) == TRUE)
   handlers(global = FALSE)
+
+  ## Informative error when called with condition handlers on the stack
+  stopifnot(!handlers(global = NA))
+  res <- tryCatch(handlers(global = TRUE), error = identity)
+  print(res)
+  stopifnot(inherits(res, "error"), grepl("tryCatch()", conditionMessage(res), fixed = TRUE))
+  stopifnot(!handlers(global = NA))
+
+  res <- tryCatch(withCallingHandlers(handlers(global = TRUE), warning = identity), error = identity)
+  stopifnot(inherits(res, "error"), grepl("withCallingHandlers()", conditionMessage(res), fixed = TRUE))
+  stopifnot(!handlers(global = NA))
+
+  res <- try(suppressWarnings(handlers(global = TRUE)), silent = TRUE)
+  stopifnot(inherits(res, "try-error"))
+  stopifnot(!handlers(global = NA))
+
+  ## Mimic calling it from a package's .onLoad(), which loadNamespace()
+  ## calls via local function runHook()
+  runHook <- function(hookname, env, libname, pkgname) {
+    tryCatch(handlers(global = TRUE), error = identity)
+  }
+  res <- runHook(".onLoad", env = emptyenv(), libname = tempdir(), pkgname = "teeny")
+  print(res)
+  stopifnot(inherits(res, "error"), grepl(".onLoad()", conditionMessage(res), fixed = TRUE), grepl("teeny", conditionMessage(res), fixed = TRUE))
+  stopifnot(!handlers(global = NA))
+
+  ## No condition handlers are established by tryCatch(..., finally)
+  tryCatch(handlers(global = TRUE), finally = NULL)
+  stopifnot(handlers(global = NA))
+
+  ## Adding when already registered is a no-op, which is fine
+  tryCatch(handlers(global = TRUE), error = identity)
+  stopifnot(handlers(global = NA))
+
+  res <- tryCatch(handlers(global = FALSE), error = identity)
+  stopifnot(inherits(res, "error"), grepl("global = FALSE", conditionMessage(res), fixed = TRUE))
+  stopifnot(handlers(global = NA))
+
+  handlers(global = FALSE)
+  stopifnot(!handlers(global = NA))
+
+  ## Removing when not registered is a no-op, which is fine
+  tryCatch(handlers(global = FALSE), error = identity)
+  stopifnot(!handlers(global = NA))
 }
 message("handlers(..., global = TRUE) ... DONE")
 
