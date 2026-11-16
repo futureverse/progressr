@@ -6,7 +6,9 @@
    an informative error message when not supported. For example, it
    cannot be set within `tryCatch()` or `withCallingHandlers()`, which
    happens automatically in Rmarkdown, knitr, and Quarto documents,
-   but also during package load.
+   but also during package load. When called from within a 'knitr',
+   'rmarkdown', or 'quarto' document, the error message suggests
+   enabling global progress handling before rendering the document.
 
 # Version 1.1.0 [2026-10-18]
 

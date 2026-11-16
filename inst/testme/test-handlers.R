@@ -97,6 +97,14 @@ if (getRversion() >= "4.0.0") {
   stopifnot(inherits(res, "error"), grepl(".onLoad()", conditionMessage(res), fixed = TRUE), grepl("teeny", conditionMessage(res), fixed = TRUE))
   stopifnot(!handlers(global = NA))
 
+  ## Mimic calling it from within a 'knitr' document
+  oopts <- options(knitr.in.progress = TRUE)
+  res <- tryCatch(handlers(global = TRUE), error = identity)
+  options(oopts)
+  print(res)
+  stopifnot(inherits(res, "error"), grepl("before rendering", conditionMessage(res), fixed = TRUE))
+  stopifnot(!handlers(global = NA))
+
   ## No condition handlers are established by tryCatch(..., finally)
   tryCatch(handlers(global = TRUE), finally = NULL)
   stopifnot(handlers(global = NA))

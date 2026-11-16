@@ -108,6 +108,17 @@ assert_no_calling_handlers_on_stack <- function(global = TRUE) {
       "progressr::handlers(global = TRUE) at the top of their R script",
       "or in their ~/.Rprofile startup file."
     ), msg, hook[["hookname"]], sQuote(hook[["pkgname"]]))
+  } else if (isTRUE(getOption("knitr.in.progress"))) {
+    msg <- paste(msg,
+      "It was called from within a 'knitr', 'rmarkdown', or 'quarto'",
+      "document, which evaluates each code chunk with condition handlers",
+      "active. Instead, enable global progress handling before rendering",
+      "the document, e.g. by calling progressr::handlers(global = TRUE)",
+      "in your ~/.Rprofile startup file, or before calling",
+      "rmarkdown::render() or knitr::knit() in the same R session.",
+      "Alternatively, use with_progress() in the document to report on",
+      "progress for a specific expression."
+    )
   } else {
     msg <- paste(msg,
       "This happens when it is called via tryCatch(), try(),",
