@@ -43,6 +43,8 @@
   : Progression Handler: Progress Reported in the RStudio Console
 - [`handler_slowdown()`](https://progressr.futureverse.org/reference/handler_slowdown.md)
   : Progression Handler: Slow Down Progress Reporting
+- [`handler_terminal_title()`](https://progressr.futureverse.org/reference/handler_terminal_title.md)
+  : Progression Handler: Progress Reported in the Terminal Title
 - [`handler_tkprogressbar()`](https://progressr.futureverse.org/reference/handler_tkprogressbar.md)
   : Progression Handler: Progress Reported as a Tcl/Tk Progress Bars in
   the GUI

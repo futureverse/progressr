@@ -2,6 +2,13 @@
 
 ## Version (development version)
 
+### New Features
+
+- Add
+  [`handler_terminal_title()`](https://progressr.futureverse.org/reference/handler_terminal_title.md),
+  which reports progress in the title of the terminal window or tab,
+  e.g. `[ 42%] 21/50 | ETA 00:12 | message`, with a spinner.
+
 ### Bug Fixes
 
 - `handlers(global = TRUE)` and `handlers(global = FALSE)` now gives an
@@ -9,7 +16,9 @@
   be set within [`tryCatch()`](https://rdrr.io/r/base/conditions.html)
   or [`withCallingHandlers()`](https://rdrr.io/r/base/conditions.html),
   which happens automatically in Rmarkdown, knitr, and Quarto documents,
-  but also during package load.
+  but also during package load. When called from within a ‘knitr’,
+  ‘rmarkdown’, or ‘quarto’ document, the error message suggests enabling
+  global progress handling before rendering the document.
 
 ## Version 1.1.0
 

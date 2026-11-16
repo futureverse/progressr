@@ -62,6 +62,9 @@ In the terminal:
 - [handler_progress](https://progressr.futureverse.org/reference/handler_progress.md)
   (requires the progress package)
 
+- [handler_terminal_title](https://progressr.futureverse.org/reference/handler_terminal_title.md)
+  (built-in; in the terminal title)
+
 In a graphical user interface (GUI):
 
 - [handler_rstudio](https://progressr.futureverse.org/reference/handler_rstudio.md)
