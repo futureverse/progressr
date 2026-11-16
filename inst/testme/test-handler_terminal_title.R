@@ -62,7 +62,7 @@ file.remove(file)
 message("- terminal output ...")
 file <- tempfile()
 con <- file(file, open = "wb")
-h <- handler_terminal_title(spinner = c("-", "+"), file = con, enable = TRUE)
+h <- handler_terminal_title(spinner = c("-", "+"), file = con, enable = TRUE, interval = 0)
 ## Pretend 'con' is a terminal
 env <- parent.env(environment(environment(h)$reporter$update))
 assign("supported", TRUE, envir = env)
