@@ -41,6 +41,7 @@
 #' * [handler_ascii_alert] (built-in)
 #' * [handler_pbmcapply] (requires the \pkg{pbmcapply} package)
 #' * [handler_progress] (requires the \pkg{progress} package)
+#' * [handler_terminal_title] (built-in; in the terminal title)
 #'
 #' In a graphical user interface (GUI):
 #' * [handler_rstudio] (only in the RStudio Console)

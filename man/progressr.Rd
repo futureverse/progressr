@@ -50,6 +50,7 @@ In the terminal:
 \item \link{handler_ascii_alert} (built-in)
 \item \link{handler_pbmcapply} (requires the \pkg{pbmcapply} package)
 \item \link{handler_progress} (requires the \pkg{progress} package)
+\item \link{handler_terminal_title} (built-in; in the terminal title)
 }
 
 In a graphical user interface (GUI):

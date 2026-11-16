@@ -1,5 +1,11 @@
 # Version (development version)
 
+## New Features
+
+ * Add `handler_terminal_title()`, which reports progress in the title
+   of the terminal window or tab, e.g. `[ 42%] 21/50 | ETA 00:12 |
+   message`, with a spinner.
+
 ## Bug Fixes
 
  * `handlers(global = TRUE)` and `handlers(global = FALSE)` now gives
